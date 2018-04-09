@@ -1,0 +1,204 @@
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[12pt]{report}
+\usepackage[french,english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+
+%----------------------------------------------------------------------------------------
+%	CUSTOM ENVIRONMENTS
+%----------------------------------------------------------------------------------------
+
+\newenvironment{abstractpage}
+{\cleardoublepage\vspace*{\fill}\thispagestyle{empty}}
+{\vfill\cleardoublepage}
+\renewenvironment{abstract}[1]
+{\bigskip\selectlanguage{#1}%
+	\begin{center}\bfseries\abstractname\end{center}}
+{\par\bigskip}
+
+
+%----------------------------------------------------------------------------------------
+%	BEGIN
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\begin{titlepage}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+\center % Center everything on the page
+
+\textsc{\Large École polytechnique}\\[1.0cm] % Name of your university/college
+\textsc{\LARGE Rapport de stage de recherche}\\[0.5cm] % Major heading such as course name
+
+\HRule \\[0.4cm]
+{ \huge \bfseries Modeling double strain DNA repair using polymer models}\\[0.4cm] % Title of your document
+\HRule \\[1.2cm]
+
+\textsc{\large Rapport non confidentiel }\\[1.2cm] % Minor heading such as course title
+ 
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \normalsize
+\textbf{\emph{Auteur :}}\\
+Ignacio \textsc{Madrid}\\ % Your name
+\textbf{\emph{Promotion :}}\\
+X2015 \\
+\textbf{\emph{Option :}}\\
+Département de Mathématiques appliquées \\
+\textbf{\emph{Champ :}}\\
+MAP594 Modélisation probabiliste et statistique \\
+\textbf{\emph{Enseignant référent :}} \\
+Pr. Vincent \textsc{Bansaye} \\ % Supervisor's Name
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \normalsize
+\textbf{\emph{Tuteur de stage :} }\\
+Pr. David \textsc{Holcman} \\
+\textbf{\emph{Dates du stage :} }\\
+26 mars - 31 aout 2018 \\
+\textbf{\emph{Adresse :} }\\
+École Normale Supérieure \\
+Institut de Biologie \\
+46 rue d'Ulm \\
+75005 Paris, France
+\end{flushright}
+\end{minipage}\\[2cm]
+
+
+\includegraphics{auxiliar_figures/polytechnique-logohori.pdf}\\ % Include a department/university logo - this will require the graphicx package
+ 
+%----------------------------------------------------------------------------------------
+
+\vfill % Fill the rest of the page with whitespace
+
+\end{titlepage}
+
+%----------------------------------------------------------------------------------------
+%	ATTESTATION SUR L'HONNEUR
+%----------------------------------------------------------------------------------------
+
+\section*{Déclaration d’intégrité relative au plagiat}
+
+
+Je soussigné \textsc{Madrid Canales} Ignacio certifie sur l’honneur :
+\begin{enumerate}
+\item Que les résultats décrits dans ce rapport sont l’aboutissement de mon travail.
+\item Que je suis l’auteur de ce rapport.
+\item Que je n’ai pas utilisé des sources ou résultats tiers sans clairement les citer et les référencer selon les règles bibliographiques préconisées.\\[0.5cm]
+\end{enumerate}
+
+\textit{Je déclare que ce travail ne peut être suspecté de plagiat.}\\[1.5cm]
+
+\begin{minipage}{0.4\textwidth}
+	à Paris, le \today \\
+	\textbf{Date}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+	Ignacio \textsc{Madrid Canales} \\
+	\textbf{Signature}
+\end{minipage}\\[2cm]
+
+\vfill
+
+\pagenumbering{gobble}
+
+\newpage
+
+%----------------------------------------------------------------------------------------
+%	RESUME
+%----------------------------------------------------------------------------------------
+
+\begin{abstractpage}
+	
+\begin{abstract}{french}
+	\emph{
+	Résume en français
+	\\[1.5cm]
+	}
+\end{abstract}
+
+
+\begin{abstract}{english}
+	\emph{
+	Abstract in English
+	\\[1.5cm]
+	}
+\end{abstract}
+
+\end{abstractpage}
+\newpage
+
+
+%----------------------------------------------------------------------------------------
+%	INDEX
+%----------------------------------------------------------------------------------------
+
+\tableofcontents %% indice
+\pagenumbering{arabic}
+\pagebreak
+
+
+%----------------------------------------------------------------------------------------
+%	CORPS
+%----------------------------------------------------------------------------------------
+
+
+\chapter{Introduction}
+
+
+\chapter{Background}
+
+\chapter{Methods}
+\section{An introduction to chromatin polymer models}
+\label{sec:mathintro}
+
+\subsection{The Rouse polymer}
+
+\subsection{The RCL polymer}
+
+\subsection{The $\beta$-polymer}
+
+\subsection{Some statistical properties of polymers}
+
+\section{Modeling double strand breaks in the RCL polymer}
+
+\subsection{Simple random cleavages}
+
+\subsection{Removing cross-links in cleaved pairs}
+
+\subsection{Adding volume exclusion}
+
+\chapter{Results}
+
+\section{Simulation results for the RCL polymer}
+
+\subsection{Statistical properties}
+
+\subsection{First Encounter Time}
+
+\subsection{Repair probability}
+
+\subsubsection{Effect of the genomic distance between two DSBs}
+
+\subsubsection{Effect of the number of cross-links}
+
+\subsubsection{Effect of the number of the encounter distance}
+
+\subsubsection{Effect of the number of the polymer size}
+
+\section{Simulation results for the $\beta$-polymer}
+
+\end{document}
