@@ -173,11 +173,24 @@ class EncounterSimulation(Simulation):
     def run(self):
         
         for i in range(self.numRealisations):
+            
+            # Prepare the random DSBs
+            breakLoci = self.polymer.randomCuts(self.genomicDistance,self.Nb)
+                        
+            # Verify is polymer is splittable for the prepeared DSBs
+            while(not(self.polymer.isSplittable(breakLoci))):
+                # if not, make new connections (#try an heuristic maybe)
+                self.polymer.reset()
+            
+            # Once the polymer is splittable:
             # Burn in until relaxation time
             self.polymer.step(self.relaxSteps(),self.dt_relax,self.D)
             
             # Induce DSBs
-            self.polymer.validDSB(self.genomicDistance,self.Nb)
+            self.polymer.cutNow(breakLoci,definitive=True)
+            # Remove the CL concerning the cleavages if it is the case
+            if self.polymer.keepCL == False:
+                self.polymer.removeCL()
             
             # Wait some more time
             self.polymer.step(self.waitingSteps,self.dt_relax,self.D)

@@ -44,7 +44,7 @@ def plot_bar_from_counter(counter, ax=None):
 
 nb_monomers         = 100
 
-numRealisations     = 1000
+numRealisations     = 500
 numConectors        = 25  #number of added connectors
 
 maxIterationsPerExperiment = 700
@@ -60,36 +60,17 @@ encounterDistance = 0.1
 
 waitingSteps = 1000
 
-def FET_Simulation(encounterDistance,waitingSteps):
+def FET_Simulation(encounterDistance,waitingSteps,numRealisations):
     
     p0 = RCLPolymer(nb_monomers, dimension, b, numConectors)
          
     mc = EncounterSimulation(dt, diffusionCte, p0, dt_relax, numRealisations, maxIterationsPerExperiment,2,genomicDistance,encounterDistance,waitingSteps)
     mc.run()
-    
-#    msd = mc.get_msd_per_monomer()
-#    mmsd = mc.get_avg_msd()
-#    msrg = mc.get_msrg()
-#    b2e = mc.get_b2e()
-#    
-    # Exponential fit for the FET
-#    timeline = mc.timeline
-#    f = lambda t, a, l : a*np.exp(-t*l)
-#    popt, pcov = curve_fit(f, timeline, self.get_avg_msd())
-    
-#    
-#    # Fitted parameters
-#    fit_params = mc.MSD_fit_mean()
-#    
-#    print('Estimated MSRG : '+str(msrg))
-#    print('Real MSRG      : '+str(nb_monomers*b*b/6))
-#    print('Estimated b2   : '+str(b2e))
-#    print('Real b2        : '+str(b*b))
-    
+        
     plt.rc('text', usetex=True)
     plt.figure()
     loc, scale = sts.expon.fit(mc.FETs)    
-    plt.hist(mc.FETs,bins=20,normed=True)
+    plt.hist(mc.FETs,bins='auto',normed=True)
     x = np.linspace(mc.FETs.min(),mc.FETs.max(), 100)
     plt.plot(x, sts.expon.pdf(x,loc=loc,scale=scale),'r-', label=r"Fitted exponential ($\lambda \exp(-\lambda x)$)  :  $\lambda$=%5.3f" % (1/scale))
     plt.title("Distribution of the First Time Encounter")
@@ -110,7 +91,7 @@ def FET_Simulation(encounterDistance,waitingSteps):
     
 #    proba = events.get('Repair')/sum(events.values())
 
-def proba_vs_genomicDistance(nb_monomers,gmax,numRealisations):
+def proba_vs_genomicDistance(nb_monomers,gmax,gStep,test_epsilons,numRealisations,errorbars=False):
 #    gmax = nb_monomers - 3
     gmin = 2
     
@@ -119,13 +100,16 @@ def proba_vs_genomicDistance(nb_monomers,gmax,numRealisations):
     
     plt.figure()
     plt.xlabel('genomic distance (in number of monomers)')
-    plt.ylabel(r'$\mathbb{P}$(Repair)',rotation=0)
+    plt.ylabel(r'$\mathbb{P}$(Repair)')
     
-    for eps in [0.2,0.1,0.05,0.001]:
+    xg = np.arange(gmin,gmax,gStep,dtype=int)
+    
+    output = np.empty((len(test_epsilons),3,len(xg)))
+    for i, eps in enumerate(test_epsilons):
         
         probas = []
         demiCI = []
-        for g in np.arange(gmin,gmax,dtype=int):
+        for g in xg:
             p0 = RCLPolymer(nb_monomers, dimension, b, numConectors)
             mc = EncounterSimulation(dt, diffusionCte, p0, dt_relax, numRealisations, maxIterationsPerExperiment, 2, g, eps, waitingSteps)
             mc.run()
@@ -135,16 +119,24 @@ def proba_vs_genomicDistance(nb_monomers,gmax,numRealisations):
         probas = np.array(probas)
         demiCI = np.array(demiCI)
         
-        plt.errorbar(x=np.arange(gmin,gmax), y=probas, yerr=demiCI,
-                     fmt='-o', label=r'$\varepsilon = $ '+str(eps), capsize = 4)
-#        plt.plot(np.arange(gmin,gmax),probas-demiCI,'r--',lw=0.4)
-#        plt.plot(np.arange(gmin,gmax),probas+demiCI,'r--',lw=0.4)
+        output[i][0] = xg
+        output[i][1] = probas
+        output[i][2] = demiCI
+        
+        if errorbars:
+            plt.errorbar(x=xg, y=probas, yerr=demiCI,
+                         fmt='-o', label=r'$\varepsilon = $ '+str(eps), capsize = 4)
+        else:
+            plt.plot(xg,probas,'-o',label=r'$\varepsilon = $ '+str(eps))
 
+    np.save('results/proba_vs_genomicDistance__'+
+            str(nb_monomers)+'monomers_'+
+            str(numRealisations)+'iterations'+
+            '.npy',output)
+    
     plt.legend()        
     plt.show()
-    
-    
-    return (probas,demiCI)
+
 
 
 def proba_vs_encounterDistance(numRealisations):
@@ -163,22 +155,26 @@ def proba_vs_encounterDistance(numRealisations):
     probas = np.array(probas)
     
     plt.figure()
+
     plt.errorbar(x=testDistances, y=probas, yerr=demiCI,
                  fmt='-o', capsize = 4)
     plt.show()
 
 
-def proba_vs_conectorsNumber(numRealisations,nb_monomers):
+def proba_vs_conectorsNumber(numRealisations,nb_monomers,test_genomic_distances,x_Nc,keepCL,errorbars=False):
     probas = []
     demiCI = []
+
+    output = np.zeros((len(test_genomic_distances),3,len(x_Nc)))
+    
     plt.figure()
     
-    for genomicDistance in [2,5,10,50]:
+    for i, genomicDistance in enumerate(test_genomic_distances):
         probas = []
         demiCI = []
         
-        for Nc in range(5,nb_monomers):
-            p0 = RCLPolymer(nb_monomers, dimension, b, Nc)
+        for Nc in x_Nc:
+            p0 = RCLPolymer(nb_monomers, dimension, b, Nc, keepCL)
             mc = EncounterSimulation(dt, diffusionCte, p0, dt_relax, numRealisations, maxIterationsPerExperiment, 2, genomicDistance, encounterDistance, waitingSteps)
             mc.run()
             probas.append(mc.repairProba[0])
@@ -187,11 +183,28 @@ def proba_vs_conectorsNumber(numRealisations,nb_monomers):
         probas = np.array(probas)
         demiCI = np.array(demiCI)
         
-        plt.errorbar(x=np.arange(5,nb_monomers), y=probas, yerr=demiCI,
-                     fmt='-o', label=r'$g = $ '+str(genomicDistance), capsize = 4)
-        #plt.plot(np.arange(2,2*nb_monomers),probas-demiCI,'r--',lw=0.4)
-        #plt.plot(np.arange(2,2*nb_monomers),probas+demiCI,'r--',lw=0.4)
+        output[i][0] = x_Nc
+        output[i][1] = probas
+        output[i][2] = demiCI
+
+        np.save('results/proba_vs_conectorsNumber__'+
+            'keepCL_'+str(keepCL)+
+            str(nb_monomers)+'monomers_'+
+            str(numRealisations)+'iterations'+
+            '.npy',output)
         
+        if errorbars:
+            plt.errorbar(x=x_Nc, y=probas, yerr=demiCI,
+                     fmt='-o', label=r'$g = $ '+str(genomicDistance), capsize = 4)
+        else:
+            plt.plot(x_Nc,probas,'-o',label=r'$g = $ '+str(genomicDistance))
+
+    np.save('results/proba_vs_conectorsNumber__'+
+            'keepCL_'+str(keepCL)+
+            str(nb_monomers)+'monomers_'+
+            str(numRealisations)+'iterations'+
+            '.npy',output)
+    
     plt.legend()
     plt.show()
 

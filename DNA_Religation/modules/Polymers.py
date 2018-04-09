@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 from scipy.spatial.distance import pdist, squareform
 from itertools import combinations
+import copy
 
 class Polymer(Graph):
     
@@ -27,8 +28,8 @@ class Polymer(Graph):
         else:
             self.positions = b*np.cumsum(np.random.randn(numMonomers,dim),0)
         self.b = b
-        self.RouseMatrix = self.Linear_Rouse_Matrix()
-        Graph.__init__(self,self.numMonomers,adjmatrix=self.RouseMatrix.copy())
+        self.LaplacianMatrix = self.Linear_Rouse_Matrix()
+        Graph.__init__(self,self.numMonomers,adjmatrix=self.LaplacianMatrix.copy())
         self.Nc = 0
         self.freeMonomers = []
         self.possibleEncounters = []
@@ -75,7 +76,7 @@ class Polymer(Graph):
         X = range(self.numMonomers)
         Y = range(self.numMonomers)
         X, Y = np.meshgrid(X, Y)
-        Z = self.RouseMatrix.flatten('F')
+        Z = self.LaplacianMatrix.flatten('F')
         
         #Define colormap and get values for barcolors from it
         cmap = plt.cm.RdYlBu_r
@@ -92,7 +93,7 @@ class Polymer(Graph):
     
     def step(self,numsteps,dt,D):
         for j in range(numsteps):
-            self.positions += -(self.dim*D/(self.b**2))*np.dot(self.RouseMatrix,self.get_r())*dt + np.random.randn(self.numMonomers,self.dim)*np.sqrt(2.0*D*dt)
+            self.positions += -(self.dim*D/(self.b**2))*np.dot(self.LaplacianMatrix,self.get_r())*dt + np.random.randn(self.numMonomers,self.dim)*np.sqrt(2.0*D*dt)
     
 
     def haveEncountered(self,mono1,mono2,eps):
@@ -126,10 +127,11 @@ class Polymer(Graph):
 
 class RCLPolymer(Polymer):
     
-    def __init__(self,numMonomers,dim,b,Nc):
-        Polymer.__init__(self,numMonomers,dim,b)
+    def __init__(self,numMonomers,dim,b,Nc,keepCL=False,**kwargs):
+        Polymer.__init__(self,numMonomers,dim,b,**kwargs)
         self.Nc = Nc
         self.connect()
+        self.keepCL = keepCL
         
         #TODO
         # Faire la matrice B et la construire sans toucher la matrice de Rouse
@@ -139,79 +141,120 @@ class RCLPolymer(Polymer):
         return RCLPolymer(self.numMonomers, self.dim, self.b, self.Nc)
     
     def reset(self):
-        self.__init__(self.numMonomers, self.dim, self.b, self.Nc)
-        
+        """
+        Reset the connections, keeping the polymer in its current position
+        """
+        self.__init__(self.numMonomers, self.dim, self.b, self.Nc, position = self.positions)
+
+    def copy(self):
+        return copy.deepcopy(self)
+    
     def connect(self):
         # Tirage des arets aleatoires
         possible_pairs = np.vstack(np.triu_indices(self.numMonomers,k=2)).T
         Nl = int((self.numMonomers-2)*(self.numMonomers-1)/2)
         selected = possible_pairs[np.random.choice(Nl,size=self.Nc,replace=False)].T
-        # Mise a jour de la matrice de Rouse
-        self.RouseMatrix[selected[0],selected[1]] = -1
-        self.RouseMatrix[selected[1],selected[0]] = -1
-        for i in selected[0] : self.RouseMatrix[i,i] += 1 
-        for i in selected[1] : self.RouseMatrix[i,i] += 1 
+        # Mise a jour de la matrice laplacienne
+        self.LaplacianMatrix[selected[0],selected[1]] = -1
+        self.LaplacianMatrix[selected[1],selected[0]] = -1
+        for i in selected[0] : self.LaplacianMatrix[i,i] += 1 
+        for i in selected[1] : self.LaplacianMatrix[i,i] += 1 
         # Mise a jour de la liste d'adjacence
         self.addEdge(selected[0],selected[1])
         self.addEdge(selected[1],selected[0])
     
     
-    def randomCut(self,g,Nb):
+    def randomCuts(self,g,Nb):
         """
-        Make Nb random DSB in the polymer each at distance g
-        o--o--o--o--A1 x A2--o--o--o--B1 x B2--o--o--o
-                           <--- g --->
+        Define Nb random DSB in the polymer each at distance g
+        0--...--o--o--o--A1 x A2--o--...--o--B1 x B2--o--o--o--...--N
+                                <---- g ---->
                            
         g  : genomic distance
+        
+        Return the upstream monomer (the left one in the sense 0 --> N)
+        of each DSB
         """
         # A1 ~ Unif[0,N-1-(Nc-1)(g-1)[
         A1 = np.random.randint(0,self.numMonomers-1-(Nb-1)*(g+1))
-        for i in range(Nb):
+        return A1 + np.arange(Nb)*(1+g)
+        
+        
+    def cutNow(self,leftMonomers,definitive=False):
+        """
+        Make the cuts defined by self.randomCuts(g,Nb)
+        If defintive = True, save the DSB loci ans generates
+        the possible pairs for the encounters (A1-B1, A1-B2, etc.)
+        """
+        # A1 ~ Unif[0,N-1-(Nc-1)(g-1)[
+        for A1 in leftMonomers:
             A2 = A1 + 1
-            # Mise a jour de la matrice de Rouse
-            self.RouseMatrix[A1,A2] = 0
-            self.RouseMatrix[A2,A1] = 0
-            self.RouseMatrix[A1,A1] -= 1 
-            self.RouseMatrix[A2,A2] -= 1 
+            # Mise a jour de la matrice laplacienne
+            self.LaplacianMatrix[A1,A2] = 0
+            self.LaplacianMatrix[A2,A1] = 0
+            self.LaplacianMatrix[A1,A1] -= 1 
+            self.LaplacianMatrix[A2,A2] -= 1 
             # Mise a jour de la liste d'adjacence
             self.cutEdge(A1,A2)
             # Add new free ends to freeMonomers list
             self.freeMonomers.extend([A1,A2])
-            # Remove all CL from and to the concerned monomers
-            self.RouseMatrix[A1][:A1-1] = 0 
-            self.RouseMatrix[A1][A1+2:] = 0
-            self.RouseMatrix[A2][:A2-1] = 0 
-            self.RouseMatrix[A2][A2+2:] = 0
-            self.RouseMatrix[:,A1][:A1-1] = 0 
-            self.RouseMatrix[:,A1][A1+2:] = 0
-            self.RouseMatrix[:,A2][:A2-1] = 0 
-            self.RouseMatrix[:,A2][A2+2:] = 0
-            self.RouseMatrix[A1,A1] = 1 
-            self.RouseMatrix[A2,A2] = 1 
-            self.cutAllEdgesWith(A1)
-            self.cutAllEdgesWith(A2)
-            # Move to the next DSB
-            A1 = A2 + g
+        
+        if definitive:
+            self.generatePossibleEncounters()
+
+
+    def isSplittable(self,cutLoci):
+        """
+        Verify is the RCL Polymer can be splittable by the random cuts
+        for which left monomers are in cutLoci
+        """
+        mirror = self.copy()
+        # Make new random cuts
+        mirror.cutNow(cutLoci)
+        # Remove the CL concerning the cleavages
+        if self.keepCL == False:
+            mirror.removeCL()
+        
+        return mirror.isConnected()
+        
         
 
-            
-        #self.addPossibleEncounters()
-    
+    def removeCL(self):
+        """
+        Remove all cross links between for all the monomers which have
+        been cleaved
+        """
+        for m in self.freeMonomers[::2]:
+            # Remove all CL from and to the concerned monomers
+            self.LaplacianMatrix[m][:m-1] = 0 
+            self.LaplacianMatrix[m][m+2:] = 0
+            self.LaplacianMatrix[:,m][:m-1] = 0 
+            self.LaplacianMatrix[:,m][m+2:] = 0
+            self.LaplacianMatrix[m,m] = 1 
+            self.cutAllEdgesWith(m)
+
+                
     def offDiagPairs(self):
         """
         Return the new connected (off-3diagonal) pairs 
         """
-        return np.transpose(np.nonzero(np.triu(self.RouseMatrix,k=2)))
+        return np.transpose(np.nonzero(np.triu(self.LaplacianMatrix,k=2)))
+
     
     def validDSB(self,g,Nb):
         """
-        If the DSB splits the polymer, a new RCL polymer is initialised and
-        new DSB are tried until the broken polymer is fully connected
+        If the DSB splits the polymer, new DSB are tried until the cleaved 
+        polymer is fully connected
         """
+        # Make new random cuts
         self.randomCut(g,Nb)
+        # Remove the CL concerning the cleavages
+        self.removeCL()
+        
         if(self.isConnected()):
-            self.addPossibleEncounters()
+            self.generatePossibleEncounters()
             return
+        
         else:
 #            token = 0
             while(not(self.isConnected())):
@@ -219,13 +262,15 @@ class RCLPolymer(Polymer):
                 self.reset()
                 # Make new random cuts
                 self.randomCut(g,Nb)
+                # Remove the CL concerning the cleavages
+                self.removeCL()
 #                token += 1
 #            print(str(token)+' essais to make a valid DSB')
-            self.addPossibleEncounters()
+            self.generatePossibleEncounters()
             return
         
     
-    def addPossibleEncounters(self):
+    def generatePossibleEncounters(self):
         """
         Once the polymer is cut, this method returns the possible combinations
         of encounters

@@ -5,20 +5,24 @@ Created on Tue Mar 27 10:40:11 2018
 @author: ignacio
 """
 
+import os, sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__)))))
+
+
 import numpy as np
 import matplotlib.pyplot as plt
 
-from Simulation import Simulation
-from Polymers import RCLPolymer
+from modules.Simulation import Simulation
+from modules.Polymers import RCLPolymer
 
 
-nb_monomers         = 30
+nb_monomers         = 50
 
-numRealisations     = 50
+numRealisations     = 200
 numConectors        = 0 #number of added connectors
 
-numSteps            = 200
-dt                  = 0.01
+numSteps            = 100
+dt                  = 0.005
 dt_relax            = 0.05
 
 dimension           = 3
@@ -49,7 +53,7 @@ print('Real b2        : '+str(b*b))
 
 plt.figure()
 plt.xlabel('time (sec)')
-plt.ylabel('MSD (mu^2)')
+plt.ylabel(r'MSD ($\mu^2$)')
 for mm in range(nb_monomers):
     plt.plot(np.arange(0,numSteps*dt,dt),msd[:,mm],label='monomer '+str(mm))
 #    popt = stats.MSD_fit_monomer(mm)
@@ -65,7 +69,7 @@ for mm in range(nb_monomers):
 plt.plot(mc.timeline, f(mc.timeline, *fit_params), 'r--',
          label='fit: A=%5.3f, alpha=%5.3f' % tuple(fit_params))
 
-plt.legend()
+#plt.legend()
 plt.show()
 
 plt.figure()
