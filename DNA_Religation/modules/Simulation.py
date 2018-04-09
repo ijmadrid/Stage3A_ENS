@@ -59,6 +59,7 @@ class Simulation():
             self.b2e[i] = self.b2()
         
             self.polymer = self.polymer.new()
+            self.trajectoire = []
         
         self.wasRun = True
     
@@ -67,7 +68,7 @@ class Simulation():
         """
         Mean Square Radius of Gyration at final time
         """
-        r = self.trajectoire[0] # last position
+        r = self.polymer.get_r() # last position
         return np.mean(np.linalg.norm(r - np.mean(r, axis=0), axis = 1)**2)
     
     def computeSD(self,t):
@@ -167,6 +168,7 @@ class EncounterSimulation(Simulation):
         self.FETs = []
         self.events = []
         self.repairProba = []
+        self.msrg = []
         self.Nb = numBreaks
         self.waitingSteps = waitingSteps
     
@@ -179,7 +181,7 @@ class EncounterSimulation(Simulation):
                         
             # Verify is polymer is splittable for the prepeared DSBs
             while(not(self.polymer.isSplittable(breakLoci))):
-                # if not, make new connections (#try an heuristic maybe)
+                # if not, make new connections (#TODO: try an heuristic maybe?)
                 self.polymer.reset()
             
             # Once the polymer is splittable:
@@ -210,10 +212,11 @@ class EncounterSimulation(Simulation):
                 self.FETs.append(t)
                 self.events.append(self.polymer.anyEncountered(self.encounterDistance)[1])
 
-#            self.msrg[i] = self.computeMSRG()
+                self.msrg.append(self.computeMSRG())
 #            self.b2e[i] = self.b2()
         
             self.polymer = self.polymer.new()
+            self.trajectoire = []
         
         self.FETs = np.array(self.FETs)*self.dt
         self.wasRun = True

@@ -16,6 +16,8 @@ import scipy.stats as sts
 from modules.Simulation import EncounterSimulation
 from modules.Polymers import RCLPolymer
 
+from time import strftime
+
 def plot_bar_from_counter(counter, ax=None):
     """"
     This function creates a bar plot from a counter.
@@ -167,6 +169,8 @@ def proba_vs_conectorsNumber(numRealisations,nb_monomers,test_genomic_distances,
 
     output = np.zeros((len(test_genomic_distances),3,len(x_Nc)))
     
+    date = strftime("%Y-%m-%d-%H:%M")
+    
     plt.figure()
     
     for i, genomicDistance in enumerate(test_genomic_distances):
@@ -191,7 +195,7 @@ def proba_vs_conectorsNumber(numRealisations,nb_monomers,test_genomic_distances,
             'keepCL_'+str(keepCL)+
             str(nb_monomers)+'monomers_'+
             str(numRealisations)+'iterations'+
-            '.npy',output)
+            date+'.npy',output)
         
         if errorbars:
             plt.errorbar(x=x_Nc, y=probas, yerr=demiCI,
@@ -203,7 +207,7 @@ def proba_vs_conectorsNumber(numRealisations,nb_monomers,test_genomic_distances,
             'keepCL_'+str(keepCL)+
             str(nb_monomers)+'monomers_'+
             str(numRealisations)+'iterations'+
-            '.npy',output)
+            date+'.npy',output)
     
     plt.legend()
     plt.show()
