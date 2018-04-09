@@ -17,6 +17,7 @@ from modules.Simulation import EncounterSimulation
 from modules.Polymers import RCLPolymer
 
 from time import strftime
+import pickle
 
 def plot_bar_from_counter(counter, ax=None):
     """"
@@ -62,13 +63,7 @@ encounterDistance = 0.1
 
 waitingSteps = 1000
 
-def FET_Simulation(encounterDistance,waitingSteps,numRealisations):
-    
-    p0 = RCLPolymer(nb_monomers, dimension, b, numConectors)
-         
-    mc = EncounterSimulation(dt, diffusionCte, p0, dt_relax, numRealisations, maxIterationsPerExperiment,2,genomicDistance,encounterDistance,waitingSteps)
-    mc.run()
-        
+def plotFET(mc):
     plt.rc('text', usetex=True)
     plt.figure()
     loc, scale = sts.expon.fit(mc.FETs)    
@@ -81,6 +76,17 @@ def FET_Simulation(encounterDistance,waitingSteps,numRealisations):
     plt.legend()
     plt.show()
     
+def FET_Simulation(encounterDistance,waitingSteps,numRealisations, keepCL):
+    
+    date = strftime("%Y_%m_%d_%H_%M")
+    
+    p0 = RCLPolymer(nb_monomers, dimension, b, numConectors, keepCL)
+         
+    mc = EncounterSimulation(dt, diffusionCte, p0, dt_relax, numRealisations, maxIterationsPerExperiment,2,genomicDistance,encounterDistance,waitingSteps)
+    mc.run()
+        
+    plotFET(mc)
+    
     halfCI = 1.96*np.std(mc.FETs)/np.sqrt(numRealisations)
     print('Mean FTE : '+str(np.mean(mc.FETs))+' ± '+str(halfCI))
     
@@ -88,8 +94,13 @@ def FET_Simulation(encounterDistance,waitingSteps,numRealisations):
     events = mc.events
     plot_bar_from_counter(events)
     plt.show()
+
+    filepath = 'results/FET_Distribution__'+'keepCL_'+str(keepCL)+\
+    str(nb_monomers)+'monomers_'+str(numRealisations)+'iterations'+\
+    date+'.pkl'
     
-    return mc
+    with open(filepath, 'wb') as output:
+        pickle.dump(mc, output, pickle.HIGHEST_PROTOCOL)
     
 #    proba = events.get('Repair')/sum(events.values())
 
@@ -169,7 +180,7 @@ def proba_vs_conectorsNumber(numRealisations,nb_monomers,test_genomic_distances,
 
     output = np.zeros((len(test_genomic_distances),3,len(x_Nc)))
     
-    date = strftime("%Y-%m-%d-%H:%M")
+    date = strftime("%Y_%m_%d_%H_%M")
     
     plt.figure()
     
