@@ -44,14 +44,17 @@ encounterDistance           = 0.1,
 keepCL                      = True, # keep CL in cleaved monomers?
 # Numerical parameters
 numRealisations             = 500,  # num of realisations per set 
-maxIterationsPerExperiment  = 700,  # if there is no encounter before
+maxIterationsPerExperiment  = 400,  # if there is no encounter before
 dt                          = 0.01, # time step after relaxation time
 dt_relax                    = 0.05, # time step until relaxation time
 waitingSteps                = 1000, # steps after the DBSs
 
 # Test parameters
-test_connectorsNumber       = [],
-test_genomic_distances      = [1,2,3,4,5]
+test_connectorsNumber       = np.arange(2,20,dtype=int),
+test_genomic_distances      = [1,2,3,5],
+
+# Plot options
+errorbars                   = False 
 )
 
 ############################################################################
@@ -60,7 +63,9 @@ test_genomic_distances      = [1,2,3,4,5]
 ############################################################################
 # FUNCTIONS
 
-def MRG_vs_CLNumber(**params):
+def MRG_vs_CLNumber(dimension,monomerNumber,b,diffusionConstant,encounterDistance,keepCL,
+                    numRealisations,maxIterationsPerExperiment,dt,dt_relax,waitingSteps,
+                    test_connectorsNumber,test_genomic_distances, errorbars):
     """
     Main function
     """
