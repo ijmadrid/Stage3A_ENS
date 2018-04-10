@@ -48,9 +48,9 @@ def plot_bar_from_counter(counter, ax=None):
 nb_monomers         = 100
 
 numRealisations     = 500
-numConectors        = 25  #number of added connectors
+numConectors        = 4  #number of added connectors
 
-maxIterationsPerExperiment = 700
+maxIterationsPerExperiment = 5000
 dt                  = 0.01
 dt_relax            = 0.05
 
@@ -61,15 +61,14 @@ b                   = 0.2
 genomicDistance = 10
 encounterDistance = 0.1
 
-waitingSteps = 1000
+waitingSteps = 200
 
 def plotFET(mc):
-    plt.rc('text', usetex=True)
     plt.figure()
     loc, scale = sts.expon.fit(mc.FETs)    
     plt.hist(mc.FETs,bins='auto',normed=True)
     x = np.linspace(mc.FETs.min(),mc.FETs.max(), 100)
-    plt.plot(x, sts.expon.pdf(x,loc=loc,scale=scale),'r-', label=r"Fitted exponential ($\lambda \exp(-\lambda x)$)  :  $\lambda$=%5.3f" % (1/scale))
+    plt.plot(x, sts.expon.pdf(x,loc=loc,scale=scale),'r-', label="Fitted exponential ($\lambda \exp(-\lambda x)$)  :  $\lambda$=%5.3f" % (1/scale))
     plt.title("Distribution of the First Time Encounter")
     plt.xlabel('time (sec)')
     plt.ylabel('distribution')
@@ -104,6 +103,11 @@ def FET_Simulation(encounterDistance,waitingSteps,numRealisations, keepCL):
     
 #    proba = events.get('Repair')/sum(events.values())
 
+def openFETtest(file):
+    with open(file, 'rb') as input:
+        return pickle.load(input, )
+
+
 def proba_vs_genomicDistance(nb_monomers,gmax,gStep,test_epsilons,numRealisations,errorbars=False):
 #    gmax = nb_monomers - 3
     gmin = 2
@@ -116,6 +120,8 @@ def proba_vs_genomicDistance(nb_monomers,gmax,gStep,test_epsilons,numRealisation
     plt.ylabel(r'$\mathbb{P}$(Repair)')
     
     xg = np.arange(gmin,gmax,gStep,dtype=int)
+    
+    date = strftime("%Y_%m_%d_%H_%M")
     
     output = np.empty((len(test_epsilons),3,len(xg)))
     for i, eps in enumerate(test_epsilons):
@@ -144,7 +150,7 @@ def proba_vs_genomicDistance(nb_monomers,gmax,gStep,test_epsilons,numRealisation
 
     np.save('results/proba_vs_genomicDistance__'+
             str(nb_monomers)+'monomers_'+
-            str(numRealisations)+'iterations'+
+            str(numRealisations)+'iterations_'+date+
             '.npy',output)
     
     plt.legend()        
@@ -156,8 +162,13 @@ def proba_vs_encounterDistance(numRealisations):
     probas = []
     demiCI = []
     
-    testDistances = np.arange(0.001,b,0.002)
- 
+    testDistances = np.arange(0.004,0.006,0.00025)
+    date = strftime("%Y_%m_%d_%H_%M")
+    
+    plt.figure()
+    plt.xlabel('Encounter distance ($\mu$ m)')
+    plt.ylabel('$\mathbb{P}$(Repair)')
+    
     for epsilon in testDistances:
         p0 = RCLPolymer(nb_monomers, dimension, b, numConectors)
         mc = EncounterSimulation(dt, diffusionCte, p0, dt_relax, numRealisations, maxIterationsPerExperiment, 2, genomicDistance, epsilon,waitingSteps)
@@ -167,10 +178,19 @@ def proba_vs_encounterDistance(numRealisations):
     
     probas = np.array(probas)
     
-    plt.figure()
+    output = np.zeros((3,len(probas)))
+    output[0] = testDistances
+    output[1] = probas
+    output[2] = demiCI
+    
+    np.save('results/proba_vs_encounterDistance__'+
+            str(nb_monomers)+'monomers_'+
+            str(numRealisations)+'iterations_'+date+
+            '.npy',output)
+    
+    
 
-    plt.errorbar(x=testDistances, y=probas, yerr=demiCI,
-                 fmt='-o', capsize = 4)
+    plt.plot(testDistances, probas, '-o')
     plt.show()
 
 

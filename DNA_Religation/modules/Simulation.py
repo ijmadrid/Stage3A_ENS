@@ -29,8 +29,8 @@ class Simulation():
         self.numRealisations = numRealisations
 
         self.msrg = np.zeros(numRealisations) 
-        self.sds = np.zeros((numRealisations,numSteps,polymer.numMonomers)) 
-        self.b2e = np.zeros(numRealisations)
+#        self.sds = np.zeros((numRealisations,numSteps,polymer.numMonomers)) 
+#        self.b2e = np.zeros(numRealisations)
         self.timeline = np.arange(0,numSteps*dt,dt)
         self.wasRun = False
 
@@ -45,6 +45,9 @@ class Simulation():
         for i in range(self.numRealisations):
             # Burn in until relaxation time
             self.polymer.step(self.relaxSteps(),self.dt_relax,self.D)
+
+            self.msrg[i] = self.polymer.get_msrg()
+#            self.b2e[i] = self.b2()
             
             # Simulation
             self.add_step(self.polymer.get_r().copy())
@@ -53,11 +56,8 @@ class Simulation():
                 self.add_step(self.polymer.get_r().copy())
         
                 # Results collect
-                self.sds[i,t] = self.computeSD(t)
-            
-            self.msrg[i] = self.computeMSRG()
-            self.b2e[i] = self.b2()
-        
+#                self.sds[i,t] = self.computeSD(t)
+                    
             self.polymer = self.polymer.new()
             self.trajectoire = []
         
@@ -161,7 +161,7 @@ class Simulation():
 
 class EncounterSimulation(Simulation):
     
-    def __init__(self,dt,diffusionConst,polymer,dt_relax,Nrealisations,maxIterationsPerExperiment,numBreaks,genomicDistance,encounterDistance,waitingSteps):
+    def __init__(self,dt,diffusionConst,polymer,dt_relax,Nrealisations,maxIterationsPerExperiment,numBreaks,genomicDistance,encounterDistance,waitingSteps,simul_until=True):
         Simulation.__init__(self,maxIterationsPerExperiment,dt,diffusionConst,polymer,dt_relax,Nrealisations)
         self.genomicDistance   = genomicDistance
         self.encounterDistance = encounterDistance
@@ -171,6 +171,7 @@ class EncounterSimulation(Simulation):
         self.msrg = []
         self.Nb = numBreaks
         self.waitingSteps = waitingSteps
+        self.simulate_until_encounter = simul_until
     
     def run(self):
         
@@ -196,24 +197,27 @@ class EncounterSimulation(Simulation):
             
             # Wait some more time
             self.polymer.step(self.waitingSteps,self.dt_relax,self.D)
-                        
-            # Simulation until encounter
-            self.add_step(self.polymer.get_r().copy())
-            t = 0
-            while(not(self.polymer.anyEncountered(self.encounterDistance)[0]) and t < self.numSteps):
-                self.polymer.step(1,self.dt,self.D)
-                self.add_step(self.polymer.get_r().copy())
-        
-                # Results collect
-#                self.sds[i,t] = self.computeSD(t)
-                t += 1
             
-            if(t<self.numSteps):
-                self.FETs.append(t)
-                self.events.append(self.polymer.anyEncountered(self.encounterDistance)[1])
-
-                self.msrg.append(self.computeMSRG())
-#            self.b2e[i] = self.b2()
+            self.msrg.append(self.polymer.get_msrg())
+            
+            if self.simulate_until_encounter:
+            # Simulation until encounter
+                self.add_step(self.polymer.get_r().copy())
+                t = 0
+                while(not(self.polymer.anyEncountered(self.encounterDistance)[0]) and t < self.numSteps):
+                    self.polymer.step(1,self.dt,self.D)
+                    self.add_step(self.polymer.get_r().copy())
+            
+                    # Results collect
+    #                self.sds[i,t] = self.computeSD(t)
+                    t += 1
+                
+                if(t<self.numSteps):
+                    self.FETs.append(t)
+                    self.events.append(self.polymer.anyEncountered(self.encounterDistance)[1])
+    
+                    
+    #            self.b2e[i] = self.b2()
         
             self.polymer = self.polymer.new()
             self.trajectoire = []

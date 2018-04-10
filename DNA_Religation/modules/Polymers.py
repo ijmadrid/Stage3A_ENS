@@ -124,6 +124,9 @@ class Polymer(Graph):
             
         return (False,None)
         #return np.prod(self.haveEncountered(possibleEncounters[:,0],possibleEncounters[:,1],eps))
+        
+    def get_msrg(self):
+        return np.mean(np.linalg.norm(self.positions - np.mean(self.positions, axis=0), axis = 1)**2)
 
 class RCLPolymer(Polymer):
     

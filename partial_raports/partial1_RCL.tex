@@ -1,7 +1,13 @@
-\documentclass{article}
+\documentclass[10pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
 
-\title{Partial report : \\
-	Repair probabilities for the RCL polymer}
+\title{Progress report : \\
+	Repair probabilities for the RCL polymer with two random breaks}
 \author{Ignacio Madrid}
 
 \begin{document}
@@ -9,19 +15,96 @@
 \maketitle
 
 \section{Introduction}
+ The model simulated is described in figure \ref{fig:model}. We study the probabilty of repair after two breaks, i.e., the probability of having encounters (see figure)
+ $$ A_1 - A_2 \quad \text{or} \quad B_1 - B_2 $$
+ before 
+ $$ A_1 - B_1 \quad \text{or} \quad A_1 - B_2 
+ \quad \text{or} \quad A_2 - B_1  \quad \text{or} \quad A_2 - B_2  $$
+
+We define the first encounter time as
+$$
+T_{m,n}^{\epsilon} := \inf \{ t \geq 0 : ||(R_m)_t - (R_n)_t|| < \epsilon  \}
+$$
+where $R_m$ and $R_n$ are the positions of monomers $m$ and $n$, and $\epsilon$ is called the encounter distance. 
+So the repair probabilty is calculated in the simulations as
+$$
+\mathbb{P}(Repair) = \mathbb{P}(T_{A_1,A_2}^\epsilon \wedge T_{A_1,A_2}^\epsilon \leq T_{A_1,B_1}^\epsilon \wedge T_{A_1,B_2}^\epsilon \wedge T_{A_2,B_1}^\epsilon \wedge T_{A_2,B_2}^\epsilon )
+$$
+
+NB: By pure chance, the expected repair probability is $2/6 = 1/3$.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{model.png}
+\caption{Model of the RCL polymer used for the simulations. Two random breaks were induced with a deterministic genomic distance (in number of monomers) betweem them. Random cross-links are built uniformly over all combinations of non-neighbour monomers. In the moment of cut, the cross-links with cleaved monomers (for instance, the cross-link with the monomer $A_1$ in the figure) may also be removed along with the cut bonds. Finally, we say there is a repair when two separed neighbour monomers encounter at a distance inferior to an encounter distance $\epsilon$. On the other hand, if another non-neighbour combination of $A_1, A_2, B_1, B_2$ encounters at such distance we say it is a failure.}
+\label{fig:model}
+\end{figure}
+
+\newpage
 
 \section{First Encounter Time distribution}
 
-\section{Repair probabilty}
+Since an important peak was observed at instant 0 in the first simulations, we decided to wait some time after the induction of double strand breaks (DSBs), before measuring if any pair of monomers have encountered. 
+Concerning the encounters events, if two or more pairs of monomers encounter at the same simulated instant, we toss a coin to choose uniformly over those pairs to be the first encounter.
 
-\subsection{Effect of the genomic distance between two DSBs}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.8\textwidth]{fet_distribution.png}
+	\caption{Distribution of the first encounter time keeping and removing the cross-links in the cleaved monomers. An exponential distribution has been fitted to each histogram. NB : Since the maximum time of simulation is set at 50 seconds (i.e. if nothing happens in 50 seconds the simulation is discarded) the distribution is biased and corresponds to $\mathcal{L}(FET|FET<50)$. Right: Distribution of events (fail or repair). The results corresponds to a polymer of 100 monomers, 5 random cross-links and a waiting time of 25 seconds.}
+	\label{fig:hists}
+\end{figure}
+
+The results of figure \ref{fig:hists} indicate that the removal of the cross-links seems to not affect the mean first encounter time, nor the ratio of fail/repair events.
+
+\newpage
+
+\section{Repair probabilty}
 
 \subsection{Effect of the number of cross-links}
 
-\subsection{Effect of the number of the encounter distance}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{proba_v_CLnumber.png}
+	\caption{Polymer of 100 monomers. Repair probabilty against the number of random cross-links: A) keeping the cross-links with cleaved monomers ; B) removing the corss-links with cleaved monomers. 500 iterations for each. NB : In the case B) the lowest genomic distance is 2.}
+\end{figure}
 
-\subsection{Effect of the number of the polymer size}
+Removing the cross-links in the separed monomers does not seem to induce a better repair probability when increasing the number of cross-links. However the genomic distance could have a more important role. Increasing the number of cross-links approaches the simulated probabilities to $1/3$, which is the result expected by pure chance. Indeed, increasing the number of CLs and therefore approaching all monomers not only increases the chances of a good matching, but also the bad match case. It is interesting however that systems which had a repair probability $\leq 1/3$  because had DSBs at a small genomic distance (so the chances of a bad matching where higher) \todo{TODO: Verify this behaviour with a finer grid for the genomic distances.} improve their repair probabilities when we increase the number of cross-links. In other words, the compactness may help to repare polymers cut in a small neighborhood. 
 
+The most interesting remark though is the gap between the probabilties at a genomic distance of 1 (i.e. the two DBS are connected, $A2$ and $B1$ being neighbours) and the other genomic distances. \todo{TODO: Investigate more seriously on the gap between the genomic distance of 1 and the rest.} So far, no problems with the code that could have leaded to a wong calculation of the repair probabilty have been detected. Some hypothesis: the wrong combination $A_2 - B_1$ is no possible anymore, so in fact, by pure chance, we have a $2/5$ probability of repair (instead of $2/6$), and the combinations $A_2-B_2$, $A_1-B_1$ could be very rare. Besides, as only valid cuts are allowed (i.e. the polymer rests fully connected after the breaks) the segment $A_2-B_1$ is indeed connected to the upstream and/or the downstream fragment. The probabilty of being connected to only one of them is higher than the probability of being connected to both, so the segment could be pushed towards one of the free monomers rapidly and then induce a good ratio of repair.
+
+\subsection{Effect of the genomic distance between two DSBs}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{proba_v_genomic.png}
+	\caption{Repair probabilty against the genomic distance between the two DSBs. Polymer of 100 monomers with 25 random cross-links. Encounter distance of 0.1 $\mu$m (and b = 0.2 $\mu$m).}
+\end{figure}
+
+When the cross-links in the breaks are kept, we see that there is an important gap between the probabilty of repair for the genomic distance of 1 and the rest, as we have seen in the previous simulations. As the number of cross-links is important we see that regardless how large the genomic distance could be, the probabilty of repair tends to the expected result by pure chance, $1/3$. So, \textbf{it would be more interesting to analyze the effect of the genomic distance with a weak number of cross-links.}
+
+In terms of the dependence on the encounter distance $\varepsilon$, the behaviour seems to be the same regardless its value. In the curves, small values of $\varepsilon$ have more variance since the number of realisations is fixed and the event of an encounter becomes rarer (the maximum time of simulation is set at 10 seconds, if nothing happens the simulation is discarded):
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{proba_v_genomic_keeping.png}
+	\caption{Repair probabilty against the genomic distance between the two DSBs and different encounter distances. Polymer of 100 monomers with 25 random cross-links. CL in the breaks are kept.}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{proba_v_genomic_removing.png}
+	\caption{Repair probabilty against the genomic distance between the two DSBs and different encounter distances. Polymer of 100 monomers with 10 random cross-links. CL in the breaks are removed.}
+\end{figure}
+
+
+\section{TODO}
+
+\begin{itemize}
+	\item Measure some statistical properties, such as the mean squared radius of gyration ton confirm the compactness induced by the random cross-links and study its curve
+	\item Perform the same tests with fixed cut loci
+	\item Add the effect of volume exclusion and other external statitical and dynamical forces.
+	\item Implement the $\beta$-polymer and define what is going to be a "cut". Study the same properties presented here.
+\end{itemize}
 
 
 \end{document}

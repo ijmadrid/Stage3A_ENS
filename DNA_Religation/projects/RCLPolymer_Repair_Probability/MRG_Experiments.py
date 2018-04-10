@@ -43,15 +43,15 @@ diffusionConstant           = 0.08,
 encounterDistance           = 0.1,
 keepCL                      = True, # keep CL in cleaved monomers?
 # Numerical parameters
-numRealisations             = 1000,  # num of realisations per set 
+numRealisations             = 50,  # num of realisations per set 
 maxIterationsPerExperiment  = 400,  # if there is no encounter before
 dt                          = 0.01, # time step after relaxation time
 dt_relax                    = 0.05, # time step until relaxation time
 waitingSteps                = 100, # steps after the DBSs
 
 # Test parameters
-test_connectorsNumber       = np.arange(2,20,dtype=int),
-test_genomic_distances      = 3,
+test_connectorsNumber       = np.arange(2,10,dtype=int),
+test_genomic_distances      = [1,2,3,5,10],
 
 # Plot options
 errorbars                   = False 
@@ -83,7 +83,7 @@ def MRG_vs_CLNumber(dimension,monomerNumber,b,diffusionConstant,encounterDistanc
         
         for Nc in test_connectorsNumber:
             p0 = RCLPolymer(monomerNumber, dimension, b, Nc, keepCL)
-            mc = EncounterSimulation(dt, diffusionConstant, p0, dt_relax, numRealisations, maxIterationsPerExperiment, 2, genomicDistance, encounterDistance, waitingSteps)
+            mc = EncounterSimulation(dt, diffusionConstant, p0, dt_relax, numRealisations, maxIterationsPerExperiment, 2, genomicDistance, encounterDistance, waitingSteps,False)
             mc.run()
             MRG.append(mc.get_msrg())
             demiCI.append(1.96*np.std(mc.msrg)/np.sqrt(len(mc.msrg)))
@@ -115,10 +115,12 @@ def MRG_vs_CLNumber(dimension,monomerNumber,b,diffusionConstant,encounterDistanc
     
     plt.legend()
     plt.show()
+    
+    return output
 
 def MSRG_vs_CLremoval(dimension,monomerNumber,b,diffusionConstant,encounterDistance,
                     numRealisations,maxIterationsPerExperiment,dt,dt_relax,waitingSteps,
-                    test_genomic_distances, errorbars,**kwargs):
+                    test_genomic_distances, errorbars):
     """
     Main function
     """
@@ -179,4 +181,4 @@ def MSRG_vs_CLremoval(dimension,monomerNumber,b,diffusionConstant,encounterDista
 ############################################################################
 
 if __name__ == '__main__':
-    MSRG_vs_CLremoval(**params)
+    z = MRG_vs_CLNumber(**params)
