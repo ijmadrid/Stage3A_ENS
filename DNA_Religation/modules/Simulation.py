@@ -222,17 +222,19 @@ class EncounterSimulation(Simulation):
             self.polymer = self.polymer.new()
             self.trajectoire = []
         
-        self.FETs = np.array(self.FETs)*self.dt
-        self.wasRun = True
-        
-        self.events = Counter(self.events)
-        total_valid_experiments = sum(self.events.values())
-        
-        if total_valid_experiments == 0:
-            self.repairProba = [0.5,0.5]
-            print('No valid experiments!')
-        else:
-            proba = self.events['Repair']/total_valid_experiments
-            self.repairProba = [proba,
-                                1.96*np.sqrt((proba - proba**2)/total_valid_experiments)]
+        if self.simulate_until_encounter:
+            
+            self.FETs = np.array(self.FETs)*self.dt
+            self.wasRun = True
+            
+            self.events = Counter(self.events)
+            total_valid_experiments = sum(self.events.values())
+            
+            if total_valid_experiments == 0:
+                self.repairProba = [0.5,0.5]
+                print('No valid experiments!')
+            else:
+                proba = self.events['Repair']/total_valid_experiments
+                self.repairProba = [proba,
+                                    1.96*np.sqrt((proba - proba**2)/total_valid_experiments)]
         

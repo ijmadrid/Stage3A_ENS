@@ -43,7 +43,7 @@ diffusionConstant           = 0.08,
 encounterDistance           = 0.1,
 keepCL                      = True, # keep CL in cleaved monomers?
 # Numerical parameters
-numRealisations             = 50,  # num of realisations per set 
+numRealisations             = 500,  # num of realisations per set 
 maxIterationsPerExperiment  = 400,  # if there is no encounter before
 dt                          = 0.01, # time step after relaxation time
 dt_relax                    = 0.05, # time step until relaxation time
@@ -51,7 +51,7 @@ waitingSteps                = 100, # steps after the DBSs
 
 # Test parameters
 test_connectorsNumber       = np.arange(2,10,dtype=int),
-test_genomic_distances      = [1,2,3,5,10],
+test_genomic_distances      = [1,2,20],
 
 # Plot options
 errorbars                   = False 
@@ -76,6 +76,8 @@ def MRG_vs_CLNumber(dimension,monomerNumber,b,diffusionConstant,encounterDistanc
     date = strftime("%Y_%m_%d_%H_%M")
     
     plt.figure()
+    plt.xlabel("Number of cross-links")
+    plt.ylabel("Mean radius of gyration")
     
     for i, genomicDistance in enumerate(test_genomic_distances):
         MRG = []
@@ -92,7 +94,7 @@ def MRG_vs_CLNumber(dimension,monomerNumber,b,diffusionConstant,encounterDistanc
         demiCI = np.array(demiCI)
         
         output[i][0] = test_connectorsNumber
-        output[i][1] = MRG
+        output[i][1] = np.sqrt(MRG)
         output[i][2] = demiCI
 
         np.save('results/MRG_vs_conectorsNumber__'+
