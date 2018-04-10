@@ -50,7 +50,7 @@ nb_monomers         = 100
 numRealisations     = 500
 numConectors        = 4  #number of added connectors
 
-maxIterationsPerExperiment = 5000
+maxIterationsPerExperiment = 20000
 dt                  = 0.01
 dt_relax            = 0.05
 
