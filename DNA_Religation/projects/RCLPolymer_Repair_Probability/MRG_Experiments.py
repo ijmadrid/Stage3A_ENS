@@ -51,7 +51,7 @@ waitingSteps                = 100, # steps after the DBSs
 
 # Test parameters
 test_connectorsNumber       = np.arange(2,10,dtype=int),
-test_genomic_distances      = [1,2,20],
+test_genomic_distances      = [5],
 
 # Plot options
 errorbars                   = False 
@@ -104,7 +104,7 @@ def MRG_vs_CLNumber(dimension,monomerNumber,b,diffusionConstant,encounterDistanc
             date+'.npy',output)
         
         if errorbars:
-            plt.errorbar(x=test_connectorsNumber, y=MRG, yerr=demiCI,
+            plt.errorbar(x=test_connectorsNumber, y=np.sqrt(MRG), demiCI,
                      fmt='-o', label=r'$g = $ '+str(genomicDistance), capsize = 4)
         else:
             plt.plot(test_connectorsNumber,MRG,'-o',label=r'$g = $ '+str(genomicDistance))

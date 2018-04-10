@@ -105,7 +105,7 @@ def FET_Simulation(encounterDistance,waitingSteps,numRealisations, keepCL):
 
 def openFETtest(file):
     with open(file, 'rb') as input:
-        return pickle.load(input, )
+        return pickle.load(input)
 
 
 def proba_vs_genomicDistance(nb_monomers,gmax,gStep,test_epsilons,numRealisations,errorbars=False):

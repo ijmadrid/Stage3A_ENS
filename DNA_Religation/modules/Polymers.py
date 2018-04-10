@@ -34,9 +34,6 @@ class Polymer(Graph):
         self.freeMonomers = []
         self.possibleEncounters = []
         
-#    def new(self):
-#        return Polymer(self.numMonomers, self.dim, self.b)
-
     def get_r(self):
         return self.positions
 
@@ -127,6 +124,22 @@ class Polymer(Graph):
         
     def get_msrg(self):
         return np.mean(np.linalg.norm(self.positions - np.mean(self.positions, axis=0), axis = 1)**2)
+    
+    
+    def get_params(self):
+        return dict(b                   = self.b,
+                    monomersNumber      = self.numMonomers,
+                    crosslinksNumber    = self.Nc)
+
+    
+    def simulateExperiment(self,experimentSet,results=dict()):
+        """
+        Simulate the experiment defined by the Experiment object experimentSet
+        """
+        results["PolymerParams"]    = self.get_params()
+        results["ExperimentParams"] = experimentSet.get_params()
+        experimentSet.run(self, results)
+    
 
 class RCLPolymer(Polymer):
     
@@ -135,19 +148,15 @@ class RCLPolymer(Polymer):
         self.Nc = Nc
         self.connect()
         self.keepCL = keepCL
-        
-        #TODO
-        # Faire la matrice B et la construire sans toucher la matrice de Rouse
-        # Puis faire Laplacian = B + Rouse
 
     def new(self):
-        return RCLPolymer(self.numMonomers, self.dim, self.b, self.Nc)
+        return RCLPolymer(self.numMonomers, self.dim, self.b, self.Nc, keepCL = self.keepCL)
     
     def reset(self):
         """
         Reset the connections, keeping the polymer in its current position
         """
-        self.__init__(self.numMonomers, self.dim, self.b, self.Nc, position = self.positions)
+        self.__init__(self.numMonomers, self.dim, self.b, self.Nc, self.keepCL, position = self.positions)
 
     def copy(self):
         return copy.deepcopy(self)
@@ -216,12 +225,10 @@ class RCLPolymer(Polymer):
         mirror.cutNow(cutLoci)
         # Remove the CL concerning the cleavages
         if self.keepCL == False:
-            mirror.removeCL()
-        
+            mirror.removeCL()        
         return mirror.isConnected()
         
         
-
     def removeCL(self):
         """
         Remove all cross links between for all the monomers which have
@@ -243,34 +250,6 @@ class RCLPolymer(Polymer):
         """
         return np.transpose(np.nonzero(np.triu(self.LaplacianMatrix,k=2)))
 
-    
-    def validDSB(self,g,Nb):
-        """
-        If the DSB splits the polymer, new DSB are tried until the cleaved 
-        polymer is fully connected
-        """
-        # Make new random cuts
-        self.randomCut(g,Nb)
-        # Remove the CL concerning the cleavages
-        self.removeCL()
-        
-        if(self.isConnected()):
-            self.generatePossibleEncounters()
-            return
-        
-        else:
-#            token = 0
-            while(not(self.isConnected())):
-                # Reconnect the RCL polymer
-                self.reset()
-                # Make new random cuts
-                self.randomCut(g,Nb)
-                # Remove the CL concerning the cleavages
-                self.removeCL()
-#                token += 1
-#            print(str(token)+' essais to make a valid DSB')
-            self.generatePossibleEncounters()
-            return
         
     
     def generatePossibleEncounters(self):
