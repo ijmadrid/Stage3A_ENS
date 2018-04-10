@@ -162,7 +162,7 @@ def proba_vs_encounterDistance(numRealisations):
     probas = []
     demiCI = []
     
-    testDistances = np.arange(0.004,0.006,0.00025)
+    testDistances = np.arange(0.001,0.004,0.00025)
     date = strftime("%Y_%m_%d_%H_%M")
     
     plt.figure()

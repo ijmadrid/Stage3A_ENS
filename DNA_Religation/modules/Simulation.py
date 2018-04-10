@@ -43,6 +43,8 @@ class Simulation():
 
     def run(self):
         for i in range(self.numRealisations):
+            self.trajectoire = []
+            
             # Burn in until relaxation time
             self.polymer.step(self.relaxSteps(),self.dt_relax,self.D)
 
@@ -59,7 +61,6 @@ class Simulation():
 #                self.sds[i,t] = self.computeSD(t)
                     
             self.polymer = self.polymer.new()
-            self.trajectoire = []
         
         self.wasRun = True
     
