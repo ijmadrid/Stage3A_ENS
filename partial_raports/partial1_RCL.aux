@@ -4,24 +4,27 @@
 \@writefile{lof}{\select@language{english}}
 \@writefile{lot}{\select@language{english}}
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Model of the RCL polymer used for the simulations. Two random breaks were induced with a deterministic genomic distance (in number of monomers) betweem them. Random cross-links are built uniformly over all combinations of non-neighbour monomers. In the moment of cut, the cross-links with cleaved monomers (for instance, the cross-link with the monomer $A_1$ in the figure) may also be removed along with the cut bonds. Finally, we say there is a repair when two separed neighbour monomers encounter at a distance inferior to an encounter distance $\epsilon $. On the other hand, if another non-neighbour combination of $A_1, A_2, B_1, B_2$ encounters at such distance we say it is a failure.}}{2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Model of the RCL polymer used for the simulations. Two random breaks were induced with a deterministic genomic distance (in number of monomers) between them. Random cross-links are built uniformly over all combinations of non-neighbor monomers. In the moment of cut, the cross-links with cleaved monomers (for instance, the cross-link with the monomer $A_1$ in the figure) may also be removed along with the cut bonds. Finally, we say there is a repair when two separated neighbor monomers encounter at a distance inferior to an encounter distance $\epsilon $. On the other hand, if another non-neighbor combination of $A_1, A_2, B_1, B_2$ encounters at such distance we say it is a failure.}}{2}}
 \newlabel{fig:model}{{1}{2}}
-\@writefile{toc}{\contentsline {section}{\numberline {2}First Encounter Time distribution}{2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Distribution of the first encounter time keeping and removing the cross-links in the cleaved monomers. An exponential distribution has been fitted to each histogram. NB : Since the maximum time of simulation is set at 50 seconds (i.e. if nothing happens in 50 seconds the simulation is discarded) the distribution is biased and corresponds to $\mathcal  {L}(FET|FET<50)$. Right: Distribution of events (fail or repair). The results corresponds to a polymer of 100 monomers, 5 random cross-links and a waiting time of 25 seconds.}}{3}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}First Encounter Time (FET) distribution}{2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Distribution of the first encounter time keeping and removing the cross-links in the cleaved monomers. An exponential distribution has been fitted to each histogram. Right: Distribution of events (fail or repair). The results corresponds to a polymer of 100 monomers, 5 random cross-links and a waiting time of 25 seconds.}}{3}}
 \newlabel{fig:hists}{{2}{3}}
 \@writefile{toc}{\contentsline {section}{\numberline {3}Repair probabilty}{3}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Effect of the number of cross-links}{3}}
-\@writefile{tdo}{\contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color  {orange}o}}\ TODO: Verify this behaviour with a finer grid for the genomic distances.}{3}}
-\pgfsyspdfmark {pgfid1}{21907703}{10750305}
-\pgfsyspdfmark {pgfid4}{34243870}{10762593}
-\pgfsyspdfmark {pgfid5}{36357406}{10538679}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Polymer of 100 monomers. Repair probabilty against the number of random cross-links: A) keeping the cross-links with cleaved monomers ; B) removing the corss-links with cleaved monomers. 500 iterations for each. NB : In the case B) the lowest genomic distance is 2.}}{4}}
-\@writefile{tdo}{\contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color  {orange}o}}\ TODO: Investigate more seriously on the gap between the genomic distance of 1 and the rest.}{4}}
-\pgfsyspdfmark {pgfid6}{22760610}{29061487}
-\pgfsyspdfmark {pgfid9}{34243870}{29073775}
-\pgfsyspdfmark {pgfid10}{36357406}{28849861}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Effect of the genomic distance between two DSBs}{4}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Repair probabilty against the genomic distance between the two DSBs. Polymer of 100 monomers with 25 random cross-links. Encounter distance of 0.1 $\mu $m (and b = 0.2 $\mu $m).}}{5}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}TODO}{5}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Repair probabilty against the genomic distance between the two DSBs and different encounter distances. Polymer of 100 monomers with 25 random cross-links. CL in the breaks are kept.}}{6}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Repair probabilty against the genomic distance between the two DSBs and different encounter distances. Polymer of 100 monomers with 10 random cross-links. CL in the breaks are removed.}}{6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Distribution of the first encounter time keeping and removing the cross-links in the cleaved monomers with a maximum simulation time of 200 seconds.}}{4}}
+\newlabel{fig:hists2}{{3}{4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Polymer of 100 monomers. Repair probability against the number of random cross-links: A) keeping the cross-links with cleaved monomers ; B) removing the cross-links with cleaved monomers. 500 iterations for each. NB : In the case B) the lowest genomic distance is 2.}}{4}}
+\newlabel{fig:proba_v_cl}{{4}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Effect of the genomic distance between two DSBs}{5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Repair probability against the genomic distance between the two DSBs. Polymer of 100 monomers with 25 random cross-links. Encounter distance of 0.1 $\mu $m (and b = 0.2 $\mu $m).}}{5}}
+\newlabel{fig:proba_v_g_1}{{5}{5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Effect of the encounter distance}{5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Repair probability against the genomic distance between the two DSBs and different encounter distances. Polymer of 100 monomers with 25 random cross-links. CL in the breaks are kept.}}{6}}
+\newlabel{fig:genomic_andkeep}{{6}{6}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}TODO}{6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Repair probability against the genomic distance between the two DSBs and different encounter distances. Polymer of 100 monomers with 10 random cross-links. CL in the breaks are removed.}}{7}}
+\newlabel{fig:genomic_andremove}{{7}{7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Probability and 95\% confidence interval of repair, in function of the encounter distance that defines the repair. For the simulations, a random polymer of 100 monomers with a standard deviation of $b = 0.2 \mu $m for the distance between neighbor monomers, and 4 random cross-links is used. CLs in the breaks are removed. DSBs are at a genomic distance of 10 monomers. 1500 realizations.}}{7}}
+\newlabel{fig:epsilon}{{8}{7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Probability and 95\% confidence interval of repair, in function of the encounter distance that defines the repair in a finner grid of encounter distances.}}{8}}
+\newlabel{fig:epsilon_finer}{{9}{8}}
