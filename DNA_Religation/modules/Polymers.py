@@ -73,26 +73,23 @@ class Polymer(Graph):
         X = range(self.numMonomers)
         Y = range(self.numMonomers)
         X, Y = np.meshgrid(X, Y)
-        Z = self.LaplacianMatrix.flatten('F')
-        
+        Z = self.LaplacianMatrix.flatten('F')      
         #Define colormap and get values for barcolors from it
         cmap = plt.cm.RdYlBu_r
         norm = mpl.colors.Normalize(vmin=Z.min(), vmax=Z.max())
         barcolors = plt.cm.ScalarMappable(norm, cmap)
-
-
         ax.bar3d(X.flatten('F'),Y.flatten('F'),np.zeros_like(X.flatten('F')),0.5,0.5,Z,color=barcolors.to_rgba(Z),alpha=0.4)
         plt.show()
 
-
-    def makeRCL(self,Nc):
-        return RCLPolymer(self.numMonomers,self.dim,self.b,Nc)
+    
+    def relaxTime(self, D):
+        z = 2*self.Nc/((self.numMonomers-1)*(self.numMonomers-2))
+        return self.b**2/(self.dim*D*(self.numMonomers*z + 4.0*(1-z)*np.sin(np.pi/(2.0*self.numMonomers))**2))
     
     def step(self,numsteps,dt,D):
         for j in range(numsteps):
             self.positions += -(self.dim*D/(self.b**2))*np.dot(self.LaplacianMatrix,self.get_r())*dt + np.random.randn(self.numMonomers,self.dim)*np.sqrt(2.0*D*dt)
     
-
     def haveEncountered(self,mono1,mono2,eps):
         """
         Return True if mono1 and mono2 have encountered, i.e., |R_mono1 - R_mono2| < eps
