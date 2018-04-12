@@ -19,11 +19,11 @@ import os, sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__)))))
 from modules.Simulation import EncounterSimulation
 from modules.Polymers import RCLPolymer
+from modules.Experiment import Experiment
 
 import numpy as np
 import matplotlib.pyplot as plt
-import scipy.stats as sts
-from time import strftime
+from time import strftime, time
 
 ###########################################################################
 
@@ -36,23 +36,25 @@ params = dict(
 dimension                   = 3,
 monomerNumber               = 100,
 b                           = 0.2,
+keepCL                      = True, # keep CL in cleaved monomers?
 
 # Simulation parameters
+simulationParams = dict(
 # Physicial parameters
+Nb                          = 2,
 diffusionConstant           = 0.08,
 encounterDistance           = 0.1,
-keepCL                      = True, # keep CL in cleaved monomers?
 # Numerical parameters
-numRealisations             = 500,  # num of realisations per set 
-maxIterationsPerExperiment  = 400,  # if there is no encounter before
+numRealisations             = 100,  # num of realisations per set 
 dt                          = 0.01, # time step after relaxation time
 dt_relax                    = 0.05, # time step until relaxation time
-waitingSteps                = 100, # steps after the DBSs
+waitingSteps                = 10, # steps after the DBSs
+),
 
 # Test parameters
-test_connectorsNumber       = np.arange(2,10,dtype=int),
+test_connectorsNumber       = np.arange(30,40,dtype=int),
 test_genomic_distances      = [5],
-
+        
 # Plot options
 errorbars                   = False 
 )
@@ -63,8 +65,7 @@ errorbars                   = False
 ############################################################################
 # FUNCTIONS
 
-def MRG_vs_CLNumber(dimension,monomerNumber,b,diffusionConstant,encounterDistance,keepCL,
-                    numRealisations,maxIterationsPerExperiment,dt,dt_relax,waitingSteps,
+def MRG_vs_CLNumber(dimension,monomerNumber,b,keepCL,simulationParams,
                     test_connectorsNumber,test_genomic_distances, errorbars):
     """
     Main function
@@ -85,10 +86,11 @@ def MRG_vs_CLNumber(dimension,monomerNumber,b,diffusionConstant,encounterDistanc
         
         for Nc in test_connectorsNumber:
             p0 = RCLPolymer(monomerNumber, dimension, b, Nc, keepCL)
-            mc = EncounterSimulation(dt, diffusionConstant, p0, dt_relax, numRealisations, maxIterationsPerExperiment, 2, genomicDistance, encounterDistance, waitingSteps,False)
-            mc.run()
-            MRG.append(mc.get_msrg())
-            demiCI.append(1.96*np.std(mc.msrg)/np.sqrt(len(mc.msrg)))
+            results = {}
+            simulationParams['genomicDistance'] = genomicDistance
+            mc = Experiment(p0, results, simulationParams, "twoDSB") 
+            MRG.append(mc.results['MSRG'])
+            demiCI.append(mc.results['MSRG_95CI'])
         
         MRG = np.array(MRG)
         demiCI = np.array(demiCI)
@@ -100,11 +102,11 @@ def MRG_vs_CLNumber(dimension,monomerNumber,b,diffusionConstant,encounterDistanc
         np.save('results/MRG_vs_conectorsNumber__'+
             'keepCL_'+str(keepCL)+
             str(monomerNumber)+'monomers_'+
-            str(numRealisations)+'iterations'+
+            str(simulationParams['numRealisations'])+'iterations'+
             date+'.npy',output)
         
         if errorbars:
-            plt.errorbar(x=test_connectorsNumber, y=np.sqrt(MRG), demiCI,
+            plt.errorbar(x=test_connectorsNumber, y=np.sqrt(MRG), yerr=demiCI,
                      fmt='-o', label=r'$g = $ '+str(genomicDistance), capsize = 4)
         else:
             plt.plot(test_connectorsNumber,MRG,'-o',label=r'$g = $ '+str(genomicDistance))
@@ -112,7 +114,7 @@ def MRG_vs_CLNumber(dimension,monomerNumber,b,diffusionConstant,encounterDistanc
     np.save('results/MRG_vs_conectorsNumber__'+
             'keepCL_'+str(keepCL)+
             str(monomerNumber)+'monomers_'+
-            str(numRealisations)+'iterations'+
+            str(simulationParams['numRealisations'])+'iterations'+
             date+'.npy',output)
     
     plt.legend()
@@ -183,4 +185,6 @@ def MSRG_vs_CLremoval(dimension,monomerNumber,b,diffusionConstant,encounterDista
 ############################################################################
 
 if __name__ == '__main__':
+    start = time()
     z = MRG_vs_CLNumber(**params)
+    print("Experiment duration : ", time()-start)   

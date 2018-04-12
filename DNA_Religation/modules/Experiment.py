@@ -45,6 +45,9 @@ class Experiment():
         elif customExperiment == "EncounterSimulation":
             print("After two DSBs Encounter Simulation")
             self.runEncounterSimulation()
+        elif customExperiment == "twoDSB":
+            print("Two DSBs until relaxation time (no encounter!)")
+            self.runTwoRandomBreakSimulation()
         elif callable(customExperiment):
             # customExperiment should be a function that has a 
             # Experiment object as unique argument
@@ -84,6 +87,18 @@ class Experiment():
         return ani
 
     
+    def reduceResults(self,experiment2):
+        """
+        Combine the results of two experiments (self and experiment2)
+        """
+        assert experiment2.get_params() == self.params, "Experiments don't have same parameters. Results should not be reduced into a single result object."
+        results = {}
+        results['iterationsNumber'] = self.numRealisations + experiment2.numRealisations
+        results['lastTrajectory'] = experiment2.trajectory
+        
+        return Experiment()
+        
+        
     ####################################################
     ############# IMPLEMENTED EXPERIMENTS ##############
     ####################################################    
@@ -118,19 +133,12 @@ class Experiment():
         self.addResults("lastTrajectory", trajectory)
         self.addResults("MSRG", np.mean(msrg))
    
-    
-    def _paralel_mc(iter=1000):
-        pool = mp.Pool(8)
-        
-        
-    def run_paralel_SimpleDynamic(self):
-        return 
+
     
     def randomBreak_SingleSimulation(self):
-            
+        
         # Prepare the random DSBs
         breakLoci = self.polymer.randomCuts(self.genomicDistance,self.Nb)
-                    
         # Verify is polymer is splittable for the prepeared DSBs
         while(not(self.polymer.isSplittable(breakLoci))):
             # if not, make new connections (#TODO: try an heuristic maybe?)
@@ -138,7 +146,8 @@ class Experiment():
         
         # Once the polymer is splittable:
         # Burn in until relaxation time
-        self.polymer.step(self.relaxSteps(),self.dt_relax,self.D)
+        relaxSteps = np.ceil(self.polymer.relaxTime(self.diffusionConstant)/self.dt_relax).astype(int)
+        self.polymer.step(relaxSteps,self.dt_relax,self.diffusionConstant)
         
         # Induce DSBs
         self.polymer.cutNow(breakLoci,definitive=True)
@@ -147,7 +156,7 @@ class Experiment():
             self.polymer.removeCL()
         
         # Wait some more time
-        self.polymer.step(self.waitingSteps,self.dt_relax,self.D)
+        self.polymer.step(self.waitingSteps,self.dt_relax,self.diffusionConstant)
     
     
     
@@ -160,8 +169,23 @@ class Experiment():
         for i in range(self.numRealisations): 
             self.randomBreak_SingleSimulation()
             msrg[i] = self.polymer.get_msrg()
+            if(self.polymer.get_msrg() > 10):
+                print("SHITY POLYMER")
+                self.polymer.plot()
+                print("Positions:")
+                print(self.polymer.positions)
+                print("Params:")
+                print(self.polymer.get_params())
+                print("Laplacian matrix:")
+                print(self.polymer.LaplacianMatrix)
+                print("Relaxation time:")
+                print(self.polymer.relaxTime(self.diffusionConstant))  
+            self.polymer = self.polymer.new()
             
         self.addResults("MSRG", np.mean(msrg))
+        halfCI = 1.96*np.std(msrg)/np.sqrt(len(msrg))
+        self.addResults("MSRG_95CI", halfCI)
+        
     
     
     def runEncounterSimulation(self):
@@ -178,7 +202,7 @@ class Experiment():
             
             # Simulation until encounter              
             t = 0
-            while(not(self.polymer.anyEncountered(self.encounterDistance)[0]) and t < self.numSteps):
+            while(not(self.polymer.anyEncountered(self.encounterDistance)[0]) and t < self.numMaxSteps):
                 self.polymer.step(1,self.dt,self.diffusionConstant)
                 t += 1
                 
