@@ -31,10 +31,10 @@ from time import strftime, time
 # PARAMETERS ###############################################################
 ############################################################################
 
-polymerParams = dict(numMonomers = 500,
+polymerParams = dict(numMonomers = 100,
                      dim         = 3,
                      b           = 0.2,
-                     Nc          = 0
+                     Nc          = 5
                      )
 
 simulationParams = dict(# Physicial parameters
