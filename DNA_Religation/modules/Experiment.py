@@ -40,13 +40,13 @@ class Experiment():
             
             
         if customExperiment == "SimpleDynamicSimulation":
-            print("Simple Dynamic Simulation")
+            print("Simulation of a Simple Dynamic (no breaks)")
             self.runSimpleDynamic()
         elif customExperiment == "EncounterSimulation":
-            print("After two DSBs Encounter Simulation")
+            print("Simulation of Encounter after two DSBs")
             self.runEncounterSimulation()
         elif customExperiment == "twoDSB":
-            print("Two DSBs until relaxation time (no encounter!)")
+            print("Simultation of two DSBs until relaxation time")
             self.runTwoRandomBreakSimulation()
         elif callable(customExperiment):
             # customExperiment should be a function that has a 
@@ -65,16 +65,20 @@ class Experiment():
     def plot_trajectoire(self):
         fig = plt.figure()
         ax = Axes3D(fig)
+#        ax.auto_scale_xyz([-10, 10], [-10, 10], [-10, 10])
+        
         
         x = self.trajectoire[0][:,0]
         line, = ax.plot(x, self.trajectoire[0][:,1], self.trajectoire[0][:,2])
-                
+        dots = ax.scatter(x, self.trajectoire[0][:,1], self.trajectoire[0][:,2], c='r', marker='o')
+        
         def animate(i):
             ri = self.trajectoire[i]
             line.set_xdata(ri[:,0])  # update the data
             line.set_ydata(ri[:,1])  # update the data
             line.set_3d_properties(ri[:,2])
-            return line,
+            dots._offsets3d = (ri[:,0], ri[:,1], ri[:,2])
+            return line, 
                 
         def init():
             line.set_data([],[])
