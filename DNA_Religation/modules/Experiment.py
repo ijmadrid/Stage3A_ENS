@@ -40,13 +40,13 @@ class Experiment():
             
             
         if customExperiment == "SimpleDynamicSimulation":
-            print("Simple Dynamic Simulation")
+            print("Simulation of a Simple Dynamic (no breaks)")
             self.runSimpleDynamic()
         elif customExperiment == "EncounterSimulation":
-            print("After two DSBs Encounter Simulation")
+            print("Simulation of Encounter after two DSBs")
             self.runEncounterSimulation()
         elif customExperiment == "twoDSB":
-            print("Two DSBs until relaxation time (no encounter!)")
+            print("Simultation of two DSBs until relaxation time")
             self.runTwoRandomBreakSimulation()
         elif callable(customExperiment):
             # customExperiment should be a function that has a 
@@ -65,16 +65,33 @@ class Experiment():
     def plot_trajectoire(self):
         fig = plt.figure()
         ax = Axes3D(fig)
+#        ax.auto_scale_xyz([-10, 10], [-10, 10], [-10, 10])
         
-        x = self.trajectoire[0][:,0]
-        line, = ax.plot(x, self.trajectoire[0][:,1], self.trajectoire[0][:,2])
-                
+        
+        
+        X = self.trajectoire[0][:,0]
+        Y = self.trajectoire[0][:,1]
+        Z = self.trajectoire[0][:,2]
+        line, = ax.plot(X, Y, Z)
+        dots = ax.scatter(X, Y, Z, c='r', marker='o')
+        
+        max_range = np.array([X.max()-X.min(), Y.max()-Y.min(), Z.max()-Z.min()]).max() / 2.0
+
+        mid_x = (X.max()+X.min()) * 0.5
+        mid_y = (Y.max()+Y.min()) * 0.5
+        mid_z = (Z.max()+Z.min()) * 0.5
+        ax.set_xlim(mid_x - max_range, mid_x + max_range)
+        ax.set_ylim(mid_y - max_range, mid_y + max_range)
+        ax.set_zlim(mid_z - max_range, mid_z + max_range)
+
+
         def animate(i):
             ri = self.trajectoire[i]
             line.set_xdata(ri[:,0])  # update the data
             line.set_ydata(ri[:,1])  # update the data
             line.set_3d_properties(ri[:,2])
-            return line,
+            dots._offsets3d = (ri[:,0], ri[:,1], ri[:,2])
+            return line, 
                 
         def init():
             line.set_data([],[])
@@ -230,4 +247,12 @@ class Experiment():
         self.addResults("FETs",FETs)
         self.addResults("eventsCounter",events)
         self.addResults("repair_probability_CI",repairProba)
-        
+    
+    
+    
+    def BreakAndExclude(self):
+        """
+        After inducing the DSBs add exclusion forces (excluded volume forces)
+        from the cleaved monomers.
+        """
+        return 

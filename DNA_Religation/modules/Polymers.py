@@ -34,6 +34,8 @@ class Polymer(Graph):
         self.freeMonomers = []
         self.possibleEncounters = []
         
+        self.forces = []
+        
     def get_r(self):
         return self.positions
 
@@ -87,9 +89,21 @@ class Polymer(Graph):
         return self.b**2/(self.dim*D*(self.numMonomers*z + 4.0*(1-z)*np.sin(np.pi/(2.0*self.numMonomers))**2))
     
     def step(self,numsteps,dt,D):
-        for j in range(numsteps):
-            self.positions += -(self.dim*D/(self.b**2))*np.dot(self.LaplacianMatrix,self.get_r())*dt + np.random.randn(self.numMonomers,self.dim)*np.sqrt(2.0*D*dt)
-    
+
+        if len(self.forces) > 0:
+            # Other potential gradients have been added to the dynamics
+            for j in range(numsteps):
+#                print([f(self)])
+                self.positions += - (np.sum([f(self) for f in self.forces],axis=0) + (self.dim*D/(self.b**2))*(np.dot(self.LaplacianMatrix,self.get_r())))*dt + np.random.randn(self.numMonomers,self.dim)*np.sqrt(2.0*D*dt)
+        
+        else:
+            # Harmonic potential only
+            for j in range(numsteps):
+                self.positions += -(self.dim*D/(self.b**2))*np.dot(self.LaplacianMatrix,self.get_r())*dt + np.random.randn(self.numMonomers,self.dim)*np.sqrt(2.0*D*dt)
+        
+    def addnewForce(self, potentialGradient):
+        self.forces.append(potentialGradient)
+        
     def haveEncountered(self,mono1,mono2,eps):
         """
         Return True if mono1 and mono2 have encountered, i.e., |R_mono1 - R_mono2| < eps

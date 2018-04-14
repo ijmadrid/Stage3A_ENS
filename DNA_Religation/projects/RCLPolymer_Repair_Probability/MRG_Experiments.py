@@ -23,6 +23,7 @@ from modules.Experiment import Experiment
 
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib import rcParams
 from time import strftime, time
 
 ###########################################################################
@@ -45,19 +46,20 @@ Nb                          = 2,
 diffusionConstant           = 0.08,
 encounterDistance           = 0.1,
 # Numerical parameters
-numRealisations             = 100,  # num of realisations per set 
+numRealisations             = 10,  # num of realisations per set 
 dt                          = 0.01, # time step after relaxation time
-dt_relax                    = 0.05, # time step until relaxation time
+dt_relax                    = 0.01, # time step until relaxation time
 waitingSteps                = 10, # steps after the DBSs
 ),
 
 # Test parameters
-test_connectorsNumber       = np.arange(30,40,dtype=int),
-test_genomic_distances      = [5],
+test_connectorsNumber       = np.arange(2,100,5,dtype=int),
+test_genomic_distances      = [10],  # Only one if the test is MSRG_vs_CLremoval
         
 # Plot options
-errorbars                   = False 
+errorbars                   = True 
 )
+
 
 ############################################################################
 
@@ -77,8 +79,9 @@ def MRG_vs_CLNumber(dimension,monomerNumber,b,keepCL,simulationParams,
     date = strftime("%Y_%m_%d_%H_%M")
     
     plt.figure()
+    rcParams.update({'axes.labelsize': 'xx-large'})
     plt.xlabel("Number of cross-links")
-    plt.ylabel("Mean radius of gyration")
+    plt.ylabel("Mean radius of gyration ($\mu$m)")
     
     for i, genomicDistance in enumerate(test_genomic_distances):
         MRG = []
@@ -122,50 +125,43 @@ def MRG_vs_CLNumber(dimension,monomerNumber,b,keepCL,simulationParams,
     
     return output
 
-def MSRG_vs_CLremoval(dimension,monomerNumber,b,diffusionConstant,encounterDistance,
-                    numRealisations,maxIterationsPerExperiment,dt,dt_relax,waitingSteps,
-                    test_genomic_distances, errorbars):
+def MSRG_vs_CLremoval(dimension,monomerNumber,b,keepCL,simulationParams,
+                    test_connectorsNumber, test_genomic_distances, errorbars):
     """
     Main function
     """
     
     # Output file
-    genomic_distance = test_genomic_distances
+    genomic_distance = test_genomic_distances[-1]
+    simulationParams['genomicDistance'] = genomic_distance
     
     date = strftime("%Y_%m_%d_%H_%M")
     
+    output = np.zeros((2,3,len(test_connectorsNumber)))
+    
     plt.figure()
+    rcParams.update({'axes.labelsize': 'xx-large'})
     plt.xlabel('Number of random cross-links')
-    plt.ylabel(r'Mean square radius of gyration ($\mu^2$)')
+    plt.ylabel(r'Mean radius of gyration ($\mu$m)')
        
-    for keepCL in [True, False]:
-        MSRG = []
+    for i, keepCL in enumerate([True, False]):
+
+        MRG = []
         demiCI = []
-        msrg = 100
-        Nc_max = 1
-        while(msrg > b + 0.1*b):
-            Nc_max += 1
-            p0 = RCLPolymer(monomerNumber, dimension, b, Nc_max, keepCL)
-            mc = EncounterSimulation(dt, diffusionConstant, p0, dt_relax, numRealisations, maxIterationsPerExperiment, 2, genomic_distance, encounterDistance, waitingSteps)
-            mc.run()
-            msrg = mc.get_msrg()
-            MSRG.append(msrg)
-            demiCI.append(1.96*np.std(mc.msrg)/np.sqrt(len(mc.msrg)))
         
-        MSRG = np.array(MSRG)
+        for Nc in test_connectorsNumber:
+            p0 = RCLPolymer(monomerNumber, dimension, b, Nc, keepCL)
+            results = {}
+            mc = Experiment(p0, results, simulationParams, "twoDSB") 
+            MRG.append(mc.results['MSRG'])
+            demiCI.append(mc.results['MSRG_95CI'])
+        
+        MRG = np.array(MRG)
         demiCI = np.array(demiCI)
         
-        output = np.zeros((3,Nc_max-1))
-        output[0] = np.arange(2,Nc_max+1)
-        output[1] = MSRG
-        output[2] = demiCI
-
-        np.save('results/MSRG_vs_RCLremoval__'+
-            'keepCL_'+str(keepCL)+
-            str(monomerNumber)+'monomers_'+
-            str(genomic_distance)+'genomicDistance_'+
-            str(numRealisations)+'iterations'+
-            date+'.npy',output)
+        output[i][0] = test_connectorsNumber
+        output[i][1] = np.sqrt(MRG)
+        output[i][2] = demiCI
         
         if keepCL:
             labelExp = "Keeping RCLs"
@@ -173,12 +169,18 @@ def MSRG_vs_CLremoval(dimension,monomerNumber,b,diffusionConstant,encounterDista
             labelExp = "Removing RCLs"
             
         if errorbars:
-            plt.errorbar(x=np.arange(2,Nc_max+1), y=MSRG, yerr=demiCI,
+            plt.errorbar(x=test_connectorsNumber, y=MRG, yerr=demiCI,
                      fmt='-o', label=labelExp, capsize = 4)
         else:
-            plt.plot(np.arange(2,Nc_max+1),MSRG,'-o',label=labelExp)
+            plt.plot(test_connectorsNumber, MRG,'-o',label=labelExp)
+
+    np.save('results/MSRG_vs_RCLremoval__'+
+        str(monomerNumber)+'monomers_'+
+        str(genomic_distance)+'genomicDistance_'+
+        str(simulationParams['numRealisations'])+'iterations'+
+        date+'.npy',output)
             
-    plt.legend()
+    plt.legend(fontsize='xx-large')
     plt.show()
     
 
@@ -186,5 +188,5 @@ def MSRG_vs_CLremoval(dimension,monomerNumber,b,diffusionConstant,encounterDista
 
 if __name__ == '__main__':
     start = time()
-    z = MRG_vs_CLNumber(**params)
+    z = MSRG_vs_CLremoval(**params)
     print("Experiment duration : ", time()-start)   

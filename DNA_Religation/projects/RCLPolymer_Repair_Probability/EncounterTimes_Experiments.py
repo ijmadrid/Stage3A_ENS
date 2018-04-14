@@ -56,7 +56,7 @@ numConectors        = 4  #number of added connectors
 
 maxIterationsPerExperiment = 20000
 dt                  = 0.01
-dt_relax            = 0.05
+dt_relax            = 0.01 
 
 dimension           = 3
 diffusionCte        = 0.008
