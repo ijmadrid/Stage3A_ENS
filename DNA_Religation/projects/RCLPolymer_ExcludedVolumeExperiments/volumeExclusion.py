@@ -16,7 +16,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath
 from modules.Simulation import EncounterSimulation
 from modules.Polymers import RCLPolymer
 from modules.Experiment import Experiment
-from modules.Forces import ExcludedVolume
+from modules.Forces import ExcludedVolume, LocalExcludedVolume
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -38,7 +38,7 @@ polymerParams = dict(numMonomers = 100,
                      )
 
 simulationParams = dict(# Physicial parameters
-                        diffusionConstant = 0.08,
+                        diffusionConstant = 0.008,
                         # Numerical parameters
                         numRealisations   = 1, 
                         dt                = 0.01,
@@ -66,13 +66,24 @@ if __name__ == '__main__':
     # Add excluded volume
     # First define the potential gradient
     # It should depend on the polymer only !!    
-    kappa = 3*0.08/(p0.b**2)
-    repulsionForce = lambda polymer : -kappa * ExcludedVolume(polymer, excludedVolumeCutOff, method='spring-like')
+    kappa = 3*0.008/(p0.b**2)
+    
+    # Loci dependant kappa
+    breakPoints = [5,6,10,11,70,71]
+#    amplitude = np.ones(p0.numMonomers)/10.
+#    amplitude[breakPoints] = 1.
+#    kappa = kappa * amplitude
+    
+#    repulsionForce = lambda polymer : (ExcludedVolume(polymer, excludedVolumeCutOff, method='spring-like').T * -kappa).T
+    
+    repulsionForce = lambda polymer : - kappa * LocalExcludedVolume(polymer, breakPoints, excludedVolumeCutOff)
+    
     p0.addnewForce(repulsionForce)
     # Simulation
     print(len(p0.forces), 'added forces.')
     results = {}
     mc_ve = Experiment(p0, results, simulationParams)
+    for monomer in breakPoints: mc_ve.addMonomer2follow(monomer)
     print('MRG with volume exclusion :', np.sqrt(mc_ve.results['MSRG']))
     
 #    # Without excluded volume

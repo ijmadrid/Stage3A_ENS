@@ -11,6 +11,8 @@ import matplotlib.animation as animation
 from mpl_toolkits.mplot3d import Axes3D
 from collections import Counter
 import multiprocessing as mp
+from .Forces import ExcludedVolume, LocalExcludedVolume
+import pandas as pd
 
 class Experiment():
     """
@@ -34,11 +36,13 @@ class Experiment():
         # Results data file
         self.results = resultsDataFrame
         self.params = params
+        
+        self.monomers2follow = []
+        
         # Unpackage params values
         for paramKeys, paramValues in params.items(): 
             exec('self.'+paramKeys+'=paramValues')
-            
-            
+        
         if customExperiment == "SimpleDynamicSimulation":
             print("Simulation of a Simple Dynamic (no breaks)")
             self.runSimpleDynamic()
@@ -48,6 +52,9 @@ class Experiment():
         elif customExperiment == "twoDSB":
             print("Simultation of two DSBs until relaxation time")
             self.runTwoRandomBreakSimulation()
+        elif customExperiment == "Encounter_withExcludedVolume":
+            print("Simulation of Encounter after two DSBs adding exclusion forces")
+            self.BreakAndExclude()
         elif callable(customExperiment):
             # customExperiment should be a function that has a 
             # Experiment object as unique argument
@@ -73,8 +80,19 @@ class Experiment():
         Y = self.trajectoire[0][:,1]
         Z = self.trajectoire[0][:,2]
         line, = ax.plot(X, Y, Z)
-        dots = ax.scatter(X, Y, Z, c='r', marker='o')
+        dots = ax.scatter(X, Y, Z, c='g', marker='o')
+
+#        annotations = []
+#        for m in self.monomers2follow:
+#            rm = self.trajectoire[0][m,:]
+#            annotations.append(ax.text(rm[0],rm[1],rm[2],  '%s' % (str(m)), size=5, zorder=1, color='k') )
         
+        fT = self.trajectoire[0][self.monomers2follow,:]
+        fX = fT[:,0]
+        fY = fT[:,1]
+        fZ = fT[:,2]
+        dots2follow = ax.scatter(fX, fY, fZ, c='r', marker='o')
+            
         max_range = np.array([X.max()-X.min(), Y.max()-Y.min(), Z.max()-Z.min()]).max() / 2.0
 
         mid_x = (X.max()+X.min()) * 0.5
@@ -91,6 +109,14 @@ class Experiment():
             line.set_ydata(ri[:,1])  # update the data
             line.set_3d_properties(ri[:,2])
             dots._offsets3d = (ri[:,0], ri[:,1], ri[:,2])
+            
+            ri2follow = ri[self.monomers2follow,:]
+            dots2follow._offsets3d = (ri2follow[:,0], ri2follow[:,1], ri2follow[:,2])
+            
+#            annotations[0].set_x(ri[m,0])
+#            annotations[0].set_y(ri[m,1])
+#            annotations[0].set_3d_properties(ri[m,3])
+                
             return line, 
                 
         def init():
@@ -103,6 +129,9 @@ class Experiment():
     
         return ani
 
+    
+    def addMonomer2follow(self,monomer):
+        self.monomers2follow.append(monomer)
     
     def reduceResults(self,experiment2):
         """
@@ -152,7 +181,7 @@ class Experiment():
    
 
     
-    def randomBreak_SingleSimulation(self):
+    def randomBreaks_SingleStep(self):
         
         # Prepare the random DSBs
         breakLoci = self.polymer.randomCuts(self.genomicDistance,self.Nb)
@@ -184,19 +213,8 @@ class Experiment():
         msrg = np.zeros(self.numRealisations)   
         
         for i in range(self.numRealisations): 
-            self.randomBreak_SingleSimulation()
+            self.randomBreaks_SingleStep()
             msrg[i] = self.polymer.get_msrg()
-            if(self.polymer.get_msrg() > 10):
-                print("SHITY POLYMER")
-                self.polymer.plot()
-                print("Positions:")
-                print(self.polymer.positions)
-                print("Params:")
-                print(self.polymer.get_params())
-                print("Laplacian matrix:")
-                print(self.polymer.LaplacianMatrix)
-                print("Relaxation time:")
-                print(self.polymer.relaxTime(self.diffusionConstant))  
             self.polymer = self.polymer.new()
             
         self.addResults("MSRG", np.mean(msrg))
@@ -215,7 +233,7 @@ class Experiment():
         for i in range(self.numRealisations):
             
             # Simulates the break and some waiting time
-            self.randomBreak_SingleSimulation()
+            self.randomBreaks_SingleStep()
             
             # Simulation until encounter              
             t = 0
@@ -255,4 +273,103 @@ class Experiment():
         After inducing the DSBs add exclusion forces (excluded volume forces)
         from the cleaved monomers.
         """
-        return 
+        self.addResults("iterationsNumber",self.numRealisations)
+        FETs = []
+        events = []
+        repairProba = []
+        pre_msrgs = []
+        post_msrgs = []
+
+        if self.numRealisations >= 10: k = self.numRealisations//10        
+        else: k = 1
+        for i in range(self.numRealisations):
+            
+            if not(i%k):
+                print("|",'='*(i//k),'-'*(10-i//k),"| Simulation", i+1, "of", self.numRealisations)
+            # Simulates the break and some waiting time:
+
+            # Prepare the random DSBs
+            breakLoci = self.polymer.randomCuts(self.genomicDistance,self.Nb)
+            # Verify is polymer is splittable for the prepeared DSBs
+            while(not(self.polymer.isSplittable(breakLoci))):
+                # if not, make new connections (#TODO: try an heuristic maybe?)
+                self.polymer.reset()
+            
+            # Once the polymer is splittable:
+            # Burn in until relaxation time
+            relaxSteps = np.ceil(self.polymer.relaxTime(self.diffusionConstant)/self.dt_relax).astype(int)
+            self.polymer.step(relaxSteps,self.dt_relax,self.diffusionConstant)
+            
+            # Induce DSBs
+            self.polymer.cutNow(breakLoci,definitive=True)
+            
+            
+            # Remove the CL concerning the cleavages if it is the case
+            if self.polymer.keepCL == False:
+                self.polymer.removeCL()
+
+            # ADD EXCLUDED VOLUME
+            # First define the potential gradient
+            # It should depend on the polymer only !!    
+            
+            kappa = 3*self.diffusionConstant/(self.polymer.b**2)
+            repulsionForce = lambda polymer : - kappa * LocalExcludedVolume(polymer, self.polymer.freeMonomers, self.excludedVolumeCutOff)
+    
+            self.polymer.addnewForce(repulsionForce)
+
+    
+            # Wait some more time
+            self.polymer.step(self.waitingSteps,self.dt_relax,self.diffusionConstant)
+    
+            # Measure MSRG after the break
+            msrg_pre_encounter = self.polymer.get_msrg()
+        
+            
+            # Simulation until encounter              
+            t = 0
+            while(not(self.polymer.anyEncountered(self.encounterDistance)[0]) and t < self.numMaxSteps):
+                self.polymer.step(1,self.dt,self.diffusionConstant)
+                t += 1
+                
+            if( t <self.numMaxSteps):
+                FETs.append(t)
+                events.append(self.polymer.anyEncountered(self.encounterDistance)[1])
+                
+                msrg_post_encounter = self.polymer.get_msrg()
+                
+                pre_msrgs.append(msrg_pre_encounter)
+                post_msrgs.append(msrg_post_encounter)
+                
+                
+        
+            self.polymer = self.polymer.new()
+
+        
+        # Prepare results 
+        data = pd.DataFrame()
+        FETs = np.array(FETs)*self.dt
+        data['event'] = events
+        events = Counter(events)
+        total_valid_experiments = sum(events.values())
+        
+        if total_valid_experiments == 0:
+            repairProba = [0.5,0.5]
+            print('No valid experiments!')
+        else:
+            proba = events['Repair']/total_valid_experiments
+            repairProba = [proba,
+                           1.96*np.sqrt((proba - proba**2)/total_valid_experiments)]
+        
+        # Save results
+        
+        
+
+        data['FET'] = FETs
+        data['MSRG_pre_encounter'] = pre_msrgs
+        data['MSRG_encounter'] = post_msrgs
+
+        self.addResults("polymerParams",self.polymer.get_params())
+        self.addResults("FETs",FETs)
+        self.addResults("eventsCounter",events)
+        self.addResults("repair_probability_CI",repairProba)
+        self.addResults("results_dataframe", data)

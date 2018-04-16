@@ -6,7 +6,7 @@ Created on Fri Apr 13 10:29:51 2018
 """
 
 import numpy as np
-
+from scipy.spatial.distance import pdist, squareform
     
 def ExcludedVolume(polymer,cutoff,method='spring-like'):
     """
@@ -45,3 +45,18 @@ def ExcludedVolume(polymer,cutoff,method='spring-like'):
     else:
         print("Available methods : spring-like, lennard-jones, exponential-like")
         raise NotImplementedError 
+        
+
+def LocalExcludedVolume(polymer, exclusionLoci, cutoff):
+    """
+    Add excluded volume forces in the monomers indicated by exclusionLoci
+    """
+##    indexes = np.concatenate([np.arange(x-window,x+1) for x in exclusionLoci])
+    localPositions = polymer.get_r()[exclusionLoci]
+    localDistances = np.array([np.linalg.norm(polymer.get_r() - rn, axis = 1) for rn in localPositions])
+    interactionMatrix = np.zeros((polymer.numMonomers,polymer.numMonomers))
+    localInteractionMatrix = np.where(localDistances < cutoff, -1, 0)
+    for i, monomer_i in enumerate(exclusionLoci):
+        localInteractionMatrix[i,monomer_i] = - np.sum(localInteractionMatrix[i]) - 1
+        interactionMatrix[monomer_i] = localInteractionMatrix[i]
+    return np.dot(interactionMatrix,polymer.get_r())
