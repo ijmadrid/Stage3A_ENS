@@ -12,6 +12,7 @@ from mpl_toolkits.mplot3d import Axes3D
 from collections import Counter
 import multiprocessing as mp
 from .Forces import ExcludedVolume, LocalExcludedVolume
+from .Polymers import RCLPolymer
 import pandas as pd
 
 class Experiment():
@@ -55,6 +56,12 @@ class Experiment():
         elif customExperiment == "Encounter_withExcludedVolume":
             print("Simulation of Encounter after two DSBs adding exclusion forces")
             self.BreakAndExclude()
+        elif customExperiment == "TAD_Repair":
+            print("Simulation of TAD Repair with one DSB in each TAD")
+            self.TAD_repair()
+        elif customExperiment == "oneTAD_Repair":
+            print("Simulation of the repair of a TAD with two DSB")
+            self.oneTADrepair()
         elif callable(customExperiment):
             # customExperiment should be a function that has a 
             # Experiment object as unique argument
@@ -80,19 +87,19 @@ class Experiment():
         Y = self.trajectoire[0][:,1]
         Z = self.trajectoire[0][:,2]
         line, = ax.plot(X, Y, Z)
-        dots = ax.scatter(X, Y, Z, c='g', marker='o')
+        dots = ax.scatter(X, Y, Z, c=self.polymer.colors, marker='o')
 
 #        annotations = []
 #        for m in self.monomers2follow:
 #            rm = self.trajectoire[0][m,:]
 #            annotations.append(ax.text(rm[0],rm[1],rm[2],  '%s' % (str(m)), size=5, zorder=1, color='k') )
         
-        fT = self.trajectoire[0][self.monomers2follow,:]
-        fX = fT[:,0]
-        fY = fT[:,1]
-        fZ = fT[:,2]
-        dots2follow = ax.scatter(fX, fY, fZ, c='r', marker='o')
-            
+#        fT = self.trajectoire[0][self.monomers2follow,:]
+#        fX = fT[:,0]
+#        fY = fT[:,1]
+#        fZ = fT[:,2]
+#        dots2follow = ax.scatter(fX, fY, fZ, c='r', marker='o')
+        
         max_range = np.array([X.max()-X.min(), Y.max()-Y.min(), Z.max()-Z.min()]).max() / 2.0
 
         mid_x = (X.max()+X.min()) * 0.5
@@ -110,8 +117,8 @@ class Experiment():
             line.set_3d_properties(ri[:,2])
             dots._offsets3d = (ri[:,0], ri[:,1], ri[:,2])
             
-            ri2follow = ri[self.monomers2follow,:]
-            dots2follow._offsets3d = (ri2follow[:,0], ri2follow[:,1], ri2follow[:,2])
+#            ri2follow = ri[self.monomers2follow,:]
+#            dots2follow._offsets3d = (ri2follow[:,0], ri2follow[:,1], ri2follow[:,2])
             
 #            annotations[0].set_x(ri[m,0])
 #            annotations[0].set_y(ri[m,1])
@@ -127,6 +134,8 @@ class Experiment():
         ani = animation.FuncAnimation(fig, animate, frames=self.numSteps, init_func=init,
                                               interval=self.dt, blit=False, repeat = True)
     
+        plt.close(fig)
+        
         return ani
 
     
@@ -203,7 +212,6 @@ class Experiment():
         
         # Wait some more time
         self.polymer.step(self.waitingSteps,self.dt_relax,self.diffusionConstant)
-    
     
     
     
@@ -286,27 +294,9 @@ class Experiment():
             
             if not(i%k):
                 print("|",'='*(i//k),'-'*(10-i//k),"| Simulation", i+1, "of", self.numRealisations)
-            # Simulates the break and some waiting time:
 
-            # Prepare the random DSBs
-            breakLoci = self.polymer.randomCuts(self.genomicDistance,self.Nb)
-            # Verify is polymer is splittable for the prepeared DSBs
-            while(not(self.polymer.isSplittable(breakLoci))):
-                # if not, make new connections (#TODO: try an heuristic maybe?)
-                self.polymer.reset()
-            
-            # Once the polymer is splittable:
-            # Burn in until relaxation time
-            relaxSteps = np.ceil(self.polymer.relaxTime(self.diffusionConstant)/self.dt_relax).astype(int)
-            self.polymer.step(relaxSteps,self.dt_relax,self.diffusionConstant)
-            
-            # Induce DSBs
-            self.polymer.cutNow(breakLoci,definitive=True)
-            
-            
-            # Remove the CL concerning the cleavages if it is the case
-            if self.polymer.keepCL == False:
-                self.polymer.removeCL()
+            # Simulates the break and some waiting time:
+            self.randomBreaks_SingleStep()
 
             # ADD EXCLUDED VOLUME
             # First define the potential gradient
@@ -373,3 +363,149 @@ class Experiment():
         self.addResults("eventsCounter",events)
         self.addResults("repair_probability_CI",repairProba)
         self.addResults("results_dataframe", data)
+
+
+    def TAD_repair(self):
+        
+        self.addResults("iterationsNumber",self.numRealisations)
+        FETs = []
+        events = []
+        repairProba = []
+        
+        for i in range(self.numRealisations):
+            
+            
+            ##################################################            
+            # Prepare the random DSBs
+            breakLoci = []
+            for TAD in self.polymer.TADs:
+                breakLoci.append(self.polymer.inregionCut(TAD))
+                
+            # Verify is polymer is splittable for the prepeared DSBs
+            while(not(self.polymer.isSplittable(breakLoci))):
+                # if not, make new connections (#TODO: try an heuristic maybe?)
+                self.polymer.reset()
+            
+            # Once the polymer is splittable:
+            # Burn in until relaxation time
+            relaxSteps = np.ceil(self.polymer.relaxTime(self.diffusionConstant)/self.dt_relax).astype(int)
+            self.polymer.step(relaxSteps,self.dt_relax,self.diffusionConstant)
+            
+            # Induce DSBs
+            self.polymer.cutNow(breakLoci,definitive=True)
+            # Remove the CL concerning the cleavages if it is the case
+            if self.polymer.keepCL == False:
+                self.polymer.removeCL()
+        
+            # Wait some more time
+            self.polymer.step(self.waitingSteps,self.dt_relax,self.diffusionConstant)
+            ##################################################  
+        
+            ##################################################                 
+            # Simulation until encounter              
+            t = 0
+            while(not(self.polymer.anyEncountered(self.encounterDistance)[0]) and t < self.numMaxSteps):
+                self.polymer.step(1,self.dt,self.diffusionConstant)
+                t += 1
+                
+            if( t <self.numMaxSteps):
+                FETs.append(t)
+                events.append(self.polymer.anyEncountered(self.encounterDistance)[1])
+        
+            self.polymer = self.polymer.new()
+            ##################################################  
+        
+        # Prepare results 
+        FETs = np.array(FETs)*self.dt
+        self.addResults("events",events)
+        events = Counter(events)
+        total_valid_experiments = sum(events.values())
+        
+        if total_valid_experiments == 0:
+            repairProba = [0.5,0.5]
+            print('No valid experiments!')
+        else:
+            proba = events['Repair']/total_valid_experiments
+            repairProba = [proba,
+                           1.96*np.sqrt((proba - proba**2)/total_valid_experiments)]
+        
+        # Save results
+        self.addResults("FETs",FETs)
+        self.addResults("eventsCounter",events)
+        self.addResults("repair_probability_CI",repairProba)
+    
+    
+    def oneTADrepair(self):
+        """
+        Induce Nb DSBs separated by a given genomic distance on the first TAD
+        """
+
+        self.addResults("iterationsNumber",self.numRealisations)
+        FETs = []
+        events = []
+        repairProba = []
+        
+        for i in range(self.numRealisations):
+            
+            
+            ##################################################            
+            # Prepare the random DSBs
+            l, r = self.polymer.TADs[0]
+            TADpolymer = RCLPolymer(r-l, 3, self.polymer.b, 0)
+            breakLoci = TADpolymer.randomCuts(self.genomicDistance,self.Nb)
+            breakLoci += l
+            
+            # Verify is polymer is splittable for the prepeared DSBs
+            while(not(self.polymer.isSplittable(breakLoci))):
+                # if not, make new connections (#TODO: try an heuristic maybe?)
+                self.polymer.reset()
+            
+            # Once the polymer is splittable:
+            # Burn in until relaxation time
+            relaxSteps = np.ceil(self.polymer.relaxTime(self.diffusionConstant)/self.dt_relax).astype(int)
+            self.polymer.step(relaxSteps,self.dt_relax,self.diffusionConstant)
+            
+            # Induce DSBs
+            self.polymer.cutNow(breakLoci,definitive=True)
+            # Remove the CL concerning the cleavages if it is the case
+            if self.polymer.keepCL == False:
+                self.polymer.removeCL()
+        
+            # Wait some more time
+            self.polymer.step(self.waitingSteps,self.dt_relax,self.diffusionConstant)
+            ##################################################  
+        
+            ##################################################                 
+            # Simulation until encounter              
+            t = 0
+            while(not(self.polymer.anyEncountered(self.encounterDistance)[0]) and t < self.numMaxSteps):
+                self.polymer.step(1,self.dt,self.diffusionConstant)
+                t += 1
+                
+            if( t <self.numMaxSteps):
+                FETs.append(t)  #TODO : FETs[i] = ...
+                events.append(self.polymer.anyEncountered(self.encounterDistance)[1])
+        
+            self.polymer = self.polymer.new()
+            ##################################################  
+        
+        # Prepare results 
+        FETs = np.array(FETs)*self.dt
+        self.addResults("events",events)
+        events = Counter(events)
+        total_valid_experiments = sum(events.values())
+        
+        if total_valid_experiments == 0:
+            repairProba = [0.5,0.5]
+            print('No valid experiments!')
+        else:
+            proba = events['Repair']/total_valid_experiments
+            repairProba = [proba,
+                           1.96*np.sqrt((proba - proba**2)/total_valid_experiments)]
+        
+        # Save results
+        self.addResults("FETs",FETs)
+        self.addResults("eventsCounter",events)
+        self.addResults("repair_probability_CI",repairProba)
+        
+        return 

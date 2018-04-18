@@ -41,13 +41,13 @@ polymerParams = dict(numMonomers = 100,
 simulationParams = dict(# Physicial parameters
                         diffusionConstant = 0.008,
                         # Numerical parameters
-                        numRealisations   = 500, 
+                        numRealisations   = 300, 
                         dt                = 0.01,
                         dt_relax          = 0.01,
-                        numSteps          = 500,
+#                        numSteps          = 500,
                         excludedVolumeCutOff = 0.2,
                         waitingSteps = 200,
-                        numMaxSteps = 20000,
+                        numMaxSteps = 500,
                         encounterDistance = 0.1,
                         genomicDistance = 10,
                         Nb = 2
@@ -245,9 +245,9 @@ if __name__ == '__main__':
     
 #    mc = FET_Simulation(polymerParams,simulationParams)
     
-#    proba_vs_genomicDistance(polymerParams,simulationParams,15,2,[0.2,0.1],errorbars=True)
-    
-    proba_vs_ExclusioncutoffRadius(polymerParams,simulationParams,np.arange(0,0.2*5,0.01),errorbars=True)
+    proba_vs_genomicDistance(polymerParams,simulationParams,15,2,[0.2],errorbars=True)
+        
+#    proba_vs_ExclusioncutoffRadius(polymerParams,simulationParams,np.arange(0.1,0.3,0.1),errorbars=True)
     
 #    # Without excluded volume
 #    p0 = RCLPolymer(**polymerParams)

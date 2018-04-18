@@ -36,6 +36,8 @@ class Polymer(Graph):
         
         self.forces = []
         
+        self.colors = ['r']*numMonomers
+        
     def get_r(self):
         return self.positions
 
@@ -46,7 +48,18 @@ class Polymer(Graph):
         if(self.dim == 3):
             ax = fig.gca(projection='3d')
             z = self.get_r()[:,2]
+            
+            max_range = np.array([x.max()-x.min(), y.max()-y.min(), z.max()-z.min()]).max() / 2.0
+
+            mid_x = (x.max()+x.min()) * 0.5
+            mid_y = (y.max()+y.min()) * 0.5
+            mid_z = (z.max()+z.min()) * 0.5
+            ax.set_xlim(mid_x - max_range, mid_x + max_range)
+            ax.set_ylim(mid_y - max_range, mid_y + max_range)
+            ax.set_zlim(mid_z - max_range, mid_z + max_range)
+
             ax.plot(x,y,z)
+            ax.scatter(x, y, z, c=self.colors, marker='o')
         else:
             plt.plot(x,y)
 
@@ -128,7 +141,7 @@ class Polymer(Graph):
             if(pair[1]-pair[0]==1 or pair[0]-pair[1]==1):
                 return (True,'Repair')
             else:
-                return (True,'Fail')            
+                return (True,'Misrepair')            
             
         return (False,None)
         #return np.prod(self.haveEncountered(possibleEncounters[:,0],possibleEncounters[:,1],eps))
@@ -154,29 +167,42 @@ class Polymer(Graph):
 
 class RCLPolymer(Polymer):
     
-    def __init__(self,numMonomers,dim,b,Nc,keepCL=False,**kwargs):
+    def __init__(self,numMonomers,dim,b,Nc, TADs=[], TADs_Nc=[], extra_Nc=0, keepCL=False, **kwargs):
         Polymer.__init__(self,numMonomers,dim,b,**kwargs)
-        self.Nc = Nc
-        self.connect()
+        
+        self.TADs = TADs
+        self.TADs_Nc = TADs_Nc
+        self.extra_Nc = extra_Nc        
         self.keepCL = keepCL
+        
+        if len(TADs) == 0:
+            self.Nc = Nc
+            self.randomConnect()
+
+        else:
+            for i, (l, r) in enumerate(TADs):
+                self.domainConnect(l,r,TADs_Nc[i])
+            self.extraDomainConnect(extra_Nc)
+            self.Nc = np.sum(TADs_Nc) + extra_Nc
+
+        
 
     def new(self):
-        return RCLPolymer(self.numMonomers, self.dim, self.b, self.Nc, keepCL = self.keepCL)
+        return RCLPolymer(self.numMonomers, self.dim, self.b, self.Nc, keepCL = self.keepCL, TADs = self.TADs, TADs_Nc = self.TADs_Nc, extra_Nc = self.extra_Nc)
     
     def reset(self):
         """
         Reset the connections, keeping the polymer in its current position
         """
-        self.__init__(self.numMonomers, self.dim, self.b, self.Nc, self.keepCL, position = self.positions)
+        self.__init__(self.numMonomers, self.dim, self.b, self.Nc, self.TADs, self.TADs_Nc, self.extra_Nc, self.keepCL, position = self.positions)
 
     def copy(self):
         return copy.deepcopy(self)
     
-    def connect(self):
-        # Tirage des arets aleatoires
-        possible_pairs = np.vstack(np.triu_indices(self.numMonomers,k=2)).T
-        Nl = int((self.numMonomers-2)*(self.numMonomers-1)/2)
-        selected = possible_pairs[np.random.choice(Nl,size=self.Nc,replace=False)].T
+    def connect(self, selected):
+        """
+        Connect the pairs indicated in selected
+        """
         # Mise a jour de la matrice laplacienne
         self.LaplacianMatrix[selected[0],selected[1]] = -1
         self.LaplacianMatrix[selected[1],selected[0]] = -1
@@ -185,7 +211,54 @@ class RCLPolymer(Polymer):
         # Mise a jour de la liste d'adjacence
         self.addEdge(selected[0],selected[1])
         self.addEdge(selected[1],selected[0])
+        
+    def randomConnect(self):
+        """
+        Induce self.Nc random connections in the whole polymer
+        """
+        if self.Nc == 0:
+            return
+        else:
+            possible_pairs = np.vstack(np.triu_indices(self.numMonomers,k=2)).T
+            Nl = int((self.numMonomers-2)*(self.numMonomers-1)/2)
+            selected = possible_pairs[np.random.choice(Nl,size=self.Nc,replace=False)].T
+            self.connect(selected)
     
+    def domainConnect(self,left,right,Nc):
+        """
+        Induce Nc random connections between the monomers in [left,right[
+        """
+        domainLength = right - left
+        # Tirage des arets aleatoires
+        possible_pairs = np.vstack(np.triu_indices(domainLength,k=2)).T
+        Nl = int((domainLength-2)*(domainLength-1)/2)
+        selected = left + possible_pairs[np.random.choice(Nl,size=Nc,replace=False)].T
+        self.connect(selected)
+        # Color the domain
+        self.colors[left:right] = ['g']*(right-left)
+        
+    
+    def extraDomainConnect(self,Nc):
+        """
+        Induce connectors between monomers which are not from the same domain
+        """
+        if Nc == 0:
+            return
+        else:
+            possible_pairs = np.vstack(np.triu_indices(self.numMonomers,k=2)).T.tolist()
+            for l,r in self.TADs:
+                length = r-l
+                for i in np.arange(l,r):    
+                    for j in range(length-i):
+                        possible_pairs.remove([i,i+2+j])
+            
+            possible_pairs = np.array(possible_pairs)
+            
+            selected = possible_pairs[np.random.choice(len(possible_pairs),size=Nc,replace=False)].T
+            
+            self.connect(selected)
+        
+        
     
     def randomCuts(self,g,Nb):
         """
@@ -201,6 +274,13 @@ class RCLPolymer(Polymer):
         # A1 ~ Unif[0,N-1-(Nc-1)(g-1)[
         A1 = np.random.randint(0,self.numMonomers-1-(Nb-1)*(g+1))
         return A1 + np.arange(Nb)*(1+g)
+    
+    
+    def inregionCut(self,region):
+        """
+        Define a random cut in the given region
+        """
+        return np.random.randint(region[0],region[1])
         
         
     def cutNow(self,leftMonomers,definitive=False):
@@ -324,3 +404,11 @@ class BetaPolymer(Polymer):
     def getPositions_from_Modes(self):
         
         return np.linalg.inv(self.alphas) @ self.modes
+
+
+#
+#class DomainRCLPolymer(Polymer):
+#    """
+#    aa
+#    """
+#    
