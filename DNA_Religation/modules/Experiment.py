@@ -14,6 +14,7 @@ import multiprocessing as mp
 from .Forces import ExcludedVolume, LocalExcludedVolume
 from .Polymers import RCLPolymer
 import pandas as pd
+from time import time
 
 class Experiment():
     """
@@ -444,22 +445,29 @@ class Experiment():
         FETs = []
         events = []
         repairProba = []
+        boundaries = np.append(0, self.polymer.subDomainnumMonomers.cumsum())
+        k = self.selectedSubDomain
+        l = boundaries[k]
+        r = boundaries[k+1]
+        #del boundaries
+        
         
         for i in range(self.numRealisations):
             
+            starttime = time()
             
             ##################################################            
             # Prepare the random DSBs
-            l, r = self.polymer.TADs[0]
-            TADpolymer = RCLPolymer(r-l, 3, self.polymer.b, 0)
-            breakLoci = TADpolymer.randomCuts(self.genomicDistance,self.Nb)
-            breakLoci += l
+            breakLoci = self.polymer.inregionCut(l,r,self.genomicDistance,self.Nb)
             
             # Verify is polymer is splittable for the prepeared DSBs
             while(not(self.polymer.isSplittable(breakLoci))):
                 # if not, make new connections (#TODO: try an heuristic maybe?)
                 self.polymer.reset()
             
+#            if time() - starttime > 2.0 :
+#                print('Very rare event : I wanted to break %s in sub-domain [%s, %s[' % (breakLoci, l, r) )
+#            
             # Once the polymer is splittable:
             # Burn in until relaxation time
             relaxSteps = np.ceil(self.polymer.relaxTime(self.diffusionConstant)/self.dt_relax).astype(int)
@@ -488,6 +496,8 @@ class Experiment():
         
             self.polymer = self.polymer.new()
             ##################################################  
+            
+            print('\r' + 'Simulation ' + str(i) + ') DSB at '+str(breakLoci)+' | Execution time : ' + str(time() - starttime), end='\r')
         
         # Prepare results 
         FETs = np.array(FETs)*self.dt

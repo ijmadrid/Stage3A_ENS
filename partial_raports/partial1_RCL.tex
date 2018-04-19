@@ -130,7 +130,29 @@ We see in figure \ref{fig:epsilon} that encounter distances greater than the nan
 
 \subsection{Effect of Excluded Volume}
 
+We add excluded volume forces in a harmonic form :
+
+$$
+\phi_{EV}(R) = \sum_{i,j \ : \ i \neq j} ||R_i - R_j ||^2 1_{||R_i - R_j || < \epsilon}
+$$
+
+
 \section{Repair probability in different domains}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{proba_v_g_1domain.png}
+	\caption{Probability and 95\% confidence interval of repair, in function of the interbreak distance. 5 RCLs over 100 monomers.}
+	\label{fig:1domain}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{proba_v_g_2domains.png}
+	\caption{Probability and 95\% confidence interval of repair, in function of the interbreak distance for two DSBs induced in one sub-domain of size 100 on a polymer formed by two sub-domains (100 and 50 monomers). The subdomain had 5 RCLs.}
+	\label{fig:2domain}
+\end{figure}
+
 
 \section{Partial conclusions}
 \begin{itemize}

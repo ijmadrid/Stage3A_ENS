@@ -10,7 +10,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 from scipy.spatial.distance import pdist, squareform
-from itertools import combinations
+from itertools import combinations, product
 import copy
 
 class Polymer(Graph):
@@ -83,17 +83,19 @@ class Polymer(Graph):
         return M 
     
     def showMatrix(self):
-        fig = plt.figure()
-        ax = fig.add_subplot(111,projection='3d')    
-        X = range(self.numMonomers)
-        Y = range(self.numMonomers)
-        X, Y = np.meshgrid(X, Y)
-        Z = self.LaplacianMatrix.flatten('F')      
-        #Define colormap and get values for barcolors from it
-        cmap = plt.cm.RdYlBu_r
-        norm = mpl.colors.Normalize(vmin=Z.min(), vmax=Z.max())
-        barcolors = plt.cm.ScalarMappable(norm, cmap)
-        ax.bar3d(X.flatten('F'),Y.flatten('F'),np.zeros_like(X.flatten('F')),0.5,0.5,Z,color=barcolors.to_rgba(Z),alpha=0.4)
+#        plt.figure()
+#        ax = fig.add_subplot(111,projection='3d')    
+#        X = range(self.numMonomers)
+#        Y = range(self.numMonomers)
+#        X, Y = np.meshgrid(X, Y)
+#        Z = self.LaplacianMatrix.flatten('F')      
+#        #Define colormap and get values for barcolors from it
+#        cmap = plt.cm.RdYlBu_r
+#        norm = mpl.colors.Normalize(vmin=Z.min(), vmax=Z.max())
+#        barcolors = plt.cm.ScalarMappable(norm, cmap)
+#        ax.bar3d(X.flatten('F'),Y.flatten('F'),np.zeros_like(X.flatten('F')),0.5,0.5,Z,color=barcolors.to_rgba(Z),alpha=0.4)
+        laplacian = plt.matshow(self.LaplacianMatrix, cmap='Spectral')
+        plt.colorbar(laplacian)
         plt.show()
 
     
@@ -167,34 +169,47 @@ class Polymer(Graph):
 
 class RCLPolymer(Polymer):
     
-    def __init__(self,numMonomers,dim,b,Nc, TADs=[], TADs_Nc=[], extra_Nc=0, keepCL=False, **kwargs):
-        Polymer.__init__(self,numMonomers,dim,b,**kwargs)
+    def __init__(self,numMonomers,dim,b,Nc, keepCL=False, **kwargs):
         
-        self.TADs = TADs
-        self.TADs_Nc = TADs_Nc
-        self.extra_Nc = extra_Nc        
+        
+        assert (np.size(Nc) == np.size(numMonomers)**2), "numMonomers %s and Nc %s must have according shape!" % (np.shape(numMonomers), np.shape(Nc))
+                   
         self.keepCL = keepCL
-        
-        if len(TADs) == 0:
+ 
+        if type(numMonomers) == np.ndarray :
+            Polymer.__init__(self,numMonomers.sum(),dim,b,**kwargs)
+            subdomainBoundaries = numMonomers.cumsum()
+            start = 0
+            for i, end in enumerate(subdomainBoundaries):
+                self.domainConnect(start, end, Nc[i,i])
+                for j in range(i+1, len(numMonomers)):
+                    start2 = subdomainBoundaries[j-1]
+                    end2 = subdomainBoundaries[j]
+                    self.interDomainConnect(start, end, start2, end2, Nc[i,j])
+                start = end
+            self.Nc = Nc.sum()
+            
+            self.subDomainNc = Nc
+            self.subDomainnumMonomers = numMonomers
+       
+        else:
+            Polymer.__init__(self,numMonomers,dim,b,**kwargs)
             self.Nc = Nc
             self.randomConnect()
-
-        else:
-            for i, (l, r) in enumerate(TADs):
-                self.domainConnect(l,r,TADs_Nc[i])
-            self.extraDomainConnect(extra_Nc)
-            self.Nc = np.sum(TADs_Nc) + extra_Nc
+            
+            self.subDomainNc = Nc
+            self.subDomainnumMonomers = numMonomers
 
         
 
     def new(self):
-        return RCLPolymer(self.numMonomers, self.dim, self.b, self.Nc, keepCL = self.keepCL, TADs = self.TADs, TADs_Nc = self.TADs_Nc, extra_Nc = self.extra_Nc)
+        return RCLPolymer(self.subDomainnumMonomers, self.dim, self.b, self.subDomainNc, keepCL = self.keepCL)
     
     def reset(self):
         """
         Reset the connections, keeping the polymer in its current position
         """
-        self.__init__(self.numMonomers, self.dim, self.b, self.Nc, self.TADs, self.TADs_Nc, self.extra_Nc, self.keepCL, position = self.positions)
+        self.__init__(self.subDomainnumMonomers, self.dim, self.b, self.subDomainNc, self.keepCL, position = self.positions)
 
     def copy(self):
         return copy.deepcopy(self)
@@ -220,7 +235,7 @@ class RCLPolymer(Polymer):
             return
         else:
             possible_pairs = np.vstack(np.triu_indices(self.numMonomers,k=2)).T
-            Nl = int((self.numMonomers-2)*(self.numMonomers-1)/2)
+            Nl = len(possible_pairs)
             selected = possible_pairs[np.random.choice(Nl,size=self.Nc,replace=False)].T
             self.connect(selected)
     
@@ -228,15 +243,34 @@ class RCLPolymer(Polymer):
         """
         Induce Nc random connections between the monomers in [left,right[
         """
-        domainLength = right - left
-        # Tirage des arets aleatoires
-        possible_pairs = np.vstack(np.triu_indices(domainLength,k=2)).T
-        Nl = int((domainLength-2)*(domainLength-1)/2)
-        selected = left + possible_pairs[np.random.choice(Nl,size=Nc,replace=False)].T
-        self.connect(selected)
-        # Color the domain
-        self.colors[left:right] = ['g']*(right-left)
+        if Nc == 0:
+            return
+        else:
+            domainLength = right - left
+            # Tirage des arets aleatoires
+            possible_pairs = np.vstack(np.triu_indices(domainLength,k=2)).T
+            Nl = len(possible_pairs) #Nl = int((domainLength-2)*(domainLength-1)/2)
+            selected = left + possible_pairs[np.random.choice(Nl,size=Nc,replace=False)].T
+            self.connect(selected)
+            # Color the domain
+            self.colors[left:right] = ['g']*(right-left)
         
+    
+    def interDomainConnect(self,l1,r1,l2,r2,Nc):
+        """
+        Induce Nc random connecions between [l1, r1[ and [l2, r2[
+        """
+        if Nc == 0:
+            return
+        else:
+            x = np.arange(l1,r1)
+            y = np.arange(l2,r2)
+            possible_pairs = [[a,b] for a,b in product(x,y)]
+            if r1 == l2:
+                possible_pairs.pop((r1-l1-1)*(r2-l2))
+            Nl = len(possible_pairs)
+            selected = np.array(possible_pairs)[np.random.choice(Nl,size=Nc,replace=False)].T
+            self.connect(selected)
     
     def extraDomainConnect(self,Nc):
         """
@@ -272,15 +306,16 @@ class RCLPolymer(Polymer):
         of each DSB
         """
         # A1 ~ Unif[0,N-1-(Nc-1)(g-1)[
-        A1 = np.random.randint(0,self.numMonomers-1-(Nb-1)*(g+1))
+        A1 = np.random.randint(1-self.keepCL, self.numMonomers-1-(Nb-1)*(g+1)-(1-self.keepCL))
         return A1 + np.arange(Nb)*(1+g)
     
     
-    def inregionCut(self,region):
+    def inregionCut(self,l,r,g,Nb):
         """
         Define a random cut in the given region
         """
-        return np.random.randint(region[0],region[1])
+        A1 = np.random.randint(1-self.keepCL, r-1-(Nb-1)*(g+1)-(1-self.keepCL))
+        return A1 + np.arange(Nb)*(1+g)
         
         
     def cutNow(self,leftMonomers,definitive=False):
@@ -351,6 +386,7 @@ class RCLPolymer(Polymer):
         possibleEncounters = [i for i in combinations(self.freeMonomers,r=2)]
         self.possibleEncounters = np.array(possibleEncounters)
         
+
         
 
 class BetaPolymer(Polymer):

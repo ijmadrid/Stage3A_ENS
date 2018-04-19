@@ -78,6 +78,7 @@ class Graph():
         self.adj[j].remove(i)
     
     def cutAllEdgesWith(self,i):
+        assert i != 0  and i != self.V , 'Trying to remove cross-links from the extremes'
         for j in self.adj[i][1:]:
             self.cutEdge(i,j)
     

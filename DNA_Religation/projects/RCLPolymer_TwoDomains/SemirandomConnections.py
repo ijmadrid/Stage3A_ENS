@@ -32,19 +32,21 @@ import pickle
 # PARAMETERS ###############################################################
 ############################################################################
 
+NcMatrix = np.ones((2,2),dtype=int)*0
+NcMatrix[0,0] = 25
+NcMatrix[1,1] = 0
+                     
 polymerParams = dict(numMonomers = 100, # TODO (.., ..., ...)
                      dim         = 3,
                      b           = 0.2,
-                     Nc          = 0,
-                     TADs        = [(20,40),(60,80)], 
-                     TADs_Nc     = [3, 3], 
-                     extra_Nc    = 2
+                     Nc          = 25,
+                     keepCL      = True
                      )
 
 simulationParams = dict(# Physicial parameters
                         diffusionConstant = 0.008,
                         # Numerical parameters
-                        numRealisations   = 100, 
+                        numRealisations   = 600, 
                         dt                = 0.01,
                         dt_relax          = 0.01,
 #                        numSteps          = 500,
@@ -53,19 +55,17 @@ simulationParams = dict(# Physicial parameters
                         numMaxSteps = 500,
                         encounterDistance = 0.1,
                         genomicDistance = 10,
-                        Nb = 2
+                        Nb = 2,
+                        selectedSubDomain = 0
                         )
 
 test_distances = np.arange(1,30,3,dtype = int)
 
-TAD_size = 20
+gmax = 40
+gStep = 1
+test_epsilons = [0.1]
 
-test_xi = np.arange(0.005,0.04,0.003)
-test_TADsize = [10,20,30,40]
-
-interTADdistance = 1
-
-errorbars = False
+errorbars = True
 
 ############################################################################
 ############################################################################
@@ -222,6 +222,7 @@ def plot_bar_from_counter(counter, ax=None):
 
 
 def plotFET(mc):
+    rcParams.update({'axes.labelsize': 'xx-large'})
     FETs = mc.results['FETs']
     FETs = FETs.flatten()
     plt.figure()
@@ -262,11 +263,62 @@ def FET_Simulation(polymerParams,simulationParams):
 
 
 
-def proba_1TAD_vs_genomicDistance(polymerParams, simulationParams, test_xi, test_TADsize, errorbars):
-    """
+def proba_vs_genomicDistance(polymerParams,simulationParams,gmax,gStep,errorbars=False):
+#    gmax = nb_monomers - 3
+    gmin = 2
     
-    """
-    return 
+    probas = []
+    demiCI = []
+    
+    plt.figure()
+    rcParams.update({'axes.labelsize': 'xx-large'})
+    plt.xlabel('genomic distance (in number of monomers)')
+    plt.ylabel(r'$\mathbb{P}$(Repair)')
+    
+    xg = np.arange(gmin,gmax,gStep,dtype=int)
+    
+    date = strftime("%Y_%m_%d_%H_%M")
+    
+    output = np.empty((2,3,len(xg)))
+    for i, keepCL in enumerate([True,False]):
+        
+        if keepCL:
+            labelkeep = 'Keeping CL in damage zone'
+        else:
+            labelkeep = 'Removing CL in damage zone'
+        
+        polymerParams['keepCL'] = keepCL
+        
+        probas = []
+        demiCI = []
+        for g in xg:    
+            print("Simulation for g =",g,"and ",labelkeep)
+            p0 = RCLPolymer(**polymerParams)
+            results = {}
+            simulationParams['genomicDistance'] = g
+            mc = Experiment(p0, results, simulationParams,"EncounterSimulation")
+#            oneTAD_Repair
+            probas.append(mc.results['repair_probability_CI'][0])
+            demiCI.append(mc.results['repair_probability_CI'][1])
+        
+        probas = np.array(probas)
+        demiCI = np.array(demiCI)
+        
+        output[i][0] = xg
+        output[i][1] = probas
+        output[i][2] = demiCI
+        
+        if errorbars:
+            plt.errorbar(x=xg, y=probas, yerr=demiCI,
+                         fmt='-o', label=labelkeep, capsize = 4)
+        else:
+            plt.plot(xg,probas,'-o',label=labelkeep)
+
+    np.save('results/proba_vs_genomicDistance_keep_and_remove__'+date+'.npy',output)
+    
+    plt.legend()        
+    plt.show()
+    
 
 
 
@@ -274,4 +326,8 @@ if __name__ == "__main__":
     
 #    mc = proba_v_interDomainDistance(polymerParams, simulationParams, TAD_size, test_distances, errorbars)
 #    mc = proba_v_connectivityFraction(polymerParams, simulationParams, test_xi, test_TADsize, errorbars)
-    mc = FET_Simulation(polymerParams,simulationParams)
+#    mc = FET_Simulation(polymerParams,simulationParams)
+
+    proba_vs_genomicDistance(polymerParams,simulationParams,gmax,gStep,errorbars)
+
+#    print(__name__)
