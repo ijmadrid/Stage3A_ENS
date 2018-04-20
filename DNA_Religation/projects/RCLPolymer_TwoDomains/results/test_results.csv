@@ -1,0 +1,6 @@
+experimentID,numMonomers,dim,b,Nc,keepCL,diffusionConstant,numRealisations,dt,dt_relax,waitingSteps,numMaxSteps,encounterDistance,genomicDistance,Nb,selectedSubDomain,iterationsNumber,FETs,eventsCounter,repair_probability_CI
+0,100,3,0.2,25,True,0.008,5,0.01,0.01,200,500,0.1,10,2,0,5,[0.23 1.03],Counter({'Repair': 2}),"[1.0, 0.0]"
+1,100,3,0.2,25,True,0.008,5,0.01,0.01,200,500,0.1,10,2,0,5,[0.06 1.53],"Counter({'Repair': 1, 'Misrepair': 1})","[0.5, 0.6929646455628166]"
+2,100,3,0.2,25,True,0.008,5,0.01,0.01,200,500,0.1,10,2,0,5,[1.14 0.16],"Counter({'Repair': 1, 'Misrepair': 1})","[0.5, 0.6929646455628166]"
+3,100,3,0.2,25,True,0.008,5,0.01,0.01,200,500,0.1,10,2,0,5,[1.33 0.  ],"Counter({'Misrepair': 1, 'Repair': 1})","[0.5, 0.6929646455628166]"
+4,100,3,0.2,25,True,0.008,5,0.01,0.01,200,500,0.1,10,2,0,5,[],Counter(),"[0.5, 0.5]"

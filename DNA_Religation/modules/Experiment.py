@@ -10,10 +10,8 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from mpl_toolkits.mplot3d import Axes3D
 from collections import Counter
-import multiprocessing as mp
 from .Forces import ExcludedVolume, LocalExcludedVolume
 from .Polymers import RCLPolymer
-import pandas as pd
 from time import time
 
 class Experiment():
@@ -237,7 +235,7 @@ class Experiment():
         self.addResults("iterationsNumber",self.numRealisations)
         FETs = []
         events = []
-        repairProba = []
+        post_msrgs = []
         
         for i in range(self.numRealisations):
             
@@ -253,27 +251,43 @@ class Experiment():
             if( t <self.numMaxSteps):
                 FETs.append(t)
                 events.append(self.polymer.anyEncountered(self.encounterDistance)[1])
+
+                msrg_post_encounter = self.polymer.get_msrg()
+                
+#                pre_msrgs.append(msrg_pre_encounter)
+                post_msrgs.append(msrg_post_encounter)
         
             self.polymer = self.polymer.new()
 
         
         # Prepare results 
         FETs = np.array(FETs)*self.dt
+        self.addResults("events",events)
         events = Counter(events)
         total_valid_experiments = sum(events.values())
         
         if total_valid_experiments == 0:
-            repairProba = [0.5,0.5]
+            repairProbas = 0.
+            repairHalfCI = 0.
+            mFET = np.nan
+            halfCI_mFET = 0.
             print('No valid experiments!')
         else:
             proba = events['Repair']/total_valid_experiments
-            repairProba = [proba,
-                           1.96*np.sqrt((proba - proba**2)/total_valid_experiments)]
-        
+            repairProbas = proba
+            repairHalfCI = 1.96*np.sqrt((proba - proba**2)/total_valid_experiments)
+            mFET = np.mean(FETs)
+            halfCI_mFET = 1.96*np.std(FETs)/np.sqrt(total_valid_experiments)
+            
         # Save results
         self.addResults("FETs",FETs)
+        self.addResults("meanFET",mFET)
+        self.addResults("halfCI_FET",halfCI_mFET)
         self.addResults("eventsCounter",events)
-        self.addResults("repair_probability_CI",repairProba)
+        self.addResults("repair_probability",repairProbas)
+        self.addResults("repair_CIhalflength",repairHalfCI)
+        
+        self.addResults('MSRG_atEncounter', post_msrgs)
     
     
     
@@ -285,8 +299,7 @@ class Experiment():
         self.addResults("iterationsNumber",self.numRealisations)
         FETs = []
         events = []
-        repairProba = []
-        pre_msrgs = []
+#        pre_msrgs = []
         post_msrgs = []
 
         if self.numRealisations >= 10: k = self.numRealisations//10        
@@ -313,7 +326,7 @@ class Experiment():
             self.polymer.step(self.waitingSteps,self.dt_relax,self.diffusionConstant)
     
             # Measure MSRG after the break
-            msrg_pre_encounter = self.polymer.get_msrg()
+#            msrg_pre_encounter = self.polymer.get_msrg()
         
             
             # Simulation until encounter              
@@ -328,7 +341,7 @@ class Experiment():
                 
                 msrg_post_encounter = self.polymer.get_msrg()
                 
-                pre_msrgs.append(msrg_pre_encounter)
+#                pre_msrgs.append(msrg_pre_encounter)
                 post_msrgs.append(msrg_post_encounter)
                 
                 
@@ -337,33 +350,37 @@ class Experiment():
 
         
         # Prepare results 
-        data = pd.DataFrame()
+#        data = pd.DataFrame()
         FETs = np.array(FETs)*self.dt
-        data['event'] = events
+#        data['event'] = events
+        self.addResults("events",events)
         events = Counter(events)
         total_valid_experiments = sum(events.values())
         
         if total_valid_experiments == 0:
-            repairProba = [0.5,0.5]
+            repairProbas = 0.
+            repairHalfCI = 0.
+            mFET = np.nan
+            halfCI_mFET = 0.
             print('No valid experiments!')
         else:
             proba = events['Repair']/total_valid_experiments
-            repairProba = [proba,
-                           1.96*np.sqrt((proba - proba**2)/total_valid_experiments)]
-        
+            repairProbas = proba
+            repairHalfCI = 1.96*np.sqrt((proba - proba**2)/total_valid_experiments)
+            mFET = np.mean(FETs)
+            halfCI_mFET = 1.96*np.std(FETs)/np.sqrt(total_valid_experiments)
+            
         # Save results
-        
-        
-
-        data['FET'] = FETs
-        data['MSRG_pre_encounter'] = pre_msrgs
-        data['MSRG_encounter'] = post_msrgs
-
-        self.addResults("polymerParams",self.polymer.get_params())
         self.addResults("FETs",FETs)
+        self.addResults("meanFET",mFET)
+        self.addResults("halfCI_FET",halfCI_mFET)
         self.addResults("eventsCounter",events)
-        self.addResults("repair_probability_CI",repairProba)
-        self.addResults("results_dataframe", data)
+        self.addResults("repair_probability",repairProbas)
+        self.addResults("repair_CIhalflength",repairHalfCI)
+
+#        self.addResults('MSRG_pre_encounter', pre_msrgs)
+        self.addResults('MSRG_atEncounter', post_msrgs)
+#        self.addResults("results_dataframe", data)
 
 
     def TAD_repair(self):
@@ -371,7 +388,6 @@ class Experiment():
         self.addResults("iterationsNumber",self.numRealisations)
         FETs = []
         events = []
-        repairProba = []
         
         for i in range(self.numRealisations):
             
@@ -423,17 +439,25 @@ class Experiment():
         total_valid_experiments = sum(events.values())
         
         if total_valid_experiments == 0:
-            repairProba = [0.5,0.5]
+            repairProbas = 0.
+            repairHalfCI = 0.
+            mFET = np.nan
+            halfCI_mFET = 0.
             print('No valid experiments!')
         else:
             proba = events['Repair']/total_valid_experiments
-            repairProba = [proba,
-                           1.96*np.sqrt((proba - proba**2)/total_valid_experiments)]
-        
+            repairProbas = proba
+            repairHalfCI = 1.96*np.sqrt((proba - proba**2)/total_valid_experiments)
+            mFET = np.mean(FETs)
+            halfCI_mFET = 1.96*np.std(FETs)/np.sqrt(total_valid_experiments)
+            
         # Save results
         self.addResults("FETs",FETs)
+        self.addResults("meanFET",mFET)
+        self.addResults("halfCI_FET",halfCI_mFET)
         self.addResults("eventsCounter",events)
-        self.addResults("repair_probability_CI",repairProba)
+        self.addResults("repair_probability",repairProbas)
+        self.addResults("repair_CIhalflength",repairHalfCI)
     
     
     def oneTADrepair(self):
@@ -444,7 +468,6 @@ class Experiment():
         self.addResults("iterationsNumber",self.numRealisations)
         FETs = []
         events = []
-        repairProba = []
         boundaries = np.append(0, self.polymer.subDomainnumMonomers.cumsum())
         k = self.selectedSubDomain
         l = boundaries[k]
@@ -506,16 +529,22 @@ class Experiment():
         total_valid_experiments = sum(events.values())
         
         if total_valid_experiments == 0:
-            repairProba = [0.5,0.5]
+            repairProbas = 0.
+            repairHalfCI = 0.
+            mFET = np.nan
+            halfCI_mFET = 0.
             print('No valid experiments!')
         else:
             proba = events['Repair']/total_valid_experiments
-            repairProba = [proba,
-                           1.96*np.sqrt((proba - proba**2)/total_valid_experiments)]
+            repairProbas = proba
+            repairHalfCI = 1.96*np.sqrt((proba - proba**2)/total_valid_experiments)
+            mFET = np.mean(FETs)
+            halfCI_mFET = 1.96*np.std(FETs)/np.sqrt(total_valid_experiments)
         
         # Save results
         self.addResults("FETs",FETs)
+        self.addResults("meanFET",mFET)
+        self.addResults("halfCI_FET",halfCI_mFET)
         self.addResults("eventsCounter",events)
-        self.addResults("repair_probability_CI",repairProba)
-        
-        return 
+        self.addResults("repair_probability",repairProbas)
+        self.addResults("repair_CIhalflength",repairHalfCI)

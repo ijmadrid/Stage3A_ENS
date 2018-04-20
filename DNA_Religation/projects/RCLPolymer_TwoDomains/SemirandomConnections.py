@@ -23,6 +23,7 @@ from matplotlib import rcParams
 from time import strftime
 import scipy.stats as sts
 import pickle
+import csv
 
 ############################################################################
 ############################################################################
@@ -39,31 +40,33 @@ NcMatrix[1,1] = 0
 polymerParams = dict(numMonomers = 100, # TODO (.., ..., ...)
                      dim         = 3,
                      b           = 0.2,
-                     Nc          = 25,
-                     keepCL      = True
+                     Nc          = 15,
+                     keepCL      = False
                      )
 
 simulationParams = dict(# Physicial parameters
                         diffusionConstant = 0.008,
                         # Numerical parameters
-                        numRealisations   = 600, 
+                        numRealisations   = 500, 
                         dt                = 0.01,
                         dt_relax          = 0.01,
 #                        numSteps          = 500,
-#                        excludedVolumeCutOff = 0.2,
+                        excludedVolumeCutOff = 0.1,
                         waitingSteps = 200,
-                        numMaxSteps = 500,
+                        numMaxSteps = 1000,
                         encounterDistance = 0.1,
                         genomicDistance = 10,
-                        Nb = 2,
-                        selectedSubDomain = 0
+                        Nb = 2
+#                        selectedSubDomain = 0
                         )
 
 test_distances = np.arange(1,30,3,dtype = int)
 
-gmax = 40
+gmax = 20
 gStep = 1
 test_epsilons = [0.1]
+
+x_Nc = np.arange(3,30,2)
 
 errorbars = True
 
@@ -243,7 +246,7 @@ def FET_Simulation(polymerParams,simulationParams):
     
     p0 = RCLPolymer(**polymerParams)
     results = {}
-    mc = Experiment(p0, results, simulationParams,"oneTAD_Repair")
+    mc = Experiment(p0, results, simulationParams,"EncounterSimulation")
      
     plotFET(mc)
     
@@ -263,71 +266,202 @@ def FET_Simulation(polymerParams,simulationParams):
 
 
 
-def proba_vs_genomicDistance(polymerParams,simulationParams,gmax,gStep,errorbars=False):
-#    gmax = nb_monomers - 3
-    gmin = 2
-    
-    probas = []
-    demiCI = []
-    
-    plt.figure()
-    rcParams.update({'axes.labelsize': 'xx-large'})
-    plt.xlabel('genomic distance (in number of monomers)')
-    plt.ylabel(r'$\mathbb{P}$(Repair)')
-    
-    xg = np.arange(gmin,gmax,gStep,dtype=int)
-    
+def proba_vs_genomicDistance(experimentName,polymerParams,simulationParams,gmax,gStep,errorbars=False):
+
     date = strftime("%Y_%m_%d_%H_%M")
+    filename = date + '_proba_vs_genomicDistance_' + experimentName + '.csv'
     
-    output = np.empty((2,3,len(xg)))
-    for i, keepCL in enumerate([True,False]):
+    with open('results/'+filename, 'w') as csvfile:
         
-        if keepCL:
-            labelkeep = 'Keeping CL in damage zone'
-        else:
-            labelkeep = 'Removing CL in damage zone'
+        gmin = 2
+          
+        plt.figure()
+        rcParams.update({'axes.labelsize': 'xx-large'})
+        plt.xlabel('genomic distance (in number of monomers)')
+        plt.ylabel(r'$\mathbb{P}$(Repair)')
         
-        polymerParams['keepCL'] = keepCL
+        xg = np.arange(gmin,gmax,gStep,dtype=int)
         
-        probas = []
-        demiCI = []
-        for g in xg:    
-            print("Simulation for g =",g,"and ",labelkeep)
-            p0 = RCLPolymer(**polymerParams)
-            results = {}
-            simulationParams['genomicDistance'] = g
-            mc = Experiment(p0, results, simulationParams,"EncounterSimulation")
-#            oneTAD_Repair
-            probas.append(mc.results['repair_probability_CI'][0])
-            demiCI.append(mc.results['repair_probability_CI'][1])
+        for i, keepCL in enumerate([True,False]):
+            
+            if keepCL:
+                labelkeep = 'Keeping CL in damage zone'
+            else:
+                labelkeep = 'Removing CL in damage zone'
+            
+            polymerParams['keepCL'] = keepCL
+            
+            probas = np.zeros(len(xg))
+            demiCI = np.zeros(len(xg))
+            
+            for j, g in enumerate(xg):    
+                print("Simulation for g =",g,"and ",labelkeep)
+                p0 = RCLPolymer(**polymerParams)
+                simulationParams['genomicDistance'] = g
+                results = {**polymerParams, **simulationParams}
+                mc = Experiment(p0, results, simulationParams,experimentName)
+    #            oneTAD_Repair
+                probas[j] = mc.results['repair_probability']
+                demiCI[j] = mc.results['repair_CIhalflength']
+                
+                if i == 0 and g == gmin:
+                    fieldnames = ['experimentSetID']+list(mc.results)
+                    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                    writer.writeheader()
+                writer.writerow({**{'experimentSetID' : str(i)}, **mc.results})
+            
+            
+            probas = np.array(probas)
+            demiCI = np.array(demiCI)
+            
+            if errorbars:
+                plt.errorbar(x=xg, y=probas, yerr=demiCI,
+                             fmt='-o', label=labelkeep, capsize = 4)
+            else:
+                plt.plot(xg,probas,'-o',label=labelkeep)
         
-        probas = np.array(probas)
-        demiCI = np.array(demiCI)
-        
-        output[i][0] = xg
-        output[i][1] = probas
-        output[i][2] = demiCI
-        
-        if errorbars:
-            plt.errorbar(x=xg, y=probas, yerr=demiCI,
-                         fmt='-o', label=labelkeep, capsize = 4)
-        else:
-            plt.plot(xg,probas,'-o',label=labelkeep)
+        plt.legend()        
+        plt.show()
 
-    np.save('results/proba_vs_genomicDistance_keep_and_remove__'+date+'.npy',output)
+
+def proba_vs_genomicDistance_andVE(polymerParams,simulationParams,gmax,gStep,errorbars=False):
+
+    date = strftime("%Y_%m_%d_%H_%M")
+    filename = date + '_VE_proba_vs_genomicDistance_' + '.csv'
     
-    plt.legend()        
-    plt.show()
+    with open('results/'+filename, 'w') as csvfile:
+        
+        gmin = 2
+        
+        
+        plt.figure()
+        rcParams.update({'axes.labelsize': 'xx-large'})
+        plt.xlabel('genomic distance (in number of monomers)')
+        plt.ylabel(r'$\mathbb{P}$(Repair)')
+        
+        xg = np.arange(gmin,gmax,gStep,dtype=int)
+        
+        for i, VolumeExclusion in enumerate([True,False]):
+            
+            if VolumeExclusion:
+                labelkeep = 'Excluding volume with a cutoff of ' + str(simulationParams['excludedVolumeCutOff']) + ' μm'
+                experimentName = "Encounter_withExcludedVolume"
+            else:
+                labelkeep = 'Without excluded volume'
+                experimentName = "EncounterSimulation"        
+                simulationParams['excludedVolumeCutOff'] = 0
+            probas = np.zeros(len(xg))
+            demiCI = np.zeros(len(xg))
+            for j, g in enumerate(xg):    
+                print("Simulation for g =",g,"and ",labelkeep)
+                p0 = RCLPolymer(**polymerParams)
+                simulationParams['genomicDistance'] = g
+                results = {**polymerParams, **simulationParams}
+                mc = Experiment(p0, results, simulationParams,experimentName)
+    #            oneTAD_Repair
+                probas[j] = mc.results['repair_probability']
+                demiCI[j] = mc.results['repair_CIhalflength']
+                
+                if i == 0 and g == gmin:
+                    fieldnames = ['experimentSetID']+list(mc.results)
+                    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                    writer.writeheader()
+                writer.writerow({**{'experimentSetID' : str(i)+'_'+str(j)}, **mc.results})
+            
+            if errorbars:
+                plt.errorbar(x=xg, y=probas, yerr=demiCI,
+                             fmt='-o', label=labelkeep, capsize = 4)
+            else:
+                plt.plot(xg,probas,'-o',label=labelkeep)
+        
+        plt.legend()        
+        plt.show()
+
+
+def proba_vs_Nc_andVE(polymerParams,simulationParams,x_Nc,errorbars=False):
+
+    date = strftime("%Y_%m_%d_%H_%M")
+    filename = date + '_VE_proba_vs_Nc' + '.csv'
     
+    with open('results/'+filename, 'w') as csvfile:
+                
+        plt.figure()
+        rcParams.update({'axes.labelsize': 'xx-large'})
+        rcParams.update({'legend.fontsize': 'large'})
+        plt.xlabel('genomic distance (in number of monomers)')
+        plt.ylabel(r'$\mathbb{P}$(Repair)')
+        
+        first_time = True
+        for i, VolumeExclusion in enumerate([True,False]):
+            
+            if VolumeExclusion:
+                labelkeep = 'Excluding volume with a cutoff of ' + str(simulationParams['excludedVolumeCutOff']) + ' μm'
+                experimentName = "Encounter_withExcludedVolume"
+            else:
+                labelkeep = 'Without excluded volume'
+                experimentName = "EncounterSimulation"        
+                simulationParams['excludedVolumeCutOff'] = 0
+            probas = np.zeros(len(x_Nc))
+            demiCI = np.zeros(len(x_Nc))
+            for j, Nc in enumerate(x_Nc):    
+                print("Simulation for Nc =",Nc,"and",labelkeep)
+                polymerParams['Nc'] = Nc
+                p0 = RCLPolymer(**polymerParams)
+                results = {**polymerParams, **simulationParams}
+                mc = Experiment(p0, results, simulationParams,experimentName)
+    #            oneTAD_Repair
+                probas[j] = mc.results['repair_probability']
+                demiCI[j] = mc.results['repair_CIhalflength']
+                
+                if first_time:
+                    fieldnames = ['experimentSetID']+list(mc.results)
+                    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                    writer.writeheader()
+                    first_time = False
+                writer.writerow({**{'experimentSetID' : str(i)+'_'+str(j)}, **mc.results})
+            
+            if errorbars:
+                plt.errorbar(x=x_Nc, y=probas, yerr=demiCI,
+                             fmt='-o', label=labelkeep, capsize = 4)
+            else:
+                plt.plot(x_Nc,probas,'-o',label=labelkeep)
+        
+        plt.legend()        
+        plt.show()
 
-
+def opencsv(file,wantedResults):
+    wantedResults = {res : [] for res in wantedResults}
+    with open(file, 'r') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            for res in wantedResults:
+                try:
+                    wantedResults[res].append(float(row[res]))
+                except:
+                    wantedResults[res].append(row[res])
+    return wantedResults
+            
 
 if __name__ == "__main__":
+    
+    file = 'results/2018_04_20_12_55_VE_proba_vs_genomicDistance_.csv'
+    wanted = {'genomicDistance',
+              'excludedVolumeCutOff',
+              'repair_probability',
+              'repair_CIhalflength',
+              'FETs'}
+    res = opencsv(file,wanted)
+
+    a = [row.split(' ')[1:] for row in res['FETs'][0].split('\n')]
+    b = [s for r in a for s in r]
+
+    
     
 #    mc = proba_v_interDomainDistance(polymerParams, simulationParams, TAD_size, test_distances, errorbars)
 #    mc = proba_v_connectivityFraction(polymerParams, simulationParams, test_xi, test_TADsize, errorbars)
 #    mc = FET_Simulation(polymerParams,simulationParams)
 
-    proba_vs_genomicDistance(polymerParams,simulationParams,gmax,gStep,errorbars)
-
+#    proba_vs_genomicDistance(polymerParams,simulationParams,gmax,gStep,errorbars)
+#    proba_vs_genomicDistance_andVE(polymerParams,simulationParams,gmax,gStep,errorbars)
+#    proba_vs_Nc_andVE(polymerParams,simulationParams,x_Nc,errorbars)
 #    print(__name__)

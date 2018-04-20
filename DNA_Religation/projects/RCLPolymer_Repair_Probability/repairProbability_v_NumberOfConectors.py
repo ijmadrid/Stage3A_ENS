@@ -15,6 +15,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath
 
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib import rcParams
 
 from modules.Polymers import RCLPolymer
 from modules.Experiment import Experiment
@@ -29,10 +30,10 @@ from pathos.multiprocessing import Pool
 
 p0 = RCLPolymer(100, 3, 0.2, 3)
 
-params = dict(dt_relax = 0.5,
+params = dict(dt_relax = 0.01,
           diffusionConstant = 0.008,
 #              numSteps = 100,
-          dt = 0.1,
+          dt = 0.01,
           genomicDistance = 2,
           Nb = 2,
           waitingSteps = 200,
@@ -46,7 +47,7 @@ params['numRealisations'] = numRealisations
 
 
 test_genomic_distances = [3,5,10]
-x_Nc = np.arange(3,20,2)
+x_Nc = np.arange(3,30,2)
 
 #############################################################
 ############ FUNCTIONS ######################################
@@ -110,32 +111,34 @@ def proba_vs_conectorsNumber(test_genomic_distances,x_Nc,keepCL,errorbars=False)
 
 
 def measureProba(g):
-    probas = []
+    probas = np.zeros(len(x_Nc))
+    halfCI = np.zeros(len(x_Nc))
     params['genomicDistance'] = g
     
-    for Nc in x_Nc:            
+    for i, Nc in enumerate(x_Nc):            
         results = {}
         np.random.seed()
         p0 = RCLPolymer(100, 3, 0.2, Nc, False)
         mc = Experiment(p0, results, params,"EncounterSimulation") 
-        probas.append(mc.results['repair_probability_CI'][0])
-   
-    return probas
+        probas[i] = mc.results['repair_probability']
+        halfCI[i] = mc.results['repair_CIhalflength']
+    return (probas, halfCI)
 
 
 if __name__ == '__main__':
     
-    print("::::::: SERIAL EXPERIMENTS :::::::::::")
-    
-    verystart = time()
-    
-    proba_vs_conectorsNumber(test_genomic_distances,x_Nc,False,errorbars=True)
-
-    print("Total duration : ", time()-verystart)
+#    print("::::::: SERIAL EXPERIMENTS :::::::::::")
+#    
+#    verystart = time()
+#    
+#    proba_vs_conectorsNumber(test_genomic_distances,x_Nc,False,errorbars=True)
+#
+#    print("Total duration : ", time()-verystart)
     
     print("::::::: PARALLEL EXPERIMENTS :::::::::")
     
     plt.figure()
+    rcParams.update({'axes.labelsize': 'xx-large'})
     
     verystart = time()
     workers = len(test_genomic_distances)
@@ -145,7 +148,7 @@ if __name__ == '__main__':
     res = pool.map(measureProba, test_genomic_distances)
     
     for i in range(len(res)):
-        plt.plot(x_Nc,res[i],'-o',label=r'$g = $ '+str(test_genomic_distances[i]))
+        plt.plot(x_Nc,res[i][0],'-o',label=r'$g = $ '+str(test_genomic_distances[i]))
     
     plt.legend()
     plt.show()    

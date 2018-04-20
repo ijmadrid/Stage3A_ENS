@@ -128,6 +128,9 @@ In terms of the dependence on the encounter distance $\varepsilon$, the behavior
 
 We see in figure \ref{fig:epsilon} that encounter distances greater than the nanometric scale induces repair probability that tends to the expect pure chance value of $1/3$ (a finer analyses could be also seen in figure \ref{fig:epsilon_finer} which confirms this trend). Again, the variance in the first mean observations are greater since the events are rare. Studying nanometric encounter distances would require a greater number of simulations or rare events sampling techniques (?). 
 
+\subsection{Effect of the CL removal}
+
+
 \subsection{Effect of Excluded Volume}
 
 We add excluded volume forces in a harmonic form :
@@ -135,6 +138,13 @@ We add excluded volume forces in a harmonic form :
 $$
 \phi_{EV}(R) = \sum_{i,j \ : \ i \neq j} ||R_i - R_j ||^2 1_{||R_i - R_j || < \epsilon}
 $$
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{../DNA_Religation/projects/RCLPolymer_ExcludedVolumeExperiments/figures/proba_vs_cutoffradius_goodone.png}
+	\caption{Probability and 95\% confidence interval of repair, in function of the cutoff radius of volume exclusion.}
+	\label{fig:vs_volumeexclusionradius}
+\end{figure}
 
 
 \section{Repair probability in different domains}
