@@ -34,41 +34,41 @@ import csv
 ############################################################################
 
 NcMatrix = np.ones((2,2),dtype=int)*0
-NcMatrix[0,0] = 25
-NcMatrix[1,1] = 0
+NcMatrix[0,0] = 5
+NcMatrix[1,1] = 5
                      
-polymerParams = dict(numMonomers = 100, # TODO (.., ..., ...)
+polymerParams = dict(numMonomers = np.array([40,40]), # TODO (.., ..., ...)
                      dim         = 3,
                      b           = 0.2,
-                     Nc          = 15,
+                     Nc          = NcMatrix,
                      keepCL      = False
                      )
 
 simulationParams = dict(# Physicial parameters
                         diffusionConstant = 0.008,
                         # Numerical parameters
-                        numRealisations   = 500, 
+                        numRealisations   = 1000, 
                         dt                = 0.01,
                         dt_relax          = 0.01,
-#                        numSteps          = 500,
+                        numSteps          = 1000,
                         excludedVolumeCutOff = 0.1,
                         waitingSteps = 200,
-                        numMaxSteps = 1000,
-                        encounterDistance = 0.1,
-                        genomicDistance = 10,
-                        Nb = 2
+#                        numMaxSteps = 1000,
+#                        encounterDistance = 0.1,
+#                        genomicDistance = 10,
+#                        Nb = 2
 #                        selectedSubDomain = 0
                         )
 
-test_distances = np.arange(1,30,3,dtype = int)
-
-gmax = 20
-gStep = 1
-test_epsilons = [0.1]
-
-x_Nc = np.arange(3,30,2)
-
-errorbars = True
+#test_distances = np.arange(1,30,3,dtype = int)
+#
+#gmax = 20
+#gStep = 1
+#test_epsilons = [0.1]
+#
+#x_Nc = np.arange(3,50,3)
+#
+#errorbars = True
 
 ############################################################################
 ############################################################################
@@ -381,7 +381,7 @@ def proba_vs_genomicDistance_andVE(polymerParams,simulationParams,gmax,gStep,err
 def proba_vs_Nc_andVE(polymerParams,simulationParams,x_Nc,errorbars=False):
 
     date = strftime("%Y_%m_%d_%H_%M")
-    filename = date + '_VE_proba_vs_Nc' + '.csv'
+    filename = date + '_VE_vs_Nc' + '.csv'
     
     with open('results/'+filename, 'w') as csvfile:
                 
@@ -389,7 +389,7 @@ def proba_vs_Nc_andVE(polymerParams,simulationParams,x_Nc,errorbars=False):
         rcParams.update({'axes.labelsize': 'xx-large'})
         rcParams.update({'legend.fontsize': 'large'})
         plt.xlabel('genomic distance (in number of monomers)')
-        plt.ylabel(r'$\mathbb{P}$(Repair)')
+        plt.ylabel('Mean first encounter time (sec)') #(r'$\mathbb{P}$(Repair)')
         
         first_time = True
         for i, VolumeExclusion in enumerate([True,False]):
@@ -401,8 +401,8 @@ def proba_vs_Nc_andVE(polymerParams,simulationParams,x_Nc,errorbars=False):
                 labelkeep = 'Without excluded volume'
                 experimentName = "EncounterSimulation"        
                 simulationParams['excludedVolumeCutOff'] = 0
-            probas = np.zeros(len(x_Nc))
-            demiCI = np.zeros(len(x_Nc))
+            mfet = np.zeros(len(x_Nc))
+            efet = np.zeros(len(x_Nc))
             for j, Nc in enumerate(x_Nc):    
                 print("Simulation for Nc =",Nc,"and",labelkeep)
                 polymerParams['Nc'] = Nc
@@ -410,8 +410,10 @@ def proba_vs_Nc_andVE(polymerParams,simulationParams,x_Nc,errorbars=False):
                 results = {**polymerParams, **simulationParams}
                 mc = Experiment(p0, results, simulationParams,experimentName)
     #            oneTAD_Repair
-                probas[j] = mc.results['repair_probability']
-                demiCI[j] = mc.results['repair_CIhalflength']
+#                probas[j] = mc.results['repair_probability']
+#                demiCI[j] = mc.results['repair_CIhalflength']
+                mfet[j] = mc.results['meanFET']
+                efet[j] = mc.results['halfCI_FET']
                 
                 if first_time:
                     fieldnames = ['experimentSetID']+list(mc.results)
@@ -421,10 +423,10 @@ def proba_vs_Nc_andVE(polymerParams,simulationParams,x_Nc,errorbars=False):
                 writer.writerow({**{'experimentSetID' : str(i)+'_'+str(j)}, **mc.results})
             
             if errorbars:
-                plt.errorbar(x=x_Nc, y=probas, yerr=demiCI,
+                plt.errorbar(x=x_Nc, y=mfet, yerr=efet,
                              fmt='-o', label=labelkeep, capsize = 4)
             else:
-                plt.plot(x_Nc,probas,'-o',label=labelkeep)
+                plt.plot(x_Nc,mfet,'-o',label=labelkeep)
         
         plt.legend()        
         plt.show()
@@ -440,20 +442,61 @@ def opencsv(file,wantedResults):
                 except:
                     wantedResults[res].append(row[res])
     return wantedResults
+
+
+def DSBclustering(polymerParams,simulationParams):
+    date = strftime("%Y_%m_%d_%H_%M")
+    filename = date + '_interbreakdistances' + '.csv'
+    
+    with open('results/'+filename, 'w') as csvfile:
+                
+        plt.figure()
+        rcParams.update({'axes.labelsize': 'xx-large'})
+        rcParams.update({'legend.fontsize': 'large'})
+        plt.xlabel('Time (sec)')
+        plt.ylabel('Distance between A1 and A2') #(r'$\mathbb{P}$(Repair)')
+        
+        first_time = True
+        for i, VolumeExclusion in enumerate([True,False]):
             
+            if VolumeExclusion:
+                labelkeep = 'Excluding volume with a cutoff of ' + str(simulationParams['excludedVolumeCutOff']) + ' μm'
+            else:
+                labelkeep = 'Without excluded volume'       
+                simulationParams['excludedVolumeCutOff'] = 0
+
+            p0 = RCLPolymer(**polymerParams)
+            results = {**polymerParams, **simulationParams}
+            mc = Experiment(p0, results, simulationParams, 'persistentDSB')
+
+            if first_time:
+                fieldnames = ['experimentSetID']+list(mc.results)
+                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                writer.writeheader()
+                first_time = False
+            writer.writerow({**{'experimentSetID' : str(i)}, **mc.results})
+            
+            distanceA2B1 = mc.results['MeanInterBreakDistance'][:,0]
+            
+            time = np.arange(simulationParams['numSteps']+1)*simulationParams['dt']
+            plt.plot(time,distanceA2B1,'-',label=labelkeep)
+        
+        plt.legend()        
+        plt.show()    
+    
 
 if __name__ == "__main__":
     
-    file = 'results/2018_04_20_12_55_VE_proba_vs_genomicDistance_.csv'
-    wanted = {'genomicDistance',
-              'excludedVolumeCutOff',
-              'repair_probability',
-              'repair_CIhalflength',
-              'FETs'}
-    res = opencsv(file,wanted)
-
-    a = [row.split(' ')[1:] for row in res['FETs'][0].split('\n')]
-    b = [s for r in a for s in r]
+#    file = 'results/2018_04_20_12_55_VE_proba_vs_genomicDistance_.csv'
+#    wanted = {'genomicDistance',
+#              'excludedVolumeCutOff',
+#              'repair_probability',
+#              'repair_CIhalflength',
+#              'FETs'}
+#    res = opencsv(file,wanted)
+#
+#    a = [row.split(' ')[1:] for row in res['FETs'][0].split('\n')]
+#    b = [s for r in a for s in r]
 
     
     
@@ -465,3 +508,4 @@ if __name__ == "__main__":
 #    proba_vs_genomicDistance_andVE(polymerParams,simulationParams,gmax,gStep,errorbars)
 #    proba_vs_Nc_andVE(polymerParams,simulationParams,x_Nc,errorbars)
 #    print(__name__)
+    DSBclustering(polymerParams,simulationParams)

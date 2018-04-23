@@ -61,6 +61,9 @@ class Experiment():
         elif customExperiment == "oneTAD_Repair":
             print("Simulation of the repair of a TAD with two DSB")
             self.oneTADrepair()
+        elif customExperiment == 'persistentDSB':
+            print("Simulation of two persistent DSB motion")
+            self.persistentDSB()
         elif callable(customExperiment):
             # customExperiment should be a function that has a 
             # Experiment object as unique argument
@@ -207,10 +210,14 @@ class Experiment():
         self.polymer.cutNow(breakLoci,definitive=True)
         # Remove the CL concerning the cleavages if it is the case
         if self.polymer.keepCL == False:
-            self.polymer.removeCL()
-        
+            removedNum = self.polymer.removeCL()
+        else:
+            removedNum = 0
+            
         # Wait some more time
         self.polymer.step(self.waitingSteps,self.dt_relax,self.diffusionConstant)
+        
+        return removedNum
     
     
     
@@ -233,61 +240,38 @@ class Experiment():
     def runEncounterSimulation(self):
             
         self.addResults("iterationsNumber",self.numRealisations)
-        FETs = []
-        events = []
-        post_msrgs = []
+        FETs = np.ones(self.numRealisations)*np.nan
+        events = np.repeat('NA',self.numRealisations).astype('<U9')
+        removedNums = np.ones(self.numRealisations)*np.nan
+        post_msrgs = np.ones(self.numRealisations)*np.nan
         
         for i in range(self.numRealisations):
             
             # Simulates the break and some waiting time
-            self.randomBreaks_SingleStep()
+            removedNum = self.randomBreaks_SingleStep()
             
+            ##################################################                 
             # Simulation until encounter              
             t = 0
-            while(not(self.polymer.anyEncountered(self.encounterDistance)[0]) and t < self.numMaxSteps):
+            didEncounter = self.polymer.anyEncountered(self.encounterDistance)
+            while(not(didEncounter[0]) and t < self.numMaxSteps):
                 self.polymer.step(1,self.dt,self.diffusionConstant)
+                didEncounter = self.polymer.anyEncountered(self.encounterDistance)
                 t += 1
                 
             if( t <self.numMaxSteps):
-                FETs.append(t)
-                events.append(self.polymer.anyEncountered(self.encounterDistance)[1])
-
-                msrg_post_encounter = self.polymer.get_msrg()
-                
-#                pre_msrgs.append(msrg_pre_encounter)
-                post_msrgs.append(msrg_post_encounter)
+                FETs[i] = t 
+                events[i] = didEncounter[1]
+                removedNums[i] = removedNum
+                msrg_post_encounter = self.polymer.get_msrg() 
+                post_msrgs[i] = msrg_post_encounter
         
             self.polymer = self.polymer.new()
+            ##################################################  
 
-        
-        # Prepare results 
-        FETs = np.array(FETs)*self.dt
-        self.addResults("events",events)
-        events = Counter(events)
-        total_valid_experiments = sum(events.values())
-        
-        if total_valid_experiments == 0:
-            repairProbas = 0.
-            repairHalfCI = 0.
-            mFET = np.nan
-            halfCI_mFET = 0.
-            print('No valid experiments!')
-        else:
-            proba = events['Repair']/total_valid_experiments
-            repairProbas = proba
-            repairHalfCI = 1.96*np.sqrt((proba - proba**2)/total_valid_experiments)
-            mFET = np.mean(FETs)
-            halfCI_mFET = 1.96*np.std(FETs)/np.sqrt(total_valid_experiments)
-            
-        # Save results
-        self.addResults("FETs",FETs)
-        self.addResults("meanFET",mFET)
-        self.addResults("halfCI_FET",halfCI_mFET)
-        self.addResults("eventsCounter",events)
-        self.addResults("repair_probability",repairProbas)
-        self.addResults("repair_CIhalflength",repairHalfCI)
-        
+        self.saveEncounterResults(FETs, events, removedNums)
         self.addResults('MSRG_atEncounter', post_msrgs)
+        self.addResults('Ensemble_MSRG', np.nanmean(post_msrgs))
     
     
     
@@ -297,10 +281,10 @@ class Experiment():
         from the cleaved monomers.
         """
         self.addResults("iterationsNumber",self.numRealisations)
-        FETs = []
-        events = []
-#        pre_msrgs = []
-        post_msrgs = []
+        FETs = np.ones(self.numRealisations)*np.nan
+        events = np.repeat('NA',self.numRealisations).astype('<U9')
+        removedNums = np.ones(self.numRealisations)*np.nan
+        post_msrgs = np.ones(self.numRealisations)*np.nan
 
         if self.numRealisations >= 10: k = self.numRealisations//10        
         else: k = 1
@@ -310,84 +294,49 @@ class Experiment():
                 print("|",'='*(i//k),'-'*(10-i//k),"| Simulation", i+1, "of", self.numRealisations)
 
             # Simulates the break and some waiting time:
-            self.randomBreaks_SingleStep()
+            removedNum = self.randomBreaks_SingleStep()
 
-            # ADD EXCLUDED VOLUME
-            # First define the potential gradient
-            # It should depend on the polymer only !!    
-            
+            # ADD EXCLUDED VOLUME       
             kappa = 3*self.diffusionConstant/(self.polymer.b**2)
-            repulsionForce = lambda polymer : - kappa * LocalExcludedVolume(polymer, self.polymer.freeMonomers, self.excludedVolumeCutOff)
-    
+            repulsionForce = lambda polymer : - kappa * LocalExcludedVolume(polymer, self.polymer.freeMonomers, self.excludedVolumeCutOff)   
             self.polymer.addnewForce(repulsionForce)
 
-    
             # Wait some more time
             self.polymer.step(self.waitingSteps,self.dt_relax,self.diffusionConstant)
-    
-            # Measure MSRG after the break
-#            msrg_pre_encounter = self.polymer.get_msrg()
-        
-            
+
+            ##################################################                 
             # Simulation until encounter              
             t = 0
-            while(not(self.polymer.anyEncountered(self.encounterDistance)[0]) and t < self.numMaxSteps):
+            didEncounter = self.polymer.anyEncountered(self.encounterDistance)
+            while(not(didEncounter[0]) and t < self.numMaxSteps):
                 self.polymer.step(1,self.dt,self.diffusionConstant)
+                didEncounter = self.polymer.anyEncountered(self.encounterDistance)
                 t += 1
                 
             if( t <self.numMaxSteps):
-                FETs.append(t)
-                events.append(self.polymer.anyEncountered(self.encounterDistance)[1])
-                
-                msrg_post_encounter = self.polymer.get_msrg()
-                
-#                pre_msrgs.append(msrg_pre_encounter)
-                post_msrgs.append(msrg_post_encounter)
-                
-                
+                FETs[i] = t 
+                events[i] = didEncounter[1]
+                removedNums[i] = removedNum
+                msrg_post_encounter = self.polymer.get_msrg() 
+                post_msrgs[i] = msrg_post_encounter
         
             self.polymer = self.polymer.new()
+            ##################################################  
 
-        
-        # Prepare results 
-#        data = pd.DataFrame()
-        FETs = np.array(FETs)*self.dt
-#        data['event'] = events
-        self.addResults("events",events)
-        events = Counter(events)
-        total_valid_experiments = sum(events.values())
-        
-        if total_valid_experiments == 0:
-            repairProbas = 0.
-            repairHalfCI = 0.
-            mFET = np.nan
-            halfCI_mFET = 0.
-            print('No valid experiments!')
-        else:
-            proba = events['Repair']/total_valid_experiments
-            repairProbas = proba
-            repairHalfCI = 1.96*np.sqrt((proba - proba**2)/total_valid_experiments)
-            mFET = np.mean(FETs)
-            halfCI_mFET = 1.96*np.std(FETs)/np.sqrt(total_valid_experiments)
-            
-        # Save results
-        self.addResults("FETs",FETs)
-        self.addResults("meanFET",mFET)
-        self.addResults("halfCI_FET",halfCI_mFET)
-        self.addResults("eventsCounter",events)
-        self.addResults("repair_probability",repairProbas)
-        self.addResults("repair_CIhalflength",repairHalfCI)
-
-#        self.addResults('MSRG_pre_encounter', pre_msrgs)
+        self.saveEncounterResults(FETs, events, removedNums)
         self.addResults('MSRG_atEncounter', post_msrgs)
-#        self.addResults("results_dataframe", data)
+        self.addResults('Ensemble_MSRG', np.nanmean(post_msrgs))
 
 
     def TAD_repair(self):
+        """
+        One independant break in each TAD
+        """
         
         self.addResults("iterationsNumber",self.numRealisations)
-        FETs = []
-        events = []
+        FETs = np.ones(self.numRealisations)*np.nan
+        events = np.repeat('NA',self.numRealisations).astype('<U9')
+        removedNums = np.ones(self.numRealisations)*np.nan
         
         for i in range(self.numRealisations):
             
@@ -412,7 +361,7 @@ class Experiment():
             self.polymer.cutNow(breakLoci,definitive=True)
             # Remove the CL concerning the cleavages if it is the case
             if self.polymer.keepCL == False:
-                self.polymer.removeCL()
+                removedNum = self.polymer.removeCL()
         
             # Wait some more time
             self.polymer.step(self.waitingSteps,self.dt_relax,self.diffusionConstant)
@@ -421,44 +370,22 @@ class Experiment():
             ##################################################                 
             # Simulation until encounter              
             t = 0
-            while(not(self.polymer.anyEncountered(self.encounterDistance)[0]) and t < self.numMaxSteps):
+            didEncounter = self.polymer.anyEncountered(self.encounterDistance)
+            while(not(didEncounter[0]) and t < self.numMaxSteps):
                 self.polymer.step(1,self.dt,self.diffusionConstant)
+                didEncounter = self.polymer.anyEncountered(self.encounterDistance)
                 t += 1
                 
             if( t <self.numMaxSteps):
-                FETs.append(t)
-                events.append(self.polymer.anyEncountered(self.encounterDistance)[1])
+                FETs[i] = t 
+                events[i] = didEncounter[1]
+                removedNums[i] = removedNum
         
             self.polymer = self.polymer.new()
             ##################################################  
         
-        # Prepare results 
-        FETs = np.array(FETs)*self.dt
-        self.addResults("events",events)
-        events = Counter(events)
-        total_valid_experiments = sum(events.values())
+        self.saveEncounterResults(FETs, events, removedNums)
         
-        if total_valid_experiments == 0:
-            repairProbas = 0.
-            repairHalfCI = 0.
-            mFET = np.nan
-            halfCI_mFET = 0.
-            print('No valid experiments!')
-        else:
-            proba = events['Repair']/total_valid_experiments
-            repairProbas = proba
-            repairHalfCI = 1.96*np.sqrt((proba - proba**2)/total_valid_experiments)
-            mFET = np.mean(FETs)
-            halfCI_mFET = 1.96*np.std(FETs)/np.sqrt(total_valid_experiments)
-            
-        # Save results
-        self.addResults("FETs",FETs)
-        self.addResults("meanFET",mFET)
-        self.addResults("halfCI_FET",halfCI_mFET)
-        self.addResults("eventsCounter",events)
-        self.addResults("repair_probability",repairProbas)
-        self.addResults("repair_CIhalflength",repairHalfCI)
-    
     
     def oneTADrepair(self):
         """
@@ -466,15 +393,15 @@ class Experiment():
         """
 
         self.addResults("iterationsNumber",self.numRealisations)
-        FETs = []
-        events = []
+        FETs = np.ones(self.numRealisations)*np.nan
+        events = np.repeat('NA',self.numRealisations).astype('<U9')
+        removedNums = np.ones(self.numRealisations)*np.nan
+        
         boundaries = np.append(0, self.polymer.subDomainnumMonomers.cumsum())
         k = self.selectedSubDomain
         l = boundaries[k]
         r = boundaries[k+1]
-        #del boundaries
-        
-        
+
         for i in range(self.numRealisations):
             
             starttime = time()
@@ -488,9 +415,74 @@ class Experiment():
                 # if not, make new connections (#TODO: try an heuristic maybe?)
                 self.polymer.reset()
             
-#            if time() - starttime > 2.0 :
-#                print('Very rare event : I wanted to break %s in sub-domain [%s, %s[' % (breakLoci, l, r) )
-#            
+            # Once the polymer is splittable:
+            # Burn in until relaxation time
+            relaxSteps = np.ceil(self.polymer.relaxTime(self.diffusionConstant)/self.dt_relax).astype(int)
+            self.polymer.step(relaxSteps,self.dt_relax,self.diffusionConstant)
+            
+            # Induce DSBs
+            self.polymer.cutNow(breakLoci,definitive=True)
+            # Remove the CL concerning the cleavages if it is the case
+            if self.polymer.keepCL == False:
+                removedNum = self.polymer.removeCL()
+        
+            # Wait some more time
+            self.polymer.step(self.waitingSteps,self.dt_relax,self.diffusionConstant)
+            ##################################################  
+        
+            ##################################################                 
+            # Simulation until encounter              
+            t = 0
+            didEncounter = self.polymer.anyEncountered(self.encounterDistance)
+            while(not(didEncounter[0]) and t < self.numMaxSteps):
+                self.polymer.step(1,self.dt,self.diffusionConstant)
+                didEncounter = self.polymer.anyEncountered(self.encounterDistance)
+                t += 1
+                
+            if( t <self.numMaxSteps):
+                FETs[i] = t  
+                events[i] = didEncounter[1]
+                removedNums[i] = removedNum
+        
+            self.polymer = self.polymer.new()
+            ##################################################  
+            
+            print('\r' + 'Simulation ' + str(i) + ') DSB at '+str(breakLoci)+' | Execution time : ' + str(time() - starttime), end='\r')
+            
+        self.saveEncounterResults(FETs, events, removedNums)
+        
+
+    def persistentDSB(self):
+        """
+        Simulate the motion of persistent DSBs, one in each TAD
+        """
+        
+        assert type(self.polymer.subDomainnumMonomers) == np.ndarray, "The polymer must contain sub-domains"
+        
+        self.addResults("iterationsNumber",self.numRealisations)
+        
+        
+        msrg = np.zeros(self.numRealisations)   
+        interbreakDistance = np.zeros((self.numRealisations,self.numSteps+1,6))
+
+
+        boundaries = np.append(0, self.polymer.subDomainnumMonomers.cumsum())
+        leftEnds = boundaries[:-1]
+        rightEnds = boundaries[1:]
+        
+        for i in range(self.numRealisations):
+            
+            ##################################################            
+            # Prepare the random DSBs
+            breakLoci = np.zeros(len(self.polymer.subDomainnumMonomers)).astype(int)
+            for i in range(len(self.polymer.subDomainnumMonomers)):
+                breakLoci[i] = self.polymer.inregionCut(leftEnds[i],rightEnds[i],1,1)
+                
+            # Verify is polymer is splittable for the prepeared DSBs
+            while(not(self.polymer.isSplittable(breakLoci))):
+                # if not, make new connections (#TODO: try an heuristic maybe?)
+                self.polymer.reset()
+            
             # Once the polymer is splittable:
             # Burn in until relaxation time
             relaxSteps = np.ceil(self.polymer.relaxTime(self.diffusionConstant)/self.dt_relax).astype(int)
@@ -501,32 +493,41 @@ class Experiment():
             # Remove the CL concerning the cleavages if it is the case
             if self.polymer.keepCL == False:
                 self.polymer.removeCL()
-        
+
+            # ADD EXCLUDED VOLUME
+            if self.excludedVolumeCutOff > 0:
+                kappa = 3*self.diffusionConstant/(self.polymer.b**2)
+                repulsionForce = lambda polymer : - kappa * LocalExcludedVolume(polymer, self.polymer.freeMonomers, self.excludedVolumeCutOff)   
+                self.polymer.addnewForce(repulsionForce)
+            
             # Wait some more time
             self.polymer.step(self.waitingSteps,self.dt_relax,self.diffusionConstant)
             ##################################################  
-        
-            ##################################################                 
-            # Simulation until encounter              
-            t = 0
-            while(not(self.polymer.anyEncountered(self.encounterDistance)[0]) and t < self.numMaxSteps):
-                self.polymer.step(1,self.dt,self.diffusionConstant)
-                t += 1
+            
+            # Once relaxes calcule some statistical properties
+            msrg[i] = self.polymer.get_msrg()
+      
+            # Main simulation           
+            interbreakDistance[i][0] = self.polymer.interBreakDistance()
+            
+            for t in range(self.numSteps):
+                self.polymer.step(1, self.dt, self.diffusionConstant)
+                interbreakDistance[i][t+1] = self.polymer.interBreakDistance()
                 
-            if( t <self.numMaxSteps):
-                FETs.append(t)  #TODO : FETs[i] = ...
-                events.append(self.polymer.anyEncountered(self.encounterDistance)[1])
-        
             self.polymer = self.polymer.new()
             ##################################################  
-            
-            print('\r' + 'Simulation ' + str(i) + ') DSB at '+str(breakLoci)+' | Execution time : ' + str(time() - starttime), end='\r')
         
+        self.addResults('MSRG_atEncounter', msrg)
+        self.addResults('Ensemble_MSRG', np.mean(msrg))
+        self.addResults('MeanInterBreakDistance',np.mean(interbreakDistance,axis=0))
+
+
+    def saveEncounterResults(self, FETs, events, removedNums):
         # Prepare results 
-        FETs = np.array(FETs)*self.dt
+        FETs = FETs*self.dt
         self.addResults("events",events)
         events = Counter(events)
-        total_valid_experiments = sum(events.values())
+        total_valid_experiments = sum(events.values())-events['NA']
         
         if total_valid_experiments == 0:
             repairProbas = 0.
@@ -538,8 +539,8 @@ class Experiment():
             proba = events['Repair']/total_valid_experiments
             repairProbas = proba
             repairHalfCI = 1.96*np.sqrt((proba - proba**2)/total_valid_experiments)
-            mFET = np.mean(FETs)
-            halfCI_mFET = 1.96*np.std(FETs)/np.sqrt(total_valid_experiments)
+            mFET = np.nanmean(FETs)
+            halfCI_mFET = 1.96*np.nanstd(FETs)/np.sqrt(total_valid_experiments)
         
         # Save results
         self.addResults("FETs",FETs)
@@ -548,3 +549,5 @@ class Experiment():
         self.addResults("eventsCounter",events)
         self.addResults("repair_probability",repairProbas)
         self.addResults("repair_CIhalflength",repairHalfCI)
+
+        

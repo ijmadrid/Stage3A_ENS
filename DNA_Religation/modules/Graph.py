@@ -79,7 +79,10 @@ class Graph():
     
     def cutAllEdgesWith(self,i):
         assert i != 0  and i != self.V , 'Trying to remove cross-links from the extremes'
+        removedNum = 0
         for j in self.adj[i][1:]:
             self.cutEdge(i,j)
+            removedNum += 1
+        return removedNum
     
 

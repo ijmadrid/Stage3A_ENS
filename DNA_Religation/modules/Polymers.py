@@ -74,7 +74,10 @@ class Polymer(Graph):
     
     def distanceMatrix(self):
         return squareform(pdist(self.positions,'euclidean'))
-        
+    
+    def interBreakDistance(self):
+        return self.distance(self.possibleEncounters[:,0],self.possibleEncounters[:,1])        
+    
     def Linear_Rouse_Matrix(self):
         m = self.numMonomers
         M = np.diag(-1*np.ones(m-1),-1) + np.diag(2*np.ones(m),0) + np.diag(-1*np.ones(m-1),1)
@@ -314,7 +317,7 @@ class RCLPolymer(Polymer):
         """
         Define a random cut in the given region
         """
-        A1 = np.random.randint(1-self.keepCL, r-1-(Nb-1)*(g+1)-(1-self.keepCL))
+        A1 = np.random.randint(l+1-self.keepCL, r-1-(Nb-1)*(g+1)-(1-self.keepCL))
         return A1 + np.arange(Nb)*(1+g)
         
         
@@ -360,6 +363,7 @@ class RCLPolymer(Polymer):
         Remove all cross links between for all the monomers which have
         been cleaved
         """
+        removedNum = 0
         for m in self.freeMonomers[::2]:
             # Remove all CL from and to the concerned monomers
             self.LaplacianMatrix[m][:m-1] = 0 
@@ -367,7 +371,8 @@ class RCLPolymer(Polymer):
             self.LaplacianMatrix[:,m][:m-1] = 0 
             self.LaplacianMatrix[:,m][m+2:] = 0
             self.LaplacianMatrix[m,m] = 1 
-            self.cutAllEdgesWith(m)
+            removedNum += self.cutAllEdgesWith(m)
+        return removedNum
 
                 
     def offDiagPairs(self):
