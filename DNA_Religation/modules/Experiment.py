@@ -241,12 +241,12 @@ class Experiment():
             
         self.addResults("iterationsNumber",self.numRealisations)
         FETs = np.ones(self.numRealisations)*np.nan
-        events = np.repeat('NA',self.numRealisations).astype('<U9')
+        events = np.repeat('NA',self.numRealisations).astype('<U15')
         removedNums = np.ones(self.numRealisations)*np.nan
         post_msrgs = np.ones(self.numRealisations)*np.nan
         
         for i in range(self.numRealisations):
-            
+                        
             # Simulates the break and some waiting time
             removedNum = self.randomBreaks_SingleStep()
             
@@ -282,7 +282,7 @@ class Experiment():
         """
         self.addResults("iterationsNumber",self.numRealisations)
         FETs = np.ones(self.numRealisations)*np.nan
-        events = np.repeat('NA',self.numRealisations).astype('<U9')
+        events = np.repeat('NA',self.numRealisations).astype('<U15')
         removedNums = np.ones(self.numRealisations)*np.nan
         post_msrgs = np.ones(self.numRealisations)*np.nan
 
@@ -335,7 +335,7 @@ class Experiment():
         
         self.addResults("iterationsNumber",self.numRealisations)
         FETs = np.ones(self.numRealisations)*np.nan
-        events = np.repeat('NA',self.numRealisations).astype('<U9')
+        events = np.repeat('NA',self.numRealisations).astype('<U15')
         removedNums = np.ones(self.numRealisations)*np.nan
         
         for i in range(self.numRealisations):
@@ -394,7 +394,7 @@ class Experiment():
 
         self.addResults("iterationsNumber",self.numRealisations)
         FETs = np.ones(self.numRealisations)*np.nan
-        events = np.repeat('NA',self.numRealisations).astype('<U9')
+        events = np.repeat('NA',self.numRealisations).astype('<U15')
         removedNums = np.ones(self.numRealisations)*np.nan
         
         boundaries = np.append(0, self.polymer.subDomainnumMonomers.cumsum())
@@ -463,7 +463,10 @@ class Experiment():
         
         
         msrg = np.zeros(self.numRealisations)   
-        interbreakDistance = np.zeros((self.numRealisations,self.numSteps+1,6))
+        
+        from scipy.special import comb
+        encounternumber = comb(2*len(self.polymer.subDomainnumMonomers),2).astype(int)
+        interbreakDistance = np.zeros((self.numRealisations,self.numSteps+1,encounternumber))
 
 
         boundaries = np.append(0, self.polymer.subDomainnumMonomers.cumsum())
@@ -501,7 +504,7 @@ class Experiment():
                 self.polymer.addnewForce(repulsionForce)
             
             # Wait some more time
-            self.polymer.step(self.waitingSteps,self.dt_relax,self.diffusionConstant)
+#            self.polymer.step(self.waitingSteps,self.dt_relax,self.diffusionConstant)
             ##################################################  
             
             # Once relaxes calcule some statistical properties
@@ -534,6 +537,7 @@ class Experiment():
             repairHalfCI = 0.
             mFET = np.nan
             halfCI_mFET = 0.
+            meanremovedCLs = 0.
             print('No valid experiments!')
         else:
             proba = events['Repair']/total_valid_experiments
@@ -541,6 +545,7 @@ class Experiment():
             repairHalfCI = 1.96*np.sqrt((proba - proba**2)/total_valid_experiments)
             mFET = np.nanmean(FETs)
             halfCI_mFET = 1.96*np.nanstd(FETs)/np.sqrt(total_valid_experiments)
+            meanremovedCLs = np.nanmean(removedNums)
         
         # Save results
         self.addResults("FETs",FETs)
@@ -549,5 +554,6 @@ class Experiment():
         self.addResults("eventsCounter",events)
         self.addResults("repair_probability",repairProbas)
         self.addResults("repair_CIhalflength",repairHalfCI)
+        self.addResults("mean_removedCLs",meanremovedCLs)
 
         

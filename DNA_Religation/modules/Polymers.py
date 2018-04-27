@@ -33,6 +33,7 @@ class Polymer(Graph):
         self.Nc = 0
         self.freeMonomers = []
         self.possibleEncounters = []
+        self.freeMonomersNames = {}
         
         self.forces = []
         
@@ -107,7 +108,9 @@ class Polymer(Graph):
         return self.b**2/(self.dim*D*(self.numMonomers*z + 4.0*(1-z)*np.sin(np.pi/(2.0*self.numMonomers))**2))
     
     def step(self,numsteps,dt,D):
-
+        
+#        springConstant = (self.dim*D/(self.b**2))
+        
         if len(self.forces) > 0:
             # Other potential gradients have been added to the dynamics
             for j in range(numsteps):
@@ -146,7 +149,9 @@ class Polymer(Graph):
             if(pair[1]-pair[0]==1 or pair[0]-pair[1]==1):
                 return (True,'Repair')
             else:
-                return (True,'Misrepair')            
+                tag = self.freeMonomersNames[pair[0]]+"-"+self.freeMonomersNames[pair[1]]
+#                tag = ""
+                return (True,'Misrepair_'+tag)     
             
         return (False,None)
         #return np.prod(self.haveEncountered(possibleEncounters[:,0],possibleEncounters[:,1],eps))
@@ -169,6 +174,12 @@ class Polymer(Graph):
         results["ExperimentParams"] = experimentSet.get_params()
         experimentSet.run(self, results)
     
+    
+    def potentialEnergy(self):
+        """
+        Returns the polymer total elastic potencial energy
+        """
+        return 0.5*(pdist(self.positions)**2).sum()
 
 class RCLPolymer(Polymer):
     
@@ -342,6 +353,9 @@ class RCLPolymer(Polymer):
         
         if definitive:
             self.generatePossibleEncounters()
+#            
+            for i in range(len(self.freeMonomers)):
+                self.freeMonomersNames[self.freeMonomers[i]] = chr(97 + i//2) + str(1 + i%2)
 
 
     def isSplittable(self,cutLoci):
