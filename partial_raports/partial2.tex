@@ -66,7 +66,7 @@ Concerning the encounters events, if two or more pairs of monomers encounter at 
 	\label{fig:hists}
 \end{figure}
 
-The results of figure \ref{fig:hists} indicate that the removal of the cross-links seems not affect the mean first encounter time, nor the ratio of fail/repair events. The estimated rate parameter ($\lambda$) is 0.08 for both cases. It should be noted that since the maximum time of simulation is set at 60 seconds (i.e. if nothing happens in 50 seconds the simulation is discarded) the distribution is biased and corresponds to $\mathcal{L}(FET|FET<50)$. For instance, when the simulation maximum time has been increased to 200 seconds, the parameter is estimated at 0.04.
+The results of figure \ref{fig:hists} indicate that the removal of cross-links does not seem to affect the mean first encounter time, nor the ratio of misrepair/repair events. The estimated rate parameter ($\lambda$) is 0.08 for both cases. It should be noted that since the maximum time of simulation is set at 60 seconds (i.e. if nothing happens in 60 seconds the simulation is discarded) the distribution is biased and corresponds to $\mathcal{L}(FET|FET<60)$. For instance, when the simulation maximum time has been increased to 200 seconds, the rate parameter is estimated at 0.04.
 
 
 %Finally as we see in figure \ref{fig:hists2} within the misrepair events, the mismatchs seems to be equidistributed. 
@@ -91,7 +91,7 @@ The results of figure \ref{fig:hists} indicate that the removal of the cross-lin
 	\label{fig:proba_v_g_1}
 \end{figure}
 
-We see that regardless the removal of cross-links the repair probability increases in the same way as the inter-break genomic distance increases. So, removing the cross-links in the disconnected monomers does not seem to induce a better repair probability
+We see in figure \ref{fig:proba_v_g_1} that regardless the removal of cross-links the repair probability increases in the same way as the inter-break genomic distance increases. So, removing the cross-links in the disconnected monomers does not seem to induce a better repair probability
 
 \begin{figure}[h]
 	\centering
@@ -100,7 +100,7 @@ We see that regardless the removal of cross-links the repair probability increas
 	\label{fig:proba_v_g_2}
 \end{figure}
 
-The most interesting remark though is the gap between the probabilities at a genomic distance of 1 (i.e. the two DSBs are connected, $A2$ and $B1$ being neighbors) and the other genomic distances (figure \ref{fig:proba_v_g_2}). Some hypothesis: the wrong combination $A_2 - B_1$ is no possible anymore, so in fact, by pure chance, we have a $2/5$ probability of repair (instead of $2/6$), and the combinations $A_2-B_2$, $A_1-B_1$ could be very rare. Besides, as only valid cuts are allowed (i.e. the polymer rests fully connected after the breaks) the segment $A_2-B_1$ is indeed connected to the upstream and/or the downstream fragment. The probability of being connected to only one of them is higher than the probability of being connected to both, so the segment could be pushed towards one of the free monomers rapidly and then induce a good ratio of repair.
+The most interesting remark though is the gap between the probabilities at a genomic distance of 1 (i.e. the two DSBs are connected, $A2$ and $B1$ being neighbors) and the other genomic distances (figure \ref{fig:proba_v_g_2}). As only valid cuts are allowed (i.e. the polymer rests fully connected after the breaks) the segment $A_2-B_1$ is indeed connected to the upstream and/or the downstream fragment. The probability of being connected to only one of them is higher than the probability of being connected to both, so the segment could be pushed towards one of the free monomers rapidly and then induce a good ratio of repair.
 
 \subsection{Effect of the number of cross-links}
 

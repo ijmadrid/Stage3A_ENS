@@ -43,6 +43,8 @@ class Experiment():
         for paramKeys, paramValues in params.items(): 
             exec('self.'+paramKeys+'=paramValues')
         
+        assert np.sqrt(2*self.diffusionConstant*self.dt) <= 0.2*self.encounterDistance, "dt should verify: sqrt(2*D*dt) < 0.2*epsilon"
+        
         if customExperiment == "SimpleDynamicSimulation":
             print("Simulation of a Simple Dynamic (no breaks)")
             self.runSimpleDynamic()
