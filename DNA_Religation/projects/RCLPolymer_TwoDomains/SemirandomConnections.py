@@ -38,10 +38,10 @@ NcMatrix = np.ones((2,2),dtype=int)*0
 NcMatrix[0,0] = 10
 NcMatrix[1,1] = 10
                      
-polymerParams = dict(numMonomers = np.array([100,100]), # TODO (.., ..., ...)
+polymerParams = dict(numMonomers = 100, # np.array([100,100]), # TODO (.., ..., ...)
                      dim         = 3,
                      b           = 0.2,
-                     Nc          = NcMatrix,
+                     Nc          = 10, #NcMatrix,
                      keepCL      = False
                      )
 
@@ -52,11 +52,11 @@ simulationParams = dict(# Physicial parameters
                         dt                = 0.005,
                         dt_relax          = 0.01,
 #                        numSteps          = 500,
-#                        excludedVolumeCutOff = 0.2,
+                        excludedVolumeCutOff = 0.1,
                         waitingSteps = 200,
                         numMaxSteps = 6000,
                         encounterDistance = 0.05,
-                        genomicDistance = 5,
+                        genomicDistance = 12,
                         Nb = 2,
                         selectedSubDomain = 0
                         )
@@ -68,8 +68,9 @@ simulationParams = dict(# Physicial parameters
 #test_epsilons = [0.1]
 #
 #x_Nc = np.arange(25,45,5)
-x_Nc = np.arange(1,10,2)
-#
+x_Nc = np.arange(2,22,2)
+#TADsizes = [20,50,100,200,300]
+#connectivityFraction = 0.002
 errorbars = True
 
 ############################################################################
@@ -520,7 +521,7 @@ def proba_vs_interNc(polymerParams,simulationParams,x_Nc,errorbars=False):
         plt.xlabel('Number of long-range connectors')
         plt.ylabel(r'$\mathbb{P}$(Repair)') #('Mean first encounter time (sec)') #
         
-        Ncintras = [3,20]
+        Ncintras = [3,45]
 
         first_time = True        
         
@@ -586,6 +587,61 @@ def potentialEnergyplot():
     plt.legend()
     plt.show()
 
+
+def proba_v_neighborSize(polymerParams,simulationParams,TADsizes,connectivityFraction,x_Nc,errorbars=False):
+    date = strftime("%Y_%m_%d_%H_%M")
+    filename = date + 'proba_vs_neighborSize' + '.csv'
+    
+    
+    with open('results/'+filename, 'w') as csvfile:
+                
+        plt.figure()
+        rcParams.update({'axes.labelsize': 'xx-large'})
+        rcParams.update({'legend.fontsize': 'large'})
+        plt.xlabel('Number of long-range connectors')
+        plt.ylabel(r'$\mathbb{P}$(Repair)') #('Mean first encounter time (sec)') #
+        
+        first_time = True        
+        
+        for i, TADsize in enumerate(TADsizes):
+            
+            polymerParams['numMonomers'] = np.array([100,TADsize])
+            
+            probas = np.zeros(len(x_Nc))
+            demiCI = np.zeros(len(x_Nc))
+            
+            polymerParams['Nc'][1,1] = np.ceil(connectivityFraction*(TADsize-1)*(TADsize-2)/2).astype(int)
+            
+            for j, Nc in enumerate(x_Nc):    
+                print("Simulation for interNc =",Nc)
+                polymerParams['Nc'][0,1] = polymerParams['Nc'][1,0] = Nc
+                
+                p0 = RCLPolymer(**polymerParams)
+                results = {**polymerParams, **simulationParams}
+                mc = Experiment(p0, results, simulationParams,'oneTAD_Repair')
+    #            oneTAD_Repair
+                probas[j] = mc.results['repair_probability']
+                demiCI[j] = mc.results['repair_CIhalflength']
+    #                mfet[j] = mc.results['meanFET']
+    #                efet[j] = mc.results['halfCI_FET']
+                
+                if first_time:
+                    fieldnames = ['experimentSetID']+list(mc.results)
+                    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                    writer.writeheader()
+                    first_time = False
+                writer.writerow({**{'experimentSetID' : str(i)+'_'+str(j)}, **mc.results})
+            
+            if errorbars:
+                plt.errorbar(x=x_Nc, y=probas, yerr=demiCI,
+                                 fmt='-o', label = 'Neighbor TAD size: %s' % TADsize, capsize = 4)
+            else:
+                plt.plot(x_Nc,probas,'-o',label = 'Neighbor TAD size: %s' % TADsize)
+        
+        plt.legend()        
+        plt.show()
+        
+
 if __name__ == "__main__":
         
 #    file = 'results/2018_04_20_12_55_VE_proba_vs_genomicDistance_.csv'
@@ -607,8 +663,10 @@ if __name__ == "__main__":
 
 #    proba_vs_genomicDistance(polymerParams,simulationParams,gmax,gStep,errorbars)
 #    proba_vs_genomicDistance_andVE(polymerParams,simulationParams,gmax,gStep,errorbars)
-#    proba_vs_Nc_andVE(polymerParams,simulationParams,x_Nc,errorbars)   ###########
+    proba_vs_Nc_andVE(polymerParams,simulationParams,x_Nc,errorbars)   ###########
 #    print(__name__)
 #    DSBclustering(polymerParams,simulationParams)
     
-    proba_vs_interNc(polymerParams,simulationParams,x_Nc,errorbars)
+#    proba_vs_interNc(polymerParams,simulationParams,x_Nc,errorbars)
+#    TADsizes = [20,50,100,200,300]
+#    proba_v_neighborSize(polymerParams,simulationParams,TADsizes,connectivityFraction,x_Nc,errorbars)

@@ -7,15 +7,25 @@
 \usepackage[colorinlistoftodos]{todonotes}
 
 \title{Progress report: \\
-	Repair probabilities for the RCL polymer with two random breaks}
+	Repair probabilities for the RCL polymer with two DSBs}
 \author{Ignacio Madrid}
 
 \begin{document}
 
 \maketitle
 
-\section{Introduction}
- The model simulated is described in figure \ref{fig:model}. We supposed a random cross-linked polymer (RCL polymer) subdued to Langevin dynamics, i.e., if $(R_t)_{t\geq0} = (R_1, ..., R_N)_{t\geq0}$ are the monomer positions of the polymer in time, the dynamics are described by the equation:
+\section{Motivation}
+
+
+\section{Methods}
+ To simulate the chromatin repair, we consider the model of a randomly cross-linked (RCL) polymer. A RCL polymer is formed by a classical Rouse chain of $N$ monomers as backbone and $N_c$ extra random cross-links which are added uniformly over all combinations of non-neighbor monomer pairs. We define the RCL polymer connectivity $\xi$ as the fraction of added cross-links with respect to the total number of possible pairings, i.e. $\xi = Nc/((N-1)(N-2)/2)$. 
+ 
+ We define two admittance (Laplacian) matrices that characterize the RCL polymer: the Rouse matrix $M$ which describes the backbone adjacency, and $B$ which describe the added connectors.
+
+  
+ The model simulated is described in figure \ref{fig:model}.
+
+  We supposed the RCL polymer subdued to Langevin dynamics, i.e., if the monomer positions of the polymer in time are represented by $(R_t)_{t\geq0} = (R_1, ..., R_N)_{t\geq0}$ with $R_i \in \mathbb{R}^3, i = 1,...,N$, the dynamics are described by the equation:
  
  $$ dR_t = -\frac{1}{\zeta} \nabla \phi(R_t) dt + \sqrt{2D} dW_t $$
  
@@ -24,7 +34,7 @@
  The harmonic potential of an RCL polymer is given by the classical Rouse potential and by the potential induced by the random cross-links:
  
  $$
- \phi(R) = \frac{\kappa}{2} \sum_{n = 1}^{N-1} ||R_{n+1} - R_{n}||^2 + \frac{\kappa'}{2} \sum_{i,j \in \mathcal{R}} ||R_{i} - R_{j}||^2 =\frac{\kappa}{2} {}^{t}RMR + \frac{\kappa'}{2} {}^{t}RBR $$
+ \phi(R) = \frac{\kappa}{2} \sum_{n = 1}^{N-1} ||R_{n+1} - R_{n}||^2 + \frac{\kappa'}{2} \sum_{i,j \in \mathcal{R}} ||R_{i} - R_{j}||^2 =\frac{\kappa}{2} \text{tr}(R^TMR) + \frac{\kappa'}{2} \text{tr}(R^TBR) $$
 
  where $\kappa$ and $\kappa' $ are spring constants we will suppose equal,  $M$ is the Rouse matrix (degree - connectivity), $B$ is the degree - connectivity matrix with the added random connectors, and $\mathcal{R}$ is the set of monomers which have been randomly connected. Since $\frac{\kappa}{\gamma} = \frac{3D}{b^2}$ where $b$ is the standard deviation of the bonds length, we'll consider the equation :
  
@@ -54,7 +64,9 @@ NB: By pure chance, the expected repair probability is $2/6 = 1/3$.
 
 \clearpage
 
-\section{First Encounter Time (FET) distribution}
+\section{Results}
+
+\subsection{First Encounter Time (FET) distribution}
 
 Since an important peak was observed at instant 0 in the first simulations, we decided to wait some time after the induction of double strand breaks (DSBs), before measuring if any pair of monomers have encountered. 
 Concerning the encounters events, if two or more pairs of monomers encounter at the same simulated instant, we toss a coin to choose uniformly over those pairs to be the first encounter.
@@ -80,9 +92,9 @@ The results of figure \ref{fig:hists} indicate that the removal of cross-links d
 
 \newpage
 
-\section{Repair probability}
+\subsection{Repair probability}
 
-\subsection{Effect of the genomic distance between two DSBs}
+\subsubsection{Effect of the genomic distance between two DSBs}
 
 \begin{figure}[h]
 	\centering
@@ -102,7 +114,7 @@ We see in figure \ref{fig:proba_v_g_1} that regardless the removal of cross-link
 
 The most interesting remark though is the gap between the probabilities at a genomic distance of 1 (i.e. the two DSBs are connected, $A2$ and $B1$ being neighbors) and the other genomic distances (figure \ref{fig:proba_v_g_2}). As only valid cuts are allowed (i.e. the polymer rests fully connected after the breaks) the segment $A_2-B_1$ is indeed connected to the upstream and/or the downstream fragment. The probability of being connected to only one of them is higher than the probability of being connected to both, so the segment could be pushed towards one of the free monomers rapidly and then induce a good ratio of repair.
 
-\subsection{Effect of the number of cross-links}
+\subsubsection{Effect of the number of cross-links}
 
 \begin{figure}[h!]
 	\centering
@@ -124,7 +136,7 @@ In effect, increasing the number of random connectors increases as well the comp
   
 
 
-\subsection{Effect of Excluded Volume}
+\subsubsection{Effect of Excluded Volume}
 
 Excluded volume interactions to simulate self-avoidance are added to the polymer dynamics through a new harmonic potential that is added to the potential considered in the Langevin equation:
 
@@ -206,7 +218,7 @@ Surprisingly however the repair probability function considering excluded volume
 
 \clearpage
 
-\subsection{Effect of volume exclusion with more restrictive encounter distances}
+\subsubsection{Effect of volume exclusion with more restrictive encounter distances}
 
 After tracking the inter-break physical distances (in $\mu$m) as it is presented in figure \ref{fig:distances3breaks}, it seems that the encounter distance of 0.1 $\mu$m is rather permissive. So, smaller encounter radius will be considered now to see if excluded volume could help the correct repairs.
 
@@ -232,9 +244,9 @@ Figure \ref{fig:noExclusion_002epsilon} shows the results with and without volum
 
 \clearpage
 
-\section{Repair probability in different domains}
+\subsection{Repair probability in different domains}
 
-
+We'll now consider a polymer replied in two connected sub-domains (TADs) (figure \ref{fig:TADSmodel}).
 
 \begin{figure}[!h]
 	\centering
@@ -243,6 +255,12 @@ Figure \ref{fig:noExclusion_002epsilon} shows the results with and without volum
 	\label{fig:TADSmodel}
 \end{figure}
 
+
+Figure \ref{fig:proba_v_interTADdistance} shows the repair probabilities of two DSBs located at independent connected sub-domains. We see that the correct repair rate is visible higher. The probabilities are observed for two sub-domains where the genomic distance that separate them is increased. The distance between the two sub-domains does not seem to affect the (already good) probability of correct repair. 
+
+The following figures illustrates the following experiment: two DSBs are induced \textbf{in the same sub-domain} with a genomic distance between the breaks as in the previous section. The repair probability is measured again to see if the presence of a juxtaposed sub-domain without breaks affects the repair in the first sub-domain.
+
+
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.7\textwidth]{../DNA_Religation/projects/RCLPolymer_TwoDomains/figures/RepairProba_v_interTADdistance.png}
@@ -250,13 +268,6 @@ Figure \ref{fig:noExclusion_002epsilon} shows the results with and without volum
 	\label{fig:proba_v_interTADdistance}
 \end{figure}
 
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.7\textwidth]{proba_v_g_1domain.png}
-	\caption{Control: Probability and 95\% confidence interval of repair, in function of the interbreak distance. 5 RCLs over 100 monomers.}
-	\label{fig:1domain}
-\end{figure}
 
 \begin{figure}[h]
 	\centering
@@ -274,14 +285,52 @@ Figure \ref{fig:noExclusion_002epsilon} shows the results with and without volum
 	\label{fig:2domain_10rcls}
 \end{figure}
 
+
 \clearpage
 
-\subsection{TODO}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{../DNA_Religation/projects/RCLPolymer_TwoDomains/figures/proba_vs_longrange_first}
+	\caption{Probability of repair in function of the number of long-range connectors. Two DSBs were induced at a genomic distance of 5 in the first sub-domain of a polymer conformed by 2 sub-domains of 100 monomers with 10 inner cross-links.}
+	\label{fig:proba_v_longrange}
+\end{figure}
+
+Figures \ref{fig:proba_v_parasytes} and \ref{fig:proba_v_longrange_sizes} suggest that the presence of a juxtaposed cross-linked polymer chain of any size does not affect the repair performance for two DSBs at a given genomic distance when the number of long-range connectors remains little. Figure \ref{fig:proba_v_longrange_3and45} suggest that a higher number of long-range connectors increases the randomness of the system, making the probabilities go to $1/3$. If the correct repair probability was already about $1/3$ without long-range connections (for example, thanks to a high number of intra-domain cross-links), adding the long-range links does not change the repair rates.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{../DNA_Religation/projects/RCLPolymer_TwoDomains/figures/proba_vs_genomicdistance_parasytes}
+	\caption{Repair probability of a 100-monomers sub-domain with two DSBs, in function of the genomic inter-break distance between the DSBs. Juxtaposed to the broken sub-domain, there is another sub-domain of size 50, 100 and 200 without breaks. The first sub-domain has 10 inner cross-links and the juxtaposed one has a connectivity of 0.2\%. There are no long-range connectors between the two sub-domains.}
+	\label{fig:proba_v_parasytes}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{../DNA_Religation/projects/RCLPolymer_TwoDomains/figures/proba_v_longrangeNum_3AND45}
+	\caption{Probability of repair in function of the number of long-range connectors. Two DSBs were induced at a genomic distance of 5 in the first sub-domain of a polymer conformed by 2 sub-domains of 100 monomers with 3 and 45 inner cross-links.}
+	\label{fig:proba_v_longrange_3and45}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{../DNA_Religation/projects/RCLPolymer_TwoDomains/figures/proba_v_longrangeNum_differentsizes}
+	\caption{Probability of repair for 0,2,4 and 6 long-range connectors, and different sizes for the juxtaposed unbroken sub-domain. Two DSBs were induced at a genomic distance of 30 in the first sub-domain (100 monomers). The juxtaposed sub-domain has a constant connectivity fraction (0.2\%).}
+	\label{fig:proba_v_longrange_sizes}
+\end{figure}
+
+
+
+
+
+
+\clearpage
+
+\subsubsection{TODO}
 \begin{itemize}
 \item For one DSB in each TAD: Simulate the repair probability vs. intra-TAD connectors number
 \item For one DSB in each TAD: Simulate the repair probability vs. long-range connectors number
 \item For two DSB in a TAD: Compare repair probabilities with the results obtained in the previous section. Does a second TAD (with no breaks) affect the repair probability of the first one? How?
-\item For two DSBs in a TAD: Simulate the repair probability vs. inter-break genomic distance (almost at the limit of the TAD). Does the probability decreases? Test with different number of random connectors (to self: simulate this first, could be interesting) (cf. figure with 2 domains and 10 random connectors per domain, the probability seems to decrease at the end, verify!)
 \end{itemize}
 
 \clearpage

@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from mpl_toolkits.mplot3d import Axes3D
 from collections import Counter
-from .Forces import ExcludedVolume, LocalExcludedVolume
+from .Forces import ExcludedVolume, LocalExcludedVolume, RepairSphere
 from .Polymers import RCLPolymer
 from time import time
 
@@ -57,6 +57,9 @@ class Experiment():
         elif customExperiment == "Encounter_withExcludedVolume":
             print("Simulation of Encounter after two DSBs adding exclusion forces")
             self.BreakAndExclude()
+        elif customExperiment == "Encounter_withRepairSphere":
+            print("Simulation of Encounter after two DSBs adding a selective exclusion forces")
+            self.SelectiveExclude()
         elif customExperiment == "TAD_Repair":
             print("Simulation of TAD Repair with one DSB in each TAD")
             self.TAD_repair()
@@ -330,6 +333,58 @@ class Experiment():
         self.addResults('Ensemble_MSRG', np.nanmean(post_msrgs))
 
 
+    def SelectiveExclude(self):
+        """
+        Add a repair spehere, repulsive for the non-cleaved monomers
+        """
+        self.addResults("iterationsNumber",self.numRealisations)
+        FETs = np.ones(self.numRealisations)*np.nan
+        events = np.repeat('NA',self.numRealisations).astype('<U15')
+        removedNums = np.ones(self.numRealisations)*np.nan
+        post_msrgs = np.ones(self.numRealisations)*np.nan
+
+        if self.numRealisations >= 10: k = self.numRealisations//10        
+        else: k = 1
+        for i in range(self.numRealisations):
+            
+            if not(i%k):
+                print("|",'='*(i//k),'-'*(10-i//k),"| Simulation", i+1, "of", self.numRealisations)
+
+            # Simulates the break and some waiting time:
+            removedNum = self.randomBreaks_SingleStep()
+
+            # ADD EXCLUDED VOLUME       
+            kappa = 3*self.diffusionConstant/(self.polymer.b**2)
+            repulsionForce = lambda polymer : - kappa * RepairSphere(polymer, self.polymer.freeMonomers, self.excludedVolumeCutOff)   
+            self.polymer.addnewForce(repulsionForce)
+
+            # Wait some more time
+            self.polymer.step(self.waitingSteps,self.dt_relax,self.diffusionConstant)
+
+            ##################################################                 
+            # Simulation until encounter              
+            t = 0
+            didEncounter = self.polymer.anyEncountered(self.encounterDistance)
+            while(not(didEncounter[0]) and t < self.numMaxSteps):
+                self.polymer.step(1,self.dt,self.diffusionConstant)
+                didEncounter = self.polymer.anyEncountered(self.encounterDistance)
+                t += 1
+                
+            if( t <self.numMaxSteps):
+                FETs[i] = t 
+                events[i] = didEncounter[1]
+                removedNums[i] = removedNum
+                msrg_post_encounter = self.polymer.get_msrg() 
+                post_msrgs[i] = msrg_post_encounter
+        
+            self.polymer = self.polymer.new()
+            ##################################################  
+
+        self.saveEncounterResults(FETs, events, removedNums)
+        self.addResults('MSRG_atEncounter', post_msrgs)
+        self.addResults('Ensemble_MSRG', np.nanmean(post_msrgs))
+        
+
     def TAD_repair(self):
         """
         One independant break in each TAD
@@ -525,7 +580,6 @@ class Experiment():
         self.addResults('MSRG_atEncounter', msrg)
         self.addResults('Ensemble_MSRG', np.mean(msrg))
         self.addResults('MeanInterBreakDistance',np.mean(interbreakDistance,axis=0))
-
 
     def saveEncounterResults(self, FETs, events, removedNums):
         # Prepare results 

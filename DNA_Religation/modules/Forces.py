@@ -55,8 +55,46 @@ def LocalExcludedVolume(polymer, exclusionLoci, cutoff):
     localPositions = polymer.get_r()[exclusionLoci]
     localDistances = np.array([np.linalg.norm(polymer.get_r() - rn, axis = 1) for rn in localPositions])
     interactionMatrix = np.zeros((polymer.numMonomers,polymer.numMonomers))
-    localInteractionMatrix = np.where(localDistances < cutoff, -1, 0)
+    localInteractionMatrix = np.where((localDistances < cutoff) & (localDistances > 0), -1, 0)
     for i, monomer_i in enumerate(exclusionLoci):
-        localInteractionMatrix[i,monomer_i] = - np.sum(localInteractionMatrix[i]) - 1
+#        localInteractionMatrix[i,monomer_i] = - np.sum(localInteractionMatrix[i]) - 1
         interactionMatrix[monomer_i] = localInteractionMatrix[i]
+        interactionMatrix[:,monomer_i] = localInteractionMatrix[i]
+        interactionMatrix -= np.diag(interactionMatrix.sum(axis=0))
+    return np.dot(interactionMatrix,polymer.get_r())
+
+
+def RepairSphere(polymer, exclusionLoci, cutoff):
+    """
+    Add excluded volume forces in the monomers indicated by exclusionLoci,
+    however exclusionLoci monomers do not feel this repulsion between them
+    """
+##    indexes = np.concatenate([np.arange(x-window,x+1) for x in exclusionLoci])
+    localPositions = polymer.get_r()[exclusionLoci]
+    localDistances = np.array([np.linalg.norm(polymer.get_r() - rn, axis = 1) for rn in localPositions])
+    interactionMatrix = np.zeros((polymer.numMonomers,polymer.numMonomers))
+    localInteractionMatrix = np.where(localDistances < cutoff, -1, 0)
+    localInteractionMatrix[:,exclusionLoci] = 0
+    for i, monomer_i in enumerate(exclusionLoci):
+#        localInteractionMatrix[i,monomer_i] = - np.sum(localInteractionMatrix[i]) - 1
+        interactionMatrix[monomer_i] = localInteractionMatrix[i]
+        interactionMatrix[:,monomer_i] = localInteractionMatrix[i]
+        interactionMatrix -= np.diag(interactionMatrix.sum(axis=0))
+    
+    return np.dot(interactionMatrix,polymer.get_r())    
+
+
+def ExternalStatiticForce(polymer,source,cutoff):
+    """
+    Add a external harmonic potential created by an "obstacle"
+    """
+    r = polymer.get_r()
+    distance2source = np.array([np.linalg.norm(r - rn, axis = 1) for rn in source])
+    distance2source = np.min(distance2source, axis = 1)
+    interactionMatrix = np.zeros((polymer.numMonomers,polymer.numMonomers))
+
+    sourceInteractionMatrix = np.where(distance2source < cutoff, -1, 0)
+    for i, monomer_i in enumerate(source):
+        sourceInteractionMatrix[i,monomer_i] = - np.sum(sourceInteractionMatrix[i]) - 1
+        interactionMatrix[monomer_i] = sourceInteractionMatrix[i]
     return np.dot(interactionMatrix,polymer.get_r())
