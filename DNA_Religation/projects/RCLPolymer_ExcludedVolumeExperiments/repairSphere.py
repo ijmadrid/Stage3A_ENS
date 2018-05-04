@@ -38,21 +38,21 @@ polymerParams = dict(numMonomers = 100, # np.array([100,100]), # TODO (.., ..., 
                      dim         = 3,
                      b           = 0.2,
                      Nc          = 10, #NcMatrix,
-                     keepCL      = False
+                     keepCL      = True
                      )
 
 simulationParams = dict(# Physicial parameters
                         diffusionConstant = 0.008,
                         # Numerical parameters
-                        numRealisations   = 200, 
+                        numRealisations   = 400, 
                         dt                = 0.005,
                         dt_relax          = 0.01,
 #                        numSteps          = 500,
                         excludedVolumeCutOff = 0.1,
                         waitingSteps = 200,
-                        numMaxSteps = 6000,
-                        encounterDistance = 0.05,
-                        genomicDistance = 12,
+                        numMaxSteps = 8000,
+                        encounterDistance = 0.1,
+                        genomicDistance = 10,
                         Nb = 2
 #                        selectedSubDomain = 0
                         )
@@ -64,7 +64,7 @@ simulationParams = dict(# Physicial parameters
 #test_epsilons = [0.1]
 #
 #x_Nc = np.arange(25,45,5)
-x_Nc = np.arange(2,33,10)
+x_Nc = np.arange(2,52,10)
 #TADsizes = [20,50,100,200,300]
 #connectivityFraction = 0.002
 errorbars = True
@@ -80,12 +80,19 @@ def proba_vs_Nc_andVE(polymerParams,simulationParams,x_Nc,errorbars=False):
     with open('results/'+filename, 'w') as csvfile:
                 
         plt.figure()
-        rcParams.update({'axes.labelsize': 'xx-large'})
-        rcParams.update({'legend.fontsize': 'large'})
+        rcParams.update({'axes.labelsize' : 'xx-large'})
+        rcParams.update({'legend.fontsize': 'xx-large'})
+        rcParams.update({'xtick.labelsize': 'large'}) 
         plt.xlabel('Number of connectors')
         plt.ylabel(r'$\mathbb{P}$(Repair)') #('Mean first encounter time (sec)') #
         
         first_time = True
+        
+        N = polymerParams['numMonomers']
+        Nc0 = x_Nc[0]
+        xi0 = 2*Nc0/((N-1)*(N-2))
+        eps0 = simulationParams['encounterDistance']
+                
         for i, VolumeExclusion in enumerate([True, False]):
             
             if VolumeExclusion:
@@ -102,6 +109,14 @@ def proba_vs_Nc_andVE(polymerParams,simulationParams,x_Nc,errorbars=False):
             for j, Nc in enumerate(x_Nc):    
                 print("Simulation for Nc =",Nc,"and",labelkeep)
                 polymerParams['Nc'] = Nc
+
+                ### ADAPTIVE ENCOUNTER DISTANCE
+                xi = 2*Nc/((N-1)*(N-2))
+                scaleFactor = np.sqrt( (1-xi0)*np.sqrt(xi0) / ((1-xi)*np.sqrt(xi)) )
+                simulationParams['encounterDistance'] = eps0 * scaleFactor
+                
+                ### ADAPTIVE dt
+                simulationParams['dt'] = np.round((0.2*simulationParams['encounterDistance'])**2/(2*simulationParams['diffusionConstant']),decimals=4)-0.0001                
                 p0 = RCLPolymer(**polymerParams)
                 results = {**polymerParams, **simulationParams}
                 mc = Experiment(p0, results, simulationParams,experimentName)

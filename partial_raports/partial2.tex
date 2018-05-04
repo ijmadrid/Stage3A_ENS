@@ -15,35 +15,77 @@
 \maketitle
 
 \section{Motivation}
-
+Double Strand Breaks (DSB) are a highly dangerous type of DNA damage that occur when both strands of duplex DNA are broken. 
 
 \section{Methods}
- To simulate the chromatin repair, we consider the model of a randomly cross-linked (RCL) polymer. A RCL polymer is formed by a classical Rouse chain of $N$ monomers as backbone and $N_c$ extra random cross-links which are added uniformly over all combinations of non-neighbor monomer pairs. We define the RCL polymer connectivity $\xi$ as the fraction of added cross-links with respect to the total number of possible pairings, i.e. $\xi = Nc/((N-1)(N-2)/2)$. 
  
- We define two admittance (Laplacian) matrices that characterize the RCL polymer: the Rouse matrix $M$ which describes the backbone adjacency, and $B$ which describe the added connectors.
-
+ \subsection{The RCL polymer}
+ To simulate the chromatin we consider a model of randomly cross-linked (RCL) polymers. A RCL polymer is formed by a chain of $N$ monomers connected by harmonic springs of constant $\kappa$ as backbone, and $N_c$ extra cross-links (CLs) which connect non-neighbor monomers with springs of constant $\kappa'$. CLs are added uniformly over all $\frac{(N-1)(N-2)}{2}$ combinations of non-neighbor monomer pairs. We also define the RCL polymer connectivity $\xi$ as the fraction of added cross-links with respect to the total number of possible pairings, i.e. $\xi = \frac{2N_c}{(N-1)(N-2)}$. 
+ 
+ We characterize the RCL polymer by two $N \times N$ admittance (Laplacian) matrices: the Rouse matrix $M$ which describes the backbone, and $B$ which describes the added connectors. A Laplacian matrix results from the difference between the diagonal degree matrix $D$ that accounts for the total number of connections each monomer has, and the adjacency matrix $A$ that accounts for the connectivity ($A_{m,n} = 1$ if monomers $m$ and $n$ are connected, $0$ otherwise). So
+ \begin{equation}
+ M_{m,n} = (D_{\text{backbone}} - A_{\text{backbone}})_{m,n} = \begin{cases}
+ -1 & \text{ if } |m-n| = 1 \\
+ - \sum_{i=1}^{N} M_{i,n}  & \text{ if }m=n \\
+ 0  & \text{ otherwise }
+ \end{cases}
+ \label{eqn:Mmatrix}
+ \end{equation}
+ and, analogically
+  \begin{equation}
+  B_{m,n} = (D_{\text{CLs}} - A_{\text{CLs}})_{m,n} = \begin{cases}
+  -1 & \text{ if $m$ and $n\neq m$ are connected by a CL} \\
+  - \sum_{i=1}^{N} B_{i,n}  & \text{ if }m=n \\
+  0  & \text{ otherwise }
+  \end{cases}
+  \label{eqn:Bmatrix}
+  \end{equation}
   
- The model simulated is described in figure \ref{fig:model}.
+%  So $B$ is constructed stochastically as
+%    \begin{equation}
+%    B_{m,n} =  \begin{cases}
+%    -1 & \text{ with probability $\xi$ , if $|m-n|>1$} \\
+%    0 & \text{ with probability $1 - \xi$ , if $|m-n|>1$} \\
+%    - \sum_{i=1}^{N} B_{i,n}  & \text{ if }m=n \\
+%    0  & \text{ otherwise }
+%    \end{cases}
+%    \label{eqn:Bmatrix_construction}
+%    \end{equation}
 
-  We supposed the RCL polymer subdued to Langevin dynamics, i.e., if the monomer positions of the polymer in time are represented by $(R_t)_{t\geq0} = (R_1, ..., R_N)_{t\geq0}$ with $R_i \in \mathbb{R}^3, i = 1,...,N$, the dynamics are described by the equation:
+The model simulated is described in figure \ref{fig:model}.
+
+ \subsection{Langevin dynamics of RCL polymers}
+  We supposed the RCL polymer subdued to Langevin dynamics, i.e., if monomer positions of the polymer in time are represented by $(R_t)_{t\geq0} = (R_1, ..., R_N)_{t\geq0}$ with each $R_i \in \mathbb{R}^3, i = 1,...,N$, the dynamics are described by the equation:
  
  $$ dR_t = -\frac{1}{\zeta} \nabla \phi(R_t) dt + \sqrt{2D} dW_t $$
  
  where $\zeta$ is the friction coefficient, $\phi$ is an harmonic potential, $D$ is the diffusion coefficient and $(W_t)_{t \geq 0}$ is a $N \times 3$-dimensional Brownian motion. 
  
- The harmonic potential of an RCL polymer is given by the classical Rouse potential and by the potential induced by the random cross-links:
+ The harmonic potential of a RCL polymer is given by the classical Rouse potential and by the potential induced by the random cross-links:
  
  $$
  \phi(R) = \frac{\kappa}{2} \sum_{n = 1}^{N-1} ||R_{n+1} - R_{n}||^2 + \frac{\kappa'}{2} \sum_{i,j \in \mathcal{R}} ||R_{i} - R_{j}||^2 =\frac{\kappa}{2} \text{tr}(R^TMR) + \frac{\kappa'}{2} \text{tr}(R^TBR) $$
 
- where $\kappa$ and $\kappa' $ are spring constants we will suppose equal,  $M$ is the Rouse matrix (degree - connectivity), $B$ is the degree - connectivity matrix with the added random connectors, and $\mathcal{R}$ is the set of monomers which have been randomly connected. Since $\frac{\kappa}{\gamma} = \frac{3D}{b^2}$ where $b$ is the standard deviation of the bonds length, we'll consider the equation :
+ where $\kappa$ and $\kappa' $ are spring constants we will suppose equal,  $\mathcal{R}$ is the set of monomers which have been randomly connected, and $M$ and $B$ are the Laplacian matrices introduced in Eq. \ref{eqn:Mmatrix} and Eq. \ref{eqn:Bmatrix}. Since $\frac{\kappa}{\gamma} = \frac{3D}{b^2}$ where $b$ is the standard deviation of the bonds length, we'll consider the matrix equation:
  
- $$
+ \begin{equation}
  dR_t = -\frac{3D}{b^2} (M + B) R_t dt + \sqrt{2D} dW_t
- $$
+ \label{eqn:langevin}
+ \end{equation}
  
- In the following, we implement the Euler's scheme of the previous equation setting $D = 0.008 \ \mu^2$m/s and $b = 0.2 \ \mu$m . In particular, we are interested on the probability of repair after two random breaks (in monomers $A_1 - A_2, B_1 - B_2$, where $A_1 \sim \mathcal{U}[1,N-g-2], \ 1 \leq A_1 < A_2 = A_1 + 1 < B_1 < B_2 = B_1 + 1 < N$) with a deterministic inter-break genomic distance $g$ between them ($B_1 - A_2 = g$).
+In the following, we implement the Euler's scheme of Eq. \ref{eqn:langevin}, setting $D = 0.008 \ \mu^2$m/s and $b = 0.2 \ \mu$m. When it is important, the $\Delta t$ used in the discretization of Eq. \ref{eqn:langevin} will be specified. $\Delta t = 0.005 $ sec will be the usual value. Anyhow, to assure numerical stability, condition in Eq. \ref{eqn:stabilityCondition} must always be verified.
+
+\begin{equation}
+\sqrt{2D\Delta t} \leq \tau \Delta r ^\star
+\label{eqn:stabilityCondition}
+\end{equation}
+
+ In Eq. \ref{eqn:stabilityCondition}, $\Delta r^\star$ stands for the smallest spatial scale used (it will normally be the monomers encounter distance as it is defined later on) and $\tau$ is a confidence factor that will be set at $\tau = 0.2$ in the simulations.
  
+ \subsection{Simulation of the induction of Double Strand Breaks (DSBs)}
+ In particular, we are interested on the probability of repair after two DSBs. One DSB will be randomly induced in neighbor monomers $A_1$ and $A_2 = A_1 + 1$ (DSB "A"), where $A_1 \sim \mathcal{U}[1,N-g-2]$. the other DSB will be induced in neighbor monomers $B_1$ and $B_2$ (DSB "B"). A deterministic inter-break genomic distance $g$ will be imposed between A and B, defined as the shortest distance between the DSBs along the backbone, i.e. $g = B1 - A2$.
+ 
+\subsection{Definition of encounter times and probabilities}
  So, if we define the first encounter time as
 $$
 T_{m,n}^{\epsilon} := \inf \{ t \geq 0 : ||(R_m)_t - (R_n)_t|| < \epsilon  \}
@@ -331,6 +373,7 @@ Figures \ref{fig:proba_v_parasytes} and \ref{fig:proba_v_longrange_sizes} sugges
 \item For one DSB in each TAD: Simulate the repair probability vs. intra-TAD connectors number
 \item For one DSB in each TAD: Simulate the repair probability vs. long-range connectors number
 \item For two DSB in a TAD: Compare repair probabilities with the results obtained in the previous section. Does a second TAD (with no breaks) affect the repair probability of the first one? How?
+\item THINK ABOUT STOCHASTICALLY GENERATING THE CROSS-LINKS, USING IN THE CONNECTIVITY $\xi$ AS A PROBABILITY SO, INSTEAD OF FIXING THE NUMBER OF CROSS-LINKS WE FIX $\xi$ AND HAVE $\mathbb{E}(Nc) = \xi N_l$ INSTEAD OF A DETERMINISTIC $Nc = \lfloor \xi N_l \rfloor $. THE RCL POLYMER WILL BE THE AN ERDOS-RENYI GRAPH, THE SUB-DOMAINS POLYMER MATRIX WOULD CORRESPOND TO A WELL KNOWN STOCHASTIC BLOCK MODEL, ETC.
 \end{itemize}
 
 \clearpage

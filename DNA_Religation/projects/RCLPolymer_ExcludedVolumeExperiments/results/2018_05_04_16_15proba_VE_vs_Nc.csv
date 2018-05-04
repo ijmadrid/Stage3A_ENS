@@ -1,0 +1,1290 @@
+experimentSetID,numMonomers,dim,b,Nc,keepCL,diffusionConstant,numRealisations,dt,dt_relax,excludedVolumeCutOff,waitingSteps,numMaxSteps,encounterDistance,genomicDistance,Nb,iterationsNumber,events,FETs,meanFET,halfCI_FET,eventsCounter,repair_probability,repair_CIhalflength,mean_removedCLs,MSRG_atEncounter,Ensemble_MSRG
+0_0,100,3,0.2,2,False,0.008,400,0.0999,0.01,0.1,200,8000,0.2,3,2,400,"['Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b2'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b2'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1']","[ 0.      2.2977  0.6993  0.1998  0.      0.      0.      0.999   1.7982
+  6.0939  0.4995  0.2997  3.7962  0.      0.      0.      0.3996  6.0939
+  2.4975  0.      0.      1.8981  0.0999  0.7992  0.4995  2.0979  0.
+  0.      0.4995 17.6823  1.3986  0.      0.0999  0.4995  1.7982  2.0979
+  0.      0.      0.0999  0.0999  0.1998  7.7922  2.2977  0.      0.
+  0.3996  2.4975  0.      1.1988  2.1978  0.999   0.3996  0.      0.4995
+  1.6983  2.2977  0.0999  2.7972  0.      1.6983  0.      0.      4.995
+  0.5994  0.      0.2997  2.3976  0.1998  0.      0.1998  0.      0.
+  0.0999  1.6983  0.0999  0.5994  0.      0.      0.0999  0.     12.6873
+  4.5954  0.      0.1998  1.3986  0.6993  0.0999  6.7932  1.0989  5.1948
+  0.0999  1.5984  1.5984  0.      0.5994  0.0999  2.7972  0.7992  0.
+ 16.8831  0.1998  0.0999  0.5994  5.7942  9.5904  0.      0.      1.1988
+ 14.985   0.7992  1.6983 14.2857  0.4995  0.      0.      1.998   0.
+  0.3996  0.      1.0989  0.      0.2997  0.1998  0.      0.0999  0.
+  1.5984  0.2997  0.      0.5994  0.      0.      0.      0.      2.0979
+  0.0999  0.0999  0.      2.3976  0.      0.      4.4955  3.7962  0.8991
+  0.      0.3996  0.      0.      2.1978  0.1998  0.2997  0.      0.5994
+  0.0999  0.5994  0.      0.7992  0.      0.1998  6.0939  0.      7.5924
+  0.      0.      0.      0.4995  0.5994  0.      0.      0.      0.
+  0.      0.      0.      0.999   0.      1.0989  0.      0.      2.6973
+  1.3986  0.      0.0999  0.1998  0.4995  0.      0.1998  0.6993  0.6993
+  0.0999  2.3976  0.      0.1998  0.      0.      0.      0.4995  0.2997
+  0.      0.      0.      0.0999  0.      8.4915  0.0999  5.6943  0.3996
+  0.4995  3.8961  5.7942  0.6993  0.0999  0.4995  0.0999  1.2987  0.
+  0.1998  0.6993  9.1908  0.1998  0.4995  4.3956  1.998   0.0999  0.
+  0.      0.      3.0969  0.2997  0.      0.      0.      0.1998  2.2977
+  0.5994  0.      0.      0.      1.3986  0.      7.5924  0.      3.6963
+  0.     24.0759  5.3946  1.1988  0.      3.8961  0.1998  0.2997  3.1968
+  3.8961  1.2987  0.0999  1.7982  0.      0.      1.0989  0.6993  1.1988
+  0.      0.      0.      2.8971  0.6993  0.3996  0.      0.      0.6993
+  0.      0.2997  3.996   0.1998  0.999   0.0999  0.6993  1.1988  0.1998
+  3.4965 11.5884  0.7992  0.      5.994   0.      0.999   0.      0.
+  2.1978  5.2947  0.      0.5994  0.      4.995   3.6963  0.8991  0.0999
+  3.0969  3.2967  1.1988  1.4985  4.3956  0.      0.      0.0999  2.5974
+  0.0999  0.6993  1.2987  0.0999  3.3966  3.6963  0.      0.      0.8991
+  0.      2.0979  0.      0.6993  0.3996  7.8921  1.3986  0.      0.999
+  1.6983  7.1928  0.      0.0999  4.3956  0.6993  0.      0.      0.
+  0.0999  0.      0.      0.      6.4935  0.      0.2997  0.5994  1.2987
+  2.6973  6.7932  0.      0.6993  0.      0.5994  6.1938  0.      0.4995
+  0.      0.      0.4995  0.      0.999   4.0959  0.1998  2.4975  0.
+  0.     16.8831  0.      0.5994  8.2917  0.2997  1.0989  0.0999  0.6993
+  0.      0.      0.      1.998   0.      0.      0.      0.      1.998
+  0.      0.5994  1.1988  0.      0.      0.      0.3996  0.      0.1998
+  0.1998  1.7982  0.      0.1998  0.3996  0.0999  0.5994  0.2997  5.1948
+  0.      7.7922  0.      3.1968]",1.4040945,0.27825739008533823,"Counter({'Misrepair_a2-b1': 207, 'Repair': 99, 'Misrepair_a1-b1': 37, 'Misrepair_a1-b2': 29, 'Misrepair_a2-b2': 28})",0.2475,0.04229284779959846,0.0,"[0.53868453 1.01002244 1.23946069 1.0762276  1.45122565 1.13456703
+ 0.63245212 0.34996481 1.2138241  1.97467992 2.09162666 0.39000509
+ 1.79683414 0.78309438 1.75635898 0.7594611  0.83491907 0.29869434
+ 1.04639873 1.868535   1.38099196 1.14989672 1.94967747 0.36611543
+ 0.84369196 0.61919192 0.88092169 0.5494126  1.34798975 1.23279295
+ 1.55177225 2.07329324 1.95389752 0.82328071 0.72798027 0.60069078
+ 2.89491958 0.47819238 1.36692407 2.78191006 2.19329774 0.63207625
+ 0.39497107 1.63368493 1.38243193 0.36705572 1.09131354 0.30652308
+ 0.74069024 1.02639248 0.44496877 1.34533756 0.6467554  1.04010151
+ 0.29583303 1.01274185 0.45927705 1.63806661 1.1743834  0.50029469
+ 1.36823984 1.13645234 0.56752516 0.61548381 1.21849004 0.52472485
+ 1.63683189 0.58817121 0.29615364 1.34978483 1.38317173 2.32352711
+ 1.35687845 0.48653199 1.15960408 0.48824352 0.54629952 0.87288651
+ 2.76066462 0.21273143 1.90226825 1.92469017 1.08724763 0.7103206
+ 0.59111646 0.83159383 1.13503283 1.00085546 1.02425931 1.27013699
+ 0.56659587 1.15701531 1.05719039 3.11559845 0.66477839 1.37221012
+ 1.5299096  0.75678956 0.61871064 1.52943308 0.39226366 2.3424407
+ 1.02460067 0.73467921 0.56658558 0.71254195 1.22628165 1.02110396
+ 0.54871754 1.67940763 0.81354043 0.9234752  0.69212887 1.22110168
+ 0.99351118 0.74841279 0.63360787 0.71549814 0.69306223 0.50491775
+ 0.417751   0.78349302 1.65402187 1.95323256 0.8185992  1.3842004
+ 1.32096923 1.26013347 1.68572561 1.12476067 1.90827414 0.83444525
+ 0.80670406 2.63784458 0.3202741  1.40170159 1.514919   2.32413549
+ 0.86891095 0.72381101 1.08718795 1.13858433 0.78380178 0.81373566
+ 1.47762054 1.37023255 1.34844763 0.90342983 0.87226584 0.94776862
+ 0.63505337 0.44332866 2.15934015 0.45912395 0.81908391 0.85722422
+ 3.03157526 0.45905511 0.89792451 1.40249966 0.98719223 0.44755842
+ 0.39775593 1.23947244 0.7978111  0.82948503 0.86503377 1.33299455
+ 2.78136064 0.90338322 0.91333955 1.78861508 0.85737924 1.25193432
+ 4.05856034 0.65100178 0.85132169 0.87786378 0.48121211 0.7086439
+ 1.10504226 2.33754616 1.40551704 0.89371302 0.89445515 1.12172277
+ 1.02391573 0.74826354 0.72613938 0.90326097 1.34236561 0.51089062
+ 1.00425701 0.4537823  1.93817016 1.34635381 1.05862216 0.49975699
+ 1.01522329 0.88380826 2.08711303 0.60962904 1.94097224 1.4982946
+ 1.38961602 1.19139453 1.3123561  2.9883684  0.31999778 0.9904593
+ 0.94144139 1.13801079 0.7814317  1.08023247 0.4101456  0.66407277
+ 0.83754476 0.47696883 3.35730443 0.72572887 0.72048053 1.12344136
+ 0.63950631 0.94910143 0.88859786 0.37562341 0.67072926 0.58011987
+ 0.91636091 0.96262338 1.86933126 1.16477583 0.53394607 1.05180398
+ 0.99405654 1.78562848 0.7645881  0.62346724 0.23777635 1.65340817
+ 1.20323922 1.20455097 0.96421633 1.29134664 2.03169549 0.50292852
+ 0.46271194 2.90727223 0.9967967  0.43284186 0.80658207 0.74889549
+ 0.54873545 0.23756155 0.68296362 0.22076256 0.72625114 0.50914521
+ 1.68357323 1.2158801  0.7892849  0.33476469 0.54339971 0.94078355
+ 0.54231844 1.25217766 0.44212476 1.29534294 2.04954917 0.40003692
+ 5.57524636 0.35977042 0.977598   0.53769486 1.87496299 0.43896939
+ 0.93713753 1.0535614  0.5386337  1.22910946 1.24439288 1.77826323
+ 0.87821519 2.32055627 1.16968136 1.76383331 0.48903992 0.80958579
+ 2.87147458 2.23610968 1.95975946 1.4725688  1.02091539 0.94794029
+ 0.72752652 1.29720696 0.63454977 0.91340651 0.57697553 0.68316978
+ 0.89578019 1.45285453 2.00524193 0.72423508 0.51046655 1.51863204
+ 2.49075943 0.96366171 1.74511148 0.99457936 0.55659401 1.59942163
+ 0.73549803 0.74000597 1.03833599 2.16205337 0.37355269 0.85598309
+ 0.92969225 0.49749203 3.19353786 0.44775895 1.11573145 0.53676186
+ 1.06453727 1.22734413 1.03124162 1.60161745 0.74828551 1.7592115
+ 2.2767944  0.61135905 0.67974024 0.37122667 0.83574529 0.87970017
+ 1.19096924 1.8613285  0.7371718  1.99926352 0.89684659 1.04856637
+ 0.93579001 0.51912174 1.81679928 0.28876391 0.40100758 2.26480749
+ 1.42939062 0.82950239 1.94106912 2.1069183  0.68408623 0.77026375
+ 1.45849941 0.46958405 0.65974931 0.67239347 0.8034942  0.6536444
+ 1.16990015 1.25477813 0.38238916 0.96283154 1.05677426 1.2073294
+ 1.76420926 0.62453882 0.59234271 2.38680624 1.14681484 0.77072217
+ 0.75441845 1.22982678 1.63344371 0.49972045 0.52995561 0.71810734
+ 0.79845447 0.6037538  0.97178642 0.60013641 1.3714241  1.63257569
+ 0.61785083 1.20700492 0.60103186 0.46476653 0.77413264 3.03924696
+ 1.11874089 1.52923458 1.64272138 0.98211926 1.36969011 0.67765202
+ 1.22572016 1.32263849 1.72358165 0.62436335]",1.106709674249469
+0_1,100,3,0.2,12,False,0.008,400,0.040799999999999996,0.01,0.1,200,8000,0.12792059302203654,3,2,400,"['Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1']","[1.224000e-01 1.958400e+00 4.202400e+00 1.428000e+01 4.080000e-02
+ 1.264800e+00 5.385600e+00 4.365600e+00 3.386400e+00 8.976000e-01
+ 1.917600e+00 6.405600e+00 6.976800e+00 0.000000e+00 4.080000e-02
+ 8.160000e-02 1.472880e+01 6.446400e+00 0.000000e+00 3.427200e+00
+ 2.040000e-01 4.080000e-01 1.052640e+01 1.162800e+01 1.632000e-01
+ 1.142400e+00 2.040000e+00 1.917600e+00 1.264800e+00 6.936000e+00
+ 2.856000e-01 1.236240e+01 3.631200e+00 1.224000e+00 8.160000e-02
+ 5.304000e-01 2.611200e+00 1.999200e+00 9.384000e-01 1.917600e+00
+ 1.219920e+01 6.201600e+00 3.549600e+00 9.384000e-01 0.000000e+00
+ 2.856000e-01 1.064880e+01 1.509600e+00 7.670400e+00 7.792800e+00
+ 4.569600e+00 1.387200e+00 0.000000e+00 0.000000e+00 1.672800e+00
+ 3.019200e+00 4.488000e-01 5.589600e+00 1.236240e+01 8.812800e+00
+ 2.529600e+00 3.060000e+00 1.264800e+00 6.609600e+00 1.224000e-01
+ 0.000000e+00 1.423920e+01 1.297440e+01 1.591200e+00 1.607520e+01
+ 5.304000e-01 1.268880e+01 5.712000e-01 7.140000e+00 1.224000e-01
+ 2.611200e+00 8.160000e-01 2.407200e+00 1.264800e+00 5.304000e-01
+ 1.207680e+01 9.996000e+00 3.264000e+00 4.447200e+00 9.384000e-01
+ 4.039200e+00 3.468000e+00 1.836000e+00 2.011440e+01 1.028160e+01
+ 3.468000e+00 0.000000e+00 2.652000e+00 1.350480e+01 8.976000e-01
+ 1.126080e+01 6.528000e+00 2.774400e+00 1.060800e+00 4.488000e+00
+ 1.428000e+00 0.000000e+00 1.754400e+00 1.574880e+01 2.080800e+00
+ 1.713600e+00 4.080000e-02 1.468800e+01 2.652000e+00 3.672000e+00
+ 5.304000e-01 3.468000e+00 4.080000e-01 1.530000e+01 8.160000e-02
+ 1.795200e+00 0.000000e+00 1.060800e+00 5.140800e+00 2.040000e-01
+ 2.856000e-01 3.264000e-01 0.000000e+00 1.183200e+01 1.338240e+01
+ 4.610400e+00 2.080800e+00 2.856000e-01 8.160000e-01 9.873600e+00
+ 4.732800e+00 4.080000e-02 0.000000e+00 8.160000e-02 5.712000e+00
+ 1.750320e+01 2.978400e+00 3.937200e+01 2.448000e+00 1.264800e+00
+ 5.875200e+00 4.080000e-02 7.507200e+00 1.305600e+00 1.142400e+00
+ 4.161600e+00 2.896800e+00 2.284800e+00 1.917600e+00 1.175040e+01
+ 7.344000e-01 1.150560e+01 1.224000e+00 8.160000e+00 6.120000e-01
+ 0.000000e+00 2.978400e+00 3.672000e+00 9.180000e+00 1.754400e+00
+ 6.120000e-01 6.528000e+00 1.578960e+01 0.000000e+00 1.224000e-01
+ 0.000000e+00 4.080000e-02 0.000000e+00 1.187280e+01 4.488000e-01
+ 7.344000e-01 2.162400e+00 9.669600e+00 1.958400e+01 7.752000e-01
+ 2.856000e-01 1.060800e+00 9.832800e+00 3.998400e+00 7.180800e+00
+ 8.160000e-02 1.224000e-01 1.081200e+01 0.000000e+00 1.305600e+00
+ 1.020000e+00 1.224000e+00 1.108128e+02 1.346400e+00 1.836000e+00
+ 0.000000e+00 1.224000e+00 5.834400e+00 8.160000e-02 8.568000e-01
+ 1.970640e+01 7.344000e-01 4.080000e-02 4.488000e-01 4.488000e-01
+ 3.549600e+00 0.000000e+00 1.872720e+01 7.466400e+00 2.652000e+01
+ 5.916000e+00 1.011840e+01 1.387200e+00 1.876800e+00 1.252560e+01
+ 4.488000e+00 2.733600e+00 3.712800e+00 1.795200e+00 5.834400e+00
+ 2.978400e+00 0.000000e+00 1.101600e+00 3.345600e+00 6.528000e-01
+ 9.506400e+00 8.160000e-02 4.080000e-02 4.080000e-02 4.896000e+00
+ 3.141600e+00 1.224000e-01 0.000000e+00 4.080000e-02 1.154640e+01
+ 1.015920e+01 2.080800e+00 2.448000e-01 3.182400e+00 6.732000e+00
+ 6.528000e-01 1.762560e+01 4.324800e+00 1.060800e+00 7.956000e+00
+ 1.183200e+00 0.000000e+00 2.162400e+00 2.040000e+00 2.448000e-01
+ 7.956000e+00 3.590400e+00 3.182400e+00 1.428000e+00 2.611200e+00
+ 0.000000e+00 6.201600e+00 2.203200e+00 1.550400e+00 2.856000e+00
+ 1.795200e+00 6.528000e-01 2.003280e+01 2.448000e-01 8.160000e-02
+ 1.060800e+00 0.000000e+00 8.160000e-02 8.160000e-01 4.488000e-01
+ 1.795200e+01 1.391280e+01 3.508800e+00 7.384800e+00 1.224000e-01
+ 2.435760e+01 3.264000e+00 4.528800e+00 1.632000e-01 1.836000e+00
+ 3.753600e+00 2.040000e+00 2.435760e+01 1.199520e+01 1.170960e+01
+ 1.889040e+01 2.774400e+00 2.570400e+00 0.000000e+00 3.508800e+00
+ 1.591200e+00 4.080000e-02 2.978400e+00 4.569600e+00 3.264000e-01
+ 2.162400e+00 9.588000e+00 5.304000e-01 1.224000e-01 8.160000e-01
+ 8.200800e+00 3.549600e+00 1.346400e+00 2.040000e-01 9.384000e-01
+ 2.121600e+00 2.080800e+00 2.419440e+01 8.160000e-01 1.305600e+00
+ 1.864560e+01 2.448000e-01 8.160000e-01 3.060000e+00 6.120000e-01
+ 4.406400e+00 1.762560e+01 5.589600e+00 1.183200e+00 4.855200e+00
+ 8.976000e+00 2.488800e+00 1.876800e+00 7.466400e+00 9.792000e+00
+ 0.000000e+00 5.304000e+00 8.608800e+00 3.712800e+00 2.040000e-01
+ 1.264800e+00 1.632000e-01 2.856000e-01 9.465600e+00 0.000000e+00
+ 9.628800e+00 4.080000e-02 6.609600e+00 4.080000e-02 1.468800e+00
+ 4.528800e+00 9.547200e+00 8.160000e-02 1.305600e+00 7.344000e-01
+ 4.488000e-01 6.324000e+00 3.794400e+00 3.712800e+00 8.976000e-01
+ 1.020000e+00 1.632000e-01 1.999200e+00 2.040000e-01 2.040000e-01
+ 1.224000e-01 1.338240e+01 4.080000e-01 1.138320e+01 1.660560e+01
+ 2.448000e-01 1.224000e-01 3.264000e-01 4.080000e-02 1.632000e-01
+ 0.000000e+00 1.113840e+01 7.752000e-01 9.465600e+00 3.264000e-01
+ 2.162400e+00 6.936000e-01 1.770720e+01 8.568000e-01 7.956000e+00
+ 1.224000e-01 1.672800e+00 3.215040e+01 8.690400e+00 0.000000e+00
+ 7.344000e-01 0.000000e+00 4.406400e+00 1.077120e+01 8.568000e-01
+ 2.227680e+01 1.387200e+00 4.896000e-01 6.120000e-01 1.734000e+01
+ 4.569600e+00 2.448000e+00 1.636080e+01 2.040000e-01 1.672800e+00
+ 1.387200e+00 7.833600e+00 1.391280e+01 1.256640e+01 1.224000e-01
+ 5.712000e-01 8.568000e-01 5.222400e+00 4.855200e+00 6.038400e+00]",4.693733999999999,0.7683264066910637,"Counter({'Misrepair_a2-b1': 225, 'Repair': 70, 'Misrepair_a2-b2': 43, 'Misrepair_a1-b1': 33, 'Misrepair_a1-b2': 29})",0.175,0.037236776176248126,0.4575,"[0.47639134 0.55512903 0.97505928 0.49898548 0.80811278 0.78648647
+ 2.40484523 0.7584717  0.2436973  0.35936641 1.65769933 0.80568335
+ 0.51553823 0.76252743 0.6588895  0.67713206 1.26183625 0.48992859
+ 1.02998322 0.62568368 0.62462161 1.37338289 0.31722834 0.32133277
+ 1.21368116 0.34361571 0.5929854  0.38944684 1.48675059 1.58266446
+ 0.48282727 0.4970745  0.5278545  1.66089904 0.51317664 0.3909108
+ 0.51268024 0.25121606 0.83216048 0.45786666 0.36109029 0.29426847
+ 0.7367725  1.14824198 0.7435774  0.52996477 0.57085024 1.09903936
+ 0.50192217 0.40136567 0.76529748 0.24271746 0.95607363 0.42659586
+ 0.40312918 0.2576111  0.46233765 0.48966205 0.19446963 0.3149913
+ 0.3071323  1.7004426  1.22278113 0.77827295 0.39672915 0.77636695
+ 0.41892956 0.44889461 0.60440396 0.25486352 1.07972562 0.22656555
+ 0.33577466 0.49045414 1.27100373 1.01027856 1.48374101 1.17571207
+ 1.03408175 0.58494821 0.63060059 0.30425648 0.99813249 0.35675971
+ 0.7732736  0.62664879 0.69951653 2.28196842 0.22318906 0.6245219
+ 0.39032524 0.42792954 0.82478352 0.60835539 0.58013535 0.769843
+ 0.42204118 1.12897504 0.93788319 0.46780699 1.16763945 0.54283084
+ 1.3652869  0.26809619 1.24985621 1.64582882 0.39113974 1.33532008
+ 0.4161329  0.87385532 0.29386584 0.4082878  0.18712173 0.62142815
+ 0.7675814  0.4837032  0.61180726 1.07824338 0.35096488 1.24551953
+ 0.71437657 0.98484589 1.03273773 0.39768647 0.53538502 0.68551246
+ 1.04435992 0.77784814 0.91214973 0.46280659 0.43031248 0.24993616
+ 0.56903206 0.7653491  1.10953973 0.75995574 0.77175763 0.46300438
+ 0.98759924 1.0457274  1.37899701 0.9077253  0.56410459 0.34315554
+ 0.73053067 0.62899999 0.57678535 0.52710954 0.45086554 0.32446204
+ 1.02539771 0.19000105 0.47801866 0.45137832 0.76517078 0.6034177
+ 0.8304639  0.16434997 1.1370003  0.82011106 0.42397574 0.36644597
+ 0.35253374 1.58596445 0.23517964 0.43123259 0.37467296 0.96321457
+ 0.42747469 0.91840493 0.47079983 0.2069408  0.80731138 0.53557123
+ 1.54226211 0.79164291 0.93752049 0.52316042 0.43455046 0.35098329
+ 0.87449272 0.49677736 0.40973105 1.14101581 0.37816306 0.51324354
+ 0.25633644 0.44682391 0.4446321  0.89405738 0.3808386  0.46829587
+ 0.83355327 0.52215078 0.87924149 0.61453587 0.95603472 1.94500299
+ 0.87311503 1.2776981  0.46763599 1.15806454 0.53260792 0.53077572
+ 0.40220665 0.38523668 0.88355545 1.66435472 0.19826128 0.52984345
+ 0.31579874 0.29964558 1.40900416 0.80346703 0.29481945 0.68533071
+ 1.32753867 0.71670765 0.44481165 0.59137665 0.75270151 0.65170648
+ 1.46569815 0.23656973 0.5217113  0.54779595 1.23167375 1.02992027
+ 0.63897392 0.65833399 0.26722407 0.6493708  0.45912355 0.97922994
+ 0.62409092 0.69158651 1.16924743 0.81916494 0.74299828 0.65239381
+ 0.41162733 0.47418254 0.27717531 0.26237357 0.34351785 0.53126949
+ 1.15485003 0.93747373 0.86034192 1.53082999 0.97798472 0.6044889
+ 0.4146299  0.64767004 0.80417035 1.09704459 0.58500009 0.5305727
+ 0.371307   0.64854781 0.27819528 0.80505882 0.91587657 0.71296214
+ 0.27040334 1.08402788 0.51053098 0.73391339 0.32615282 0.61125721
+ 0.60946314 0.9559089  0.53287732 0.50055001 1.17788628 1.5405132
+ 0.35689262 1.05847902 0.22550937 0.55485757 0.5778333  0.81137135
+ 1.25646582 0.94231079 0.80733591 0.29695738 1.01683049 1.04314463
+ 1.2818867  0.86080127 0.44944017 0.49199814 0.98452206 0.30779306
+ 1.07316684 0.85762669 0.80421883 0.86033899 0.87269905 0.29506542
+ 0.38691538 0.6377757  0.81578091 0.39268985 1.23067145 0.28250923
+ 0.64278729 0.49884765 0.39470679 0.62901659 0.3176519  0.28608975
+ 0.49018941 1.69493778 1.20030123 0.24407178 0.34313248 0.74527997
+ 0.79281658 0.653879   1.64096799 0.32776438 0.62228287 0.50653218
+ 0.60417426 0.13415686 0.42207484 0.53942216 0.9917459  0.73912624
+ 0.55834445 0.3019567  0.35788134 0.17415567 0.39718346 0.26486959
+ 0.58593823 1.06335784 0.81521785 0.34794093 0.47131983 1.39167481
+ 0.63206113 0.83848249 0.44903739 1.09453049 1.02889446 1.17477763
+ 0.37772968 0.86228211 0.66499635 1.41395211 0.78393071 0.37568267
+ 0.51533608 0.48109826 0.53884392 1.78213567 0.81591651 0.85966703
+ 0.7657539  0.38484592 0.51559454 0.28056692 0.55054241 0.78856724
+ 0.71174316 0.22207972 0.8216098  0.48341266 0.50789598 0.31208867
+ 0.92988546 0.16534391 0.69294502 1.49278181 0.77610472 1.28737736
+ 0.21518208 0.59190147 0.43866237 0.29473262 0.38806097 0.7484178
+ 0.17449383 0.39715264 1.04961544 1.31210817 0.63724181 1.13892311
+ 0.80619789 0.98376008 0.3932761  0.80964242 0.56222685 0.71863208
+ 0.78838279 0.89454961 0.94308783 0.51714182]",0.7003966738613048
+0_2,100,3,0.2,22,False,0.008,400,0.0302,0.01,0.1,200,8000,0.11004728025701425,3,2,400,"['Misrepair_a2-b2' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b2'
+ 'Repair' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair' 'Repair'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b2']","[1.93280e+00 5.22460e+00 9.63380e+00 1.41940e+00 6.49300e+00 4.31860e+00
+ 1.81200e-01 1.04794e+01 9.06000e-01 1.00264e+01 0.00000e+00 2.65760e+00
+ 7.24800e-01 1.72140e+00 1.93884e+01 1.17780e+00 5.13400e-01 2.41600e+00
+ 2.05360e+01 1.43450e+01 1.57946e+01 1.49490e+01 0.00000e+00 1.02680e+00
+ 2.74820e+00 4.34880e+00 3.02000e+00 7.61040e+00 1.51000e+01 1.02680e+00
+ 1.18988e+01 3.92600e-01 9.06000e-02 0.00000e+00 1.84220e+00 9.96600e-01
+ 6.46280e+00 3.02000e-02 1.78180e+00 6.97620e+00 2.05360e+00 2.06870e+01
+ 5.37560e+00 2.84484e+01 3.68440e+00 7.55000e+00 6.64400e-01 1.72140e+00
+ 8.12380e+00 6.52320e+00 1.20800e-01 6.85540e+00 1.45564e+01 4.22800e-01
+ 0.00000e+00 8.48620e+00 3.02000e-02 7.00640e+00 2.29520e+00 1.93280e+00
+ 4.83200e-01 3.02000e-02 1.26538e+01 6.94600e-01 1.57040e+00 0.00000e+00
+ 7.21780e+00 4.76254e+01 5.07360e+00 1.14760e+00 3.62400e-01 3.14080e+00
+ 0.00000e+00 1.90260e+00 1.36202e+01 6.04000e-02 1.11740e+00 2.70592e+01
+ 2.11400e-01 4.07700e+00 3.02000e+00 3.19818e+01 3.08040e+00 7.30840e+00
+ 6.10040e+00 1.20800e+00 8.48620e+00 6.94600e-01 8.90900e+00 3.17100e+00
+ 6.07020e+00 1.62476e+01 2.08380e+00 1.39524e+01 1.18988e+01 0.00000e+00
+ 6.52320e+00 1.20800e-01 1.17780e+00 4.53000e-01 1.32880e+00 2.11400e-01
+ 1.13552e+01 9.66400e-01 1.66100e+00 3.98640e+00 5.73800e-01 7.24800e-01
+ 1.15062e+01 1.44960e+00 5.43600e-01 2.23480e+00 3.32200e-01 2.62740e+00
+ 2.17440e+00 1.09626e+01 8.75800e-01 4.83200e-01 1.03586e+01 4.19780e+00
+ 4.43940e+00 5.58700e+00 1.20800e-01 0.00000e+00 7.42920e+00 1.72140e+00
+ 1.37712e+01 3.23140e+00 2.41600e+00 2.41600e-01 1.75160e+00 1.02680e+00
+ 4.22800e-01 1.29860e+00 2.44620e+00 4.77160e+00 1.09626e+01 6.04000e-02
+ 9.66400e-01 4.83200e+00 7.94260e+00 2.53680e+00 3.14080e+00 1.44960e+00
+ 3.62400e-01 4.86220e+00 2.71800e-01 1.22008e+01 8.45600e-01 1.48886e+01
+ 2.35560e+00 3.36428e+01 1.87240e+00 3.02000e-02 2.41600e-01 4.71120e+00
+ 3.92600e-01 1.81200e-01 3.38240e+00 2.23480e+00 1.13250e+01 2.05360e+00
+ 3.80520e+00 9.06000e-02 2.41600e-01 1.93582e+01 4.64778e+01 4.83200e+00
+ 2.05964e+01 1.51302e+01 6.49300e+00 1.20800e-01 5.85880e+00 2.02642e+01
+ 3.62400e-01 3.89580e+00 1.10532e+01 1.95998e+01 7.85200e-01 2.41600e-01
+ 1.01170e+01 9.66400e-01 4.83200e+00 5.37560e+00 5.43600e+00 6.04000e-02
+ 8.93920e+00 2.47640e+00 1.32880e+00 0.00000e+00 9.36200e-01 8.48620e+00
+ 3.92600e-01 1.66100e+01 2.35862e+01 2.95960e+01 3.83540e+00 1.51000e-01
+ 6.04000e-01 1.65194e+01 1.39826e+01 3.14080e+00 2.20460e+00 5.55680e+00
+ 6.82520e+00 5.61720e+00 6.88560e+00 2.26500e+00 8.18420e+00 2.26500e+00
+ 3.17704e+01 6.04000e-01 4.34880e+00 4.92260e+00 3.21932e+01 2.59720e+00
+ 8.15400e-01 3.26160e+00 1.60060e+00 1.20800e-01 9.39220e+00 1.11136e+01
+ 2.83880e+00 1.71536e+01 2.38580e+00 1.28350e+01 4.07700e+00 9.06000e-02
+ 1.59456e+01 4.62060e+00 2.08380e+00 1.11740e+00 9.96600e+00 1.41638e+01
+ 3.77500e+00 3.68440e+00 1.20800e-01 1.75160e+00 1.32880e+00 1.32880e+00
+ 1.54020e+00 5.31520e+00 6.64400e-01 1.77576e+01 1.20800e-01 7.06680e+00
+ 5.40580e+00 4.53000e-01 2.71800e-01 4.83200e-01 1.84220e+00 0.00000e+00
+ 3.02000e-02 6.19100e+00 3.53340e+00 1.69120e+01 2.26500e+00 6.94600e-01
+ 2.65760e+00 9.06000e-02 5.37560e+00 0.00000e+00 1.94790e+01 3.02000e-01
+ 9.93580e+00 4.83200e+00 1.14458e+01 7.88220e+00 1.60060e+00 1.17780e+00
+ 3.53340e+00 1.57040e+00 7.24800e-01 9.48280e+00 6.34200e-01 1.41940e+00
+ 3.02000e+00 2.56700e+00 5.43600e-01 1.51000e-01 7.64060e+00 6.55340e+00
+ 7.55000e-01 1.11740e+00 7.97280e+00 9.15060e+00 6.64400e-01 1.66100e+00
+ 2.00528e+01 5.40580e+00 5.37560e+00 2.26500e+00 2.47640e+00 2.65760e+00
+ 0.00000e+00 2.41600e-01 2.38580e+00 5.67760e+00 4.59040e+00 2.41600e-01
+ 4.92260e+00 1.52510e+01 1.18082e+01 9.90560e+00 3.02000e-02 1.81200e+00
+ 0.00000e+00 1.51000e-01 1.51000e-01 1.94488e+01 9.36200e-01 7.39900e+00
+ 7.24800e-01 1.26840e+00 2.83880e+00 1.23820e+00 2.11400e+00 1.09022e+01
+ 3.71460e+00 1.17780e+00 9.39220e+00 2.89920e+00 6.00980e+00 1.17780e+00
+ 1.54322e+01 2.11400e-01 1.83918e+01 9.36200e-01 1.47980e+00 0.00000e+00
+ 6.40240e+00 3.02000e+00 3.17100e+00 2.29520e+00 5.04340e+00 1.31370e+01
+ 4.07700e+00 2.77840e+00 3.62400e+00 6.34200e+00 1.81200e-01 3.02000e-02
+ 1.60060e+00 6.97620e+00 8.57680e+00 6.00980e+00 3.29180e+00 2.76934e+01
+ 2.59720e+00 1.32880e+00 8.15400e-01 2.14722e+01 1.81200e+00 1.51000e+00
+ 4.37900e+00 1.26840e+00 4.22800e-01 6.49300e+00 5.43600e-01 4.40920e+00
+ 3.23140e+00 4.92260e+00 2.36768e+01 6.52320e+00 2.11400e-01 6.34200e-01
+ 1.54020e+00 9.06000e-02 6.31180e+00 6.16080e+00 6.16080e+00 3.95620e+00
+ 0.00000e+00 7.06680e+00 4.40920e+00 6.04000e-02 1.72140e+00 6.76480e+00
+ 2.11400e-01 1.22310e+01 1.32880e+00 3.02000e-02 2.86900e+00 5.34540e+00
+ 3.32200e-01 7.55000e+00 1.32880e+00 2.11400e+01 6.94600e-01 0.00000e+00
+ 2.71800e+00 3.59380e+00 8.75800e-01 3.32200e+00 6.94600e-01 7.09700e+00
+ 4.80180e+00 9.36200e+00 2.41600e-01 8.15400e-01]",5.353856,0.682274442084423,"Counter({'Misrepair_a2-b1': 190, 'Repair': 93, 'Misrepair_a2-b2': 51, 'Misrepair_a1-b1': 34, 'Misrepair_a1-b2': 32})",0.2325,0.0413977508447017,0.84,"[0.73413042 0.29878355 0.1728885  0.30078951 0.81971869 0.12627234
+ 1.35063101 0.28517743 0.38725639 0.21029708 0.37142658 0.36063165
+ 0.30683233 0.2565503  0.24216086 0.37166939 0.40025961 0.5619053
+ 0.25631713 0.45353899 0.43665131 0.17659184 0.23880887 0.25238567
+ 0.50897915 1.38832933 0.35812927 0.71157893 0.25317531 0.44742986
+ 0.20562247 0.49414839 0.29437359 0.36886071 0.57127641 0.81779426
+ 0.71301913 1.39009649 0.11441281 0.21940476 0.41949259 0.26240893
+ 0.09511597 0.26599689 0.21762    0.29317647 0.64798547 0.26456192
+ 0.29140007 0.26090245 0.5843464  0.218468   0.23480245 0.75782689
+ 0.55465607 0.12234145 0.85216809 0.32396262 0.80115869 0.71580426
+ 0.53356837 1.55521488 0.47992126 0.2737186  0.4041081  0.23053254
+ 0.38833926 0.22026255 0.42137726 0.44310784 0.46401823 0.33566086
+ 0.52499161 0.19477084 0.12688592 0.43464816 0.45509546 0.173767
+ 0.53530936 0.52143598 1.4798734  0.08944521 0.47226263 0.41766794
+ 0.5266781  0.98794635 0.79006884 0.19482262 0.35739933 0.53505278
+ 0.32159672 0.23989186 0.36991437 0.30292512 0.25406678 0.48634433
+ 0.27794321 0.4117882  0.20384291 0.20386694 0.50755452 0.20544063
+ 0.37435324 0.48811265 0.29917541 0.47284229 0.25714052 1.06161048
+ 0.55292876 0.24691499 0.41501094 0.45481544 1.56398742 0.31775699
+ 0.48062285 0.21964179 0.34612121 0.4724125  0.22303933 0.99153394
+ 0.18186876 0.97416347 0.43315501 0.45720506 0.15954582 0.20223595
+ 0.18142349 0.19976297 0.18696399 0.49044609 0.17298723 0.19610144
+ 0.5026082  0.46193076 0.7430583  0.41065957 0.11163219 0.71179734
+ 0.23249258 0.86957708 0.41514755 0.50927896 0.21717645 1.1272961
+ 0.5225488  0.5040988  0.3227578  0.19317402 0.66231106 0.12126992
+ 0.63370373 0.09954851 0.36070563 0.4929086  1.00483217 0.48727774
+ 0.46149301 0.18663003 0.37643011 0.24757007 0.32912994 0.68362685
+ 0.31147338 0.16734695 0.30978742 0.23242987 0.16983577 0.85375286
+ 0.19572614 0.1743729  0.37109742 0.61212472 0.38196174 0.16644423
+ 0.71310512 0.92217978 0.34635318 0.09785196 0.20100328 0.53282684
+ 0.08079772 0.18605623 0.37599425 0.46694545 0.26692005 0.27513339
+ 0.24362117 0.48354284 0.46924018 0.55995111 0.38516941 0.57388229
+ 0.4205428  0.30818029 0.05987857 0.29073181 0.74997096 0.48417038
+ 0.45953126 0.37461111 0.53263668 1.43304626 0.32678358 0.83068384
+ 0.189111   0.3595528  0.3101258  0.27049654 0.18188647 0.68851126
+ 0.25968986 0.2580298  0.32207644 0.42219122 0.13537539 0.27606731
+ 1.07982884 0.54371649 0.76426162 0.33959384 0.29592073 0.55135572
+ 1.28512504 0.21600432 0.3785619  0.37792616 0.35424099 0.3235856
+ 0.63996122 0.14371251 0.20808714 0.5561409  0.20328767 0.15989571
+ 0.26020956 0.92609634 0.34493578 0.83189919 0.48102509 0.47450258
+ 0.69714569 0.29630501 0.49637698 0.10490447 0.22628677 0.68926444
+ 0.1288763  0.18598821 0.69170333 0.2973503  0.61689988 0.48712882
+ 0.34697336 0.38381542 0.35656501 0.56823374 0.90353556 0.56339407
+ 0.27224694 0.26709621 0.29249824 0.55167847 0.99357379 0.38793158
+ 0.34404681 0.22024583 0.3867698  0.57412353 0.49907362 0.24902685
+ 0.29771608 0.2452527  0.40525953 0.18873835 0.59953291 0.5199099
+ 0.52701306 1.39203045 0.17645123 0.55576182 0.3486683  0.31026104
+ 0.65381213 0.9376575  0.19996171 0.16172987 0.19952804 0.59775508
+ 0.25013356 0.64107459 0.23692085 0.50201953 0.46960748 0.31498743
+ 0.268595   0.2281602  0.25824424 0.35053015 0.34010639 0.28560271
+ 0.36520338 0.23190397 0.34304398 0.21585749 0.72869663 0.37935483
+ 0.3657376  0.6535658  0.46887161 0.08852025 0.21935143 0.28607739
+ 0.48644794 0.6040802  0.62316119 0.62482179 0.35936575 0.37701621
+ 0.54179762 0.46358267 0.24392865 0.19477992 0.25204506 0.18896708
+ 0.39943758 0.43108361 0.18999649 0.46197224 0.26104059 0.62297053
+ 0.45923375 0.28237853 0.77796172 0.24914896 0.47068621 0.25387813
+ 0.16924278 0.61188829 0.70889918 0.92883647 0.4179988  0.42249826
+ 0.60794371 0.68009311 0.22408482 0.53573096 0.80557685 0.08881572
+ 0.94450305 0.91523087 0.43526162 0.16525696 0.1466549  0.5985465
+ 0.53397578 0.54430136 0.42357796 0.23927329 0.27333479 0.37738441
+ 0.34580198 0.66023498 0.14152532 0.22404175 0.33149243 0.63107925
+ 0.28918041 0.9154965  0.20470868 0.39202219 0.16250821 0.56531963
+ 0.43899937 0.71125337 0.53017171 0.13952398 0.26431722 0.5404312
+ 0.567602   0.20970047 0.37213788 0.64320279 0.17957131 1.21644206
+ 0.31262678 0.40692979 0.687481   0.5152177  2.05870828 0.56453378
+ 0.37069077 0.20407012 0.72794116 0.31060723 1.00661555 0.1887413
+ 0.13499886 0.77784645 0.56072276 0.32632693]",0.43997661305519303
+1_0,100,3,0.2,2,False,0.008,400,0.0999,0.01,0,200,8000,0.2,3,2,400,"['Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b2'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b1' 'Repair'
+ 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Repair' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair' 'Repair'
+ 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b2']","[ 0.      0.      0.      0.      0.      0.      0.      4.7952  3.6963
+  0.      0.5994  1.7982  0.      0.      0.999   0.      1.4985  0.
+  0.0999  0.      0.      0.0999  0.      0.      0.      0.      0.3996
+  0.0999  0.      0.      0.      0.      0.      0.      0.1998  2.4975
+  0.0999  0.3996  0.      0.      2.6973  7.1928  0.8991  0.0999  0.
+  2.5974  0.0999  0.0999  0.8991  0.      0.      1.3986  0.      0.
+  0.1998  1.4985  0.      3.1968  1.2987  0.      0.999   0.      0.
+  0.1998  0.      0.6993  4.3956  1.5984  0.      0.0999  4.1958  0.
+  0.      0.      0.      0.1998  0.      0.      0.2997  4.995   3.4965
+ 15.1848  0.4995  9.0909  0.      6.0939  1.3986  0.      0.999   0.
+  0.0999  0.      0.2997  0.      0.      0.3996  0.8991  0.999   6.8931
+  4.0959  0.      1.0989  0.      1.2987  0.2997  0.      1.4985  3.6963
+  2.1978  0.      0.999   0.2997  0.4995  1.0989  0.0999  0.0999  1.1988
+  0.      1.3986  0.7992  0.1998  0.      4.3956  0.      0.5994  0.0999
+  0.      0.      0.      0.      0.      2.7972  0.4995  0.      0.8991
+  0.      0.      0.0999 17.4825  1.4985  0.7992  5.994   0.      0.7992
+  0.      0.7992  0.4995  0.4995  0.4995  0.5994  0.0999  0.      0.2997
+  0.      0.      0.      0.0999  0.      0.0999  0.1998  3.5964  0.
+  0.0999  0.1998  1.7982  0.1998  0.5994  0.4995  0.0999  8.2917  0.0999
+  2.1978  0.      0.1998  6.0939  0.      0.      1.2987  3.0969  0.6993
+ 11.3886  0.3996  0.0999  0.4995  1.998   0.      0.      1.0989  1.5984
+  0.0999  0.3996  0.1998  0.      0.6993  0.      0.3996  0.      0.
+  0.      0.      0.0999  3.7962  0.      0.      0.      0.2997  0.
+  0.      0.      0.      0.      0.0999  5.2947  0.999   0.      9.8901
+  0.0999  0.3996  0.      0.      0.1998  1.6983  0.0999  0.      3.996
+  0.      0.0999  0.      1.2987  1.2987  0.2997  0.      1.6983  2.2977
+  0.      5.1948  0.      0.2997  1.4985  0.      0.      0.     19.2807
+  0.999   0.      5.5944  0.      1.4985  0.      1.0989  1.8981  0.2997
+  0.      0.      8.4915  1.998   0.      2.2977  0.6993  7.1928  0.0999
+  0.      0.999   0.2997  0.999   0.4995  0.7992  0.0999  0.5994  0.6993
+  2.6973  1.0989  0.      0.7992  0.0999  0.2997 13.2867  0.      2.2977
+  0.      0.      0.      0.      0.      0.     13.4865  0.      0.
+  0.1998 11.6883  0.      0.      0.      0.0999  0.      0.      0.4995
+  1.1988  1.0989  0.4995  0.      0.1998  0.      0.0999  0.8991  0.0999
+  0.      0.      1.0989  0.0999  0.0999  0.      5.4945  5.8941  0.2997
+  0.1998  0.      0.      0.      0.      0.      1.0989  8.4915  0.
+  0.0999  0.      0.0999  0.0999  0.4995  0.      0.0999  0.      0.5994
+  0.999   0.7992  2.7972  1.3986  0.4995  0.      0.      3.6963  0.0999
+  0.      3.3966  0.1998 20.8791  0.      0.0999  0.      5.2947  0.7992
+  0.      0.7992  2.8971  0.4995  1.3986  2.2977  0.6993  0.      0.8991
+  0.      0.      0.0999  0.2997  2.7972  2.4975  0.      2.8971  0.
+  0.1998  1.8981  0.3996  0.      0.      0.      0.      0.      0.
+  3.5964  0.      0.      0.      0.      2.1978  0.      0.0999  0.
+  0.      0.1998  0.5994  0.1998  0.      0.      0.3996  1.8981  0.2997
+  0.      0.      0.      0.1998]",1.13886,0.25783937326464396,"Counter({'Misrepair_a2-b1': 161, 'Repair': 137, 'Misrepair_a1-b1': 46, 'Misrepair_a2-b2': 34, 'Misrepair_a1-b2': 22})",0.3425,0.046505491879991985,0.0,"[3.45103201 0.43687117 0.80043296 0.78159494 1.73721324 0.81381799
+ 2.51136967 0.86824378 1.7079578  1.25967088 1.32330352 0.49916557
+ 0.331043   0.79352114 1.08792595 0.86843946 0.65178131 1.462723
+ 1.47145397 1.04518952 1.4510884  0.44461507 1.00901726 4.61876859
+ 1.35498398 1.38339563 0.59401843 1.65071225 0.71476889 1.40007339
+ 0.24878047 1.80473284 1.32516623 2.70266939 0.7755586  1.07230521
+ 0.7098794  0.95448839 1.64926316 1.42951169 1.27737158 0.73376512
+ 0.98178802 0.61755959 1.73449208 2.402347   1.56065591 0.84860613
+ 0.65110263 1.08876742 1.52271134 0.91625975 1.1015308  1.74214886
+ 0.41507104 0.76476671 0.40045591 1.16111602 0.92930775 0.31654865
+ 0.82952831 1.28546746 0.58063477 0.19509352 1.19140099 1.20076387
+ 1.32462011 1.96166297 0.45340013 1.44504883 1.8445815  1.96195913
+ 1.50167813 0.3892858  1.96208388 2.09921731 1.87943667 1.45836398
+ 1.48223515 0.57323725 0.98812293 1.64480149 0.9658367  2.20456323
+ 0.57218971 1.01995264 1.52398026 0.38705601 2.0644551  1.41342959
+ 1.47624436 0.39071234 2.52065089 1.31360593 1.5006348  1.95807734
+ 0.57022265 4.35929459 0.89224303 0.81156709 1.31897984 0.65110105
+ 0.36836295 0.46193435 1.10571301 2.67899235 1.25510376 0.51649381
+ 1.29767819 0.31999213 1.62390206 2.10646593 0.39153787 1.7557066
+ 0.27196888 0.48725665 0.72133399 2.84580837 0.69034744 0.99670903
+ 0.39143137 1.62201242 1.21113912 0.60830908 0.59923994 2.4475037
+ 1.14174884 1.70221371 1.34893017 1.23626865 0.74900297 1.52526957
+ 1.59530171 2.62351169 2.28895263 0.72649575 0.90651448 0.59245413
+ 1.2319351  0.42431004 0.41690908 0.94513823 0.38662953 0.81439323
+ 0.41967288 2.04405072 2.43952409 0.65911053 1.44577945 1.53043153
+ 1.20622959 0.95756332 1.34136298 0.73152776 1.10820864 1.17175141
+ 1.35406062 0.48371496 1.29836591 0.77063297 1.23474923 1.33931262
+ 1.16435414 3.80949986 0.24002423 1.94118386 1.01809344 1.62428721
+ 0.88348744 1.35362042 0.66116845 1.00812564 1.18862454 0.55839151
+ 0.70202287 0.89034221 0.89403573 1.14903264 1.29141211 0.8040269
+ 0.81798562 0.58295679 0.52368887 1.76751369 2.51372309 1.39863963
+ 0.35271281 0.73760722 0.44411359 1.32757143 0.29684433 0.28475862
+ 0.43951055 0.9720157  0.45764461 0.73878483 1.79064103 3.40480742
+ 0.90147383 0.55652466 0.88276668 0.88235942 0.63642943 0.90579591
+ 0.72951102 0.55077996 0.89692199 0.36734132 0.33823556 0.9128458
+ 1.93701801 1.46999729 1.28646237 1.93005374 0.72193491 0.68963442
+ 0.92017274 0.9580566  2.93320709 0.44575195 1.73711841 2.21642835
+ 0.82772404 0.82929014 0.40097316 0.34307138 1.15025918 0.97906165
+ 0.77573892 1.31236715 1.02977059 1.8349207  1.71209754 1.15810505
+ 0.60659566 0.45907949 0.79653643 1.02878932 0.70616432 1.23820455
+ 0.66964708 0.93853783 1.05792513 1.87702445 1.2317732  0.92547684
+ 0.98966237 2.8567501  3.16582684 1.17561078 0.7074265  0.40745778
+ 0.79715536 1.68094339 0.67830122 0.9881597  1.19445861 1.27073067
+ 2.02578306 2.49765299 3.48542776 0.67518046 1.83212839 0.83191807
+ 1.4282156  0.54443525 0.61458841 0.95243403 0.62406619 1.29949745
+ 1.1874307  0.91262732 1.10401176 0.74279888 0.51248663 0.4191815
+ 0.55363201 1.39642486 0.7400569  1.7630654  0.47592314 1.86642221
+ 0.83737849 0.98090393 1.71479158 1.47552374 1.15379576 0.78354707
+ 0.85973333 2.78689032 1.28983764 1.47758168 0.26575688 0.44089623
+ 1.2236153  1.36024134 0.52980183 0.85630644 1.14219226 4.38998334
+ 0.89812266 2.71370518 1.23613104 0.43021126 2.07540447 0.3425873
+ 0.6654756  1.3984604  1.0813851  1.34106345 1.20622797 1.78220607
+ 1.05813521 0.75383709 2.24270127 0.78694531 1.31591831 0.36751921
+ 0.50747665 1.03699683 1.7077342  1.20635146 0.81122446 1.21310617
+ 0.71305049 2.84147196 1.30270975 1.87878212 1.26025773 1.6803371
+ 0.79857889 1.0823045  1.54773116 1.41126236 0.94907811 2.01912943
+ 2.35044953 1.02265946 0.2958712  0.55341453 1.17129284 0.6123032
+ 3.20660815 1.22970887 0.61036174 0.54379903 0.74311168 0.44588196
+ 0.82354043 1.32362504 0.55915747 0.76530842 0.61897148 2.99119646
+ 3.60132056 0.49635552 0.82629115 1.5396672  1.35261658 0.56639988
+ 0.97339332 0.91572726 1.45252604 1.93742172 1.40292508 2.86631529
+ 0.39793371 1.64997394 1.16952478 0.59686566 1.64006168 0.21643936
+ 0.823954   0.32363274 1.71983139 2.05571602 1.71633365 1.15657195
+ 0.50348692 1.33188467 0.60383716 0.4448342  0.84702755 0.7830333
+ 0.80587896 2.63211986 1.04452248 1.83510203 0.73341977 0.66316722
+ 1.92629205 0.52145351 1.06303921 0.92494515 0.88027305 0.24515774
+ 1.51604447 1.36020313 1.64621271 1.07233715]",1.1887653096012385
+1_1,100,3,0.2,12,False,0.008,400,0.040799999999999996,0.01,0,200,8000,0.12792059302203654,3,2,400,"['Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b2'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Repair' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a1-b2' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b1' 'Repair' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Repair' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair']","[ 3.4272  2.1216  4.8144  1.4688  2.04    0.      2.6928  2.448   4.08
+  2.4888  0.6936  8.568   0.      1.1832  0.0408  6.936   2.9376  0.4488
+  0.      0.612  11.832   0.408   1.9584  0.0408  9.588   0.408   1.3056
+  0.3672  0.9792  2.4072  0.1632  0.      0.1632  2.1216  1.9584  3.9168
+  2.2848  0.7344  1.1424  0.5712  1.7136  0.204   5.4672  0.7752  2.652
+  0.3672  0.1632  5.4264  4.4472  4.1208  5.0184  0.1632  1.02    9.0168
+  5.9976 11.3424  2.04   11.3424  2.652   5.4672  4.9776 12.9336  7.4664
+  1.3056  1.3464  8.3232  1.224   0.      0.612   0.6528  0.612   0.
+ 14.7288  0.0408  4.2432  0.4488  3.7944  0.3264  2.448   0.3264  0.0816
+  0.0408  0.0816  2.3664  1.1424 14.5248  0.3672  0.9792  7.5072  0.
+ 10.0368  0.      0.      0.      0.1224  1.1016  0.     12.444   5.1816
+  3.9984  5.5896  0.204   0.9792  0.      1.9176  8.4456  7.0992  2.5296
+ 10.812   0.1632  0.0816  1.4688  0.8976 12.7296  2.7336  0.8568  1.1832
+ 14.9736  0.      0.3672  4.5288  0.204   6.4872 11.22    8.2824  0.6936
+  0.1632 20.8896  0.0408 18.6456 10.608   0.4488  2.1624  0.      1.7136
+  0.3672  5.1     1.7136  5.3856  0.6936  3.7536  0.6528  1.9992  0.
+  1.2648  1.5096  8.5272  0.204   0.5712  0.408   0.1632  0.      5.8752
+  0.0816  1.02    2.5296  5.2224  0.9792  2.7336 15.0552  0.      4.6104
+  3.9576  4.0392 18.2784  7.0992  2.448   6.0792  5.5488  6.1608  0.2856
+  2.5296  5.2632  0.9792 14.6064  3.5088  0.      9.0576  0.4488  1.9584
+  0.204   2.2032  0.7752  2.04    0.      0.3264  0.204   1.7952  0.408
+  8.0376  0.6936  4.6104  0.4488  6.2424  3.9984 13.3008  5.1816  8.2416
+  0.3672  0.      0.4896  0.408   1.1424  0.3672  0.408   0.0816  0.9792
+  6.8136  0.7344 33.66    0.0408  0.9792  3.876  12.5256  5.1     2.2848
+  0.      0.204   7.3848  3.3456  0.2856  1.4688  1.9176  1.02    5.0184
+  0.0816  0.4896  3.7536  0.6936  0.7752  0.      0.0408  0.9384  3.3048
+  5.1     4.08    4.692   3.5496  1.5096  3.9168  0.2448  0.6936  2.4888
+  0.      0.4896  3.672   1.2648  0.5304 15.6264  0.      6.0792  8.0784
+  0.5712  9.3024 17.7072  1.4688  4.2024  6.0792  1.5912  1.3872  0.6936
+  2.7336  2.7744  0.      0.      0.4488  0.      9.6696  0.0408  0.
+  0.0816  3.7536  1.02    1.7952  3.1008  0.1224 12.4848  3.2232  6.324
+  2.9376 15.6264  3.1008  3.876   2.2032  4.8552  0.      0.816   0.
+  0.6936  0.6528  0.1632  2.0808  4.6512  1.1016  3.6312  8.0376  0.3672
+  0.6528  4.2432  1.3872  0.0816  0.8568  1.6728 15.2592  0.9792  0.3264
+  0.0816  0.5712  0.      3.2232  4.2024 14.6064  5.1     0.9384  7.3848
+  0.2856  0.1224 16.8096  3.7944  6.6504  2.244   6.936   0.204   2.8968
+  8.7312  0.0816  0.3672  3.672   3.1416  1.5912  1.4688  1.836   1.1832
+  0.408   2.6112  1.2648  0.3264  4.9368  0.4488  4.9368 13.2192  0.4896
+  1.7952  0.9792  0.0408  0.      2.0808  0.      0.0408  0.5712  2.6928
+ 11.9136  3.5496  0.3264  0.204   0.0816 10.2     1.3872  4.8552  1.2648
+  0.     11.1384  1.428   5.3448  1.9176  3.7128  1.9176  6.732  21.4608
+  1.3872 33.5376  4.8552  0.9384  0.0408  0.7344  1.1016  0.      5.0184
+  1.3464  0.204   2.9784  0.     30.4368  6.6912  0.      0.2448  0.6936
+  2.2848  9.9144  3.6312 16.2792  0.3672  6.12   11.424   0.      1.8768
+  0.7752  3.4272  1.02    2.856 ]",3.4536179999999996,0.4721228070057827,"Counter({'Misrepair_a2-b1': 187, 'Repair': 94, 'Misrepair_a1-b1': 44, 'Misrepair_a2-b2': 42, 'Misrepair_a1-b2': 33})",0.235,0.041551884433801554,0.4825,"[1.21586567 1.36405514 0.35448652 2.39504088 0.64417956 0.66344883
+ 0.70334794 0.46844194 1.19647824 0.75702431 0.97419043 0.33362853
+ 2.5356029  0.53618197 0.76377242 0.86341537 0.65252678 1.59524637
+ 1.21744892 0.71326923 0.40475326 0.65578392 0.46586156 0.72708528
+ 1.01781019 2.31814522 0.60489259 0.57646281 1.10651177 1.04976944
+ 0.32207201 0.51296077 0.58208795 0.38365167 0.50195907 0.59230012
+ 0.30177923 0.44323378 0.85868606 0.81116404 0.51075389 0.27408888
+ 1.05731794 0.83674393 1.80528994 0.74710316 1.17028843 0.72497135
+ 0.88991264 0.74683453 0.20633784 0.55300809 0.43982527 0.53974768
+ 1.01403476 0.44095245 0.5513422  0.29436717 0.63258926 0.79686001
+ 0.48954648 0.59665737 0.95086071 0.73489971 0.32781127 0.80964667
+ 1.33399936 0.48180302 0.79220774 2.34322513 1.13231825 1.37396972
+ 0.5341283  0.65757708 0.88079109 0.64102066 2.19470314 0.33756967
+ 0.6307749  0.60450576 0.28872966 0.49995532 0.55757398 0.74506688
+ 2.00956529 0.83874276 0.86876661 0.89337207 0.58383055 0.84997007
+ 0.50580711 0.31323899 0.289795   1.0522221  0.35330905 0.3277409
+ 0.4035664  0.92591979 0.24125005 0.21244026 0.99811469 1.18685103
+ 0.53958309 2.27644979 0.66017876 0.44121031 0.7873492  0.94245298
+ 0.67912439 0.69637911 0.49332663 0.72368627 0.71428933 0.69088375
+ 0.67028225 0.82828954 1.08035205 1.03795325 1.13992456 1.56383258
+ 0.4711227  0.88151779 0.73438452 0.68028442 0.66210555 0.43248656
+ 0.75099688 0.62627437 0.43984699 0.57268328 0.43640632 0.32232778
+ 1.74505137 0.72046012 0.42996067 0.81018138 1.11323783 1.32351305
+ 0.47358453 1.54334224 0.41955653 1.5116625  0.30025855 0.48624915
+ 0.79633391 0.44808339 0.54672676 1.7234753  0.41702751 0.69564602
+ 0.68663643 0.91836726 0.88041695 1.18948461 0.31475144 1.99994925
+ 0.6023882  0.47689851 1.6662903  0.38025136 0.49859422 0.62416672
+ 1.64475935 0.88120085 0.72137044 0.34591145 0.54231227 1.055686
+ 1.11282151 1.38220691 0.82010255 0.62478962 0.32703841 0.42901344
+ 0.74829591 0.36355334 1.61978326 0.72348205 0.53186301 1.21587512
+ 1.17670274 0.75129392 0.28454867 2.5139548  1.13805458 1.247578
+ 0.91180015 1.86281784 0.92135984 0.6737243  0.52673763 0.86033941
+ 0.85646122 1.05717737 0.72442865 1.07917967 0.44197521 0.48898411
+ 0.44644234 0.54866824 1.4968475  0.60483055 0.35984565 0.47251583
+ 0.39142653 0.46787802 0.20773179 0.2637623  0.64287436 0.22522595
+ 0.4825602  0.87605338 0.44254287 1.92444406 0.37730946 1.17037358
+ 1.47899715 0.63466362 0.34594281 0.73529643 0.97310988 1.16103935
+ 0.96564459 0.47307195 0.7559133  0.4458849  0.49040856 1.00936196
+ 1.74249661 2.17401506 0.61020779 0.40146323 0.87925703 1.03572959
+ 0.14375358 1.2594187  0.36359849 0.75418133 1.38804714 0.96892685
+ 0.20427477 0.80216993 1.14059357 0.2119644  0.33160732 0.68080747
+ 0.41441686 0.69308858 0.35480632 0.77649787 2.77807914 0.98335968
+ 2.14936801 0.60197449 0.10711751 0.74473412 1.00715913 0.57942768
+ 0.64464358 0.52796576 1.447747   0.66699121 1.02699034 2.32049516
+ 0.41282859 0.52925842 1.50655302 0.95422654 0.59594662 0.24946024
+ 0.2433857  0.60585389 0.33766124 0.42058692 0.59516523 0.6456786
+ 1.05201522 0.87657129 0.4390356  0.5635234  0.77758235 1.77552113
+ 0.58027185 1.43263384 1.11290957 0.66538441 0.77412356 0.85428557
+ 0.86629816 0.51491491 0.46826559 2.33159408 0.17813334 0.7423458
+ 0.46958939 0.6327226  0.29426108 0.39486211 0.45528889 2.67494138
+ 2.21164807 1.50614046 0.91476175 0.50322223 1.443225   0.29841004
+ 0.46505882 0.8037441  0.86861148 0.85833785 0.7598091  0.58389172
+ 0.43270805 0.29047616 0.42781873 1.03885003 0.4308357  1.54700916
+ 1.96609241 0.40164233 1.56814759 0.38384912 0.84826915 0.91260456
+ 0.36487997 0.47714709 0.38944894 0.83722239 0.71086143 0.41032403
+ 0.86886162 0.88547154 0.91893987 0.52320613 1.31691466 0.81479178
+ 1.62764948 0.48245745 0.73010512 1.41878221 2.18420452 0.42337473
+ 0.98275962 0.76531001 0.24745391 0.73357245 0.86536134 0.35243769
+ 0.80649732 1.10382955 0.74981212 1.2272907  0.47175507 0.77430249
+ 1.12838658 0.61202608 1.48908953 2.5029011  0.32363232 1.46531625
+ 0.62701685 2.85008842 0.50869252 1.23993599 1.18874623 0.43380336
+ 1.45721565 1.50141653 0.24255631 0.62773727 0.54821083 0.72426381
+ 0.67046842 0.54162162 0.28583052 0.93647424 0.68986574 0.70487901
+ 0.71001329 3.35814118 0.62958778 0.857798   0.51424971 0.49290232
+ 2.52370466 0.61828381 1.03667618 0.90776144 0.71122219 0.67827668
+ 0.50275366 0.93225184 0.90879696 1.03299132 0.66123646 0.68352068
+ 0.44121322 2.44735307 1.21615437 0.95989356]",0.8410085508799794
+1_2,100,3,0.2,22,False,0.008,400,0.0302,0.01,0,200,8000,0.11004728025701425,3,2,400,"['Repair' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b1'
+ 'Repair' 'Repair' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2' 'Repair'
+ 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2' 'Repair' 'Repair'
+ 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair']","[6.04000e-01 4.46960e+00 1.11438e+01 0.00000e+00 4.13740e+00 7.85200e-01
+ 2.50660e+00 6.04000e-02 2.53680e+00 5.10380e+00 0.00000e+00 1.01170e+01
+ 1.26236e+01 7.12720e+00 5.13400e-01 4.56020e+00 5.94940e+00 3.02000e+00
+ 6.82520e+00 4.89240e+00 1.78180e+00 1.02680e+00 5.19440e+00 1.81200e-01
+ 6.70440e+00 1.78180e+00 2.68780e+00 5.13400e-01 8.81840e+00 1.54020e+00
+ 3.83540e+00 3.62400e-01 4.65080e+00 4.40920e+00 1.00566e+01 0.00000e+00
+ 9.96600e-01 1.81200e-01 1.15364e+01 2.23480e+00 1.15062e+01 4.25820e+00
+ 8.69760e+00 3.62400e-01 3.49112e+01 9.66400e-01 6.70440e+00 3.20120e+00
+ 1.51000e-01 8.09360e+00 1.72140e+00 1.69120e+00 6.10040e+00 1.80294e+01
+ 2.41600e+00 6.94600e-01 1.13552e+01 0.00000e+00 7.55000e-01 6.25140e+00
+ 1.84220e+00 2.44620e+00 4.68100e+00 2.71800e+00 3.02000e-02 5.73800e-01
+ 8.87880e+00 3.62400e-01 2.77840e+00 3.92600e-01 1.96300e+00 3.02000e-01
+ 5.43600e-01 8.84860e+00 4.22800e-01 4.53000e+00 0.00000e+00 1.32880e+00
+ 3.92600e-01 6.04000e-02 3.80520e+00 2.86900e+00 4.13740e+00 1.63986e+01
+ 2.68780e+00 4.86220e+00 9.06000e-02 4.74140e+00 1.38920e+00 9.96600e+00
+ 0.00000e+00 1.91468e+01 3.14080e+00 7.03660e+00 3.83540e+00 4.37900e+00
+ 1.07210e+01 2.89920e+00 5.73800e-01 6.73460e+00 0.00000e+00 6.79500e+00
+ 1.69120e+00 8.45600e-01 2.02340e+00 7.85200e-01 4.22800e-01 6.04000e-01
+ 9.84520e+00 9.96600e-01 2.41600e-01 1.41940e+00 1.51000e-01 9.66400e-01
+ 1.75160e+00 1.12646e+01 6.85540e+00 6.04000e-02 1.73348e+01 3.80520e+00
+ 8.15400e-01 4.22800e-01 7.76140e+00 9.99620e+00 1.81200e-01 0.00000e+00
+ 5.73800e-01 5.43600e-01 4.46960e+00 1.51000e-01 8.45600e-01 2.89920e+00
+ 3.32200e-01 3.02000e+00 9.06000e-02 3.14080e+00 1.14760e+00 3.92600e+00
+ 1.57342e+01 7.45940e+00 3.32200e-01 8.75800e-01 3.86560e+00 5.13400e+00
+ 9.06000e-02 2.11400e-01 9.90560e+00 1.26236e+01 6.91580e+00 2.11400e-01
+ 6.04000e-02 1.17780e+00 6.04000e-02 2.50660e+00 1.08720e+00 9.99620e+00
+ 0.00000e+00 3.58474e+01 0.00000e+00 9.06000e-01 4.01660e+00 2.71800e-01
+ 3.02000e-02 1.18082e+01 2.53680e+00 3.02000e-02 1.83314e+01 1.51000e-01
+ 5.28500e+00 2.08380e+00 1.32880e+01 1.51000e+00 1.99320e+00 4.22800e+00
+ 3.02000e-02 5.04340e+00 8.45600e+00 2.78746e+01 8.45600e-01 4.83200e-01
+ 9.06000e-01 1.54020e+00 1.22008e+01 6.64400e-01 4.53000e-01 9.66400e+00
+ 2.29520e+00 9.60360e+00 1.05398e+01 0.00000e+00 1.00566e+01 1.51000e-01
+ 3.02000e+00 3.68440e+00 2.89920e+00 7.70100e+00 6.76480e+00 2.26500e+00
+ 5.58700e+00 1.44658e+01 8.21440e+00 1.05700e+00 2.95960e+00 1.29860e+00
+ 8.36540e+00 1.26840e+00 2.59720e+00 2.53680e+00 2.65760e+00 0.00000e+00
+ 1.63080e+00 1.96300e+00 9.06000e-02 1.11740e+00 2.38580e+00 2.45828e+01
+ 3.47300e+00 0.00000e+00 3.32200e-01 1.24726e+01 0.00000e+00 1.75160e+00
+ 1.05700e+00 6.25140e+00 2.23480e+00 1.41940e+00 0.00000e+00 6.00980e+00
+ 2.11400e-01 4.22800e-01 1.68818e+01 2.22574e+01 0.00000e+00 3.23140e+00
+ 2.95960e+00 2.02340e+00 1.44960e+00 7.12720e+00 2.95960e+00 5.13400e-01
+ 2.56700e+00 0.00000e+00 5.43600e-01 3.62400e-01 1.29860e+00 2.77840e+00
+ 1.51000e-01 7.36880e+00 0.00000e+00 8.15400e-01 7.58020e+00 4.28840e+00
+ 0.00000e+00 7.24800e+00 1.44960e+00 1.93280e+00 1.51000e+00 8.81840e+00
+ 2.98980e+00 2.93242e+01 4.53000e-01 1.51000e-01 3.92600e-01 3.44280e+00
+ 3.92600e-01 9.36200e-01 1.47980e+01 2.41600e-01 2.65760e+00 0.00000e+00
+ 0.00000e+00 1.20800e-01 2.41600e+00 4.83200e-01 7.33860e+00 1.51000e+00
+ 9.06000e-02 1.11740e+00 3.02000e-02 2.50056e+01 3.62400e-01 3.32200e-01
+ 7.12720e+00 1.41940e+00 3.89580e+00 1.38920e+00 8.09360e+00 0.00000e+00
+ 1.33182e+01 5.13400e-01 4.59040e+00 6.79500e+00 2.05360e+00 7.55000e-01
+ 4.07700e+00 0.00000e+00 1.51000e-01 0.00000e+00 6.34200e-01 3.26160e+00
+ 2.72404e+01 6.04000e-02 1.23820e+00 3.02000e-02 5.43600e+00 2.71800e-01
+ 6.64400e-01 2.41600e-01 1.87240e+00 6.94600e-01 1.19592e+01 5.13400e-01
+ 1.11740e+00 6.00980e+00 3.02000e-02 3.02000e-01 2.11400e-01 1.51000e-01
+ 5.97960e+00 1.58852e+01 6.94600e-01 1.84522e+01 6.58360e+00 1.71838e+01
+ 5.73800e-01 0.00000e+00 1.72140e+00 4.37900e+00 8.15400e-01 0.00000e+00
+ 8.66740e+00 0.00000e+00 1.66100e+00 1.05700e+00 2.08380e+00 1.04190e+01
+ 3.02000e-02 4.83200e+00 6.64400e+00 7.55000e-01 5.67760e+00 1.51000e+00
+ 1.20800e-01 2.08380e+00 1.51000e-01 2.26500e+00 2.29520e+00 6.94600e-01
+ 4.83200e+00 0.00000e+00 2.95960e+00 3.17100e+00 3.47300e+00 1.07814e+01
+ 0.00000e+00 5.43600e+00 2.98980e+00 1.57040e+00 2.65760e+00 4.53000e-01
+ 4.22800e-01 4.43940e+00 4.53000e-01 1.81200e-01 0.00000e+00 2.41600e+00
+ 6.00980e+00 6.22120e+00 9.96600e-01 4.77160e+00 4.37900e+00 4.89240e+00
+ 3.74480e+00 6.43260e+00 7.24800e-01 0.00000e+00 5.19440e+00 2.21366e+01
+ 1.60966e+01 2.11400e+00 9.66400e-01 6.04000e-02 4.89240e+00 1.35900e+00
+ 6.91580e+00 3.50320e+00 4.98300e+00 7.55000e+00 7.24800e-01 3.02000e-02
+ 8.75800e-01 1.05700e+00 3.68440e+00 2.94148e+01 0.00000e+00 8.93920e+00
+ 4.83200e-01 5.22460e+00 1.86032e+01 2.71800e-01]",4.10418,0.5513589439307733,"Counter({'Misrepair_a2-b1': 175, 'Repair': 117, 'Misrepair_a1-b1': 43, 'Misrepair_a2-b2': 41, 'Misrepair_a1-b2': 24})",0.2925,0.044581249141315005,0.775,"[0.41590798 0.30531729 0.17398043 1.03245955 0.24074031 0.42475199
+ 0.22015438 0.57528443 1.23611242 0.35887179 0.34515998 0.27639773
+ 0.71173225 0.24348833 0.79739658 0.2428201  0.33874357 0.35367413
+ 0.31536274 0.6069673  0.6572598  0.5258705  0.76790999 0.62765143
+ 0.46662106 0.45504301 0.96646931 0.57001798 0.79367901 0.76793805
+ 0.36104916 0.56641571 0.8823561  0.52015327 0.18162815 0.84378793
+ 0.45200972 0.85266878 0.48244286 1.6029996  0.18807659 0.59529941
+ 0.36753004 0.46793946 0.25917627 0.58656358 0.19931293 0.40339038
+ 0.46355315 0.27194604 0.28713092 0.49841071 0.36803796 0.3015966
+ 0.49004093 0.2691717  0.14300063 1.04704815 0.16963165 0.69988722
+ 0.42527786 0.71342789 0.1651077  0.51312502 0.3046179  0.46305739
+ 0.24233388 0.38762622 0.20898601 0.21240789 0.47282166 0.23885212
+ 0.56480205 0.40085791 0.44064436 0.30239396 1.13703119 0.184694
+ 0.57764037 0.21912774 0.36497144 0.70418394 2.42553275 0.12962199
+ 1.0176883  0.28498254 0.43437966 0.57211024 0.39253181 0.42945738
+ 0.58556345 0.31988189 0.39773819 0.4056535  0.21873636 0.27445535
+ 0.20090453 1.02016344 0.55142727 0.80866397 0.29713602 0.61367802
+ 0.27133268 0.85565512 0.50219833 0.39989431 1.53241864 0.3448209
+ 0.43431697 0.39598741 0.31652237 0.74313948 0.5273692  0.25272124
+ 0.64541664 0.24294265 0.51707293 0.58108579 0.36669029 0.39023598
+ 0.56288763 0.45348195 0.78343189 0.34428422 0.43821193 0.63977814
+ 0.31559137 0.80178063 0.66667881 0.26212812 0.19599804 0.42958697
+ 0.71851406 0.84784021 1.19833819 0.30480504 0.36649111 1.09923404
+ 0.18188431 0.19579854 0.38458564 0.3205877  0.22199902 0.48472466
+ 0.20898339 1.05661661 0.57104647 0.40383164 0.59954138 0.79030077
+ 0.59442838 0.68249172 0.25702406 0.18019055 0.63759337 0.47698394
+ 0.39602601 0.27553743 0.60327041 0.71647274 0.29135072 1.36800567
+ 1.6560795  0.15935547 0.52737821 0.94728994 0.22861467 0.30313483
+ 0.76905682 0.34735723 0.15513623 0.35731865 0.26393714 0.75359311
+ 0.65815061 0.23777853 0.50043699 0.25515346 0.72129236 0.27202963
+ 0.35402417 0.13823102 0.46300209 0.36599333 0.79475691 0.16467229
+ 0.29283659 0.25095128 0.42558195 0.2395756  0.19269402 0.32635167
+ 0.15940151 0.72427696 0.18243985 0.59705291 0.32598696 0.69240926
+ 0.43639377 0.29013791 0.85204853 0.5892639  0.2778393  0.59918097
+ 0.26869928 0.53413812 0.21481872 0.11708009 0.63409978 0.53456814
+ 0.42863426 1.49988509 0.60401402 0.7181088  0.50896525 0.5529221
+ 0.65027707 0.24941507 1.71476686 1.25125456 1.1352322  0.52568652
+ 0.76957303 0.55165739 1.09524462 0.60719105 0.29008202 0.28295501
+ 0.6892259  0.31197121 0.5157373  0.20287817 0.47378403 0.91901966
+ 0.51485786 0.3535302  0.43835144 0.30374492 1.06262188 0.32886559
+ 0.27100717 0.41764169 0.41376306 0.30789786 0.21545557 0.63476859
+ 0.90874805 0.26203246 0.28864247 0.33119656 0.59168188 0.24391387
+ 1.34895866 0.7003672  0.25634438 0.25164493 0.63308339 0.09887897
+ 0.90756144 0.29717419 0.20102284 1.09687615 0.7076193  1.63917187
+ 1.5419132  0.75934229 0.10277472 0.59618727 0.7958867  0.88999479
+ 1.03166154 0.16580287 0.59131084 1.40822191 0.25464641 0.30515092
+ 0.25334518 0.27743521 0.73688427 0.2782134  0.77210906 0.23343612
+ 0.46617216 0.50039953 0.20936977 0.6104491  0.4538764  0.55287744
+ 0.25125067 1.32149874 0.30892016 0.24280929 0.64989601 0.43065863
+ 0.46736198 0.27036298 0.47285021 0.31887499 0.41431807 0.44706681
+ 0.39290071 0.50160378 0.82968397 0.87457329 0.20692216 0.82995235
+ 1.08393413 0.32324468 0.7303214  0.62117758 0.20427511 0.6415903
+ 0.48392846 0.33147708 0.57629193 0.31716829 0.42377897 1.23799528
+ 0.24948123 0.2243721  0.73563082 0.19886301 0.32315599 0.35483835
+ 0.92204106 0.49077985 0.30234482 0.3270136  0.51573593 0.86731567
+ 0.17918975 0.58112096 0.17707577 0.40370679 0.50403408 0.13365997
+ 0.83386217 0.30998525 0.29220657 0.56818911 0.60487154 0.62051012
+ 0.93604231 0.42544915 0.30751065 0.14248336 0.14434437 1.65389157
+ 0.40470741 0.18702867 0.36791969 0.34096474 0.71451864 0.98448691
+ 0.29376346 0.34681198 0.62117298 1.11275458 0.4018008  0.43806373
+ 0.90298134 0.45365988 1.34858829 0.35414444 1.44305163 1.01548
+ 0.25272895 0.33107959 0.64569577 0.48772452 0.28720279 0.66745901
+ 0.156002   0.91381994 0.48793085 0.6137232  0.18189445 0.09336583
+ 0.2323549  0.32829216 0.26453034 0.28400751 0.27492227 0.56150793
+ 0.2990409  0.16637854 0.27429429 0.70359596 0.18529077 0.27954528
+ 0.68281194 0.3671601  0.75802001 0.13187561 0.87362842 0.55042119
+ 0.30093934 0.65391568 0.16689378 0.3636768 ]",0.5162837081240865
