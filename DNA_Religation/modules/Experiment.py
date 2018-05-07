@@ -10,8 +10,7 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from mpl_toolkits.mplot3d import Axes3D
 from collections import Counter
-from .Forces import ExcludedVolume, LocalExcludedVolume, RepairSphere
-from .Polymers import RCLPolymer
+from .Forces import LocalExcludedVolume, RepairSphere
 from time import time
 
 class Experiment():
@@ -201,6 +200,11 @@ class Experiment():
         
         # Prepare the random DSBs
         breakLoci = self.polymer.randomCuts(self.genomicDistance,self.Nb)
+        
+        # Add CLs to the Damage-to-be foci
+        if(self.Nc_inDamageFoci > 0):
+            self.polymer.imposeDSBconnections(self.Nc_inDamageFoci,breakLoci)
+        
         # Verify is polymer is splittable for the prepeared DSBs
         while(not(self.polymer.isSplittable(breakLoci))):
             # if not, make new connections (#TODO: try an heuristic maybe?)
@@ -337,6 +341,7 @@ class Experiment():
         """
         Add a repair spehere, repulsive for the non-cleaved monomers
         """
+        
         self.addResults("iterationsNumber",self.numRealisations)
         FETs = np.ones(self.numRealisations)*np.nan
         events = np.repeat('NA',self.numRealisations).astype('<U15')
@@ -345,6 +350,7 @@ class Experiment():
 
         if self.numRealisations >= 10: k = self.numRealisations//10        
         else: k = 1
+        
         for i in range(self.numRealisations):
             
             if not(i%k):
@@ -507,7 +513,8 @@ class Experiment():
             print('\r' + 'Simulation ' + str(i) + ') DSB at '+str(breakLoci)+' | Execution time : ' + str(time() - starttime), end='\r')
             
         self.saveEncounterResults(FETs, events, removedNums)
-        
+    
+    
 
     def persistentDSB(self):
         """
@@ -581,6 +588,23 @@ class Experiment():
         self.addResults('Ensemble_MSRG', np.mean(msrg))
         self.addResults('MeanInterBreakDistance',np.mean(interbreakDistance,axis=0))
 
+
+    def exponentialFit(self,x):
+        from scipy.optimize import curve_fit
+        
+        def exponential(x, amplitude, lambd):
+            return amplitude * np.exp(-lambd*x)
+        
+        bin_heights, bin_borders = np.histogram(x, bins='auto', normed='True')
+        bin_centers = bin_borders[:-1] + np.diff(bin_borders) / 2
+        popt, _ = curve_fit(exponential, bin_centers, bin_heights, p0=[1/np.mean(x),1/np.mean(x)])
+        
+        return popt
+    
+#        x_interval_for_fit = np.linspace(bin_borders[0], bin_borders[-1], 10000)
+#        plt.plot(x_interval_for_fit, exponential(x_interval_for_fit, *popt), label='Fit %s exp(- %s t)' % (*popt))
+#        plt.legend()
+
     def saveEncounterResults(self, FETs, events, removedNums):
         # Prepare results 
         FETs = FETs*self.dt
@@ -594,6 +618,7 @@ class Experiment():
             mFET = np.nan
             halfCI_mFET = 0.
             meanremovedCLs = 0.
+            fitAmplitude = fitRate = 0.
             print('No valid experiments!')
         else:
             proba = events['Repair']/total_valid_experiments
@@ -602,14 +627,19 @@ class Experiment():
             mFET = np.nanmean(FETs)
             halfCI_mFET = 1.96*np.nanstd(FETs)/np.sqrt(total_valid_experiments)
             meanremovedCLs = np.nanmean(removedNums)
+            fitAmplitude, fitRate = self.exponentialFit(FETs[~np.isnan(FETs)])
+
         
         # Save results
         self.addResults("FETs",FETs)
         self.addResults("meanFET",mFET)
         self.addResults("halfCI_FET",halfCI_mFET)
+        self.addResults("expFit_Amplitude",fitAmplitude)
+        self.addResults("expFit_Rate",fitRate)
         self.addResults("eventsCounter",events)
         self.addResults("repair_probability",repairProbas)
         self.addResults("repair_CIhalflength",repairHalfCI)
         self.addResults("mean_removedCLs",meanremovedCLs)
+
 
         

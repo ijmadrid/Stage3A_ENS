@@ -1,0 +1,90 @@
+experimentSetID,numMonomers,dim,b,Nc,keepCL,diffusionConstant,numRealisations,dt,dt_relax,excludedVolumeCutOff,waitingSteps,numMaxSteps,encounterDistance,genomicDistance,Nb,Nc_inDamageFoci,excludedVolume,iterationsNumber,events,FETs,meanFET,halfCI_FET,expFit_Amplitude,expFit_Rate,eventsCounter,repair_probability,repair_CIhalflength,mean_removedCLs,MSRG_atEncounter,Ensemble_MSRG
+0_0,100,3,0.2,5,True,0.008,200,0.0368,0.01,0.1,200,9000,0.12152980865829638,25,2,1,0.24305961731659276,200,"['Misrepair_a1-b1' 'Repair' 'Repair' 'Repair' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a1-b2' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Repair' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Repair' 'Repair' 'Repair' 'Repair' 'Repair' 'Repair'
+ 'Repair' 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair' 'Repair'
+ 'Repair' 'Repair' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b2' 'Repair'
+ 'Repair' 'Misrepair_a2-b2' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b2'
+ 'Repair' 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Repair' 'Repair' 'Repair' 'Repair'
+ 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Repair' 'Repair' 'Repair' 'Repair' 'Repair' 'Repair'
+ 'Repair' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair' 'Repair'
+ 'Repair' 'Misrepair_a2-b2' 'Repair' 'Repair' 'Repair' 'Repair' 'Repair'
+ 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair' 'Repair'
+ 'Repair' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Repair' 'Repair'
+ 'Repair' 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Repair'
+ 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Repair'
+ 'Repair' 'Misrepair_a1-b1']","[ 0.2944  3.6432  4.968   0.736   0.1104  0.      0.9568  0.4048  0.736
+  0.     19.136   0.9568  6.44    0.6624  9.7152  1.656   0.8464  1.2144
+  3.9744  2.2448  3.7168  3.496   0.184   0.      2.8336  0.      2.6496
+  1.1408 10.488   0.1104  1.1408  7.544   0.      6.1824  0.8096  3.5328
+  2.392   0.0368 11.592   1.288   0.6992  4.416   0.184   0.0736  0.4784
+ 10.3408  3.2752 16.5968  1.6928  3.7168  3.68    4.0112  0.      0.
+  1.9872  1.656   4.1952  0.      0.      4.0848  0.4416  1.3616  0.
+  0.368   0.2576  0.2576  0.92    2.6128  0.      0.      0.8832  0.
+  6.5504  0.552   1.4352 30.1392  6.9552  1.5824  0.     11.7392  5.704
+  6.7712  0.1472  0.5152  0.      0.2576  0.      2.0976  3.9376  0.0368
+  6.5136  3.6064  0.3312  4.0112  0.4048  1.4352  0.      0.2208  0.7728
+  0.6256  8.2064  0.1472  1.3248  0.4416  6.2928  0.      3.128   1.4352
+  9.6048  0.6992  2.6496  0.8464  1.0672  0.2208  0.2208  0.4048  4.6736
+  3.9376  0.0368  0.6624 19.0992 12.3648  0.0368  0.6256  0.9568  0.
+  6.992   0.0736  0.4048  1.6192  0.0736  0.6992  2.6128  0.0368  9.1264
+  0.2576  1.7296 10.9664  3.1648  0.4048  1.0672  0.0368  0.      3.4224
+  0.3312  2.9808  1.1776  0.      9.1264  0.1472  2.392   1.8768  5.4832
+  0.      1.472   0.8096  0.1472  0.4048  0.      3.3488  3.9744  1.3616
+  2.0608  3.3488  0.9568  0.3312  1.5088  0.3312  5.8144  0.0736  0.
+  0.0368 13.9472  0.368  10.5248  1.8032  0.2944  7.3968 15.1616  0.4048
+  1.9136  0.0736  0.      0.0368  1.9872  3.2016  2.024   1.4352  1.2144
+  2.1344  2.7968 11.2976  6.4768  0.      0.      1.84    0.      4.6736
+  3.4224 15.7872]",2.819248,0.5866573767780775,0.6768670067663567,0.8137824085920902,"Counter({'Repair': 142, 'Misrepair_a2-b1': 26, 'Misrepair_a1-b1': 11, 'Misrepair_a2-b2': 11, 'Misrepair_a1-b2': 10})",0.71,0.06288821193196702,0.0,"[0.47364136 1.12127784 1.1524315  1.74684908 0.97194047 1.71800317
+ 1.55052158 0.84387776 0.56050442 1.39547114 1.88296988 0.45899691
+ 0.92819002 0.71633934 0.84984934 0.9262135  0.47283755 1.11780874
+ 3.17755116 0.93866835 1.22246548 0.64684754 1.72312608 0.60885013
+ 1.00516929 0.66999848 1.77606823 1.14373928 1.18944692 2.00600841
+ 2.22571413 1.81583495 0.82323484 1.04294409 1.1506653  0.36688649
+ 0.81885293 1.02785253 1.13741085 0.86865031 0.84916839 0.71427568
+ 0.66584683 0.93388802 1.14293736 0.71850155 1.66764792 1.70125744
+ 1.90414832 0.76550518 0.55261018 0.90224004 0.30019275 1.08203814
+ 0.52111716 1.52214713 1.56628254 0.90560529 0.98323086 1.17730509
+ 1.0739378  1.75605968 0.62351349 0.85736631 0.56707856 1.54956866
+ 0.50835302 0.49932161 0.28437811 0.50673963 1.41511093 0.53029195
+ 0.94179967 0.71779966 1.31858175 0.69762237 0.61829997 0.31901331
+ 1.82187409 1.95235371 1.00436152 1.64938478 0.90641672 1.65060078
+ 0.83329777 1.10442133 1.1627476  1.53238589 0.43671525 0.48322807
+ 0.95511237 0.60987717 0.54742103 0.88682006 0.9978114  0.98761008
+ 0.84261088 0.43898888 1.48629023 0.42785718 0.84531557 0.56885702
+ 0.62239154 0.60377309 0.59174337 1.8224799  0.4188288  0.69164446
+ 1.39779965 1.63953018 0.47947385 0.37836591 0.75221573 1.55725718
+ 0.52250144 0.84941681 1.61547524 1.29325873 0.45989249 0.6462366
+ 0.75516601 0.99865857 0.42902941 1.08506243 1.24468553 0.50608115
+ 1.14510267 1.50113211 0.59717175 0.61589056 2.48709186 0.73292159
+ 0.5791986  0.63286351 1.10107874 0.97841294 1.45004552 0.81320829
+ 2.19499289 1.387092   1.28811495 0.61861461 0.75013917 0.58435368
+ 1.32621958 1.91531629 2.19695801 0.41784807 0.61076354 2.00312815
+ 0.95530883 0.94177918 0.89881292 1.09486921 1.01710045 0.61919584
+ 0.46145151 1.07440409 0.37516813 1.0687655  1.33892638 1.10029263
+ 0.37861988 0.62499075 1.09468037 0.72108918 1.08564755 0.90316895
+ 1.09600459 0.59559529 1.85371698 1.23070733 3.16930261 2.28547603
+ 1.72620918 0.96161871 0.44557679 0.7802617  0.75226065 1.31721006
+ 1.2565085  1.28901543 0.37347293 0.52518938 0.75168925 1.20497084
+ 0.87354553 2.20520423 0.98568579 1.70835201 0.90807549 0.92576974
+ 2.11421439 1.68640278 0.67487512 1.20402575 0.71153058 1.14361767
+ 0.60909737 0.85826066]",1.045165964955629

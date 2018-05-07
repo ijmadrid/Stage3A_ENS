@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     23773,        613]
-NotebookOptionsPosition[     22593,        572]
-NotebookOutlinePosition[     22935,        587]
-CellTagsIndexPosition[     22892,        584]
+NotebookDataLength[     20037,        507]
+NotebookOptionsPosition[     19184,        474]
+NotebookOutlinePosition[     19526,        489]
+CellTagsIndexPosition[     19483,        486]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -24,22 +24,19 @@ Cell[BoxData[
    RowBox[{"N_", ",", "\[Xi]_", ",", "y_", ",", "e_"}], "]"}], ":=", " ", 
   RowBox[{"e", 
    RowBox[{"\[Sqrt]", 
-    FractionBox["1", 
+    FractionBox[
+     SuperscriptBox["0.2", "2"], 
      RowBox[{"2", 
       RowBox[{"(", 
        RowBox[{"1", "-", "\[Xi]"}], ")"}], " ", 
       RowBox[{"\[Sqrt]", 
        RowBox[{"(", 
-        RowBox[{"2", 
-         RowBox[{"(", 
-          RowBox[{"1", "-", "\[Xi]"}], ")"}]}], ")"}]}], 
-      RowBox[{"\[Sqrt]", 
-       RowBox[{"(", 
         RowBox[{
          SuperscriptBox["y", "2"], "-", "1"}], ")"}]}]}]]}]}]}]], "Input",
  CellChangeTimes->{{3.7344267382727222`*^9, 3.7344269136593676`*^9}, {
-  3.7344269745725822`*^9, 3.734426979720598*^9}, {3.734430068957556*^9, 
-  3.734430087084625*^9}}],
+   3.7344269745725822`*^9, 3.734426979720598*^9}, {3.734430068957556*^9, 
+   3.734430087084625*^9}, {3.734682822277683*^9, 3.7346828265364904`*^9}, 
+   3.7346829245512905`*^9}],
 
 Cell[BoxData[
  RowBox[{
@@ -70,7 +67,7 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"Manipulate", "[", 
   RowBox[{
-   RowBox[{"Plot", "[", 
+   RowBox[{"DiscretePlot", "[", 
     RowBox[{
      RowBox[{"\[Epsilon]", "[", 
       RowBox[{"N", ",", 
@@ -80,46 +77,43 @@ Cell[BoxData[
          RowBox[{"(", 
           RowBox[{"N", "-", "1"}], ")"}], "*", 
          RowBox[{"(", 
-          RowBox[{"N", "-", "2"}], ")"}]}]], ",", "b", ",", "K"}], "]"}], ",", 
+          RowBox[{"N", "-", "2"}], ")"}]}]], ",", 
+       FractionBox[
+        RowBox[{"\[Sqrt]", "6"}], 
+        RowBox[{"\[Sqrt]", "N"}]]}], "]"}], ",", 
      RowBox[{"{", 
-      RowBox[{"M", ",", "10", ",", "1000"}], "}"}]}], "]"}], ",", 
+      RowBox[{"M", ",", "2", ",", "50"}], "}"}]}], "]"}], ",", 
    RowBox[{"{", 
-    RowBox[{"N", ",", "1", ",", "200", ",", "1"}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{"b", ",", "0.2"}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{"K", ",", "2"}], "}"}]}], "]"}]], "Input",
+    RowBox[{"N", ",", "100"}], "}"}]}], "]"}]], "Input",
  CellChangeTimes->{{3.734427018771741*^9, 3.734427097931029*^9}, {
-  3.734427230440482*^9, 3.734427360582996*^9}}],
+  3.734427230440482*^9, 3.734427360582996*^9}, {3.7346823866611853`*^9, 
+  3.7346824388447385`*^9}, {3.734682717128696*^9, 3.7346827422955403`*^9}, {
+  3.7346827764202013`*^9, 3.734682780180808*^9}, {3.7346830092526417`*^9, 
+  3.734683012981048*^9}, {3.734683296986552*^9, 3.734683304304965*^9}, {
+  3.734683482265918*^9, 3.734683489693531*^9}, {3.734683560608458*^9, 
+  3.73468360145533*^9}}],
 
 Cell[BoxData[
  TagBox[
   StyleBox[
-   DynamicModuleBox[{$CellContext`b$$ = 0.2, K$$ = 1, N$$ = 104, 
-    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
-    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
-    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
-      Hold[N$$], 1, 200, 1}, {
-      Hold[$CellContext`b$$], 0.2}, {
-      Hold[K$$], 2}}, Typeset`size$$ = {360., {107., 112.}}, 
-    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = True, 
-    N$17265$$ = 0}, 
+   DynamicModuleBox[{N$$ = 100, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[N$$], 100}}, Typeset`size$$ = {360., {110., 114.}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = True}, 
     DynamicBox[Manipulate`ManipulateBoxes[
-     1, StandardForm, 
-      "Variables" :> {$CellContext`b$$ = 0.2, K$$ = 2, N$$ = 1}, 
-      "ControllerVariables" :> {
-        Hold[N$$, N$17265$$, 0]}, 
-      "OtherVariables" :> {
+     1, StandardForm, "Variables" :> {N$$ = 100}, "ControllerVariables" :> {},
+       "OtherVariables" :> {
        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
         Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
-         Typeset`skipInitDone$$}, "Body" :> Plot[
+         Typeset`skipInitDone$$}, "Body" :> DiscretePlot[
         $CellContext`\[Epsilon][
-        N$$, 2 $CellContext`M/((N$$ - 1) (N$$ - 2)), $CellContext`b$$, 
-         K$$], {$CellContext`M, 10, 1000}], 
-      "Specifications" :> {{N$$, 1, 200, 1}, {$CellContext`b$$, 0.2}, {
-        K$$, 2}}, "Options" :> {}, "DefaultOptions" :> {}],
-     ImageSizeCache->{411., {187., 194.}},
+        N$$, 2 $CellContext`M/((N$$ - 1) (N$$ - 2)), Sqrt[6]/Sqrt[
+         N$$]], {$CellContext`M, 2, 50}], "Specifications" :> {{N$$, 100}}, 
+      "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{411., {152., 159.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -131,105 +125,11 @@ Cell[BoxData[
   Manipulate`InterpretManipulate[1]]], "Output",
  CellChangeTimes->{
   3.7344271000890355`*^9, 3.7344271345171523`*^9, {3.734427266154606*^9, 
-   3.734427362821006*^9}}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Power", "::", "infy"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Infinite expression \[NoBreak]\\!\\(1\\/0\\)\[NoBreak] \
-encountered. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/infy\\\", ButtonNote -> \
-\\\"Power::infy\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.7344273633640065`*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Infinity", "::", "indet"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Indeterminate expression \[NoBreak]\\!\\(0\\\\ \
-ComplexInfinity\\)\[NoBreak] encountered. \\!\\(\\*ButtonBox[\\\"\
-\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/indet\\\", ButtonNote -> \
-\\\"Infinity::indet\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.7344273634240065`*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Power", "::", "infy"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Infinite expression \[NoBreak]\\!\\(1\\/0\\)\[NoBreak] \
-encountered. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/infy\\\", ButtonNote -> \
-\\\"Power::infy\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.7344273634720078`*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Infinity", "::", "indet"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Indeterminate expression \[NoBreak]\\!\\(0\\\\ \
-ComplexInfinity\\)\[NoBreak] encountered. \\!\\(\\*ButtonBox[\\\"\
-\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/indet\\\", ButtonNote -> \
-\\\"Infinity::indet\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.7344273635120077`*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Power", "::", "infy"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Infinite expression \[NoBreak]\\!\\(1\\/0\\)\[NoBreak] \
-encountered. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/infy\\\", ButtonNote -> \
-\\\"Power::infy\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.734427363562008*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"General", "::", "stop"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Further output of \[NoBreak]\\!\\(\\*StyleBox[\\(Power :: \
-infy\\), \\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this \
-calculation. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/stop\\\", ButtonNote -> \
-\\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.734427363582008*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Infinity", "::", "indet"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Indeterminate expression \[NoBreak]\\!\\(0\\\\ \
-ComplexInfinity\\)\[NoBreak] encountered. \\!\\(\\*ButtonBox[\\\"\
-\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/indet\\\", ButtonNote -> \
-\\\"Infinity::indet\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.7344273636220083`*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"General", "::", "stop"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Further output of \[NoBreak]\\!\\(\\*StyleBox[\\(Infinity \
-:: indet\\), \\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this \
-calculation. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/stop\\\", ButtonNote -> \
-\\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.734427363652008*^9}]
+   3.734427362821006*^9}, 3.734682277394192*^9, 3.7346824036638575`*^9, 
+   3.7346824416527433`*^9, {3.7346827112454853`*^9, 3.7346827430131416`*^9}, 
+   3.734682780773609*^9, 3.734682831356899*^9, 3.7346829296056995`*^9, 
+   3.734683014478651*^9, {3.734683300122157*^9, 3.7346833051629663`*^9}, 
+   3.734683492095935*^9, {3.734683593780116*^9, 3.7346836023133316`*^9}}]
 }, Open  ]],
 
 Cell[BoxData[""], "Input",
@@ -515,7 +415,7 @@ Cell[BoxData[
          RowBox[{"(", 
           RowBox[{"N", "-", "2"}], ")"}]}]]}], "]"}], ",", 
      RowBox[{"{", 
-      RowBox[{"M", ",", "2", ",", "30"}], "}"}]}], "]"}], ",", 
+      RowBox[{"M", ",", "2", ",", "60"}], "}"}]}], "]"}], ",", 
    RowBox[{"{", 
     RowBox[{"N", ",", "50", ",", "200", ",", "1"}], "}"}], ",", 
    RowBox[{"{", 
@@ -525,7 +425,8 @@ Cell[BoxData[
  CellChangeTimes->{{3.734430371004629*^9, 3.734430439215871*^9}, {
   3.734430480877019*^9, 3.734430505498104*^9}, {3.734430538909234*^9, 
   3.734430539039234*^9}, {3.7344307115520473`*^9, 3.734430715643067*^9}, {
-  3.7344310341718407`*^9, 3.7344310353248434`*^9}}],
+  3.7344310341718407`*^9, 3.7344310353248434`*^9}, {3.7346825672518272`*^9, 
+  3.7346825711392345`*^9}}],
 
 Cell[BoxData[
  TagBox[
@@ -536,14 +437,14 @@ Cell[BoxData[
     1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
       Hold[N$$], 50, 200, 1}, {
       Hold[$CellContext`e0$$], 0.2}, {
-      Hold[$CellContext`Nc0$$], 2}}, Typeset`size$$ = {360., {115., 119.}}, 
+      Hold[$CellContext`Nc0$$], 2}}, Typeset`size$$ = {360., {114., 118.}}, 
     Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = True, 
-    N$36737$$ = 0}, 
+    N$23452$$ = 0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, 
       "Variables" :> {$CellContext`e0$$ = 0.2, N$$ = 50, $CellContext`Nc0$$ = 
         2}, "ControllerVariables" :> {
-        Hold[N$$, N$36737$$, 0]}, 
+        Hold[N$$, N$23452$$, 0]}, 
       "OtherVariables" :> {
        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
@@ -552,10 +453,10 @@ Cell[BoxData[
         $CellContext`\[Epsilon][
         2 $CellContext`M/((N$$ - 1) (N$$ - 2)), $CellContext`e0$$, 
          2 $CellContext`Nc0$$/((N$$ - 1) (N$$ - 2))], {$CellContext`M, 2, 
-         30}], "Specifications" :> {{
+         60}], "Specifications" :> {{
         N$$, 50, 200, 1}, {$CellContext`e0$$, 0.2}, {$CellContext`Nc0$$, 2}}, 
       "Options" :> {}, "DefaultOptions" :> {}],
-     ImageSizeCache->{411., {181., 188.}},
+     ImageSizeCache->{411., {180., 187.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -567,7 +468,8 @@ Cell[BoxData[
   Manipulate`InterpretManipulate[1]]], "Output",
  CellChangeTimes->{{3.734430427885833*^9, 3.734430448200905*^9}, 
    3.7344305077181144`*^9, 3.7344305395892363`*^9, {3.734430712840053*^9, 
-   3.73443071613107*^9}, 3.7344310359738455`*^9}]
+   3.73443071613107*^9}, 3.7344310359738455`*^9, 3.734682511303874*^9, 
+   3.7346825719348354`*^9}]
 }, Open  ]]
 },
 WindowSize->{767, 873},
@@ -586,38 +488,29 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 736, 21, 55, "Input"],
-Cell[1297, 43, 367, 11, 48, "Input"],
-Cell[1667, 56, 394, 9, 31, "Input"],
+Cell[558, 20, 693, 18, 56, "Input"],
+Cell[1254, 40, 367, 11, 48, "Input"],
+Cell[1624, 53, 394, 9, 31, "Input"],
 Cell[CellGroupData[{
-Cell[2086, 69, 809, 23, 77, "Input"],
-Cell[2898, 94, 1783, 39, 398, "Output"],
-Cell[4684, 135, 447, 10, 40, "Message"],
-Cell[5134, 147, 477, 10, 21, "Message"],
-Cell[5614, 159, 447, 10, 40, "Message"],
-Cell[6064, 171, 477, 10, 21, "Message"],
-Cell[6544, 183, 445, 10, 40, "Message"],
-Cell[6992, 195, 528, 11, 21, "Message"],
-Cell[7523, 208, 477, 10, 21, "Message"],
-Cell[8003, 220, 532, 11, 21, "Message"]
+Cell[2043, 66, 1096, 27, 54, "Input"],
+Cell[3142, 95, 1881, 36, 328, "Output"]
 }, Open  ]],
-Cell[8550, 234, 94, 1, 31, "Input"],
+Cell[5038, 134, 94, 1, 31, "Input"],
 Cell[CellGroupData[{
-Cell[8669, 239, 1255, 34, 95, "Input"],
-Cell[9927, 275, 6126, 129, 238, "Output"]
+Cell[5157, 139, 1255, 34, 95, "Input"],
+Cell[6415, 175, 6126, 129, 238, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[16090, 409, 1160, 34, 88, "Input"],
-Cell[17253, 445, 1659, 28, 152, "Output"]
+Cell[12578, 309, 1160, 34, 88, "Input"],
+Cell[13741, 345, 1659, 28, 152, "Output"]
 }, Open  ]],
-Cell[18927, 476, 500, 15, 55, "Input"],
+Cell[15415, 376, 500, 15, 55, "Input"],
 Cell[CellGroupData[{
-Cell[19452, 495, 1159, 32, 77, "Input"],
-Cell[20614, 529, 1963, 40, 419, "Output"]
+Cell[15940, 395, 1212, 33, 77, "Input"],
+Cell[17155, 430, 2013, 41, 417, "Output"]
 }, Open  ]]
 }
 ]
 *)
 
 (* End of internal cache information *)
-

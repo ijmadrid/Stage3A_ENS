@@ -5,6 +5,7 @@
 \usepackage{amsfonts}
 \usepackage{graphicx}
 \usepackage[colorinlistoftodos]{todonotes}
+\usepackage{cite}
 
 \title{Progress report: \\
 	Repair probabilities for the RCL polymer with two DSBs}
@@ -15,7 +16,7 @@
 \maketitle
 
 \section{Motivation}
-Double Strand Breaks (DSB) are a highly dangerous type of DNA damage that occur when both strands of duplex DNA are broken. 
+Double Strand Breaks (DSB) are a highly cytotoxic type of DNA damage that occur when both strands of duplex DNA break, for instance, after ionizing radiation and cancer chemotherapy. Two principal pathways of DSB repair have evolved: non-homologous end joining (NHEJ) and homologous recombination (HR). NHEJ is the major pathway of DSB repair and consists on the synapsis and ligation of the broken ends. Here, we aim to simulate and study the repair and misrepair rates after two DSBs, via the NHEJ pathway. Polymer models (and in particular, a generalization of the Gaussian chain, the Randomly Cross-Linked (RCL) Polymer) will be used as a model of the chromatin. Stochastic simulations of molecular dynamics will be performed with the goal of characterize the factors that contribute to interfere or improve the repair probability, namely: the distance between the DSBs, the degree of folding of the polymer (simulated by the number of cross-links connecting non-neighbor monomers) and the dispersion effect of the DNA repair machinery (simulated by exclusion forces and the local removal of cross-links in the damage foci).
 
 \section{Methods}
  
@@ -83,19 +84,19 @@ In the following, we implement the Euler's scheme of Eq. \ref{eqn:langevin}, set
  In Eq. \ref{eqn:stabilityCondition}, $\Delta r^\star$ stands for the smallest spatial scale used (it will normally be the monomers encounter distance as it is defined later on) and $\tau$ is a confidence factor that will be set at $\tau = 0.2$ in the simulations.
  
  \subsection{Simulation of the induction of Double Strand Breaks (DSBs)}
- In particular, we are interested on the probability of repair after two DSBs. One DSB will be randomly induced in neighbor monomers $A_1$ and $A_2 = A_1 + 1$ (DSB "A"), where $A_1 \sim \mathcal{U}[1,N-g-2]$. the other DSB will be induced in neighbor monomers $B_1$ and $B_2$ (DSB "B"). A deterministic inter-break genomic distance $g$ will be imposed between A and B, defined as the shortest distance between the DSBs along the backbone, i.e. $g = B1 - A2$.
+ In particular, we are interested on the probability of repair after two DSBs. One DSB (DSB \guillemotleft A\guillemotright) will be randomly induced between neighbor monomers $A_1$ and $A_2 = A_1 + 1$, where $A_1 \sim \mathcal{U}[1,N-g-2]$. the other DSB (DSB \guillemotleft B\guillemotright) will be induced in neighbor monomers $B_1$ and $B_2$. A deterministic inter-break genomic distance $g$ will be imposed between A and B, defined as the shortest distance between the DSBs along the backbone, i.e. $g = B1 - A2$.
  
 \subsection{Definition of encounter times and probabilities}
- So, if we define the first encounter time as
+ We define the first encounter time between monomers $m$ and $n$ as
 $$
 T_{m,n}^{\epsilon} := \inf \{ t \geq 0 : ||(R_m)_t - (R_n)_t|| < \epsilon  \}
 $$
-where $R_m$ and $R_n$ are the positions of monomers $m$ and $n$, and $\epsilon$ is the encounter distance, then the repair probability is
+where $\epsilon$ is the encounter distance. Then, the repair probability is defined as
 $$
-\mathbb{P}(Repair) = \mathbb{P}(T_{A_1,A_2}^\epsilon \wedge T_{A_1,A_2}^\epsilon \leq T_{A_1,B_1}^\epsilon \wedge T_{A_1,B_2}^\epsilon \wedge T_{A_2,B_1}^\epsilon \wedge T_{A_2,B_2}^\epsilon )
+\mathbb{P}(Repair) = \mathbb{P}(\inf \{ T_{A_1,A_2}^\epsilon,  T_{B_1,B_2}^\epsilon \} \leq \inf \{ T_{A_1,B_1}^\epsilon , T_{A_1,B_2}^\epsilon , T_{A_2,B_1}^\epsilon , T_{A_2,B_2}^\epsilon \} )
 $$
 
-NB: By pure chance, the expected repair probability is $2/6 = 1/3$.
+We remark that when monomers are well mixed, the expected repair probability is $2/6 = 1/3$ (favorable encounters / total possible encounters).
 
 \begin{figure}[!h]
 \centering
@@ -112,6 +113,7 @@ NB: By pure chance, the expected repair probability is $2/6 = 1/3$.
 
 Since an important peak was observed at instant 0 in the first simulations, we decided to wait some time after the induction of double strand breaks (DSBs), before measuring if any pair of monomers have encountered. 
 Concerning the encounters events, if two or more pairs of monomers encounter at the same simulated instant, we toss a coin to choose uniformly over those pairs to be the first encounter.
+Since the FET distribution can be approximated by a single exponential \cite{amitai12}, an exponential function with parameters $a, \lambda$, $t \mapsto a \exp(- \lambda t)$ is fitted to the frequency histograms, aiming to compare the $\lambda$ fitted in each one of the experiments sets.
 
 \begin{figure}[h!]
 	\centering
@@ -392,5 +394,10 @@ Figures \ref{fig:proba_v_parasytes} and \ref{fig:proba_v_longrange_sizes} sugges
 	\item For the RCL polymer with subdomains : It has been reported that DSBs cluster. In particular, damaged active genes remain largely unrepaired and clustered to be repaired afterwards via homologous recombination in postreplicative cells\footnote{Aymard F. \textit{et al.} Genome-wide mapping of long-range contacts unveils clustering of DNA double-strand breaks at damaged active genes. \textbf{Nat Struct Mol Biol.} 2017 Apr;24(4):353-361}. It could be interesting to study if DSB clustering is a property inherent to the polymer dynamics, and if it is facilitated by exclude volume interactions and the local removal of cross-links in the damage foci.
 \end{itemize}
 
+\clearpage
+
+\begin{thebibliography} 
+	\bibitem{amitai12} Amitai A, Kupka I, Holcman D. \textbf{Computation of the mean first-encounter time between the ends of a polymer chain.}  Phys Rev Lett. 2012 Sep 7;109(10):108302.
+\end{thebibliography}
 
 \end{document}

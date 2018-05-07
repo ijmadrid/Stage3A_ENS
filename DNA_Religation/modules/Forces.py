@@ -6,7 +6,7 @@ Created on Fri Apr 13 10:29:51 2018
 """
 
 import numpy as np
-from scipy.spatial.distance import pdist, squareform
+#from scipy.spatial.distance import pdist, squareform
     
 def ExcludedVolume(polymer,cutoff,method='spring-like'):
     """
@@ -79,7 +79,7 @@ def RepairSphere(polymer, exclusionLoci, cutoff):
 #        localInteractionMatrix[i,monomer_i] = - np.sum(localInteractionMatrix[i]) - 1
         interactionMatrix[monomer_i] = localInteractionMatrix[i]
         interactionMatrix[:,monomer_i] = localInteractionMatrix[i]
-        interactionMatrix -= np.diag(interactionMatrix.sum(axis=0))
+        interactionMatrix += np.diag(interactionMatrix.sum(axis=0))
     
     return np.dot(interactionMatrix,polymer.get_r())    
 

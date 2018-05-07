@@ -44,16 +44,17 @@ polymerParams = dict(numMonomers = 100, # np.array([100,100]), # TODO (.., ..., 
 simulationParams = dict(# Physicial parameters
                         diffusionConstant = 0.008,
                         # Numerical parameters
-                        numRealisations   = 400, 
+                        numRealisations   = 200, 
                         dt                = 0.005,
                         dt_relax          = 0.01,
 #                        numSteps          = 500,
                         excludedVolumeCutOff = 0.1,
                         waitingSteps = 200,
-                        numMaxSteps = 8000,
-                        encounterDistance = 0.1,
-                        genomicDistance = 10,
-                        Nb = 2
+                        numMaxSteps = 9000,
+                        encounterDistance = 0.05,
+                        genomicDistance = 25,
+                        Nb = 2,
+                        Nc_inDamageFoci = 1
 #                        selectedSubDomain = 0
                         )
 
@@ -64,7 +65,7 @@ simulationParams = dict(# Physicial parameters
 #test_epsilons = [0.1]
 #
 #x_Nc = np.arange(25,45,5)
-x_Nc = np.arange(2,52,10)
+x_Nc = np.arange(5,40,5)
 #TADsizes = [20,50,100,200,300]
 #connectivityFraction = 0.002
 errorbars = True
@@ -72,10 +73,15 @@ errorbars = True
 ############################################################################
 ############################################################################
 
+
+def adaptiveEpsilon(xi, N, b):
+    y = 1 + (N*xi)/(2*(1 -xi))
+    return 2*np.sqrt(6 * b**2 / (N * 2*(1-xi) * np.sqrt(y**2-1)))
+
 def proba_vs_Nc_andVE(polymerParams,simulationParams,x_Nc,errorbars=False):
 
     date = strftime("%Y_%m_%d_%H_%M")
-    filename = date + 'proba_VE_vs_Nc' + '.csv'
+    filename = date + 'proba_VE_vs_Nc_NcinDF_adptEPSILONandSIGMA' + '.csv'
     
     with open('results/'+filename, 'w') as csvfile:
                 
@@ -89,14 +95,15 @@ def proba_vs_Nc_andVE(polymerParams,simulationParams,x_Nc,errorbars=False):
         first_time = True
         
         N = polymerParams['numMonomers']
-        Nc0 = x_Nc[0]
-        xi0 = 2*Nc0/((N-1)*(N-2))
-        eps0 = simulationParams['encounterDistance']
+#        Nc0 = x_Nc[0]
+#        xi0 = 2*Nc0/((N-1)*(N-2))
+#        eps0 = simulationParams['encounterDistance']
+#        sigma0 = simulationParams['excludedVolumeCutOff']
                 
         for i, VolumeExclusion in enumerate([True, False]):
             
             if VolumeExclusion:
-                labelkeep = 'Excluding volume with a cutoff of ' + str(simulationParams['excludedVolumeCutOff']) + ' μm'
+                labelkeep = r"Excluding volume ($\xi$-adaptive $\epsilon$ and $\sigma$)"
                 experimentName = "Encounter_withRepairSphere"
             else:
                 labelkeep = 'Without excluded volume'
@@ -107,16 +114,22 @@ def proba_vs_Nc_andVE(polymerParams,simulationParams,x_Nc,errorbars=False):
             probas = np.zeros(len(x_Nc))
             demiCI = np.zeros(len(x_Nc))
             for j, Nc in enumerate(x_Nc):    
-                print("Simulation for Nc =",Nc,"and",labelkeep)
+                print("Simulation for Nc =",Nc)
                 polymerParams['Nc'] = Nc
 
                 ### ADAPTIVE ENCOUNTER DISTANCE
                 xi = 2*Nc/((N-1)*(N-2))
-                scaleFactor = np.sqrt( (1-xi0)*np.sqrt(xi0) / ((1-xi)*np.sqrt(xi)) )
-                simulationParams['encounterDistance'] = eps0 * scaleFactor
+#                scaleFactor = np.sqrt( (1-xi0)*np.sqrt(xi0) / ((1-xi)*np.s1qrt(xi)) )
+                simulationParams['encounterDistance'] = adaptiveEpsilon(xi, N, polymerParams['b'])
+                
+                ### ADAPTIVE CUTOFF RADIUS
+                simulationParams['excludedVolume'] = 2 * adaptiveEpsilon(xi, N, polymerParams['b'])
                 
                 ### ADAPTIVE dt
                 simulationParams['dt'] = np.round((0.2*simulationParams['encounterDistance'])**2/(2*simulationParams['diffusionConstant']),decimals=4)-0.0001                
+                
+                print("ε = %s and σ = %s" % (simulationParams['encounterDistance'],simulationParams['excludedVolume']))
+                
                 p0 = RCLPolymer(**polymerParams)
                 results = {**polymerParams, **simulationParams}
                 mc = Experiment(p0, results, simulationParams,experimentName)

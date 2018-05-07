@@ -8,10 +8,11 @@ Created on Fri Mar 30 10:36:41 2018
 from .Graph import Graph
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib as mpl
+#import matplotlib as mpl
 from scipy.spatial.distance import pdist, squareform
 from itertools import combinations, product
 import copy
+
 
 class Polymer(Graph):
     
@@ -305,7 +306,43 @@ class RCLPolymer(Polymer):
             selected = possible_pairs[np.random.choice(len(possible_pairs),size=Nc,replace=False)].T
             
             self.connect(selected)
-        
+
+
+    def imposeDSBconnections(self,Nc,breakLoci):
+        """
+        Imposes connecitivy in the Damage Foci (monomers in the DSBs)
+        NB : breakLoci = [A1, B1]
+        """
+        if Nc == 0:
+            return
+        else:
+            breakLoci = np.vstack((breakLoci,breakLoci+1)).T.flatten() # [A1, B1] -> [A1, A2, B1, B2]
+            possible_pairs = [[a,b] for a,b in product(breakLoci, np.arange(0,self.numMonomers))]
+
+            k0 = 0
+            k1 = 4
+            
+            if breakLoci[0] == 0:
+                for _ in range(2):
+                    possible_pairs.pop(0)
+                k0 += 1
+            
+            if breakLoci[-1] == 99:
+                for _ in range(2):
+                    possible_pairs.pop(-1)
+                k1 -= 1
+                
+            for i in range(k0,k1):
+                for _ in range(3):
+                    possible_pairs.pop(self.numMonomers*i + breakLoci[i] - 1 - 3*i + k0)
+                
+            for _ in range(2):
+                possible_pairs.pop(breakLoci[2]-3 + k0)
+            for _ in range(2):
+                possible_pairs.pop(self.numMonomers + breakLoci[2] - 2*3 + k0 - 2)
+            selected = np.array(possible_pairs)[np.random.choice(len(possible_pairs),size=Nc,replace=False)].T
+            self.connect(selected)                
+            self.Nc += Nc
         
     
     def randomCuts(self,g,Nb):
