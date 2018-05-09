@@ -415,7 +415,7 @@ class RCLPolymer(Polymer):
         been cleaved
         """
         removedNum = 0
-        for m in self.freeMonomers[::2]:
+        for m in self.freeMonomers: #[::2]:
             # Remove all CL from and to the concerned monomers
             self.LaplacianMatrix[m][:m-1] = 0 
             self.LaplacianMatrix[m][m+2:] = 0

@@ -209,6 +209,8 @@ class Experiment():
         while(not(self.polymer.isSplittable(breakLoci))):
             # if not, make new connections (#TODO: try an heuristic maybe?)
             self.polymer.reset()
+            if(self.Nc_inDamageFoci > 0):
+                self.polymer.imposeDSBconnections(self.Nc_inDamageFoci,breakLoci)
         
         # Once the polymer is splittable:
         # Burn in until relaxation time
@@ -597,8 +599,10 @@ class Experiment():
         
         bin_heights, bin_borders = np.histogram(x, bins='auto', normed='True')
         bin_centers = bin_borders[:-1] + np.diff(bin_borders) / 2
-        popt, _ = curve_fit(exponential, bin_centers, bin_heights, p0=[1/np.mean(x),1/np.mean(x)])
-        
+        try:
+            popt, _ = curve_fit(exponential, bin_centers, bin_heights, p0=[1/np.mean(x),1/np.mean(x)])
+        except:
+            popt = (-1, -1)
         return popt
     
 #        x_interval_for_fit = np.linspace(bin_borders[0], bin_borders[-1], 10000)

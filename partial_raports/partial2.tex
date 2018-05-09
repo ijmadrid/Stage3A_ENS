@@ -15,13 +15,17 @@
 
 \maketitle
 
+\tableofcontents
+
+\clearpage
+
 \section{Motivation}
-Double Strand Breaks (DSB) are a highly cytotoxic type of DNA damage that occur when both strands of duplex DNA break, for instance, after ionizing radiation and cancer chemotherapy. Two principal pathways of DSB repair have evolved: non-homologous end joining (NHEJ) and homologous recombination (HR). NHEJ is the major pathway of DSB repair and consists on the synapsis and ligation of the broken ends. Here, we aim to simulate and study the repair and misrepair rates after two DSBs, via the NHEJ pathway. Polymer models (and in particular, a generalization of the Gaussian chain, the Randomly Cross-Linked (RCL) Polymer) will be used as a model of the chromatin. Stochastic simulations of molecular dynamics will be performed with the goal of characterize the factors that contribute to interfere or improve the repair probability, namely: the distance between the DSBs, the degree of folding of the polymer (simulated by the number of cross-links connecting non-neighbor monomers) and the dispersion effect of the DNA repair machinery (simulated by exclusion forces and the local removal of cross-links in the damage foci).
+Double Strand Breaks (DSB) are a highly cytotoxic type of DNA damage that occur when both strands of duplex DNA break, for instance, after ionizing radiation and cancer chemotherapy. Two principal pathways of DSB repair have evolved: non-homologous end joining (NHEJ) and homologous recombination (HR). NHEJ is the major pathway of DSB repair and consists on the synapsis and ligation of the broken ends. Here, we aim to simulate and study the repair and misrepair rates after two DSBs, via the NHEJ pathway. Polymer models (and in particular, a generalization of the Gaussian chain, the Randomly Cross-Linked (RCL) Polymer) will be used as a model of the chromatin. Stochastic simulations of molecular dynamics will be performed with the goal of characterize the factors that contribute to interfere or improve the repair probability, namely: the distance between the DSBs, the degree of folding of the polymer (simulated by the number of cross-links connecting non-neighbor monomers) and the dispersion effect induced by the DNA repair machinery (simulated by exclusion forces and the local removal of cross-links in the damage foci).
 
 \section{Methods}
  
  \subsection{The RCL polymer}
- To simulate the chromatin we consider a model of randomly cross-linked (RCL) polymers. A RCL polymer is formed by a chain of $N$ monomers connected by harmonic springs of constant $\kappa$ as backbone, and $N_c$ extra cross-links (CLs) which connect non-neighbor monomers with springs of constant $\kappa'$. CLs are added uniformly over all $\frac{(N-1)(N-2)}{2}$ combinations of non-neighbor monomer pairs. We also define the RCL polymer connectivity $\xi$ as the fraction of added cross-links with respect to the total number of possible pairings, i.e. $\xi = \frac{2N_c}{(N-1)(N-2)}$. 
+ To simulate the chromatin we consider the model of a randomly cross-linked (RCL) polymer. An RCL polymer is formed by a chain of $N$ monomers connected by harmonic springs of constant $\kappa$ as backbone, and $N_c$ extra cross-links (CLs) which connect non-neighbor monomers with springs of constant $\kappa'$. CLs are added uniformly over all $\frac{(N-1)(N-2)}{2}$ combinations of non-neighbor monomer pairs. We also define the RCL polymer connectivity $\xi$ as the fraction of added cross-links with respect to the total number of possible pairings, i.e. $\xi = \frac{2N_c}{(N-1)(N-2)}$. 
  
  We characterize the RCL polymer by two $N \times N$ admittance (Laplacian) matrices: the Rouse matrix $M$ which describes the backbone, and $B$ which describes the added connectors. A Laplacian matrix results from the difference between the diagonal degree matrix $D$ that accounts for the total number of connections each monomer has, and the adjacency matrix $A$ that accounts for the connectivity ($A_{m,n} = 1$ if monomers $m$ and $n$ are connected, $0$ otherwise). So
  \begin{equation}
@@ -41,7 +45,7 @@ Double Strand Breaks (DSB) are a highly cytotoxic type of DNA damage that occur 
   \end{cases}
   \label{eqn:Bmatrix}
   \end{equation}
-  
+
 %  So $B$ is constructed stochastically as
 %    \begin{equation}
 %    B_{m,n} =  \begin{cases}
@@ -53,19 +57,25 @@ Double Strand Breaks (DSB) are a highly cytotoxic type of DNA damage that occur 
 %    \label{eqn:Bmatrix_construction}
 %    \end{equation}
 
-The model simulated is described in figure \ref{fig:model}.
+An schematic illustration of an RCL polymer is described in Fig. \ref{fig:model}-A along with its respective Laplacian matrices (Fig.\ref{fig:model}-B). 
 
- \subsection{Langevin dynamics of RCL polymers}
-  We supposed the RCL polymer subdued to Langevin dynamics, i.e., if monomer positions of the polymer in time are represented by $(R_t)_{t\geq0} = (R_1, ..., R_N)_{t\geq0}$ with each $R_i \in \mathbb{R}^3, i = 1,...,N$, the dynamics are described by the equation:
+ \subsection{Langevin dynamics of the RCL polymer}
+  We supposed the RCL polymer subdued to Langevin dynamics, i.e., if monomer positions of the polymer in time are represented by $(R_t)_{t\geq0} = (R_1, ..., R_N)_{t\geq0}$ with each $R_i \in \mathbb{R}^3, i = 1,...,N$, the dynamics are described by Eq. \eqref{eqn:general_langevin}:
  
- $$ dR_t = -\frac{1}{\zeta} \nabla \phi(R_t) dt + \sqrt{2D} dW_t $$
+ \begin{equation}
+ dR_t = -\frac{1}{\zeta} \nabla \phi(R_t) dt + \sqrt{2D} dW_t
+ \label{eqn:general_langevin}
+ \end{equation}
  
  where $\zeta$ is the friction coefficient, $\phi$ is an harmonic potential, $D$ is the diffusion coefficient and $(W_t)_{t \geq 0}$ is a $N \times 3$-dimensional Brownian motion. 
  
  The harmonic potential of a RCL polymer is given by the classical Rouse potential and by the potential induced by the random cross-links:
  
- $$
- \phi(R) = \frac{\kappa}{2} \sum_{n = 1}^{N-1} ||R_{n+1} - R_{n}||^2 + \frac{\kappa'}{2} \sum_{i,j \in \mathcal{R}} ||R_{i} - R_{j}||^2 =\frac{\kappa}{2} \text{tr}(R^TMR) + \frac{\kappa'}{2} \text{tr}(R^TBR) $$
+ \begin{align}
+ \phi(R) &= \frac{\kappa}{2} \sum_{n = 1}^{N-1} ||R_{n+1} - R_{n}||^2 + \frac{\kappa'}{2} \sum_{i,j \in \mathcal{R}} ||R_{i} - R_{j}||^2 \nonumber \\
+ &=\frac{\kappa}{2} \text{tr}(R^TMR) + \frac{\kappa'}{2} \text{tr}(R^TBR) 
+ \label{eqn:potential}
+ \end{align}
 
  where $\kappa$ and $\kappa' $ are spring constants we will suppose equal,  $\mathcal{R}$ is the set of monomers which have been randomly connected, and $M$ and $B$ are the Laplacian matrices introduced in Eq. \ref{eqn:Mmatrix} and Eq. \ref{eqn:Bmatrix}. Since $\frac{\kappa}{\gamma} = \frac{3D}{b^2}$ where $b$ is the standard deviation of the bonds length, we'll consider the matrix equation:
  
@@ -77,20 +87,21 @@ The model simulated is described in figure \ref{fig:model}.
 In the following, we implement the Euler's scheme of Eq. \ref{eqn:langevin}, setting $D = 0.008 \ \mu^2$m/s and $b = 0.2 \ \mu$m. When it is important, the $\Delta t$ used in the discretization of Eq. \ref{eqn:langevin} will be specified. $\Delta t = 0.005 $ sec will be the usual value. Anyhow, to assure numerical stability, condition in Eq. \ref{eqn:stabilityCondition} must always be verified.
 
 \begin{equation}
-\sqrt{2D\Delta t} \leq \tau \Delta r ^\star
+\sqrt{2D\Delta t} \leq c \Delta r ^\star
 \label{eqn:stabilityCondition}
 \end{equation}
 
- In Eq. \ref{eqn:stabilityCondition}, $\Delta r^\star$ stands for the smallest spatial scale used (it will normally be the monomers encounter distance as it is defined later on) and $\tau$ is a confidence factor that will be set at $\tau = 0.2$ in the simulations.
+ In Eq. \ref{eqn:stabilityCondition}, $\Delta r^\star$ stands for the smallest spatial scale used (it will normally be the monomers encounter distance as it is defined later on) and $c$ is a confidence factor that will be set at $c = 0.2$ in the simulations.
  
- \subsection{Simulation of the induction of Double Strand Breaks (DSBs)}
- In particular, we are interested on the probability of repair after two DSBs. One DSB (DSB \guillemotleft A\guillemotright) will be randomly induced between neighbor monomers $A_1$ and $A_2 = A_1 + 1$, where $A_1 \sim \mathcal{U}[1,N-g-2]$. the other DSB (DSB \guillemotleft B\guillemotright) will be induced in neighbor monomers $B_1$ and $B_2$. A deterministic inter-break genomic distance $g$ will be imposed between A and B, defined as the shortest distance between the DSBs along the backbone, i.e. $g = B1 - A2$.
+ \subsection{Induction of Double Strand Breaks (DSBs)}
+ In particular, we are interested on the probability of repair after two DSBs. One DSB (DSB \guillemotleft A\guillemotright) will be randomly induced between neighbor monomers $A_1$ and $A_2 = A_1 + 1$, where $A_1 \sim \mathcal{U}[1,N-g-2]$. The other DSB (DSB \guillemotleft B\guillemotright) will be induced in neighbor monomers $B_1$ and $B_2$. A deterministic inter-break genomic distance $g$ will be imposed between A and B, defined as the shortest distance between the DSBs along the backbone, i.e. $g = B1 - A2$. An scheme of two DSBs is represented in Fig. \ref{fig:model}-C. 
  
 \subsection{Definition of encounter times and probabilities}
  We define the first encounter time between monomers $m$ and $n$ as
-$$
+\begin{equation}
 T_{m,n}^{\epsilon} := \inf \{ t \geq 0 : ||(R_m)_t - (R_n)_t|| < \epsilon  \}
-$$
+\label{eqn:encountertime}
+\end{equation}
 where $\epsilon$ is the encounter distance. Then, the repair probability is defined as
 $$
 \mathbb{P}(Repair) = \mathbb{P}(\inf \{ T_{A_1,A_2}^\epsilon,  T_{B_1,B_2}^\epsilon \} \leq \inf \{ T_{A_1,B_1}^\epsilon , T_{A_1,B_2}^\epsilon , T_{A_2,B_1}^\epsilon , T_{A_2,B_2}^\epsilon \} )
@@ -98,13 +109,70 @@ $$
 
 We remark that when monomers are well mixed, the expected repair probability is $2/6 = 1/3$ (favorable encounters / total possible encounters).
 
+\subsection{Simulation of chromatin decondensation around DSBs: Removal of CLs and Excluded Volume Interactions}
+It has been reported that the DNA repair machinery induces a relaxation of the chromatin around damage foci (DF) [Ref]. To simulate this dispersion two effects are considered independently: the removal of CLs in the damage foci to induce decompactation of the polymer around the breaks; and the addition of an exclusion potential around the damaged monomers, to simulate self-avoidance towards the cut ends. 
+
+In general, excluded volume forces are added to the polymer dynamics through a new harmonic potential $\phi_{ev}$ that is added to the potential $\phi$ defined in Eq. \ref{eqn:potential}:
+
+\begin{equation}
+\phi_{ev}(R) = - \frac{\kappa_{ev}}{2} \sum_{i,j \ : \ i \neq j} ||R_i - R_j ||^2 1_{||R_i - R_j || < \sigma}
+\end{equation}
+where $\sigma$ is a cutoff radius of exclusion and $1_{||R_i - R_j || < \sigma} = 1$ if $||R_i - R_j || < \sigma$ and $0$ otherwise.
+
+In our case, to simulate the dispersion of chromatin only around DSBs, we induce volume exclusion for the DF monomers only and take $\kappa_{ev} = \kappa$:
+
+\begin{equation}
+\phi_{local-ev}(R) = - \frac{\kappa_{ev}}{2} \sum_{i \in \text{DF}}\sum_{j \neq i} ||R_i - R_j ||^2 1_{||R_i - R_j || < \sigma}
+\end{equation}
+
 \begin{figure}[!h]
 \centering
-\includegraphics[width=\textwidth]{../drawings/modele.png}
-\caption{Model of an RCL polymer for chromatin repair simulations. Two random breaks are induced with a deterministic inter-break genomic distance between them. Random cross-links are built uniformly over all combinations of non-neighbor monomers. In the break moment, the cross-links in damage foci (e.g. the CL in monomer $B_2$) might be removed along with the broken bonds. Excluded volume interactions can also be added in the form of a repulsive harmonic potential in the disconnected monomers, simulating the reported chromatin expansion induced just after the DSBs. Finally, repair occurs when two separated neighbors meet at a distance inferior to an encounter distance $\varepsilon$.}
+\includegraphics[width=\textwidth]{../drawings/model4.png}
+\caption{Model of an RCL polymer for chromatin repair simulations. \textbf{A}: Example of the Rouse backbone with some cross-links. \textbf{B}: Laplacian matrices of the RCL polymer represented in \textbf{A}: the Rouse matrix ($M$) and the CLs matrix ($B$). \textbf{C}: Scheme of the induction of two DSBs $A$ and $B$ at a distance $g$. \textbf{D}: To simulate the effect of the sparsity induced by the repair machinery, excluded volume forces are added in the damage foci and the concerned CLs are removed.}
 \label{fig:model}
 \end{figure}
 
+Finally, considering that in spite of the exclusion induced by repair proteins, the whole repair machinery looks for affine ends to join them, we'll consider repair exclusion spheres that repel all monomers except the other cut ends. So, if any two cut ends approach they won't feel exclusion forces. This new exclusion potential is defined in Eq. \ref{eqn:repair_sphere}.
+
+\begin{equation}
+\phi_{\substack{repair \\ sphere}}(R) = - \frac{\kappa_{ev}}{2} \sum_{i \in \text{DF}}\sum_{j \notin \text{DF}} ||R_i - R_j ||^2 1_{||R_i - R_j || < \sigma}
+\label{eqn:repair_sphere}
+\end{equation}
+
+Thereby, volume exclusion potentials originate a new Laplacian $E$ as defined in Eq. \ref{eqn:Ematrix}, that will be added to the Laplacian matrices considered up to now (Eq. \ref{eqn:langevin}):
+
+\begin{equation}
+  E_{m,n} = \begin{cases}
+  -1 & \text{ if } m \in \text{DF , } n \notin \text{DF  and  }||R_m - R_n || < \sigma  \\
+  -1 & \text{ if } n \in \text{DF , } m \notin \text{DF  and  }||R_m - R_n || < \sigma  \\
+  - \sum_{i=1,\ i\neq n}^{N} E_{m,i}  & \text{ if }m=n \\
+  0  & \text{ otherwise }
+  \end{cases}
+  \label{eqn:Ematrix}
+\end{equation}
+
+So when exclusion forces are considered the simulated system will subdue the dynamic described by Eq. \ref{eqn:langevin_VE}.
+
+ \begin{equation}
+ dR_t = -\frac{3D}{b^2} (M + B + E) R_t dt + \sqrt{2D} dW_t
+ \label{eqn:langevin_VE}
+ \end{equation}
+
+We call the total $M+B+E$ the total Laplacian matrix of the system. The two decondensation effects are summarized in Fig. \ref{fig:model}-D.
+
+\subsection{Pipeline of the simulations}
+\begin{enumerate}
+	\item \textbf{Initialization of the polymer backbone} from a random walk in $\mathbb{R}^3$ with each step is i.i.d. $\mathcal{N}(0,b^2)$.
+	\item \textbf{Predefinition of DSBs $A$ and $B$}. We take $A_1 \sim \mathcal{U}[1,N-g-2]$ and then $A_2 = A_1 + 1$, $B_1 = A_2 + g$, $B_2 = B_2 + 1$.
+	\item \textbf{Induction of random cross-links}. $N_c$ cross-links are induced between non-neighbor monomers such that after breaks $A$ and $B$ the polymer rests fully connected. In practice, we make random connections until obtaining one which verifies the full connectivity condition.
+	\item \textbf{Relaxation}. Once the polymer is validly cross-linked, the polymer is subdued to Langevin dynamics (discretized as an Euler's scheme for Eq. \ref{eqn:langevin}) until relaxation time $\tau$, which is computed analytically [Ref] as:
+	$$
+	\tau = \frac{...}{...}
+	$$
+	\item \textbf{DSBs Induction and actualization of the total Laplacian matrix}. When the polymer reaches relaxation time, the two cuts are induced between the predefined monomers $A_1$, $A_2$ and $B_1$, $B_2$. Removed bonds are thus cleaned from the Laplacian matrix. Besides, if CLs are removed from the separated monomers and if Volume Exclusion is included, those effects are also added to the Laplacian as in Eq. \ref{eqn:langevin_VE}.
+	\item \textbf{Simulation until encounter}. Once the DSBs are considered into the Laplacian matrix, simulation of Eq. \ref{eqn:langevin} continues until an encounter, as defined in Eq. \ref{eqn:encountertime}, happens between any of the cut ends. If no encounters occur before a threshold time $T_{max}$ the simulation is discarded.
+	\item Statistical properties and the encounter event that occurred (repair or misrepair) are saved and a new polymer is initialized to perform the same simulation. 
+\end{enumerate}
 \clearpage
 
 \section{Results}
@@ -182,19 +250,7 @@ In effect, increasing the number of random connectors increases as well the comp
 
 \subsubsection{Effect of Excluded Volume}
 
-Excluded volume interactions to simulate self-avoidance are added to the polymer dynamics through a new harmonic potential that is added to the potential considered in the Langevin equation:
-
-$$
-\phi_{ev}(R) = - \frac{\kappa_{ev}}{2} \sum_{i,j \ : \ i \neq j} ||R_i - R_j ||^2 1_{||R_i - R_j || < \sigma}
-$$
-
-In practice, to simulate the dispersion of chromatin in the break region, we induce volume exclusion to the damage foci monomers only and take $\kappa_{ev} = \kappa$:
-
-$$
-\phi_{local-ev}(R) = - \frac{\kappa_{ev}}{2} \sum_{i \in \text{Damage foci}}\sum_{j \neq i} ||R_i - R_j ||^2 1_{||R_i - R_j || < \sigma}
-$$
-
-$\sigma$ is a cutoff radius for the excluded volume interactions. Larger values of $\sigma$ make the waiting for looping times last longer (figure \ref{fig:mFET_v_Nc_EV}) and thus make the encounter events rarer, however they do not affect dramatically the repair probability overall (figure \ref{fig:vs_volumeexclusionradius}). 
+ Larger values of $\sigma$ make the waiting for looping times last longer (figure \ref{fig:mFET_v_Nc_EV}) and thus make the encounter events rarer, however they do not affect dramatically the repair probability overall (figure \ref{fig:vs_volumeexclusionradius}). 
 
 
 \begin{figure}[h]
@@ -396,8 +452,7 @@ Figures \ref{fig:proba_v_parasytes} and \ref{fig:proba_v_longrange_sizes} sugges
 
 \clearpage
 
-\begin{thebibliography} 
-	\bibitem{amitai12} Amitai A, Kupka I, Holcman D. \textbf{Computation of the mean first-encounter time between the ends of a polymer chain.}  Phys Rev Lett. 2012 Sep 7;109(10):108302.
+\begin{thebibliography}{10}
+	\bibitem{amitai12} Amitai A, Kupka I, Holcman D. Computation of the mean first-encounter time between the ends of a polymer chain. Phys Rev Lett. 2012 Sep 7;109(10):108302.
 \end{thebibliography}
-
 \end{document}
