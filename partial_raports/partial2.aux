@@ -10,74 +10,80 @@
 \newlabel{eqn:potential}{{4}{3}}
 \newlabel{eqn:langevin}{{5}{3}}
 \newlabel{eqn:stabilityCondition}{{6}{3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Induction of Double Strand Breaks (DSBs)}{4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Definition of encounter times and probabilities}{4}}
-\newlabel{eqn:encountertime}{{7}{4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Simulation of chromatin decondensation around DSBs: Removal of CLs and Excluded Volume Interactions}{4}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Model of an RCL polymer for chromatin repair simulations. \textbf  {A}: Example of the Rouse backbone with some cross-links. \textbf  {B}: Laplacian matrices of the RCL polymer represented in \textbf  {A}: the Rouse matrix ($M$) and the CLs matrix ($B$). \textbf  {C}: Scheme of the induction of two DSBs $A$ and $B$ at a distance $g$. \textbf  {D}: To simulate the effect of the sparsity induced by the repair machinery, excluded volume forces are added in the damage foci and the concerned CLs are removed.}}{5}}
-\newlabel{fig:model}{{1}{5}}
-\newlabel{eqn:repair_sphere}{{10}{5}}
-\newlabel{eqn:Ematrix}{{11}{6}}
-\newlabel{eqn:langevin_VE}{{12}{6}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.6}Pipeline of the simulations}{6}}
+\citation{pre2017}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Useful statistical properties of the RCL polymer}{4}}
+\newlabel{eqn:mrg}{{7}{4}}
+\newlabel{eqn:msrg_xi}{{8}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Induction of Double Strand Breaks (DSBs)}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Definition of encounter times and probabilities}{4}}
+\newlabel{eqn:encountertime}{{9}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.6}Simulation of chromatin decondensation around DSBs: Removal of CLs and Excluded Volume Interactions}{5}}
+\newlabel{eqn:repair_sphere}{{12}{5}}
+\newlabel{eqn:Ematrix}{{13}{5}}
+\newlabel{eqn:langevin_VE}{{14}{5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Model of an RCL polymer for chromatin repair simulations. \textbf  {A}: Example of the Rouse backbone with some cross-links. \textbf  {B}: Laplacian matrices of the RCL polymer represented in \textbf  {A}: the Rouse matrix ($M$) and the CLs matrix ($B$). \textbf  {C}: Scheme of the induction of two DSBs $A$ and $B$ at a distance $g$. \textbf  {D}: To simulate the effect of the sparsity induced by the repair machinery, excluded volume forces are added in the damage foci and the concerned CLs are removed.}}{6}}
+\newlabel{fig:model}{{1}{6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.7}Scaling distances under condensation: $\xi $-adaptive encounter distances and exclusion radii}{6}}
+\newlabel{eqn:adaptive_eps}{{15}{7}}
+\newlabel{eqn:adaptive_sigma}{{16}{7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.8}Pipeline of the simulations}{7}}
 \citation{amitai12}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Results}{7}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}First Encounter Time (FET) distribution}{7}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Distribution of the first encounter time keeping and removing the cross-links in the cleaved monomers. An exponential distribution has been fitted to each histogram. The results corresponds to a polymer of 100 monomers, 5 random cross-links, with two DSBs at a genomic distance of 10 and a waiting after-break time of 25 seconds. The events which take longer than 60 seconds are ignored.}}{7}}
-\newlabel{fig:hists}{{2}{7}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Distribution of the first encounter time keeping the CLs in the damage foci, and distribution of the repair and misrepair events (1000 realisations).}}{8}}
-\newlabel{fig:hists2}{{3}{8}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Repair probability}{8}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Effect of the genomic distance between two DSBs}{8}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.2}Effect of the number of cross-links}{8}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Repair probability against the genomic distance between the two DSBs. Polymer of 100 monomers with 15 random cross-links. Encounter distance of 0.1 $\mu $m (and b = 0.2 $\mu $m).}}{9}}
-\newlabel{fig:proba_v_g_1}{{4}{9}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.3}Effect of Excluded Volume}{9}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Repair probability against the genomic distance between the two DSBs. Polymer of 100 monomers with 10 random cross-links. Encounter distance of 0.1 $\mu $m (and b = 0.2 $\mu $m).}}{10}}
-\newlabel{fig:proba_v_g_2}{{5}{10}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Polymer of 100 monomers. Repair probability against the number of random cross-links when removing the random CLs in damage foci.}}{10}}
-\newlabel{fig:proba_v_cl}{{6}{10}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Polymer of 100 monomers. Mean radius of gyration in function of the number of cross-links.}}{11}}
-\newlabel{fig:mrg_v_nc}{{7}{11}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Mean first encounter times in function of the number of cross-links, with and without a radius of 0.1 $\mu $m of excluded volume in the damage zone.}}{11}}
-\newlabel{fig:mFET_v_Nc_EV}{{8}{11}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Probability and 95\% confidence interval of repair, in function of the cutoff radius of volume exclusion.}}{12}}
-\newlabel{fig:vs_volumeexclusionradius}{{9}{12}}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Distribution of the first encounter times and the mean square radius of gyration in repair and misrepair events considering local excluded volume interactions.}}{13}}
-\newlabel{fig:MSRGandFET_byEvent}{{10}{13}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Probability and 95\% confidence interval of repair, in function of interbreak genomic distance for exclusion cutoffs $b/2$ and $b$ ($b = 0.1 \mu $m).}}{13}}
-\newlabel{fig:pr_v_g_cutoffs}{{11}{13}}
-\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Probability of repair in function of the genomic separation between the breaks.}}{14}}
-\newlabel{fig:proba_vs_g_exclusion}{{12}{14}}
-\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Probability of repair in function of the number of random cross-links, for two breaks separated by 4 monomers (g=5).}}{14}}
-\newlabel{fig:proba_vs_Nc_exclusion}{{13}{14}}
-\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Probability of repair in function of the genomic separation between the breaks. Even for small genomic distances and high connectivity (20 random cross-links) the local volume exclusion seems to interfere with the correct repair, rather than helping it.}}{15}}
-\newlabel{fig:proba_vs_g_03exclusion}{{14}{15}}
-\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Probability of repair in function of the total number of cross-links, with an inter-break genomic distance $g = 4$. }}{15}}
-\newlabel{fig:proba_vs_Nc_03exclusion}{{15}{15}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.4}Effect of volume exclusion with more restrictive encounter distances}{16}}
-\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Track of the distances between the ends of three DSBs just before the breaks are induced at relaxation time. The ends of the same break tend to be nearer in comparison to the other distances. }}{16}}
-\newlabel{fig:distances3breaks}{{16}{16}}
-\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Encounter results with and without volume exclusion for a two DSBs at a genomic distance of 4 and considering 20 random cross-links. \textbf  {a}. Experiment set. \textbf  {a}. Encounter events distribution. The most frequent mismatch corresponds to the looping of the central fragment of the broken polymer. \textbf  {c}. First Encounter Time distribution of all the events. \textbf  {d}. Same results considering volume exclusion with a cutoff radius of 0.1 $\mu $m.}}{17}}
-\newlabel{fig:noExclusion_002epsilon}{{17}{17}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Repair probability in different domains}{18}}
-\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces Model of the RCL polymer replied in two connected subdomains.}}{18}}
-\newlabel{fig:TADSmodel}{{18}{18}}
-\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces One DSB in each subdomain (two subdomains of size 50). Repair probability vs. inter-TAD separation distance.}}{19}}
-\newlabel{fig:proba_v_interTADdistance}{{19}{19}}
-\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces Probability and 95\% confidence interval of repair, in function of the interbreak distance for two DSBs induced in one sub-domain of size 100 on a polymer formed by two sub-domains (100 and 50 monomers). The subdomain had 5 RCLs.}}{20}}
-\newlabel{fig:2domain}{{20}{20}}
-\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces Probability and 95\% confidence interval of repair, in function of the interbreak distance for two DSBs induced in one sub-domain of size 100 on a polymer formed by two sub-domains (100 and 50 monomers). The subdomain had 10 RCLs.}}{20}}
-\newlabel{fig:2domain_10rcls}{{21}{20}}
-\@writefile{lof}{\contentsline {figure}{\numberline {22}{\ignorespaces Probability of repair in function of the number of long-range connectors. Two DSBs were induced at a genomic distance of 5 in the first sub-domain of a polymer conformed by 2 sub-domains of 100 monomers with 10 inner cross-links.}}{21}}
-\newlabel{fig:proba_v_longrange}{{22}{21}}
-\@writefile{lof}{\contentsline {figure}{\numberline {23}{\ignorespaces Repair probability of a 100-monomers sub-domain with two DSBs, in function of the genomic inter-break distance between the DSBs. Juxtaposed to the broken sub-domain, there is another sub-domain of size 50, 100 and 200 without breaks. The first sub-domain has 10 inner cross-links and the juxtaposed one has a connectivity of 0.2\%. There are no long-range connectors between the two sub-domains.}}{22}}
-\newlabel{fig:proba_v_parasytes}{{23}{22}}
-\@writefile{lof}{\contentsline {figure}{\numberline {24}{\ignorespaces Probability of repair in function of the number of long-range connectors. Two DSBs were induced at a genomic distance of 5 in the first sub-domain of a polymer conformed by 2 sub-domains of 100 monomers with 3 and 45 inner cross-links.}}{22}}
-\newlabel{fig:proba_v_longrange_3and45}{{24}{22}}
-\@writefile{lof}{\contentsline {figure}{\numberline {25}{\ignorespaces Probability of repair for 0,2,4 and 6 long-range connectors, and different sizes for the juxtaposed unbroken sub-domain. Two DSBs were induced at a genomic distance of 30 in the first sub-domain (100 monomers). The juxtaposed sub-domain has a constant connectivity fraction (0.2\%).}}{23}}
-\newlabel{fig:proba_v_longrange_sizes}{{25}{23}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.1}TODO}{24}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Partial conclusions}{25}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Perspectives}{25}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Results}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}First Encounter Time (FET) distribution}{9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Distribution of the first encounter time keeping and removing the cross-links in the cleaved monomers. An exponential function has been fitted to each histogram. $N = 100$ monomers, $N_c = 5$, $g = 10$, $T_{wait} = 25 sec$, and $T_{max} = 60 sec$.}}{9}}
+\newlabel{fig:hists}{{2}{9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Distribution of the first encounter times and events, keeping and removing the cross-links when imposing CLs in the DF. Both results corresponds to $I = 500$ simulations, with $N = 100$, $N_c = 12$, $N_d = 2$, $g = 10$, $\varepsilon = 0.05 \mu $m, $T_{max} = 45$ sec, $T_{wait} = 2.5$ sec and $\sigma = 0$ (no volume exclusion). \textbf  {A}: Schematic representation of the experimental set and possible encounters. \textbf  {B}: Results keeping CLs in DF. \textbf  {1.} Histogram of relative frequencies and fitted exponential function, with and estimated rate of 0.096 and a mean FET of $12.600 \pm 1.032$ sec. \textbf  {2.} Encounter events distribution. \textbf  {C}: Results removing CLs in DF. \textbf  {1.} Histogram of relative frequencies and fitted exponential function, with and estimated rate of 0.077 and a mean FET of $14.171 \pm 1.117$ sec. \textbf  {2.} Encounter events distribution.}}{10}}
+\newlabel{fig:hists_CLinDF}{{3}{10}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Changes on the repair probability conditionally to $g$, $N_c$ and decondensation}{11}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Effect of $g$ on the repair probability}{11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Repair probability as function of the genomic distance $g$ between the two DSBs. $N = 100$, $N_c = 15$, $\varepsilon = 0.1 \mu $m and $N_d = 0$ (no CLs imposed in DF).}}{11}}
+\newlabel{fig:proba_v_g_1}{{4}{11}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.2}Effect of $N_c$ on the repair probability}{11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Repair probability as a function of $N_c$ for $N=100$, $\varepsilon = 0.1 \mu $m and $N_d$ = 0.}}{12}}
+\newlabel{fig:proba_v_cl}{{5}{12}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.3}Effect of volume exclusion on the repair probability}{12}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Polymer of 100 monomers. Mean radius of gyration in function of the number of cross-links.}}{13}}
+\newlabel{fig:mrg_v_nc}{{6}{13}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Mean first encounter times in function of the number of cross-links, with and without a radius of 0.1 $\mu $m of excluded volume in the damage zone.}}{13}}
+\newlabel{fig:mFET_v_Nc_EV}{{7}{13}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Probability and 95\% confidence interval of repair, in function of the cutoff radius of volume exclusion.}}{14}}
+\newlabel{fig:vs_volumeexclusionradius}{{8}{14}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Distribution of the first encounter times and the mean square radius of gyration in repair and misrepair events considering local excluded volume interactions.}}{15}}
+\newlabel{fig:MSRGandFET_byEvent}{{9}{15}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Probability and 95\% confidence interval of repair, in function of interbreak genomic distance for exclusion cutoffs $b/2$ and $b$ ($b = 0.1 \mu $m).}}{15}}
+\newlabel{fig:pr_v_g_cutoffs}{{10}{15}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Probability of repair in function of the genomic separation between the breaks.}}{16}}
+\newlabel{fig:proba_vs_g_exclusion}{{11}{16}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Probability of repair in function of the number of random cross-links, for two breaks separated by 4 monomers (g=5).}}{16}}
+\newlabel{fig:proba_vs_Nc_exclusion}{{12}{16}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Probability of repair in function of the genomic separation between the breaks. Even for small genomic distances and high connectivity (20 random cross-links) the local volume exclusion seems to interfere with the correct repair, rather than helping it.}}{17}}
+\newlabel{fig:proba_vs_g_03exclusion}{{13}{17}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Probability of repair in function of the total number of cross-links, with an inter-break genomic distance $g = 4$. }}{17}}
+\newlabel{fig:proba_vs_Nc_03exclusion}{{14}{17}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.4}Effect of volume exclusion with more restrictive encounter distances}{18}}
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Track of the distances between the ends of three DSBs just before the breaks are induced at relaxation time. The ends of the same break tend to be nearer in comparison to the other distances. }}{18}}
+\newlabel{fig:distances3breaks}{{15}{18}}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Encounter results with and without volume exclusion for a two DSBs at a genomic distance of 4 and considering 20 random cross-links. \textbf  {a}. Experiment set. \textbf  {a}. Encounter events distribution. The most frequent mismatch corresponds to the looping of the central fragment of the broken polymer. \textbf  {c}. First Encounter Time distribution of all the events. \textbf  {d}. Same results considering volume exclusion with a cutoff radius of 0.1 $\mu $m.}}{19}}
+\newlabel{fig:noExclusion_002epsilon}{{16}{19}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Repair probability in different domains}{20}}
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Model of the RCL polymer replied in two connected subdomains.}}{20}}
+\newlabel{fig:TADSmodel}{{17}{20}}
+\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces One DSB in each subdomain (two subdomains of size 50). Repair probability vs. inter-TAD separation distance.}}{21}}
+\newlabel{fig:proba_v_interTADdistance}{{18}{21}}
+\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Probability and 95\% confidence interval of repair, in function of the interbreak distance for two DSBs induced in one sub-domain of size 100 on a polymer formed by two sub-domains (100 and 50 monomers). The subdomain had 5 RCLs.}}{22}}
+\newlabel{fig:2domain}{{19}{22}}
+\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces Probability and 95\% confidence interval of repair, in function of the interbreak distance for two DSBs induced in one sub-domain of size 100 on a polymer formed by two sub-domains (100 and 50 monomers). The subdomain had 10 RCLs.}}{22}}
+\newlabel{fig:2domain_10rcls}{{20}{22}}
+\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces Probability of repair in function of the number of long-range connectors. Two DSBs were induced at a genomic distance of 5 in the first sub-domain of a polymer conformed by 2 sub-domains of 100 monomers with 10 inner cross-links.}}{23}}
+\newlabel{fig:proba_v_longrange}{{21}{23}}
+\@writefile{lof}{\contentsline {figure}{\numberline {22}{\ignorespaces Repair probability of a 100-monomers sub-domain with two DSBs, in function of the genomic inter-break distance between the DSBs. Juxtaposed to the broken sub-domain, there is another sub-domain of size 50, 100 and 200 without breaks. The first sub-domain has 10 inner cross-links and the juxtaposed one has a connectivity of 0.2\%. There are no long-range connectors between the two sub-domains.}}{24}}
+\newlabel{fig:proba_v_parasytes}{{22}{24}}
+\@writefile{lof}{\contentsline {figure}{\numberline {23}{\ignorespaces Probability of repair in function of the number of long-range connectors. Two DSBs were induced at a genomic distance of 5 in the first sub-domain of a polymer conformed by 2 sub-domains of 100 monomers with 3 and 45 inner cross-links.}}{24}}
+\newlabel{fig:proba_v_longrange_3and45}{{23}{24}}
+\@writefile{lof}{\contentsline {figure}{\numberline {24}{\ignorespaces Probability of repair for 0,2,4 and 6 long-range connectors, and different sizes for the juxtaposed unbroken sub-domain. Two DSBs were induced at a genomic distance of 30 in the first sub-domain (100 monomers). The juxtaposed sub-domain has a constant connectivity fraction (0.2\%).}}{25}}
+\newlabel{fig:proba_v_longrange_sizes}{{24}{25}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.1}TODO}{26}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Partial conclusions}{27}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Perspectives}{27}}
 \bibcite{amitai12}{1}
+\bibcite{pre2017}{2}

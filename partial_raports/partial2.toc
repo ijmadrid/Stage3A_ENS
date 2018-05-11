@@ -3,18 +3,20 @@
 \contentsline {section}{\numberline {2}Methods}{2}
 \contentsline {subsection}{\numberline {2.1}The RCL polymer}{2}
 \contentsline {subsection}{\numberline {2.2}Langevin dynamics of the RCL polymer}{3}
-\contentsline {subsection}{\numberline {2.3}Induction of Double Strand Breaks (DSBs)}{4}
-\contentsline {subsection}{\numberline {2.4}Definition of encounter times and probabilities}{4}
-\contentsline {subsection}{\numberline {2.5}Simulation of chromatin decondensation around DSBs: Removal of CLs and Excluded Volume Interactions}{4}
-\contentsline {subsection}{\numberline {2.6}Pipeline of the simulations}{6}
-\contentsline {section}{\numberline {3}Results}{7}
-\contentsline {subsection}{\numberline {3.1}First Encounter Time (FET) distribution}{7}
-\contentsline {subsection}{\numberline {3.2}Repair probability}{8}
-\contentsline {subsubsection}{\numberline {3.2.1}Effect of the genomic distance between two DSBs}{8}
-\contentsline {subsubsection}{\numberline {3.2.2}Effect of the number of cross-links}{8}
-\contentsline {subsubsection}{\numberline {3.2.3}Effect of Excluded Volume}{9}
-\contentsline {subsubsection}{\numberline {3.2.4}Effect of volume exclusion with more restrictive encounter distances}{16}
-\contentsline {subsection}{\numberline {3.3}Repair probability in different domains}{18}
-\contentsline {subsubsection}{\numberline {3.3.1}TODO}{24}
-\contentsline {section}{\numberline {4}Partial conclusions}{25}
-\contentsline {section}{\numberline {5}Perspectives}{25}
+\contentsline {subsection}{\numberline {2.3}Useful statistical properties of the RCL polymer}{4}
+\contentsline {subsection}{\numberline {2.4}Induction of Double Strand Breaks (DSBs)}{4}
+\contentsline {subsection}{\numberline {2.5}Definition of encounter times and probabilities}{4}
+\contentsline {subsection}{\numberline {2.6}Simulation of chromatin decondensation around DSBs: Removal of CLs and Excluded Volume Interactions}{5}
+\contentsline {subsection}{\numberline {2.7}Scaling distances under condensation: $\xi $-adaptive encounter distances and exclusion radii}{6}
+\contentsline {subsection}{\numberline {2.8}Pipeline of the simulations}{7}
+\contentsline {section}{\numberline {3}Results}{9}
+\contentsline {subsection}{\numberline {3.1}First Encounter Time (FET) distribution}{9}
+\contentsline {subsection}{\numberline {3.2}Changes on the repair probability conditionally to $g$, $N_c$ and decondensation}{11}
+\contentsline {subsubsection}{\numberline {3.2.1}Effect of $g$ on the repair probability}{11}
+\contentsline {subsubsection}{\numberline {3.2.2}Effect of $N_c$ on the repair probability}{11}
+\contentsline {subsubsection}{\numberline {3.2.3}Effect of volume exclusion on the repair probability}{12}
+\contentsline {subsubsection}{\numberline {3.2.4}Effect of volume exclusion with more restrictive encounter distances}{18}
+\contentsline {subsection}{\numberline {3.3}Repair probability in different domains}{20}
+\contentsline {subsubsection}{\numberline {3.3.1}TODO}{26}
+\contentsline {section}{\numberline {4}Partial conclusions}{27}
+\contentsline {section}{\numberline {5}Perspectives}{27}

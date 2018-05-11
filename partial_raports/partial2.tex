@@ -58,9 +58,9 @@ Double Strand Breaks (DSB) are a highly cytotoxic type of DNA damage that occur 
 %    \end{equation}
 
 An schematic illustration of an RCL polymer is described in Fig. \ref{fig:model}-A along with its respective Laplacian matrices (Fig.\ref{fig:model}-B). 
-
+ 
  \subsection{Langevin dynamics of the RCL polymer}
-  We supposed the RCL polymer subdued to Langevin dynamics, i.e., if monomer positions of the polymer in time are represented by $(R_t)_{t\geq0} = (R_1, ..., R_N)_{t\geq0}$ with each $R_i \in \mathbb{R}^3, i = 1,...,N$, the dynamics are described by Eq. \eqref{eqn:general_langevin}:
+  We supposed the RCL polymer subdued to Langevin dynamics, i.e., if monomer positions of the polymer in time $t$ are represented by the $N \times 3$ matrix $(R_t)_{t\geq0} = (R_1, ..., R_N)_{t\geq0}$ with each $R_i \in \mathbb{R}^3, i = 1,...,N$, the dynamics are described by Eq. \eqref{eqn:general_langevin}:
  
  \begin{equation}
  dR_t = -\frac{1}{\zeta} \nabla \phi(R_t) dt + \sqrt{2D} dW_t
@@ -84,7 +84,7 @@ An schematic illustration of an RCL polymer is described in Fig. \ref{fig:model}
  \label{eqn:langevin}
  \end{equation}
  
-In the following, we implement the Euler's scheme of Eq. \ref{eqn:langevin}, setting $D = 0.008 \ \mu^2$m/s and $b = 0.2 \ \mu$m. When it is important, the $\Delta t$ used in the discretization of Eq. \ref{eqn:langevin} will be specified. $\Delta t = 0.005 $ sec will be the usual value. Anyhow, to assure numerical stability, condition in Eq. \ref{eqn:stabilityCondition} must always be verified.
+In the following, we implement the Euler's scheme of Eq. \ref{eqn:langevin}, setting $D = 0.008 \ \mu^2$m/s and $b = 0.2 \ \mu$m. When it is important, the $\Delta t$ used in the discretization of Eq. \ref{eqn:langevin} will be specified. $\Delta t = 0.005 $ sec will be the usual value. Anyhow, to assure numerical stability, condition in Eq. \ref{eqn:stabilityCondition} must always be verified [Ref].
 
 \begin{equation}
 \sqrt{2D\Delta t} \leq c \Delta r ^\star
@@ -93,8 +93,24 @@ In the following, we implement the Euler's scheme of Eq. \ref{eqn:langevin}, set
 
  In Eq. \ref{eqn:stabilityCondition}, $\Delta r^\star$ stands for the smallest spatial scale used (it will normally be the monomers encounter distance as it is defined later on) and $c$ is a confidence factor that will be set at $c = 0.2$ in the simulations.
  
+  \subsection{Useful statistical properties of the RCL polymer}
+  Some useful statistical properties will be measured to study the polymer repair. For instance, the Mean Radius of Gyration (MRG) will be computed as a proper indicator of the polymer compaction. The MRG is defined as the root mean square distance from each monomer to the center of mass of the polymer (Eq. \ref{eqn:mrg}).
+  
+  \begin{equation}
+  \text{MRG}(R) = \sqrt{\frac{1}{N} \sum_{m=1}^{N}(R_m - \bar{R})^2}
+  \label{eqn:mrg}
+  \end{equation}
+  
+  It has been proven \cite{pre2017} that for a given connectivity fraction $\xi$ and when the connectivity is low ($N_c \ll \frac12 N^2$) the mean square radius of gyration MSRG (MRG$^2$) can be approximated by Eq. \ref{eqn:msrg_xi}.
+  
+   \begin{equation}
+   \text{MSRG}(\xi) \approx \frac{3b^2}{4(1-\xi)\sqrt{N \xi}}
+   \label{eqn:msrg_xi}
+   \end{equation}
+  
+  
  \subsection{Induction of Double Strand Breaks (DSBs)}
- In particular, we are interested on the probability of repair after two DSBs. One DSB (DSB \guillemotleft A\guillemotright) will be randomly induced between neighbor monomers $A_1$ and $A_2 = A_1 + 1$, where $A_1 \sim \mathcal{U}[1,N-g-2]$. The other DSB (DSB \guillemotleft B\guillemotright) will be induced in neighbor monomers $B_1$ and $B_2$. A deterministic inter-break genomic distance $g$ will be imposed between A and B, defined as the shortest distance between the DSBs along the backbone, i.e. $g = B1 - A2$. An scheme of two DSBs is represented in Fig. \ref{fig:model}-C. 
+ In particular, we are interested on the probability of repair after two DSBs. One DSB (damage focus \guillemotleft A\guillemotright) will be randomly induced between neighbor monomers $A_1$ and $A_2 = A_1 + 1$, where $A_1 \sim \mathcal{U}[1,N-g-2]$. The other DSB (damage focus \guillemotleft B\guillemotright) will be induced in neighbor monomers $B_1$ and $B_2$. A deterministic inter-break genomic distance $g$ will be imposed between A and B, defined as the shortest distance between the DSBs along the backbone, i.e. $g = B_1 - A_2$. An scheme of two DSBs is represented in Fig. \ref{fig:model}-C.  The two breaks define thus three interconnected fragments: the upstream fragment (formed by monomers $1$ to $A_1$), the central fragment (monomers $A_2$ to $B_1$) and the downstream fragment (monomers $B_2$ to $N$).
  
 \subsection{Definition of encounter times and probabilities}
  We define the first encounter time between monomers $m$ and $n$ as
@@ -104,7 +120,11 @@ T_{m,n}^{\epsilon} := \inf \{ t \geq 0 : ||(R_m)_t - (R_n)_t|| < \epsilon  \}
 \end{equation}
 where $\epsilon$ is the encounter distance. Then, the repair probability is defined as
 $$
-\mathbb{P}(Repair) = \mathbb{P}(\inf \{ T_{A_1,A_2}^\epsilon,  T_{B_1,B_2}^\epsilon \} \leq \inf \{ T_{A_1,B_1}^\epsilon , T_{A_1,B_2}^\epsilon , T_{A_2,B_1}^\epsilon , T_{A_2,B_2}^\epsilon \} )
+\mathbb{P}(\text{Repair}) = \mathbb{P}(\inf \{ T_{A_1,A_2}^\epsilon,  T_{B_1,B_2}^\epsilon \} \leq \inf \{ T_{A_1,B_1}^\epsilon , T_{A_1,B_2}^\epsilon , T_{A_2,B_1}^\epsilon , T_{A_2,B_2}^\epsilon \} )
+$$
+and the First Encounter Time (FET) as:
+$$
+\text{FET} = \inf \{ T_{A_1,A_2}^\epsilon,  T_{B_1,B_2}^\epsilon, T_{A_1,B_1}^\epsilon , T_{A_1,B_2}^\epsilon , T_{A_2,B_1}^\epsilon , T_{A_2,B_2}^\epsilon \}
 $$
 
 We remark that when monomers are well mixed, the expected repair probability is $2/6 = 1/3$ (favorable encounters / total possible encounters).
@@ -119,7 +139,7 @@ In general, excluded volume forces are added to the polymer dynamics through a n
 \end{equation}
 where $\sigma$ is a cutoff radius of exclusion and $1_{||R_i - R_j || < \sigma} = 1$ if $||R_i - R_j || < \sigma$ and $0$ otherwise.
 
-In our case, to simulate the dispersion of chromatin only around DSBs, we induce volume exclusion for the DF monomers only and take $\kappa_{ev} = \kappa$:
+In our case, to simulate the dispersion of chromatin around DSBs only, we induce volume exclusion for the DF monomers only and take $\kappa_{ev} = \kappa$:
 
 \begin{equation}
 \phi_{local-ev}(R) = - \frac{\kappa_{ev}}{2} \sum_{i \in \text{DF}}\sum_{j \neq i} ||R_i - R_j ||^2 1_{||R_i - R_j || < \sigma}
@@ -160,9 +180,27 @@ So when exclusion forces are considered the simulated system will subdue the dyn
 
 We call the total $M+B+E$ the total Laplacian matrix of the system. The two decondensation effects are summarized in Fig. \ref{fig:model}-D.
 
+\subsection{Scaling distances under condensation: $\xi$-adaptive encounter distances and exclusion radii}
+
+As indicates Eq. \ref{eqn:msrg_xi} (cf. Fig. \ref{fig:mrg_v_nc} for an empirical example), as $N_c$ (equivalently $\xi$) increases the polymer compaction increases too. Since the spatial scale of a compact polymer is different from the spatial scale used by a decompacted polymer, and thus for the same $\varepsilon$, an encounter which is rare enough for the later might be too common for the former, for a more compact polymer, smaller spatial scales should be used. In effect, scaling $\varepsilon$ and $\sigma$ for different degrees of compaction will allow to measure the repair rates conditionally to the compaction, invariantly to the polymer size. So $\varepsilon$ and $\sigma$ will be redefined to be $\xi$-adaptive and preserve the spatial scale. 
+Thus, $\varepsilon$ and $\sigma$ will be proportional to the polymer mean size, and in particular, to the MRG. Starting from Eq. \ref{eqn:msrg_xi} we will define the adaptive encounter distance $\tilde{\varepsilon}(\xi)$ as in Eq. \ref{eqn:adaptive_eps}, and the adaptive cutoff radius of exclusion $\tilde{\sigma}(\xi)$ as in Eq. \ref{eqn:adaptive_sigma}, where $v>1$ is a factor which indicates how much bigger is the exclusion sphere with respect to the exclusion volume.
+
+\begin{eqnarray}
+\tilde{\varepsilon}(\xi) &=& 2 \sqrt{  \frac{3b^2}{N(1-\xi)\sqrt{y^2-1}} }
+\label{eqn:adaptive_eps} \\
+y &=& 1 + \frac{N \xi}{2(1-\xi)} \nonumber
+\end{eqnarray}
+
+\begin{equation}
+\tilde{\sigma}(\xi) = v \cdot \tilde{\varepsilon}(\xi)
+\label{eqn:adaptive_sigma}
+\end{equation}
+
 \subsection{Pipeline of the simulations}
+A number $I$ of independent polymer realizations will be simulated to extract mean statistical properties and the repair probabilities conditional to the parameters defined so far. The main pipeline of each realization goes as described below:
+
 \begin{enumerate}
-	\item \textbf{Initialization of the polymer backbone} from a random walk in $\mathbb{R}^3$ with each step is i.i.d. $\mathcal{N}(0,b^2)$.
+	\item \textbf{Initialization of the polymer backbone} from a random walk in $\mathbb{R}^3$ where each step is i.i.d. $\mathcal{N}(0,b^2)$.
 	\item \textbf{Predefinition of DSBs $A$ and $B$}. We take $A_1 \sim \mathcal{U}[1,N-g-2]$ and then $A_2 = A_1 + 1$, $B_1 = A_2 + g$, $B_2 = B_2 + 1$.
 	\item \textbf{Induction of random cross-links}. $N_c$ cross-links are induced between non-neighbor monomers such that after breaks $A$ and $B$ the polymer rests fully connected. In practice, we make random connections until obtaining one which verifies the full connectivity condition.
 	\item \textbf{Relaxation}. Once the polymer is validly cross-linked, the polymer is subdued to Langevin dynamics (discretized as an Euler's scheme for Eq. \ref{eqn:langevin}) until relaxation time $\tau$, which is computed analytically [Ref] as:
@@ -170,74 +208,85 @@ We call the total $M+B+E$ the total Laplacian matrix of the system. The two deco
 	\tau = \frac{...}{...}
 	$$
 	\item \textbf{DSBs Induction and actualization of the total Laplacian matrix}. When the polymer reaches relaxation time, the two cuts are induced between the predefined monomers $A_1$, $A_2$ and $B_1$, $B_2$. Removed bonds are thus cleaned from the Laplacian matrix. Besides, if CLs are removed from the separated monomers and if Volume Exclusion is included, those effects are also added to the Laplacian as in Eq. \ref{eqn:langevin_VE}.
-	\item \textbf{Simulation until encounter}. Once the DSBs are considered into the Laplacian matrix, simulation of Eq. \ref{eqn:langevin} continues until an encounter, as defined in Eq. \ref{eqn:encountertime}, happens between any of the cut ends. If no encounters occur before a threshold time $T_{max}$ the simulation is discarded.
+	\item \textbf{Waiting}. As a way to exclude the repair events which happen immediately after the break, and since the DNA repair is not instantaneous (it requires the arrival of specific proteins to the cut ends), the polymer is let to evolve under Eq. \ref{eqn:langevin} for some waiting time $T_{wait}$
+	\item \textbf{Simulation until encounter}. Once $T_{wait}$ is reached, simulation continues until an encounter, as defined in Eq. \ref{eqn:encountertime}, happens between any of the cut ends. If two or more pairs of monomers encounter at the same simulated instant, we randomly choose over those pairs to be the first encounter. If no encounters occur before a threshold time $T_{max}$ the simulation is discarded.
 	\item Statistical properties and the encounter event that occurred (repair or misrepair) are saved and a new polymer is initialized to perform the same simulation. 
 \end{enumerate}
+Finally, the conditional probability of repair is estimated as
+$$
+\mathbb{P}(\text{Repair}|\Theta) = \frac{\text{Number of $A_1$-$A_2$ or $B_1$-$B_2$ encounters}}{\text{Total number of encounters}}
+$$
+where $\Theta$ summarizes the experiment parameters, $$\Theta = (N,b,N_c,g,\varepsilon,\sigma,T_{wait},T_{max}).$$
+
 \clearpage
 
 \section{Results}
 
 \subsection{First Encounter Time (FET) distribution}
 
-Since an important peak was observed at instant 0 in the first simulations, we decided to wait some time after the induction of double strand breaks (DSBs), before measuring if any pair of monomers have encountered. 
-Concerning the encounters events, if two or more pairs of monomers encounter at the same simulated instant, we toss a coin to choose uniformly over those pairs to be the first encounter.
-Since the FET distribution can be approximated by a single exponential \cite{amitai12}, an exponential function with parameters $a, \lambda$, $t \mapsto a \exp(- \lambda t)$ is fitted to the frequency histograms, aiming to compare the $\lambda$ fitted in each one of the experiments sets.
+Since the FET distribution can be approximated by a single exponential \cite{amitai12}, an exponential function with parameters $a, \lambda$ such that $t \mapsto a \exp(- \lambda t)$ is fitted to the frequency histograms, aiming to compare the $\lambda$ fitted in each one of the experiments sets.
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\textwidth]{../DNA_Religation/figures/FEThistograms_keepingANDremoving.png}
-	\caption{Distribution of the first encounter time keeping and removing the cross-links in the cleaved monomers. An exponential distribution has been fitted to each histogram. The results corresponds to a polymer of 100 monomers, 5 random cross-links, with two DSBs at a genomic distance of 10 and a waiting after-break time of 25 seconds. The events which take longer than 60 seconds are ignored.}
+	\caption{Distribution of the first encounter time keeping and removing the cross-links in the cleaved monomers. An exponential function has been fitted to each histogram. $N = 100$ monomers, $N_c = 5$, $g = 10$,  $T_{wait} = 25 sec$, and $T_{max} = 60 sec$.}
 	\label{fig:hists}
 \end{figure}
 
-The results of figure \ref{fig:hists} indicate that the removal of cross-links does not seem to affect the mean first encounter time, nor the ratio of misrepair/repair events. The estimated rate parameter ($\lambda$) is 0.08 for both cases. It should be noted that since the maximum time of simulation is set at 60 seconds (i.e. if nothing happens in 60 seconds the simulation is discarded) the distribution is biased and corresponds to $\mathcal{L}(FET|FET<60)$. For instance, when the simulation maximum time has been increased to 200 seconds, the rate parameter is estimated at 0.04.
+The results in Fig. \ref{fig:hists} indicate that the removal of cross-links does not seem to affect the mean first encounter time, the estimated rate parameter ($\lambda$) is 0.08 for both cases. Nonetheless, it's no surprising considering that for $N = 100$ and $N_c = 5$ the mean number of connectors in the DF is about $0.4$, so the removal of CLs is not actually occurring for the majority of cases. To overcome this situation and to properly study the effect of removing the CLs a new Laplacian matrix will be included, which will impose a certain number $N_{d}$ of extra cross-links in the DF monomers. Fig. \ref{fig:hists_CLinDF} shows the difference in the FET distributions when we impose $N_d = 2$ CLs in the DF. We can see that when we remove the 2 imposed CLs the mean FET increases in 2 seconds, and the repair rate increases as well. We also observe that when we remove the CLs the most common misrepair corresponds to the looping of the central segment of the broken polymer ($A_2$-$B_1$).
+
+In the following, we will determine the effect of the removal of CLs with respect to the inter-break distance $g$ and the number of random CLs $N_c$.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{../DNA_Religation/figures/eventsandFET_005epsilon_CLinDF.PNG}
+	\caption{Distribution of the first encounter times and events, keeping and removing the cross-links when imposing CLs in the DF. Both results corresponds to $I = 500$ simulations, with $N = 100$, $N_c = 12$, $N_d = 2$, $g = 10$, $\varepsilon = 0.05 \mu$m, $T_{max} = 45$ sec, $T_{wait} = 2.5$ sec and $\sigma = 0$ (no volume exclusion). \textbf{A}: Schematic representation of the experimental set and possible encounters. \textbf{B}: Results keeping CLs in DF. \textbf{1.} Histogram of relative frequencies and fitted exponential function, with and estimated rate of 0.096 and a mean FET of $12.600 \pm 1.032$ sec. \textbf{2.} Encounter events distribution. \textbf{C}: Results removing CLs in DF. \textbf{1.} Histogram of relative frequencies and fitted exponential function, with and estimated rate of 0.077 and a mean FET of $14.171 \pm 1.117$ sec. \textbf{2.} Encounter events distribution.}
+	\label{fig:hists_CLinDF}
+\end{figure}
+
+%It should be noted that since the maximum time of simulation is set at 60 seconds (i.e. if nothing happens in 60 seconds the simulation is discarded) the distribution is biased and corresponds to $\mathcal{L}(FET|FET<60)$. For instance, when the simulation maximum time has been increased to 200 seconds, the rate parameter is estimated at 0.04.
 
 
 %Finally as we see in figure \ref{fig:hists2} within the misrepair events, the mismatchs seems to be equidistributed. 
 
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=\textwidth]{../DNA_Religation/figures/eventsRepartition.png}
-	\caption{Distribution of the first encounter time keeping the CLs in the damage foci, and distribution of the repair and misrepair events (1000 realisations).}
-	\label{fig:hists2}
-\end{figure}
+%\begin{figure}[h!]
+%	\centering
+%	\includegraphics[width=\textwidth]{../DNA_Religation/figures/eventsRepartition.png}
+%	\caption{Distribution of the first encounter time keeping the CLs in the damage foci, and distribution of the repair and misrepair events (1000 realisations).}
+%	\label{fig:hists2}
+%\end{figure}
 
-\newpage
+\clearpage
 
-\subsection{Repair probability}
+\subsection{Changes on the repair probability conditionally to $g$, $N_c$ and decondensation}
 
-\subsubsection{Effect of the genomic distance between two DSBs}
+\subsubsection{Effect of $g$ on the repair probability}
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{../DNA_Religation/projects/RCLPolymer_Repair_Probability/Figures/proba_v_g__100monomers_keepingandremovingCLs.png}
-	\caption{Repair probability against the genomic distance between the two DSBs. Polymer of 100 monomers with 15 random cross-links. Encounter distance of 0.1 $\mu$m (and b = 0.2 $\mu$m).}
+	\includegraphics[width=\textwidth]{../DNA_Religation/projects/RCLPolymer_Repair_Probability/Figures/proba_v_g__100monomers_keepingandremovingCLs_xxlarge.png}
+	\caption{Repair probability as function of the genomic distance $g$ between the two DSBs. $N = 100$, $N_c = 15$, $\varepsilon = 0.1 \mu$m and $N_d = 0$ (no CLs imposed in DF).}
 	\label{fig:proba_v_g_1}
 \end{figure}
 
-We see in figure \ref{fig:proba_v_g_1} that regardless the removal of cross-links the repair probability increases in the same way as the inter-break genomic distance increases. So, removing the cross-links in the disconnected monomers does not seem to induce a better repair probability
+Fig. \ref{fig:proba_v_g_1} shows that regardless the removal of cross-links, repair probability increases as the inter-break genomic distance increases. 
+%So, removing the cross-links in the disconnected monomers does not seem to induce a better repair probability
 
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.7\textwidth]{../DNA_Religation/projects/RCLPolymer_Repair_Probability/Figures/proba_v_g__keepingCLs.png}
-	\caption{Repair probability against the genomic distance between the two DSBs. Polymer of 100 monomers with 10 random cross-links. Encounter distance of 0.1 $\mu$m (and b = 0.2 $\mu$m).}
-	\label{fig:proba_v_g_2}
-\end{figure}
 
-The most interesting remark though is the gap between the probabilities at a genomic distance of 1 (i.e. the two DSBs are connected, $A2$ and $B1$ being neighbors) and the other genomic distances (figure \ref{fig:proba_v_g_2}). As only valid cuts are allowed (i.e. the polymer rests fully connected after the breaks) the segment $A_2-B_1$ is indeed connected to the upstream and/or the downstream fragment. The probability of being connected to only one of them is higher than the probability of being connected to both, so the segment could be pushed towards one of the free monomers rapidly and then induce a good ratio of repair.
+Besides, when we keep CLs in the DF, we can remark an important gap between the probabilities at $g = 1$ (i.e., the two DSBs are connected, $A2$ and $B1$ being neighbors) and the other genomic distances (Fig. \ref{fig:proba_v_g_1} Zoom). As only valid cuts are allowed (the polymer rests fully connected after the breaks) the central segment is indeed connected to the upstream and/or the downstream fragment. The probability of being connected to only one of them is higher than the probability of being connected to both, so the segment could be pushed towards one of the free monomers rapidly and then induce a good ratio of repair. This case will be treated as an out-layer from now on, and thus the following comparative analysis will be performed for $g\geq 2$.
 
-\subsubsection{Effect of the number of cross-links}
+\subsubsection{Effect of $N_c$ on the repair probability}
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\textwidth]{../DNA_Religation/projects/RCLPolymer_Repair_Probability/Figures/proba_v_Nc__100monomers_01eps_removingCLs_500iteration_goodDT.png}
-	\caption{Polymer of 100 monomers. Repair probability against the number of random cross-links when removing the random CLs in damage foci.}
+	\caption{Repair probability as a function of $N_c$ for $N=100$, $\varepsilon = 0.1 \mu$m and $N_d$ = 0.}
 	\label{fig:proba_v_cl}
 \end{figure}
 
-Increasing the number of cross-links approaches the simulated probabilities to $1/3$, which is the result expected by pure chance. Indeed, increasing the number of CLs and therefore approaching all monomers not only increases the chances of a good matching, but also the bad match case. It is interesting that systems which had a repair probability $\leq 1/3$  because had DSBs at a small genomic distance (so the chances of a bad matching where higher) improve their repair probabilities when we increase the number of cross-links. In other words, \textbf{the compactness may help to repair polymers cut in a small neighborhood.}
+Increasing the number of cross-links approaches the simulated probabilities to $1/3$, which is the result expected in the well mixed case, as we observe in Fig. \ref{fig:proba_v_cl}. Indeed, increasing the number of CLs and therefore approaching all monomers not only increases the chances of repair, but also of mismatch. It is interesting that systems which had a repair probability $\leq 1/3$  because had DSBs at a very small genomic distance ($g \leq 3$) (so the chances of a bad matching were higher) improve their repair probabilities when we increase the number of cross-links. 
 
-In effect, increasing the number of random connectors increases as well the compactness of the polymer, revealed as a decrease of the mean radius of gyration (cf. figure \ref{fig:mrg_v_nc}). Besides, we can see that the position of the breaks does not affect the ensemble mean of the gyration radius.
+In effect, increasing the number of random connectors increases as well the compactness of the polymer, revealed as a decrease of the mean radius of gyration (Fig. \ref{fig:mrg_v_nc}). Besides, we can see that the position of the breaks does not affect the ensemble mean of the gyration radius. In conclusion, \textbf{the compactness help to repair polymers cut in a small neighborhood.}
 
 \begin{figure}[h!]
 	\centering
@@ -248,7 +297,7 @@ In effect, increasing the number of random connectors increases as well the comp
   
 
 
-\subsubsection{Effect of Excluded Volume}
+\subsubsection{Effect of volume exclusion on the repair probability}
 
  Larger values of $\sigma$ make the waiting for looping times last longer (figure \ref{fig:mFET_v_Nc_EV}) and thus make the encounter events rarer, however they do not affect dramatically the repair probability overall (figure \ref{fig:vs_volumeexclusionradius}). 
 
@@ -454,5 +503,6 @@ Figures \ref{fig:proba_v_parasytes} and \ref{fig:proba_v_longrange_sizes} sugges
 
 \begin{thebibliography}{10}
 	\bibitem{amitai12} Amitai A, Kupka I, Holcman D. Computation of the mean first-encounter time between the ends of a polymer chain. Phys Rev Lett. 2012 Sep 7;109(10):108302.
+	\bibitem{pre2017} Shukron, O. and Holcman D. Statistics of randomly cross-linked polymer models to interpret chromatin conformation capture data. Phys. Rev. E 96, 012503 – Published 27 July 2017.
 \end{thebibliography}
 \end{document}

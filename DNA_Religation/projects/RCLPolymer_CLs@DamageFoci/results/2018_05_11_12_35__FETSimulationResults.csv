@@ -1,0 +1,9 @@
+numMonomers,dim,b,Nc,keepCL,diffusionConstant,numRealisations,dt,dt_relax,waitingSteps,numMaxSteps,encounterDistance,genomicDistance,Nb,Nc_inDamageFoci,iterationsNumber,events,FETs,meanFET,halfCI_FET,expFit_Amplitude,expFit_Rate,eventsCounter,repair_probability,repair_CIhalflength,mean_removedCLs,MSRG_atEncounter,Ensemble_MSRG
+100,3,0.2,12,True,0.008,20,0.005,0.01,250,9000,0.05,10,2,2,20,"['Misrepair_a2-b2' 'NA' 'Misrepair_a2-b1' 'NA' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b2' 'Repair' 'Repair' 'Repair'
+ 'NA' 'Misrepair_a1-b1' 'NA']","[11.52     nan 20.115    nan 11.    18.49  28.48  17.91   6.385  0.505
+  0.71  15.45   0.    31.835  4.38   0.13   2.145    nan  0.04     nan]",10.5684375,4.99480630226034,0.08260981496797098,0.07682384929761256,"Counter({'Repair': 7, 'Misrepair_a2-b2': 5, 'NA': 4, 'Misrepair_a2-b1': 2, 'Misrepair_a1-b2': 1, 'Misrepair_a1-b1': 1})",0.4375,0.24307840170405925,0.0,"[0.18072064        nan 0.27251546        nan 0.45876711 0.29169014
+ 0.10760056 0.21835845 0.30617743 0.43557914 0.63795173 0.99275673
+ 1.45234299 0.18220034 0.45500359 0.71866086 0.67436151        nan
+ 0.30147705        nan]",0.48038523217445667
