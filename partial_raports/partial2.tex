@@ -31,7 +31,7 @@ Double Strand Breaks (DSB) are a highly cytotoxic type of DNA damage that occur 
  \begin{equation}
  M_{m,n} = (D_{\text{backbone}} - A_{\text{backbone}})_{m,n} = \begin{cases}
  -1 & \text{ if } |m-n| = 1 \\
- - \sum_{i=1}^{N} M_{i,n}  & \text{ if }m=n \\
+ - \sum_{i=1, i \neq n}^{N} M_{i,n}  & \text{ if }m=n \\
  0  & \text{ otherwise }
  \end{cases}
  \label{eqn:Mmatrix}
@@ -40,7 +40,7 @@ Double Strand Breaks (DSB) are a highly cytotoxic type of DNA damage that occur 
   \begin{equation}
   B_{m,n} = (D_{\text{CLs}} - A_{\text{CLs}})_{m,n} = \begin{cases}
   -1 & \text{ if $m$ and $n\neq m$ are connected by a CL} \\
-  - \sum_{i=1}^{N} B_{i,n}  & \text{ if }m=n \\
+  - \sum_{i=1, i \neq n}^{N} B_{i,n}  & \text{ if }m=n \\
   0  & \text{ otherwise }
   \end{cases}
   \label{eqn:Bmatrix}
@@ -183,7 +183,7 @@ We call the total $M+B+E$ the total Laplacian matrix of the system. The two deco
 \subsection{Scaling distances under condensation: $\xi$-adaptive encounter distances and exclusion radii}
 
 As indicates Eq. \ref{eqn:msrg_xi} (cf. Fig. \ref{fig:mrg_v_nc} for an empirical example), as $N_c$ (equivalently $\xi$) increases the polymer compaction increases too. Since the spatial scale of a compact polymer is different from the spatial scale used by a decompacted polymer, and thus for the same $\varepsilon$, an encounter which is rare enough for the later might be too common for the former, for a more compact polymer, smaller spatial scales should be used. In effect, scaling $\varepsilon$ and $\sigma$ for different degrees of compaction will allow to measure the repair rates conditionally to the compaction, invariantly to the polymer size. So $\varepsilon$ and $\sigma$ will be redefined to be $\xi$-adaptive and preserve the spatial scale. 
-Thus, $\varepsilon$ and $\sigma$ will be proportional to the polymer mean size, and in particular, to the MRG. Starting from Eq. \ref{eqn:msrg_xi} we will define the adaptive encounter distance $\tilde{\varepsilon}(\xi)$ as in Eq. \ref{eqn:adaptive_eps}, and the adaptive cutoff radius of exclusion $\tilde{\sigma}(\xi)$ as in Eq. \ref{eqn:adaptive_sigma}, where $v>1$ is a factor which indicates how much bigger is the exclusion sphere with respect to the exclusion volume.
+Thus, $\varepsilon$ and $\sigma$ will be proportional to the polymer mean size, and in particular, to the MRG. Starting from Eq. \ref{eqn:msrg_xi} we will define the adaptive encounter distance $\tilde{\varepsilon}(\xi)$ as in Eq. \ref{eqn:adaptive_eps}, and the adaptive cutoff radius of exclusion $\tilde{\sigma}(\xi)$ as in Eq. \ref{eqn:adaptive_sigma}, where $v>1$ is a factor which indicates how much bigger is the exclusion sphere with respect to the encounter distance.
 
 \begin{eqnarray}
 \tilde{\varepsilon}(\xi) &=& 2 \sqrt{  \frac{3b^2}{N(1-\xi)\sqrt{y^2-1}} }
@@ -207,7 +207,7 @@ A number $I$ of independent polymer realizations will be simulated to extract me
 	$$
 	\tau = \frac{...}{...}
 	$$
-	\item \textbf{DSBs Induction and actualization of the total Laplacian matrix}. When the polymer reaches relaxation time, the two cuts are induced between the predefined monomers $A_1$, $A_2$ and $B_1$, $B_2$. Removed bonds are thus cleaned from the Laplacian matrix. Besides, if CLs are removed from the separated monomers and if Volume Exclusion is included, those effects are also added to the Laplacian as in Eq. \ref{eqn:langevin_VE}.
+	\item \textbf{DSBs Induction and actualization of the total Laplacian matrix}. When the polymer reaches relaxation time, the two cuts are induced between the predefined monomers $A_1$, $A_2$ and $B_1$, $B_2$. Removed bonds are thus cleaned out from the Laplacian matrix. Besides, if CLs are removed from the separated monomers and if Volume Exclusion is included, those effects are also added to the Laplacian as in Eq. \ref{eqn:langevin_VE}.
 	\item \textbf{Waiting}. As a way to exclude the repair events which happen immediately after the break, and since the DNA repair is not instantaneous (it requires the arrival of specific proteins to the cut ends), the polymer is let to evolve under Eq. \ref{eqn:langevin} for some waiting time $T_{wait}$
 	\item \textbf{Simulation until encounter}. Once $T_{wait}$ is reached, simulation continues until an encounter, as defined in Eq. \ref{eqn:encountertime}, happens between any of the cut ends. If two or more pairs of monomers encounter at the same simulated instant, we randomly choose over those pairs to be the first encounter. If no encounters occur before a threshold time $T_{max}$ the simulation is discarded.
 	\item Statistical properties and the encounter event that occurred (repair or misrepair) are saved and a new polymer is initialized to perform the same simulation. 
@@ -222,7 +222,7 @@ where $\Theta$ summarizes the experiment parameters, $$\Theta = (N,b,N_c,g,\vare
 
 \section{Results}
 
-\subsection{First Encounter Time (FET) distribution}
+\subsection{First Encounter Time (FET) distribution when CLs are kept and removed in the damage foci}
 
 Since the FET distribution can be approximated by a single exponential \cite{amitai12}, an exponential function with parameters $a, \lambda$ such that $t \mapsto a \exp(- \lambda t)$ is fitted to the frequency histograms, aiming to compare the $\lambda$ fitted in each one of the experiments sets.
 
@@ -233,7 +233,7 @@ Since the FET distribution can be approximated by a single exponential \cite{ami
 	\label{fig:hists}
 \end{figure}
 
-The results in Fig. \ref{fig:hists} indicate that the removal of cross-links does not seem to affect the mean first encounter time, the estimated rate parameter ($\lambda$) is 0.08 for both cases. Nonetheless, it's no surprising considering that for $N = 100$ and $N_c = 5$ the mean number of connectors in the DF is about $0.4$, so the removal of CLs is not actually occurring for the majority of cases. To overcome this situation and to properly study the effect of removing the CLs a new Laplacian matrix will be included, which will impose a certain number $N_{d}$ of extra cross-links in the DF monomers. Fig. \ref{fig:hists_CLinDF} shows the difference in the FET distributions when we impose $N_d = 2$ CLs in the DF. We can see that when we remove the 2 imposed CLs the mean FET increases in 2 seconds, and the repair rate increases as well. We also observe that when we remove the CLs the most common misrepair corresponds to the looping of the central segment of the broken polymer ($A_2$-$B_1$).
+The results in Fig. \ref{fig:hists} indicate that the removal of cross-links does not seem to affect the mean first encounter time, the estimated rate parameter ($\lambda$) is 0.08 for both cases. Nonetheless, it's no surprising considering that for $N = 100$ and $N_c = 5$ the mean number of connectors in the DF is about $0.4$, so the removal of CLs is not actually occurring for the majority of cases. To overcome this situation and to properly study the effect of removing the CLs a new Laplacian matrix will be included, which will impose a certain number $N_{d}$ of extra cross-links in the DF monomers. Fig. \ref{fig:hists_CLinDF} shows the difference in the FET distributions when we impose $N_d = 2$ CLs in the DF. We can see that when we remove the 2 imposed CLs the mean FET increases in 2 seconds, and the repair rate increases as well. We also observe that when we remove the CLs the most common misrepair corresponds to the looping of the central segment of the broken polymer ($A_2$-$B_1$). In the spirit way Fig. \ref{fig:meanFET_vs_Nd} shows that increasing the imposed $N_d$ reduces the mean FET when those CLs are kept, but not when they are removed. 
 
 In the following, we will determine the effect of the removal of CLs with respect to the inter-break distance $g$ and the number of random CLs $N_c$.
 
@@ -243,6 +243,14 @@ In the following, we will determine the effect of the removal of CLs with respec
 	\caption{Distribution of the first encounter times and events, keeping and removing the cross-links when imposing CLs in the DF. Both results corresponds to $I = 500$ simulations, with $N = 100$, $N_c = 12$, $N_d = 2$, $g = 10$, $\varepsilon = 0.05 \mu$m, $T_{max} = 45$ sec, $T_{wait} = 2.5$ sec and $\sigma = 0$ (no volume exclusion). \textbf{A}: Schematic representation of the experimental set and possible encounters. \textbf{B}: Results keeping CLs in DF. \textbf{1.} Histogram of relative frequencies and fitted exponential function, with and estimated rate of 0.096 and a mean FET of $12.600 \pm 1.032$ sec. \textbf{2.} Encounter events distribution. \textbf{C}: Results removing CLs in DF. \textbf{1.} Histogram of relative frequencies and fitted exponential function, with and estimated rate of 0.077 and a mean FET of $14.171 \pm 1.117$ sec. \textbf{2.} Encounter events distribution.}
 	\label{fig:hists_CLinDF}
 \end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{../DNA_Religation/projects/RCLPolymer_CLs@DamageFoci/figures/mFET_keepingVSremovingCL.PNG}
+	\caption{Mean FET as function of $N_d$ when CLs in the DF are kept and removed. $N_c = 12$ and $\varepsilon$ is $(N_c+N_d)$-adaptive, ranging from 0.096 $\mu$m ($N_d = 0$) to 0.088 $\mu$m ($N_d = 5$).}
+	\label{fig:meanFET_vs_Nd}
+\end{figure}
+
 
 %It should be noted that since the maximum time of simulation is set at 60 seconds (i.e. if nothing happens in 60 seconds the simulation is discarded) the distribution is biased and corresponds to $\mathcal{L}(FET|FET<60)$. For instance, when the simulation maximum time has been increased to 200 seconds, the rate parameter is estimated at 0.04.
 
@@ -275,18 +283,39 @@ Fig. \ref{fig:proba_v_g_1} shows that regardless the removal of cross-links, rep
 
 Besides, when we keep CLs in the DF, we can remark an important gap between the probabilities at $g = 1$ (i.e., the two DSBs are connected, $A2$ and $B1$ being neighbors) and the other genomic distances (Fig. \ref{fig:proba_v_g_1} Zoom). As only valid cuts are allowed (the polymer rests fully connected after the breaks) the central segment is indeed connected to the upstream and/or the downstream fragment. The probability of being connected to only one of them is higher than the probability of being connected to both, so the segment could be pushed towards one of the free monomers rapidly and then induce a good ratio of repair. This case will be treated as an out-layer from now on, and thus the following comparative analysis will be performed for $g\geq 2$.
 
+Fig. \ref{fig:proba_v_g_1} does not show any significant difference for the removal of CLs, because no CLs were imposed in the DF. However, imposing $N_d = 2$, as in Fig. \ref{fig:proba_v_g_Nd2} and \ref{fig:all_v_g}, shows that the removal of DSB' CLs helps the reparation for distant breaks. Nonetheless, near breaks ($g < 10$) seems to perform better reparation rates when the CLs are kept in the DF. Fig. \ref{fig:all_v_g} complements Fig. \ref{fig:proba_v_g_Nd2} and show the effect of $g$ and the removal of CLs in other observables (the MSRG at encounter time, the mean FET and the fitted rate parameter $\lambda$ to the FET distribution). We observe that at encounter time the MSRG is, as expected, bigger when we remove CLs (the polymer is more decompacted). We also see that removing CLs extend the FET. 
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{../DNA_Religation/figures/proba_v_g_Nd2_zoom.png}
+	\caption{Repair probability as function of $g$  when $N = 100$, $N_c = 15$, $\varepsilon = 0.1 \mu$m and $N_d = 2$ (2 CLs imposed in DF) which are kept (blue) or removed (orange) after the induction of the DSBs. ($I = 500$ simulations)}
+	\label{fig:proba_v_g_Nd2}
+\end{figure}
+
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{../DNA_Religation/figures/__v_g_keepANDremove.png}
+	\caption{Repair probability (A), MSRG at encounter time (B), mean FET (C) and estimated encounter rate parameter ($\lambda$) (D) as functions of $g$  when $N = 100$, $N_c = 15$, $\varepsilon = 0.1 \mu$m and $N_d = 2$ (2 CLs imposed in DF). A window zooming in $g \in [2,11]$ with 500 simulations for each $g$ is at the right of each graph.} 
+	\label{fig:all_v_g}
+\end{figure}
+
+
+
 \subsubsection{Effect of $N_c$ on the repair probability}
+
+Increasing the number of cross-links approaches the simulated probabilities to $1/3$, which is the result expected in the well mixed case, as we observe in Fig. \ref{fig:proba_v_cl}. Indeed, increasing the number of CLs and therefore approaching all monomers not only increases the chances of repair, but also of mismatch. It is interesting that systems which had a repair probability $\leq 1/3$  because had DSBs at a very small genomic distance ($g \leq 3$) (so the chances of a bad matching were higher) improve their repair probabilities when we increase the number of cross-links. 
+
+In effect, increasing the number of random connectors increases as well the compactness of the polymer, revealed as a decrease of the mean radius of gyration (Fig. \ref{fig:mrg_v_nc}). Besides, we can see that the position of the breaks does not affect the ensemble mean of the gyration radius. 
+
+In conclusion, \textbf{the compactness help to repair polymers cut in a small neighborhood.} This is coherent with which was observed in Fig. \ref{fig:all_v_g}-A, where at small genomic distances, the repair probabilities were better when CLs were kept in the DF. On the other hand, at a big genomic distance ($g = 20$), it can be observed in Fig. \ref{fig:proba_v_NcNd} that the presence of CLs in the DBS' monomers swifts the repair probabilities down, although the removal of those CLs after the break.
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\textwidth]{../DNA_Religation/projects/RCLPolymer_Repair_Probability/Figures/proba_v_Nc__100monomers_01eps_removingCLs_500iteration_goodDT.png}
-	\caption{Repair probability as a function of $N_c$ for $N=100$, $\varepsilon = 0.1 \mu$m and $N_d$ = 0.}
+	\caption{Repair probability as a function of $N_c$ for $N=100$, $\varepsilon = 0.1 \mu$m and $N_d$ = 0. If any, CLs are removed in DF.}
 	\label{fig:proba_v_cl}
 \end{figure}
-
-Increasing the number of cross-links approaches the simulated probabilities to $1/3$, which is the result expected in the well mixed case, as we observe in Fig. \ref{fig:proba_v_cl}. Indeed, increasing the number of CLs and therefore approaching all monomers not only increases the chances of repair, but also of mismatch. It is interesting that systems which had a repair probability $\leq 1/3$  because had DSBs at a very small genomic distance ($g \leq 3$) (so the chances of a bad matching were higher) improve their repair probabilities when we increase the number of cross-links. 
-
-In effect, increasing the number of random connectors increases as well the compactness of the polymer, revealed as a decrease of the mean radius of gyration (Fig. \ref{fig:mrg_v_nc}). Besides, we can see that the position of the breaks does not affect the ensemble mean of the gyration radius. In conclusion, \textbf{the compactness help to repair polymers cut in a small neighborhood.}
 
 \begin{figure}[h!]
 	\centering
@@ -294,29 +323,37 @@ In effect, increasing the number of random connectors increases as well the comp
 	\caption{Polymer of 100 monomers. Mean radius of gyration in function of the number of cross-links.}
 	\label{fig:mrg_v_nc}
 \end{figure}
-  
+
+
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{../DNA_Religation/projects/RCLPolymer_CLs@DamageFoci/figures/proba_vs_NcNd.png}
+	\caption{Repair probability in function of the total number of polymer CLs ($N_c + N_d$) where $N_d$ is fixed to 0 (blue) and 1 (orange). In both cases, CLs are removed from the DF monomers, $N = 100$, $g = 20$, $\epsilon = \tilde{\varepsilon}(\xi)$ according to Eq. \ref{eqn:adaptive_eps} and the step $\Delta t$ is also adapted such that Eq. \ref{eqn:stabilityCondition} remains verified.}
+	\label{fig:proba_v_NcNd}
+\end{figure}
 
 
 \subsubsection{Effect of volume exclusion on the repair probability}
 
- Larger values of $\sigma$ make the waiting for looping times last longer (figure \ref{fig:mFET_v_Nc_EV}) and thus make the encounter events rarer, however they do not affect dramatically the repair probability overall (figure \ref{fig:vs_volumeexclusionradius}). 
+ Larger values of $\sigma$ make the waiting for looping times last longer (Fig. \ref{fig:mFET_v_Nc_EV}) and thus make the encounter events rarer, however they do not affect dramatically the repair probability overall (Fig. \ref{fig:vs_volumeexclusionradius}). 
 
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{../DNA_Religation/projects/RCLPolymer_ExcludedVolumeExperiments/figures/meanFET_vs_VE_Nc.png}
-	\caption{Mean first encounter times in function of the number of cross-links, with and without a radius of 0.1 $\mu$m of excluded volume in the damage zone.}
+	\caption{Mean FET in function of $N_c$, with and without an excluded volume of $\sigma =$ 0.1 $\mu$m. $\varepsilon$ is fixed at 0.04 $\mu$m and so, either $\varepsilon$ and $\sigma$ are adapted to the polymer compaction.}
 	\label{fig:mFET_v_Nc_EV}
 \end{figure}
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{../DNA_Religation/projects/RCLPolymer_ExcludedVolumeExperiments/figures/proba_vs_cutoffradius_goodone.png}
+	\includegraphics[width=\textwidth]{../DNA_Religation/projects/RCLPolymer_ExcludedVolumeExperiments/figures/proba_vs_cutoffradius_bigfont.png}
 	\caption{Probability and 95\% confidence interval of repair, in function of the cutoff radius of volume exclusion.}
 	\label{fig:vs_volumeexclusionradius}
 \end{figure}
 
-We see in figure \ref{fig:MSRGandFET_byEvent} that, as expected, the misrepair scenarios are associated with smaller radius of gyration, and thus with more compact polymers. This could be an indication that relaxation of the polymer chain in the damage loci could lead to better repair probabilities. 
+Fig. \ref{fig:MSRGandFET_byEvent} shows that, as expected, the misrepair scenarios are associated with smaller radius of gyration, and thus with more compact polymers. This could be an indication that decondensation of the polymer chain in the damage loci could lead to better repair probabilities. 
 
 \begin{figure}[h]
 	\centering
@@ -325,7 +362,7 @@ We see in figure \ref{fig:MSRGandFET_byEvent} that, as expected, the misrepair s
 	\label{fig:MSRGandFET_byEvent}
 \end{figure}
 
-We can see in figure \ref{fig:pr_v_g_cutoffs} that the repair probability in function of the genomic separation between the breaks behaves similarly that previously (cf. figure \ref{fig:proba_v_g_1}). 
+We can see in Fig. \ref{fig:pr_v_g_cutoffs} that the repair probability in function of the genomic separation between the breaks behaves similarly that previously (cf. Fig \ref{fig:proba_v_g_1}). 
 
 \begin{figure}[h]
 	\centering
@@ -334,7 +371,7 @@ We can see in figure \ref{fig:pr_v_g_cutoffs} that the repair probability in fun
 	\label{fig:pr_v_g_cutoffs}
 \end{figure}
 
-Surprisingly however the repair probability function considering excluded volume interactions is always below the repair probability in the non-excluded case (figures \ref{fig:proba_vs_g_exclusion} and \ref{fig:proba_vs_Nc_exclusion})
+However the repair probability function considering excluded volume interactions is always below the repair probability in the non-excluded case (Figs. \ref{fig:proba_vs_g_exclusion} and \ref{fig:proba_vs_Nc_exclusion})
 
 \begin{figure}[h]
 	\centering
@@ -486,6 +523,11 @@ Figures \ref{fig:proba_v_parasytes} and \ref{fig:proba_v_longrange_sizes} sugges
 \clearpage
 
 \section{Partial conclusions}
+
+\begin{itemize}
+	\item At short genomic distances ($g < 4$) the removal of CLs in the DF makes FET shorter (or equivalently the encounter rate $\lambda$ higher) and the repair probabilities worse than when CLs are kept in the breaks. At further $g$, the observed behavior is the opposite and the expected one: the removal of CLs makes FET longer, but the repair rates are increased.
+\end{itemize}
+
 \begin{itemize}
 	\item When the mismatch rate is high (near DSBs and/or high connectivity) the most common misrepair seems to be the $"a_2-b_1$" one, which corresponds to the looping of the central segment of the cut RCL polymer.
 	\item Keeping or removing the cross-links in the separated neighbors does not seem to particularly help the repair, at least without considering volume exclusion. The joint action of CLs removal and volume exclusion in the damage foci should be analyzed more carefully to conclude if this "relaxation" helps or not the repair.
