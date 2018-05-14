@@ -44,7 +44,7 @@ polymerParams = dict(numMonomers = 100, # np.array([100,100]), # TODO (.., ..., 
 simulationParams = dict(# Physicial parameters
                         diffusionConstant = 0.008,
                         # Numerical parameters
-                        numRealisations   = 200, 
+                        numRealisations   = 5, 
                         dt                = 0.005,
                         dt_relax          = 0.01,
 #                        numSteps          = 500,
@@ -60,16 +60,16 @@ simulationParams = dict(# Physicial parameters
 
 #test_distances = np.arange(1,30,3,dtype = int)
 #
-#gmax = 50
-#gStep = 4
+gmax = 10
+gStep = 5
 #test_epsilons = [0.1]
 #
 #x_Nc = np.arange(25,45,5)
-x_Nc = np.arange(5,40,5)
+#x_Nc = np.arange(5,40,5)
 #TADsizes = [20,50,100,200,300]
 #connectivityFraction = 0.002
 errorbars = True
-
+x_sigma = np.array([0, 0.1, 0.2])
 ############################################################################
 ############################################################################
 
@@ -155,6 +155,61 @@ def proba_vs_Nc_andVE(polymerParams,simulationParams,x_Nc,errorbars=False):
         plt.legend()        
         plt.show()
 
+def proba_vs_genomicDistance_andVE(polymerParams,simulationParams,x_sigma,gmax,gStep,errorbars=False):
+
+    date = strftime("%Y_%m_%d_%H_%M")
+    filename = date + '_VE_proba_vs_genomicDistance_' + '.csv'
+    
+    with open('results/'+filename, 'w') as csvfile:
+        
+        gmin = 2
+        
+        
+        plt.figure()
+        rcParams.update({'axes.labelsize': 'xx-large'})
+        plt.xlabel('genomic distance (in number of monomers)')
+        plt.ylabel(r'$\mathbb{P}$(Repair)')
+        
+        xg = np.arange(gmin,gmax,gStep,dtype=int)
+        
+        for i, sigma in enumerate(x_sigma):
+            
+            if sigma == 0:
+                labelkeep = 'Without excluded volume'
+                experimentName = "EncounterSimulation"        
+                simulationParams['excludedVolumeCutOff'] = 0
+            else:
+                labelkeep = r"Excluding volume ($\sigma = %s $)" % sigma
+                experimentName = "Encounter_withRepairSphere"
+                simulationParams['excludedVolumeCutOff'] = sigma
+            probas = np.zeros(len(xg))
+            demiCI = np.zeros(len(xg))
+            for j, g in enumerate(xg):    
+                print("Simulation for g =",g,"and ",labelkeep)
+                p0 = RCLPolymer(**polymerParams)
+                simulationParams['genomicDistance'] = g
+                results = {**polymerParams, **simulationParams}
+                mc = Experiment(p0, results, simulationParams,experimentName)
+    #            oneTAD_Repair
+                probas[j] = mc.results['repair_probability']
+                demiCI[j] = mc.results['repair_CIhalflength']
+                
+                if i == 0 and g == gmin:
+                    fieldnames = ['experimentSetID']+list(mc.results)
+                    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                    writer.writeheader()
+                writer.writerow({**{'experimentSetID' : str(i)+'_'+str(j)}, **mc.results})
+            
+            if errorbars:
+                plt.errorbar(x=xg, y=probas, yerr=demiCI,
+                             fmt='-o', label=labelkeep, capsize = 4)
+            else:
+                plt.plot(xg,probas,'-o',label=labelkeep)
+        
+        plt.legend()        
+        plt.show()
+
+
 if __name__ == "__main__":
         
 #    file = 'results/2018_04_20_12_55_VE_proba_vs_genomicDistance_.csv'
@@ -175,8 +230,8 @@ if __name__ == "__main__":
 #    mc = FET_Simulation(polymerParams,simulationParams)
 
 #    proba_vs_genomicDistance(polymerParams,simulationParams,gmax,gStep,errorbars)
-#    proba_vs_genomicDistance_andVE(polymerParams,simulationParams,gmax,gStep,errorbars)
-    proba_vs_Nc_andVE(polymerParams,simulationParams,x_Nc,errorbars)   ###########
+    proba_vs_genomicDistance_andVE(polymerParams,simulationParams,x_sigma,gmax,gStep,errorbars)
+#    proba_vs_Nc_andVE(polymerParams,simulationParams,x_Nc,errorbars)   ###########
 #    print(__name__)
 #    DSBclustering(polymerParams,simulationParams)
     
