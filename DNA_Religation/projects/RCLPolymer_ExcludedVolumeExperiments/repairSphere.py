@@ -44,7 +44,7 @@ polymerParams = dict(numMonomers = 100, # np.array([100,100]), # TODO (.., ..., 
 simulationParams = dict(# Physicial parameters
                         diffusionConstant = 0.008,
                         # Numerical parameters
-                        numRealisations   = 5, 
+                        numRealisations   = 600, 
                         dt                = 0.005,
                         dt_relax          = 0.01,
 #                        numSteps          = 500,
@@ -60,8 +60,8 @@ simulationParams = dict(# Physicial parameters
 
 #test_distances = np.arange(1,30,3,dtype = int)
 #
-gmax = 10
-gStep = 5
+gmax = 16
+gStep = 1
 #test_epsilons = [0.1]
 #
 #x_Nc = np.arange(25,45,5)

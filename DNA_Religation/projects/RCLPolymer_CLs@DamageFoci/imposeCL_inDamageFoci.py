@@ -41,7 +41,7 @@ polymerParams = dict(numMonomers = 100, # np.array([100,100]), # TODO (.., ..., 
 simulationParams = dict(# Physicial parameters
                         diffusionConstant = 0.008,
                         # Numerical parameters
-                        numRealisations   = 600, 
+                        numRealisations   = 800, 
                         dt                = 0.005,
                         dt_relax          = 0.01,
 #                        numSteps          = 500,
@@ -49,17 +49,18 @@ simulationParams = dict(# Physicial parameters
                         waitingSteps = 250,
                         numMaxSteps = 12000,
                         encounterDistance = 0.05,
-#                        genomicDistance = 20,
+                        genomicDistance = 4,
                         Nb = 2,
                         Nc_inDamageFoci = 2
 #                        selectedSubDomain = 0
                         )
 
 
+x_Nc = np.arange(3,11)
 #x_Nc = np.array([3,5,7,9,11,13,15]) #np.arange(3,20,3)
 #x_Nd = np.array([0,1,2,3])
-gmax = 12
-gStep = 1
+#gmax = 12
+#gStep = 1
 
 errorbars = True
 
@@ -147,7 +148,7 @@ def proba_vs_keepDFCL(polymerParams,simulationParams,x_Nc,errorbars=False):
         
         
     
-def proba_vs_Nc_andKeepCL(polymerParams,simulationParams,x_Nc,x_Nd,errorbars=False):
+def proba_vs_NcNd_andKeepCL(polymerParams,simulationParams,x_Nc,x_Nd,errorbars=False):
 
     date = strftime("%Y_%m_%d_%H_%M")
     filename = date + 'proba_VE_vs_Nc_NcinDF_adptEPSILONandSIGMA' + '.csv'
@@ -219,6 +220,80 @@ def proba_vs_Nc_andKeepCL(polymerParams,simulationParams,x_Nc,x_Nd,errorbars=Fal
         plt.legend()        
         plt.show()
 
+def proba_vs_Nc_andKeepCL(polymerParams,simulationParams,x_Nc,errorbars=False):
+    date = strftime("%Y_%m_%d_%H_%M")
+    filename = date + 'proba_VE_vs_Nc_NcinDF_adptEPSILONandSIGMA' + '.csv'
+    
+    with open('results/'+filename, 'w') as csvfile:
+                
+        plt.figure()
+        rcParams.update({'axes.labelsize' : 'xx-large'})
+        rcParams.update({'legend.fontsize': 'xx-large'})
+        rcParams.update({'xtick.labelsize': 'xx-large'}) 
+        rcParams.update({'ytick.labelsize': 'xx-large'}) 
+        plt.xlabel('Number of connectors in DF')
+        plt.ylabel(r'$\mathbb{P}$(Repair)') #('Mean first encounter time (sec)') #
+        
+        first_time = True
+        
+        N = polymerParams['numMonomers']
+
+        for i, keepCL in enumerate([True, False]):
+            
+            if keepCL:
+                labelkeep = "Keeping CLs in DF"
+                
+            else:
+                labelkeep = 'Removing CLs in DF'       
+            polymerParams['keepCL'] = keepCL
+#            mfet = np.zeros(len(x_Nc))
+#            efet = np.zeros(len(x_Nc))
+            probas = np.zeros(len(x_Nc))
+            demiCI = np.zeros(len(x_Nc))
+            for j, Nc in enumerate(x_Nc):    
+                print("Simulation for %s CL in DF" % Nc)
+                polymerParams['Nc'] = Nc
+
+                ### ADAPTIVE ENCOUNTER DISTANCE
+                xi = 2*(Nc)/((N-1)*(N-2))
+#                scaleFactor = np.sqrt( (1-xi0)*np.sqrt(xi0) / ((1-xi)*np.s1qrt(xi)) )
+                simulationParams['encounterDistance'] = adaptiveEpsilon(xi, N, polymerParams['b'])
+                
+#                ### ADAPTIVE CUTOFF RADIUS
+#                simulationParams['excludedVolume'] = 2 * adaptiveEpsilon(xi, N, polymerParams['b'])
+#                
+                ### ADAPTIVE dt
+                simulationParams['dt'] = np.round((0.2*simulationParams['encounterDistance'])**2/(2*simulationParams['diffusionConstant']),decimals=4)-0.0001                
+                
+                print("ε = %s" % (simulationParams['encounterDistance']))
+                
+                p0 = RCLPolymer(**polymerParams)
+                results = {**polymerParams, **simulationParams}
+                mc = Experiment(p0, results, simulationParams,"EncounterSimulation")
+    #            oneTAD_Repair
+                probas[j] = mc.results['repair_probability']
+                demiCI[j] = mc.results['repair_CIhalflength']
+#                mfet[j] = mc.results['meanFET']
+#                efet[j] = mc.results['halfCI_FET']
+                
+                if first_time:
+                    fieldnames = ['experimentSetID']+list(mc.results)
+                    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                    writer.writeheader()
+                    first_time = False
+                writer.writerow({**{'experimentSetID' : str(i)+'_'+str(j)}, **mc.results})
+            
+            if errorbars:
+                plt.errorbar(x=x_Nc, y=probas, yerr=demiCI,
+                             fmt='-o', label=labelkeep, capsize = 4)
+            else:
+                plt.plot(x_Nc,probas,'-o',label=labelkeep)
+        
+        plt.legend()        
+        plt.show()
+        
+        
+        
 def proba_vs_genomicDistance(polymerParams,simulationParams,gmax,gStep,errorbars=False):
 
     date = strftime("%Y_%m_%d_%H_%M")
@@ -467,7 +542,7 @@ def mFET_vs_NcinDF(polymerParams,simulationParams,x_Nc,errorbars=False):
 if __name__ == "__main__":
         
 #    proba_vs_keepDFCL(polymerParams,simulationParams,x_Nc,errorbars)   ###########
-    proba_vs_genomicDistance(polymerParams,simulationParams,gmax,gStep,errorbars)
-#    proba_vs_Nc_andKeepCL(polymerParams,simulationParams,x_Nc,x_Nd,errorbars)
+#    proba_vs_genomicDistance(polymerParams,simulationParams,gmax,gStep,errorbars)
+    proba_vs_Nc_andKeepCL(polymerParams,simulationParams,x_Nc,errorbars)
 #    FET_Simulation(polymerParams,simulationParams)
 #    mFET_vs_NcinDF(polymerParams,simulationParams,x_Nc,errorbars)

@@ -6,6 +6,15 @@
 \usepackage{graphicx}
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage{cite}
+\usepackage{titlesec}
+
+\setcounter{secnumdepth}{4}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
 
 \title{Progress report: \\
 	Repair probabilities for the RCL polymer with two DSBs}
@@ -139,7 +148,7 @@ In general, excluded volume forces are added to the polymer dynamics through a n
 \end{equation}
 where $\sigma$ is a cutoff radius of exclusion and $1_{||R_i - R_j || < \sigma} = 1$ if $||R_i - R_j || < \sigma$ and $0$ otherwise.
 
-In our case, to simulate the dispersion of chromatin around DSBs only, we induce volume exclusion for the DF monomers only and take $\kappa_{ev} = \kappa$:
+In our case, to simulate the dispersion of chromatin around DSBs only, we'll induce first volume exclusion for the DF monomers only and take $\kappa_{ev} = \kappa$:
 
 \begin{equation}
 \phi_{local-ev}(R) = - \frac{\kappa_{ev}}{2} \sum_{i \in \text{DF}}\sum_{j \neq i} ||R_i - R_j ||^2 1_{||R_i - R_j || < \sigma}
@@ -152,7 +161,7 @@ In our case, to simulate the dispersion of chromatin around DSBs only, we induce
 \label{fig:model}
 \end{figure}
 
-Finally, considering that in spite of the exclusion induced by repair proteins, the whole repair machinery looks for affine ends to join them, we'll consider repair exclusion spheres that repel all monomers except the other cut ends. So, if any two cut ends approach they won't feel exclusion forces. This new exclusion potential is defined in Eq. \ref{eqn:repair_sphere}.
+Later on, considering that in spite of the exclusion induced by repair proteins, the whole repair machinery looks for affine ends to join them, we'll consider repair exclusion spheres that repel all monomers except the other cut ends. So, if any two cut ends approach they won't feel exclusion forces. This new exclusion potential $\phi_{\substack{repair \\ sphere}}$ is defined in Eq. \ref{eqn:repair_sphere}.
 
 \begin{equation}
 \phi_{\substack{repair \\ sphere}}(R) = - \frac{\kappa_{ev}}{2} \sum_{i \in \text{DF}}\sum_{j \notin \text{DF}} ||R_i - R_j ||^2 1_{||R_i - R_j || < \sigma}
@@ -329,14 +338,40 @@ In conclusion, \textbf{the compactness help to repair polymers cut in a small ne
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\textwidth]{../DNA_Religation/projects/RCLPolymer_CLs@DamageFoci/figures/proba_vs_NcNd.png}
-	\caption{Repair probability in function of the total number of polymer CLs ($N_c + N_d$) where $N_d$ is fixed to 0 (blue) and 1 (orange). In both cases, CLs are removed from the DF monomers, $N = 100$, $g = 20$, $\epsilon = \tilde{\varepsilon}(\xi)$ according to Eq. \ref{eqn:adaptive_eps} and the step $\Delta t$ is also adapted such that Eq. \ref{eqn:stabilityCondition} remains verified.}
+	\caption{Repair probability in function of the total number of polymer CLs ($N_c + N_d$) where $N_d$ is fixed to 0 (blue) and 1 (orange). In both cases, CLs are removed from the DF monomers, $N = 100$, $g = 20$, $\varepsilon = \tilde{\varepsilon}(\xi)$ according to Eq. \ref{eqn:adaptive_eps} and the step $\Delta t$ is also adapted such that Eq. \ref{eqn:stabilityCondition} remains verified.}
 	\label{fig:proba_v_NcNd}
 \end{figure}
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{../DNA_Religation/projects/RCLPolymer_CLs@DamageFoci/figures/proba_vs_Nc_g20_Nd2.png}
+	\caption{Repair probability in function of $N_c$ when $N_d = 2$, $g = 20$ and $\varepsilon = \tilde{\varepsilon}(\xi)$.}
+	\label{fig:proba_v_Nc_Nd2_g20}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{../DNA_Religation/projects/RCLPolymer_CLs@DamageFoci/figures/proba_vs_Nc_g4_Nd2.png}
+	\caption{Repair probability in function of $N_c$ when $N_d = 2$, $g = 4$ and $\varepsilon = \tilde{\varepsilon}(\xi)$.}
+	\label{fig:proba_v_Nc_Nd2_g4}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{../DNA_Religation/figures/__v_Nc_keepANDremove_g20and4.png}
+	\caption{Repair probability (A), MSRG at encounter time (B), mean FET (C) and fitted encounter rate parameter ($\lambda$) (D) as functions of $N_c$  when $g = 20$ (left) and $g = 4$ (right), for $N = 100$, $N_d = 2$ and $\varepsilon = \tilde{\varepsilon}(\xi)$.} 
+	\label{fig:all_v_Nc_Nd2}
+\end{figure}
+
+\clearpage
 
 \subsubsection{Effect of volume exclusion on the repair probability}
 
- Larger values of $\sigma$ make the waiting for looping times last longer (Fig. \ref{fig:mFET_v_Nc_EV}) and thus make the encounter events rarer, however they do not affect dramatically the repair probability overall (Fig. \ref{fig:vs_volumeexclusionradius}). 
+\paragraph{Effect of undiscriminating exclusion} 
+
+First we consider volume exclusion around the DF monomers and affecting indiscriminatingly every monomer reaching the exclusion region. We'll see how increasing the value of the exclusion radius $\sigma$ affects the repair probability in this case.
+
+Fig. \ref{fig:mFET_v_Nc_EV} shows larger values of $\sigma$ make the waiting for looping times last longer and thus make the encounter events rarer for the same $N_c$, however they do not affect dramatically the repair probability overall (Fig. \ref{fig:vs_volumeexclusionradius}). 
 
 
 \begin{figure}[h]
@@ -346,19 +381,20 @@ In conclusion, \textbf{the compactness help to repair polymers cut in a small ne
 	\label{fig:mFET_v_Nc_EV}
 \end{figure}
 
+
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{../DNA_Religation/projects/RCLPolymer_ExcludedVolumeExperiments/figures/proba_vs_cutoffradius_bigfont.png}
+	\includegraphics[width=0.8\textwidth]{../DNA_Religation/projects/RCLPolymer_ExcludedVolumeExperiments/figures/proba_vs_cutoffradius_bigfont.png}
 	\caption{Probability and 95\% confidence interval of repair, in function of the cutoff radius of volume exclusion.}
 	\label{fig:vs_volumeexclusionradius}
 \end{figure}
 
-Fig. \ref{fig:MSRGandFET_byEvent} shows that, as expected, the misrepair scenarios are associated with smaller radius of gyration, and thus with more compact polymers. This could be an indication that decondensation of the polymer chain in the damage loci could lead to better repair probabilities. 
+Fig. \ref{fig:MSRGandFET_byEvent} shows that, as expected, the misrepair scenarios are associated with smaller radius of gyration, i.e. \textbf{misrepair happens in a compact polymer}. This could be an indication that decondensation of the polymer chain in the damage loci could lead to better repair probabilities. 
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{../DNA_Religation/projects/RCLPolymer_Repair_Probability/figures/by_event_type_distributions.png}
-	\caption{Distribution of the first encounter times and the mean square radius of gyration in repair and misrepair events considering local excluded volume interactions.}
+	\caption{Distribution of FET (A) and MSRG at encounter time (B) in misrepair (left) and repair (right) events considering local excluded volume interactions with $\sigma = 0.1 \mu$m.}
 	\label{fig:MSRGandFET_byEvent}
 \end{figure}
 
@@ -371,7 +407,7 @@ We can see in Fig. \ref{fig:pr_v_g_cutoffs} that the repair probability in funct
 	\label{fig:pr_v_g_cutoffs}
 \end{figure}
 
-However the repair probability function considering excluded volume interactions is always below the repair probability in the non-excluded case (Figs. \ref{fig:proba_vs_g_exclusion} and \ref{fig:proba_vs_Nc_exclusion})
+However \textbf{the repair probability function considering excluded volume interactions is always below the repair probability in the non-excluded case} (Figs. \ref{fig:proba_vs_g_exclusion} and \ref{fig:proba_vs_Nc_exclusion})
 
 \begin{figure}[h]
 	\centering
@@ -401,21 +437,9 @@ However the repair probability function considering excluded volume interactions
 	\label{fig:proba_vs_Nc_03exclusion}
 \end{figure}
 
+Now, smaller encounter radius will be considered now to see if excluded volume could help the correct repairs.
 
-\clearpage
-
-\subsubsection{Effect of volume exclusion with more restrictive encounter distances}
-
-After tracking the inter-break physical distances (in $\mu$m) as it is presented in figure \ref{fig:distances3breaks}, it seems that the encounter distance of 0.1 $\mu$m is rather permissive. So, smaller encounter radius will be considered now to see if excluded volume could help the correct repairs.
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=\textwidth]{../DNA_Religation/projects/DSB_Clustering/figures/distanceBetween3DSBs}
-	\caption{Track of the distances between the ends of three DSBs just before the breaks are induced at relaxation time. The ends of the same break tend to be nearer in comparison to the other distances. }
-	\label{fig:distances3breaks}
-\end{figure}
-
-Figure \ref{fig:noExclusion_002epsilon} shows the results with and without volume exclusion and with a encounter distance of $\varepsilon = b \cdot 10^{-1} = 0.02 \mu$m.
+Figure \ref{fig:noExclusion_002epsilon} shows the results with and without volume exclusion and with a encounter distance of $\varepsilon = b \cdot 10^{-1} = 0.02 \mu$m. We observe that keeping the same $\varepsilon$ does not provide interesting results. This results motivated the addition of a $\xi$-adaptive $\varepsilon$.
 
 \begin{figure}[h]
 	\centering
@@ -424,8 +448,32 @@ Figure \ref{fig:noExclusion_002epsilon} shows the results with and without volum
 	\label{fig:noExclusion_002epsilon}
 \end{figure}
 
+\clearpage
+
+\paragraph{Effect of a selective repair sphere}
+
+Now a repair sphere will be considered, which will repeal any monomer that is not one of the DF cut ends. On the other hand, DF monomers will not be repealed, which is performed adding the potential $\phi_{\substack{repair \\ sphere}}$  defined in Eq. \ref{eqn:repair_sphere}.
+
+Fig. \ref{fig:all_v_g_VE} shows that the selective repair sphere, when $N_d = 1$ CLs are imposed in the DF, allows to achieve better repair probabilities. Indeed, larger $\sigma$ lead to a greater repair probability. At the same time, larger $\sigma$ induce shorter FETs. For $\sigma = b = 0.2 \ \mu$m the encounter rate increases significantly (\ref{fig:all_v_g_VE}-C and D). But, even though the encounter occurs rapidly, the repair rate is higher.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{../DNA_Religation/figures/__v_g_VE.png}
+	\caption{Repair probability (A), MSRG at encounter time (B), mean FET (C) and fitted encounter rate parameter ($\lambda$) (D) as functions of $g$  for $\sigma = $0, 0.1 $\mu$m and 0.2 $\mu$m. $N = 100$, $b = 0.2 \ \mu$m, $N_c = 10$, $N_d = 1$, $\varepsilon = 0.05 \ \mu$m.}
+	\label{fig:all_v_g_VE}
+\end{figure}
+
+Now, for an increasing $N_c$ and adapting both $\sigma$ and $\epsilon$ to the connectivity as indicated by Eqs. \ref{eqn:adaptive_eps} and \ref{eqn:adaptive_sigma}, Fig. \ref{fig:proba_v_Nc_VE_nd} shows that the scaled selective volume exclusion leads to better repair probabilites. Thus, contrastively to the undiscriminating volume exclusion, \textbf{the selective repair sphere, particularly with scaled encounter and cutoff radii, helps the repair.}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{../DNA_Religation/figures/proba_v_Nc_adaptiveE_VE.png}
+	\caption{Repair probability considering a selective volume exclusion with $\xi$-adaptive $\varepsilon$ and $\sigma$ with $v$ = 2 (i.e. $\sigma = 2 \varepsilon$) for $g = $ and $N_d = 0$ (A) and $N_d = 1$ (B)}
+	\label{fig:proba_v_Nc_VE_nd}
+\end{figure}
 
 
+\subsubsection{TODO: Joint effect of volume exclusion and CL removal}
 
 
 \clearpage

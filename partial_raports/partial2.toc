@@ -14,9 +14,11 @@
 \contentsline {subsection}{\numberline {3.2}Changes on the repair probability conditionally to $g$, $N_c$ and decondensation}{12}
 \contentsline {subsubsection}{\numberline {3.2.1}Effect of $g$ on the repair probability}{12}
 \contentsline {subsubsection}{\numberline {3.2.2}Effect of $N_c$ on the repair probability}{13}
-\contentsline {subsubsection}{\numberline {3.2.3}Effect of volume exclusion on the repair probability}{15}
-\contentsline {subsubsection}{\numberline {3.2.4}Effect of volume exclusion with more restrictive encounter distances}{22}
-\contentsline {subsection}{\numberline {3.3}Repair probability in different domains}{24}
-\contentsline {subsubsection}{\numberline {3.3.1}TODO}{30}
-\contentsline {section}{\numberline {4}Partial conclusions}{31}
-\contentsline {section}{\numberline {5}Perspectives}{31}
+\contentsline {subsubsection}{\numberline {3.2.3}Effect of volume exclusion on the repair probability}{19}
+\contentsline {paragraph}{\numberline {3.2.3.1}Effect of undiscriminating exclusion}{19}
+\contentsline {paragraph}{\numberline {3.2.3.2}Effect of a selective repair sphere}{25}
+\contentsline {subsubsection}{\numberline {3.2.4}TODO: Joint effect of volume exclusion and CL removal}{26}
+\contentsline {subsection}{\numberline {3.3}Repair probability in different domains}{28}
+\contentsline {subsubsection}{\numberline {3.3.1}TODO}{34}
+\contentsline {section}{\numberline {4}Partial conclusions}{35}
+\contentsline {section}{\numberline {5}Perspectives}{35}
