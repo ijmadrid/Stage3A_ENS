@@ -467,25 +467,41 @@ Now, for an increasing $N_c$ and adapting both $\sigma$ and $\epsilon$ to the co
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{../DNA_Religation/figures/proba_v_Nc_adaptiveE_VE.png}
+	\includegraphics[width=0.8\textwidth]{../DNA_Religation/figures/proba_v_Nc_adaptiveE_VE.png}
 	\caption{Repair probability considering a selective volume exclusion with $\xi$-adaptive $\varepsilon$ and $\sigma$ with $v$ = 2 (i.e. $\sigma = 2 \varepsilon$) for $g = $ and $N_d = 0$ (A) and $N_d = 1$ (B)}
 	\label{fig:proba_v_Nc_VE_nd}
 \end{figure}
 
 
-\subsubsection{TODO: Joint effect of volume exclusion and CL removal}
+\subsubsection{Joint effect of volume exclusion and CL removal}
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{../DNA_Religation/figures/__v_sigma_Nd123}
+	\caption{Repair probability (A), MSRG (B) and mean FET (C) as functions of $\sigma$ with selective exclusion, imposing $N_d =1$, $2$ and $3$ CLs in the DF, for then keeping or removing them. $N = 100$, $g = 4$, $\varepsilon = 0.05 \ \mu$m and $N_c = 10$.}
+	\label{fig:all_v_sigma_3nds}
+\end{figure}
 
 \clearpage
 
 \subsection{Repair probability in different domains}
 
-We'll now consider a polymer replied in two connected sub-domains (TADs) (figure \ref{fig:TADSmodel}).
+We'll now consider a polymer folded in two connected sub-domains (simulating topologically associating domains (TADs) in DNA) as represented in Fig. \ref{fig:TADSmodel}). We'll define $M$ sub-domains where each sub-domain $i$ has a connectivity $\xi_i$ defined by their number of inner CLs $N_c^{(i)}$. A number $N_{lr}^{(i,j)}$ of large-range CLs connecting different pairs $i \neq j$  of sub-domains are also added. Thus, we define the connectivity matrix $\mathbb{N}_c$ characterizing the TAD-folded RCL polymer by Eq. \ref{eqn: Nc_TAD}.
+
+\begin{equation}
+\mathbb{N}_c = \begin{pmatrix}
+N_c^{(1)} & N_{lr}^{(1,2)} & \cdots & N_{lr}^{(1,M)} \\ 
+& N_c^{(2)} & \cdots & N_{lr}^{(2,M)} \\ 
+&  & \ddots & \vdots \\ 
+\text{sym.} &  &  & N_c^{(M)}
+\end{pmatrix} 
+\label{eqn: Nc_TAD}
+\end{equation}
 
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=\textwidth]{../drawings/twoTADmodel.png}
-	\caption{Model of the RCL polymer replied in two connected subdomains.}
+	\caption{Model of the RCL polymer folded in two connected subdomains.}
 	\label{fig:TADSmodel}
 \end{figure}
 

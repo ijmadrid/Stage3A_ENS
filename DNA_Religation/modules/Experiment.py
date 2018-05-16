@@ -57,7 +57,7 @@ class Experiment():
             print("Simulation of Encounter after two DSBs adding exclusion forces")
             self.BreakAndExclude()
         elif customExperiment == "Encounter_withRepairSphere":
-            print("Simulation of Encounter after two DSBs adding a selective exclusion forces")
+            print("Simulation of Encounter after two DSBs adding selective exclusion forces")
             self.SelectiveExclude()
         elif customExperiment == "TAD_Repair":
             print("Simulation of TAD Repair with one DSB in each TAD")
@@ -280,9 +280,9 @@ class Experiment():
             self.polymer = self.polymer.new()
             ##################################################  
 
-        self.saveEncounterResults(FETs, events, removedNums)
-        self.addResults('MSRG_atEncounter', post_msrgs)
-        self.addResults('Ensemble_MSRG', np.nanmean(post_msrgs))
+        self.saveEncounterResults(FETs, events, removedNums, post_msrgs)
+#        self.addResults('MSRG_atEncounter', post_msrgs)
+#        self.addResults('Ensemble_MSRG', np.nanmean(post_msrgs))
     
     
     
@@ -334,9 +334,9 @@ class Experiment():
             self.polymer = self.polymer.new()
             ##################################################  
 
-        self.saveEncounterResults(FETs, events, removedNums)
-        self.addResults('MSRG_atEncounter', post_msrgs)
-        self.addResults('Ensemble_MSRG', np.nanmean(post_msrgs))
+        self.saveEncounterResults(FETs, events, removedNums, post_msrgs)
+#        self.addResults('MSRG_atEncounter', post_msrgs)
+#        self.addResults('Ensemble_MSRG', np.nanmean(post_msrgs))
 
 
     def SelectiveExclude(self):
@@ -388,9 +388,7 @@ class Experiment():
             self.polymer = self.polymer.new()
             ##################################################  
 
-        self.saveEncounterResults(FETs, events, removedNums)
-        self.addResults('MSRG_atEncounter', post_msrgs)
-        self.addResults('Ensemble_MSRG', np.nanmean(post_msrgs))
+        self.saveEncounterResults(FETs, events, removedNums, post_msrgs)
         
 
     def TAD_repair(self):
@@ -588,6 +586,7 @@ class Experiment():
         
         self.addResults('MSRG_atEncounter', msrg)
         self.addResults('Ensemble_MSRG', np.mean(msrg))
+        self.addResults('Ensemble_MSRG_dx', 1.96*np.std(msrg)/np.sqrt(len(msrg)))
         self.addResults('MeanInterBreakDistance',np.mean(interbreakDistance,axis=0))
 
 
@@ -609,7 +608,7 @@ class Experiment():
 #        plt.plot(x_interval_for_fit, exponential(x_interval_for_fit, *popt), label='Fit %s exp(- %s t)' % (*popt))
 #        plt.legend()
 
-    def saveEncounterResults(self, FETs, events, removedNums):
+    def saveEncounterResults(self, FETs, events, removedNums, post_msrgs = None):
         # Prepare results 
         FETs = FETs*self.dt
         self.addResults("events",events)
@@ -644,6 +643,10 @@ class Experiment():
         self.addResults("repair_probability",repairProbas)
         self.addResults("repair_CIhalflength",repairHalfCI)
         self.addResults("mean_removedCLs",meanremovedCLs)
+        if post_msrgs is not None:
+            self.addResults('MSRG_atEncounter', post_msrgs)
+            self.addResults('Ensemble_MSRG', np.nanmean(post_msrgs))
+            self.addResults('Ensemble_MSRG_dx', 1.96*np.nanstd(post_msrgs)/np.sqrt(total_valid_experiments))
 
 
         
