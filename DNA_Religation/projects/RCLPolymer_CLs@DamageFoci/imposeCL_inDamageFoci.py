@@ -41,7 +41,7 @@ polymerParams = dict(numMonomers = 100, # np.array([100,100]), # TODO (.., ..., 
 simulationParams = dict(# Physicial parameters
                         diffusionConstant = 0.008,
                         # Numerical parameters
-                        numRealisations   = 500, 
+                        numRealisations   = 800, 
                         dt                = 0.005,
                         dt_relax          = 0.01,
                         numSteps          = 12000,
@@ -57,7 +57,7 @@ simulationParams = dict(# Physicial parameters
 
 
 #x_Nc = np.arange(3,11)
-x_sigma = np.linspace(0.035,0.225,num=36)
+x_sigma = np.linspace(0.03,0.25,num=4)
 #x_Nc = np.array([3,5,7,9,11,13,15]) #np.arange(3,20,3)
 #x_Nd = np.array([0,1,2,3])
 #gmax = 12
@@ -601,7 +601,7 @@ def proba_v_sigma(polymerParams,simulationParams,x_sigma,errorbars=False):
 #        plt.show()    
 #        
 
-def proba_v_VEkappa(polymerParams,simulationParams,x_kappa,errorbars=False):
+def proba_v_VEkappa(polymerParams,simulationParams,x_sigma,x_kappa,errorbars=False):
     date = strftime("%Y_%m_%d_%H_%M")
     filename = date + '_proba-v_kappa' + '.csv'
 
@@ -609,9 +609,10 @@ def proba_v_VEkappa(polymerParams,simulationParams,x_kappa,errorbars=False):
         
     with open('results/'+filename, 'w') as csvfile:
 
-        for i, keepCL in enumerate([True]):
+        for i, sigma in enumerate(x_sigma):
   
-            polymerParams['keepCL'] = keepCL
+            print("Simulation for σ = %s " % sigma)
+            simulationParams['excludedVolumeCutOff'] = sigma
 
             for j, kappa in enumerate(x_kappa):    
                 print("Simulation for κ = %s " % kappa)
@@ -649,7 +650,7 @@ if __name__ == "__main__":
 #    proba_vs_genomicDistance(polymerParams,simulationParams,gmax,gStep,errorbars)
 #    proba_vs_Nc_andKeepCL(polymerParams,simulationParams,x_Nc,errorbars)
 #    proba_v_sigma(polymerParams,simulationParams,x_sigma,errorbars)
-    proba_v_VEkappa(polymerParams,simulationParams,x_kappa,errorbars)
+    proba_v_VEkappa(polymerParams,simulationParams,x_sigma,x_kappa,errorbars)
 #    FET_Simulation(polymerParams,simulationParams)
 #    mFET_vs_NcinDF(polymerParams,simulationParams,x_Nc,errorbars)
 #    mc = watchOneSimulation(polymerParams, simulationParams)
