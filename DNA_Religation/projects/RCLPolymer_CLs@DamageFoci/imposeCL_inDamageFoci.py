@@ -44,8 +44,8 @@ simulationParams = dict(# Physicial parameters
                         numRealisations   = 500, 
                         dt                = 0.005,
                         dt_relax          = 0.01,
-#                        numSteps          = 500,
-#                        excludedVolumeCutOff = 0,
+                        numSteps          = 12000,
+                        excludedVolumeCutOff = 0.1,
                         waitingSteps = 250,
                         numMaxSteps = 12000,
                         encounterDistance = 0.05,
@@ -62,6 +62,8 @@ x_sigma = np.linspace(0.035,0.225,num=36)
 #x_Nd = np.array([0,1,2,3])
 #gmax = 12
 #gStep = 1
+
+x_kappa = (3*0.008/(0.2**2))*np.linspace(0, 4, num = 30)
 
 errorbars = True
 
@@ -530,7 +532,7 @@ def mFET_vs_NcinDF(polymerParams,simulationParams,x_Nc,errorbars=False):
                 plt.plot(x_Nc,mfet,'-o',label=labelkeep)
         
         plt.legend()        
-        plt.show
+        plt.show()
 
 ################################################################################
 ################################################################################
@@ -599,6 +601,41 @@ def proba_v_sigma(polymerParams,simulationParams,x_sigma,errorbars=False):
 #        plt.show()    
 #        
 
+def proba_v_VEkappa(polymerParams,simulationParams,x_kappa,errorbars=False):
+    date = strftime("%Y_%m_%d_%H_%M")
+    filename = date + '_proba-v_kappa' + '.csv'
+
+    first_time = True
+        
+    with open('results/'+filename, 'w') as csvfile:
+
+        for i, keepCL in enumerate([True]):
+  
+            polymerParams['keepCL'] = keepCL
+
+            for j, kappa in enumerate(x_kappa):    
+                print("Simulation for κ = %s " % kappa)
+                simulationParams['excludedVolumeSpringConstant'] = kappa
+                
+                p0 = RCLPolymer(**polymerParams)
+                results = {**polymerParams, **simulationParams}
+                mc = Experiment(p0, results, simulationParams,"Encounter_withRepairSphere")
+
+                if first_time:
+                    fieldnames = ['experimentSetID']+list(mc.results)
+                    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                    writer.writeheader()
+                    first_time = False
+                writer.writerow({**{'experimentSetID' : str(i)+'_'+str(j)}, **mc.results})
+  
+                
+def watchOneSimulation(polymerParams, simulationParams):
+    p0 = RCLPolymer(**polymerParams)
+    results = {}
+    mc = Experiment(p0, results, simulationParams, "watchEncounter")
+    print(mc.results['FET'])
+    return mc
+    
 ################################################################################
 ################################################################################
 ########################### MAIN ###############################################
@@ -611,6 +648,9 @@ if __name__ == "__main__":
 #    proba_vs_keepDFCL(polymerParams,simulationParams,x_Nc,errorbars)   ###########
 #    proba_vs_genomicDistance(polymerParams,simulationParams,gmax,gStep,errorbars)
 #    proba_vs_Nc_andKeepCL(polymerParams,simulationParams,x_Nc,errorbars)
-    proba_v_sigma(polymerParams,simulationParams,x_sigma,errorbars)
+#    proba_v_sigma(polymerParams,simulationParams,x_sigma,errorbars)
+    proba_v_VEkappa(polymerParams,simulationParams,x_kappa,errorbars)
 #    FET_Simulation(polymerParams,simulationParams)
 #    mFET_vs_NcinDF(polymerParams,simulationParams,x_Nc,errorbars)
+#    mc = watchOneSimulation(polymerParams, simulationParams)
+#    ani = mc.plot_trajectoire(show=True)

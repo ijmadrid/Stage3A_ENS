@@ -68,6 +68,8 @@ class Experiment():
         elif customExperiment == 'persistentDSB':
             print("Simulation of two persistent DSB motion")
             self.persistentDSB()
+        elif customExperiment == 'watchEncounter':
+            self.watchEncounter()
         elif callable(customExperiment):
             # customExperiment should be a function that has a 
             # Experiment object as unique argument
@@ -82,7 +84,7 @@ class Experiment():
     def addResults(self, name, value):
         self.results[name] = value
 
-    def plot_trajectoire(self):
+    def plot_trajectoire(self,show=False):
         fig = plt.figure()
         ax = Axes3D(fig)
 #        ax.auto_scale_xyz([-10, 10], [-10, 10], [-10, 10])
@@ -94,17 +96,18 @@ class Experiment():
         Z = self.trajectoire[0][:,2]
         line, = ax.plot(X, Y, Z)
         dots = ax.scatter(X, Y, Z, c=self.polymer.colors, marker='o')
-
-#        annotations = []
-#        for m in self.monomers2follow:
-#            rm = self.trajectoire[0][m,:]
-#            annotations.append(ax.text(rm[0],rm[1],rm[2],  '%s' % (str(m)), size=5, zorder=1, color='k') )
-        
-#        fT = self.trajectoire[0][self.monomers2follow,:]
-#        fX = fT[:,0]
-#        fY = fT[:,1]
-#        fZ = fT[:,2]
-#        dots2follow = ax.scatter(fX, fY, fZ, c='r', marker='o')
+    
+#        cls = []    
+#        clpairs = self.polymer.offDiagPairs()
+#        for clpair in clpairs:
+#            mx = X[clpair[0]]
+#            nx = X[clpair[1]]
+#            my = Y[clpair[0]]
+#            ny = Y[clpair[1]]
+#            mz = Z[clpair[0]]
+#            nz = Z[clpair[1]]
+#            cl, = ax.plot([mx,nx],[my,ny],[mz,nz],color = 'g')
+#            cls.append(cl)
         
         max_range = np.array([X.max()-X.min(), Y.max()-Y.min(), Z.max()-Z.min()]).max() / 2.0
 
@@ -122,25 +125,26 @@ class Experiment():
             line.set_ydata(ri[:,1])  # update the data
             line.set_3d_properties(ri[:,2])
             dots._offsets3d = (ri[:,0], ri[:,1], ri[:,2])
-            
-#            ri2follow = ri[self.monomers2follow,:]
-#            dots2follow._offsets3d = (ri2follow[:,0], ri2follow[:,1], ri2follow[:,2])
-            
-#            annotations[0].set_x(ri[m,0])
-#            annotations[0].set_y(ri[m,1])
-#            annotations[0].set_3d_properties(ri[m,3])
-                
-            return line, 
+#            for p, cl in enumerate(cls):
+#                cl.set_xdata(ri[:,0][clpairs[p][0]],ri[:,0][clpairs[p][1]])
+#                cl.set_ydata(ri[:,1][clpairs[p][0]],ri[:,1][clpairs[p][1]]) 
+#                cl.set_3d_properties(ri[:,2][clpairs[p][0]],ri[:,2][clpairs[p][1]]) 
+            return line,
                 
         def init():
             line.set_data([],[])
             line.set_3d_properties([])
+#            for cl in cls:
+#                cl.set_data([],[])
+#                cl.set_3d_properties([])
             return line,
         
         ani = animation.FuncAnimation(fig, animate, frames=self.numSteps, init_func=init,
                                               interval=self.dt, blit=False, repeat = True)
     
-        plt.close(fig)
+        plt.show()
+        if not show:
+            plt.close(fig)
         
         return ani
 
@@ -361,8 +365,12 @@ class Experiment():
             # Simulates the break and some waiting time:
             removedNum = self.randomBreaks_SingleStep()
 
-            # ADD EXCLUDED VOLUME       
-            kappa = 3*self.diffusionConstant/(self.polymer.b**2)
+            # ADD EXCLUDED VOLUME
+            try:
+                kappa = self.excludedVolumeSpringConstant
+            except:
+                kappa = 3*self.diffusionConstant/(self.polymer.b**2)
+            
             repulsionForce = lambda polymer : - kappa * RepairSphere(polymer, self.polymer.freeMonomers, self.excludedVolumeCutOff)   
             self.polymer.addnewForce(repulsionForce)
 
@@ -607,6 +615,50 @@ class Experiment():
 #        x_interval_for_fit = np.linspace(bin_borders[0], bin_borders[-1], 10000)
 #        plt.plot(x_interval_for_fit, exponential(x_interval_for_fit, *popt), label='Fit %s exp(- %s t)' % (*popt))
 #        plt.legend()
+
+
+    def watchEncounter(self):
+
+        # Simulates the break and some waiting time:
+        removedNum = self.randomBreaks_SingleStep()
+
+        # ADD EXCLUDED VOLUME       
+        kappa = 3*self.diffusionConstant/(self.polymer.b**2)
+        repulsionForce = lambda polymer : - kappa * RepairSphere(polymer, self.polymer.freeMonomers, self.excludedVolumeCutOff)   
+        self.polymer.addnewForce(repulsionForce)
+
+        self.polymer.colors = ['y']*self.polymer.numMonomers
+        for m in self.polymer.freeMonomers:
+            self.polymer.colors[m] = 'r'
+        self.polymer.colors[:self.polymer.freeMonomers[0]] = ['g']*(self.polymer.freeMonomers[0])
+        self.polymer.colors[(self.polymer.freeMonomers[1]+1):self.polymer.freeMonomers[2]] = ['b']*(self.polymer.freeMonomers[2]-self.polymer.freeMonomers[1]-1)
+#        self.polymer.colors[(self.polymer.freeMonomers[2]+1):self.polymer.freeMonomers[3]] = ['b']*(self.polymer.numMonomers-self.polymer.freeMonomers[3]-1)
+        # Wait some more time
+        self.polymer.step(self.waitingSteps,self.dt_relax,self.diffusionConstant)
+
+        ##################################################                 
+        # Simulation until encounter              
+        t = 0
+        trajectory = np.zeros((self.numSteps+1,self.polymer.numMonomers,3))
+        trajectory[0] = self.polymer.get_r()
+        
+        didEncounter = self.polymer.anyEncountered(self.encounterDistance)
+        while(not(didEncounter[0]) and t < self.numSteps):
+            self.polymer.step(1,self.dt,self.diffusionConstant)
+            didEncounter = self.polymer.anyEncountered(self.encounterDistance)
+            trajectory[t+1] = self.polymer.get_r()
+            t += 1
+        
+        if(t < self.numSteps):
+            trajectory[t+1:-1] = self.polymer.get_r()
+        
+        self.trajectoire = trajectory
+        
+        self.addResults("trajectory",self.trajectoire)
+        self.addResults("removedCLs",removedNum)
+        self.addResults("FET",t)
+        
+        ##################################################  
 
     def saveEncounterResults(self, FETs, events, removedNums, post_msrgs = None):
         # Prepare results 
