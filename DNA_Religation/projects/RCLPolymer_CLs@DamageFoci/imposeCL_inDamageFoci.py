@@ -57,7 +57,7 @@ simulationParams = dict(# Physicial parameters
 
 
 #x_Nc = np.arange(3,11)
-x_sigma = np.linspace(0.03,0.25,num=4)
+x_sigma = np.linspace(0.03,0.25,num=5)
 #x_Nc = np.array([3,5,7,9,11,13,15]) #np.arange(3,20,3)
 #x_Nd = np.array([0,1,2,3])
 #gmax = 12

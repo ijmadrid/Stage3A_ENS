@@ -1,21 +1,37 @@
-res <- read.csv("./Stage 3A ENS/DNA_Religation/projects/RCLPolymer_CLs@DamageFoci/results/2018_05_16_17_52_proba-v_sigma.csv")
-
+res <- read.csv("./Stage 3A ENS/DNA_Religation/projects/RCLPolymer_CLs@DamageFoci/results/2018_05_17_18_10_proba-v_kappa.csv")
+  
 library(ggplot2)
 
 res$excludedVolumeCutOff <- as.factor(res$excludedVolumeCutOff)
 
 {
-p <- ggplot(data = res, aes(x = excludedVolumeSpringConstant, y = repair_probability)) + geom_line(size = 1.5) + geom_ribbon(data = res, aes(x = excludedVolumeSpringConstant, 
+p <- ggplot(data = res, aes(x = excludedVolumeSpringConstant, y = repair_probability, color = excludedVolumeCutOff)) + geom_line(size = 1.5) + geom_ribbon(data = res, aes(x = excludedVolumeSpringConstant, 
                                   ymin = repair_probability - repair_CIhalflength,
                                   ymax = repair_probability + repair_CIhalflength), alpha = 0.2) + theme_bw()
 p
 }
 
+
+
+####
+{
+  p <- ggplot(data = res, aes(x = excludedVolumeCutOff, y = excludedVolumeSpringConstant)) + geom_raster(aes(fill = repair_probability), interpolate = T)
+  
+  p <- p + scale_fill_gradientn(colours= heat.colors(100)) +
+    geom_hline(yintercept = 0.6,linetype = 2,size=1) +
+    geom_vline(xintercept = 0.05,linetype = 2,size=1) +
+    geom_vline(xintercept = 0.2,linetype = 2,size=1) 
+  
+  p
+}
+####
+
+
 {q <- ggplot(data = res, aes(x = excludedVolumeSpringConstant, 
                             y = meanFET)) + geom_line(size = 1.5) + geom_ribbon(aes(x = excludedVolumeSpringConstant, 
                                                                              ymin = meanFET - halfCI_FET,
                                                                              ymax = meanFET + halfCI_FET), alpha = 0.2) + theme_bw()
-q+ scale_color_manual(values=c("turquoise1"))}
+q}
 
 #### Curve fitting
 exp.fit <- lm(data = res, formula = log(meanFET) ~ excludedVolumeSpringConstant)
@@ -25,8 +41,7 @@ predicted_df <- data.frame(fit = fit, x=x)
 q + geom_line(data = predicted_df, aes(x = x, y = fit), colour = 'red')
 
 {k <- ggplot(data = res, aes(x = excludedVolumeSpringConstant, 
-                            y = Ensemble_MSRG, 
-                            color = keepCL)) + geom_line(size = 1.5)  + geom_ribbon(aes(x = excludedVolumeSpringConstant, 
+                            y = Ensemble_MSRG)) + geom_line(size = 1.5)  + geom_ribbon(aes(x = excludedVolumeSpringConstant, 
                                                                                                      ymin = Ensemble_MSRG - Ensemble_MSRG_dx,
                                                                                                      ymax = Ensemble_MSRG + Ensemble_MSRG_dx), alpha = 0.2) + theme_bw()
 k + scale_color_manual(values=c("turquoise1"))}
@@ -72,20 +87,49 @@ k + scale_color_manual(values=c("turquoise1"))}
 
 library(gsubfn)
 str2numvector <- function(strlist){
-  z <- strapply(as.character(strlist), "(\\d*\\.*\\d+|\\d+\\.|\\d*\\.*\\d+e\\+\\d+|\\d*\\.*\\d+e\\-\\d+)", as.numeric)
-  #z <- strapply(as.character(strlist), "(-?(\\d*\\.*\\d+|\\d+\\.))", as.numeric)
-  #z <- lapply(as.character(strlist), function(x) gsub("[^[:digit:].e+]","",x))
-  z <- cbind(lapply(z, 2, FUN = unlist))
+  z <- strapply(as.character(strlist), "(\\d*\\.*\\d+|\\d+\\.|\\d*\\.*\\d+e\\+\\d+|\\d*\\.*\\d+e\\-\\d+|nan)", as.numeric)
+  z <- cbind(sapply(z, 2, FUN = unlist))
   return(z)
-#return(unlist(lapply(z, mean)))
 }
 
 msrgs <- str2numvector(res$MSRG_atEncounter)
-msrgs
-plot(res$Ensemble_MSRG, unlist(lapply(msrgs, mean)))
+msrgs[is.nan(msrgs)] <- NA
+plot(res$Ensemble_MSRG, colMeans(msrgs,na.rm = T))
 FETs <- str2numvector(res$FETs)
+FETs[is.nan(FETs)] <- NA
 
-# 2.
+str2eventlist <- function(strlist){
+  z <- strapply(as.character(strlist), "(\\w+|\\w*\\-\\w+)")
+  z <- cbind(sapply(z, 2, FUN = unlist))
+  return(z)
+}
+events <- str2eventlist(res$events)
+events[events == "NA"] <- NA
+
+df <- data.frame(events = events, fets = FETs, msrgs = msrgs)
+
+# 2. Violin plots
+library(manipulate)
+
+manipulate(
+  ggplot(data = df <- subset(data.frame(events = events[,column], 
+                                        fets = FETs[,column], 
+                                        msrgs = msrgs[,column]), 
+                             !is.na(events)), 
+         aes(x = events, y = df[,factor], fill = events, color = events)) +
+    geom_violin() + geom_boxplot(width=0.1, fill = "white",color="black") +
+    coord_flip() + ylab(factor) +
+    scale_fill_manual(values = c("red","coral","orange","yellow","green2")) + 
+    scale_color_manual(values = c("red","coral","orange","yellow","green2")) +
+    theme_bw() + theme(legend.position="none"),
+  column = slider(1,30),
+  factor = picker('fets','msrgs')
+)
+
+manipulate(
+ggplot(data = df, aes(x = events.10, y = df[,factor], fill = events.10)) + geom_violin() + geom_boxplot(width=0.1, fill = "white") + theme(legend.position="none") + coord_flip(),
+factor = picker("msrgs.10","fets.10")
+)
 
 
 

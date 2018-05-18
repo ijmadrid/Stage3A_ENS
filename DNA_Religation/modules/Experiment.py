@@ -612,6 +612,15 @@ class Experiment():
             popt = (-1, -1)
         return popt
     
+    
+    def getMSDfit(self,x):
+        from scipy.optimize import curve_fit
+        
+        def power(t, A, alpha):
+            return A*t**alpha
+        
+        #TODO
+        
 #        x_interval_for_fit = np.linspace(bin_borders[0], bin_borders[-1], 10000)
 #        plt.plot(x_interval_for_fit, exponential(x_interval_for_fit, *popt), label='Fit %s exp(- %s t)' % (*popt))
 #        plt.legend()
