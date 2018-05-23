@@ -1,14 +1,19 @@
-res <- read.csv("./Stage 3A ENS/DNA_Religation/projects/RCLPolymer_CLs@DamageFoci/results/2018_05_17_18_10_proba-v_kappa.csv")
+res <- read.csv("./Stage 3A ENS/DNA_Religation/projects/RCLPolymer_CLs@DamageFoci/results/2018_05_22_12_28_proba-v_kappa.csv")
   
 library(ggplot2)
+library(RColorBrewer)
 
 res$excludedVolumeCutOff <- as.factor(res$excludedVolumeCutOff)
 
 {
-p <- ggplot(data = res, aes(x = excludedVolumeSpringConstant, y = repair_probability, color = excludedVolumeCutOff)) + geom_line(size = 1.5) + geom_ribbon(data = res, aes(x = excludedVolumeSpringConstant, 
+  p <- ggplot(data = res, aes(x = excludedVolumeSpringConstant, y = repair_probability, color = excludedVolumeCutOff)) + geom_line(size = 1.5) + geom_ribbon(data = res, aes(x = excludedVolumeSpringConstant, 
                                   ymin = repair_probability - repair_CIhalflength,
                                   ymax = repair_probability + repair_CIhalflength), alpha = 0.2) + theme_bw()
-p
+
+  colourCount = 15
+  getPalette = colorRampPalette(brewer.pal(9, "Blues"))
+  
+  p + geom_vline(xintercept = 0.6, linetype = 2, size = 1) + scale_color_manual(values = getPalette(colourCount)) + coord_cartesian()
 }
 
 
@@ -25,6 +30,21 @@ p
   p
 }
 ####
+
+
+#########################
+######## 3D #############
+#########################
+library(plotly)
+{
+  proba <- matrix(res$repair_probability, nrow = 10)
+  sigma <- unique(res$excludedVolumeCutOff)
+  kappa <- unique(res$excludedVolumeSpringConstant)
+  py <- plot_ly(x = sigma, y = kappa) %>% 
+    add_surface(z = proba,colorscale = list(c(0,0.5,1),c("rgb(255,0,0)","rgb(255,200,0)","rgb(255,255,255)")))
+  py
+}
+
 
 
 {q <- ggplot(data = res, aes(x = excludedVolumeSpringConstant, 

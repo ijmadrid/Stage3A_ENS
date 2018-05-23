@@ -41,7 +41,7 @@ class Experiment():
         # Unpackage params values
         for paramKeys, paramValues in params.items(): 
             exec('self.'+paramKeys+'=paramValues')
-        
+
         assert np.sqrt(2*self.diffusionConstant*self.dt) <= 0.2*self.encounterDistance, "dt should verify: sqrt(2*D*dt) < 0.2*epsilon"
         
         if customExperiment == "SimpleDynamicSimulation":
@@ -95,7 +95,7 @@ class Experiment():
         Y = self.trajectoire[0][:,1]
         Z = self.trajectoire[0][:,2]
         line, = ax.plot(X, Y, Z)
-        dots = ax.scatter(X, Y, Z, c=self.polymer.colors, marker='o')
+        dots = ax.scatter(X, Y, Z, c=self.polymer.colors, marker='o', s = 30)
     
 #        cls = []    
 #        clpairs = self.polymer.offDiagPairs()
