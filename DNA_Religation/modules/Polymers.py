@@ -62,6 +62,16 @@ class Polymer(Graph):
 
             ax.plot(x,y,z)
             ax.scatter(x, y, z, c=self.colors, marker='o')
+            if self.Nc > 0:
+                clpairs = self.offDiagPairs()
+                for clpair in clpairs:
+                    mx = x[clpair[0]]
+                    nx = x[clpair[1]]
+                    my = y[clpair[0]]
+                    ny = y[clpair[1]]
+                    mz = z[clpair[0]]
+                    nz = z[clpair[1]]
+                    ax.plot([mx,nx],[my,ny],[mz,nz],color = 'r')
         else:
             plt.plot(x,y)
 

@@ -4,6 +4,7 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{graphicx}
+\usepackage{float}
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage{cite}
 \usepackage{titlesec}
@@ -310,12 +311,15 @@ Fig. \ref{fig:proba_v_g_1} does not show any significant difference for the remo
 \end{figure}
 
 
+\clearpage
 
 \subsubsection{Effect of $N_c$ on the repair probability}
 
-Increasing the number of cross-links approaches the simulated probabilities to $1/3$, which is the result expected in the well mixed case, as we observe in Fig. \ref{fig:proba_v_cl}. Indeed, increasing the number of CLs and therefore approaching all monomers not only increases the chances of repair, but also of mismatch. It is interesting that systems which had a repair probability $\leq 1/3$  because had DSBs at a very small genomic distance ($g \leq 3$) (so the chances of a bad matching were higher) improve their repair probabilities when we increase the number of cross-links. 
+\paragraph{Effect of $N_c$ under fixed $\varepsilon$}
 
-In effect, increasing the number of random connectors increases as well the compactness of the polymer, revealed as a decrease of the mean radius of gyration (Fig. \ref{fig:mrg_v_nc}). Besides, we can see that the position of the breaks does not affect the ensemble mean of the gyration radius. 
+Increasing the number of cross-links approaches the simulated probabilities to $1/3$, which is the result expected in the well-mixed case, as we observe in Fig. \ref{fig:proba_v_cl}. Indeed, increasing the number of CLs and therefore approaching all monomers not only increases the chances of repair, but also of mismatch. The well-mixed scenario is particularly favored by the fact that a constant $\varepsilon$ is used as encounter distance, despite the increasing compactness induced by the addition of CLs. Anyhow, it is interesting that systems which had a repair probability $\leq 1/3$  because had DSBs at a very small genomic distance ($g \leq 3$) (so the chances of a bad matching were higher) improve their repair probabilities when we increase the number of cross-links. 
+
+Fig. \ref{fig:mrg_v_nc} proves that increasing the number of random connectors increases as well the compactness of the polymer, revealed as a decrease of the mean radius of gyration. Besides, we can see that the position of the breaks does not affect the ensemble mean of the gyration radius. 
 
 In conclusion, \textbf{the compactness help to repair polymers cut in a small neighborhood.} This is coherent with which was observed in Fig. \ref{fig:all_v_g}-A, where at small genomic distances, the repair probabilities were better when CLs were kept in the DF. On the other hand, at a big genomic distance ($g = 20$), it can be observed in Fig. \ref{fig:proba_v_NcNd} that the presence of CLs in the DBS' monomers swifts the repair probabilities down, although the removal of those CLs after the break.
 
@@ -342,16 +346,31 @@ In conclusion, \textbf{the compactness help to repair polymers cut in a small ne
 	\label{fig:proba_v_NcNd}
 \end{figure}
 
+\clearpage
+
+
+\paragraph{Effect of $N_c$ under a $\xi$-adaptive $\varepsilon$}
+
+We use now an adaptive $\varepsilon$ that evolutes according the polymer compactness, i.e., according to the fraction $\xi$ defined by $N_c$, following the formula in Eq. \ref{eqn:adaptive_eps}. Fig. \ref{fig:adaptiveEps_vs_nc} shows the adaptivity of $\varepsilon$ compared with the MRG for different $N_c$'s. 
+
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{../DNA_Religation/projects/RCLPolymer_CLs@DamageFoci/figures/proba_vs_Nc_g20_Nd2.png}
+	\includegraphics[width=\textwidth]{../DNA_Religation/figures/adaptive_epsilon_vs_Nc.png}
+	\caption{$\tilde{\varepsilon}(\xi)$ for different values of $N_c$ and comparison with the MRG curve.}
+	\label{fig:adaptiveEps_vs_nc}
+\end{figure}
+
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{../DNA_Religation/projects/RCLPolymer_CLs@DamageFoci/figures/proba_vs_Nc_g20_Nd2.png}
 	\caption{Repair probability in function of $N_c$ when $N_d = 2$, $g = 20$ and $\varepsilon = \tilde{\varepsilon}(\xi)$.}
 	\label{fig:proba_v_Nc_Nd2_g20}
 \end{figure}
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{../DNA_Religation/projects/RCLPolymer_CLs@DamageFoci/figures/proba_vs_Nc_g4_Nd2.png}
+	\includegraphics[width=0.7\textwidth]{../DNA_Religation/projects/RCLPolymer_CLs@DamageFoci/figures/proba_vs_Nc_g4_Nd2.png}
 	\caption{Repair probability in function of $N_c$ when $N_d = 2$, $g = 4$ and $\varepsilon = \tilde{\varepsilon}(\xi)$.}
 	\label{fig:proba_v_Nc_Nd2_g4}
 \end{figure}
@@ -363,11 +382,13 @@ In conclusion, \textbf{the compactness help to repair polymers cut in a small ne
 	\label{fig:all_v_Nc_Nd2}
 \end{figure}
 
+
+
 \clearpage
 
-\subparagraph*{Summary of the effects of $g$ and $N_c$ on the repair}
+\subsubsection*{Summary of the effects of $g$ and $N_c$ on the repair and induced differences keeping or removing CLs in the DF}
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{../DNA_Religation/figures/p3d_v_gNc.png}
 	\caption{Repair probability as function of $g$ and $N_c$ with $N = 100$, $N_d = 1$ and $\xi$-adaptive $\varepsilon$. \textbf{A.} Probability surface when CLs are kept in the DF. \textbf{B.} Comparison between the probability surfaces when CLs are kept (as in A) and removed.} 
@@ -409,16 +430,8 @@ Fig. \ref{fig:MSRGandFET_byEvent} shows that, as expected, the misrepair scenari
 	\label{fig:MSRGandFET_byEvent}
 \end{figure}
 
-We can see in Fig. \ref{fig:pr_v_g_cutoffs} that the repair probability in function of the genomic separation between the breaks behaves similarly that previously (cf. Fig \ref{fig:proba_v_g_1}). 
 
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=\textwidth]{../DNA_Religation/projects/RCLPolymer_Repair_Probability/figures/proba_v_g_VEcutoffs.png}
-	\caption{Probability and 95\% confidence interval of repair, in function of interbreak genomic distance for exclusion cutoffs  $b/2$ and $b$ ($b = 0.1 \mu$m).}
-	\label{fig:pr_v_g_cutoffs}
-\end{figure}
-
-However \textbf{the repair probability function considering excluded volume interactions is always below the repair probability in the non-excluded case} (Figs. \ref{fig:proba_vs_g_exclusion} and \ref{fig:proba_vs_Nc_exclusion})
+It can be observed that \textbf{the repair probability function considering excluded volume interactions is always below the repair probability in the non-excluded case} (Figs. \ref{fig:proba_vs_g_exclusion} and \ref{fig:proba_vs_Nc_exclusion}). Even for small genomic distances and high connectivity (20 random cross-links) the local volume exclusion seems to interfere with the correct repair, rather than helping it. (\ref{fig:proba_vs_g_03exclusion} and \ref{fig:proba_vs_Nc_03exclusion})
 
 \begin{figure}[h]
 	\centering
@@ -437,7 +450,7 @@ However \textbf{the repair probability function considering excluded volume inte
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{../DNA_Religation/projects/RCLPolymer_ExcludedVolumeExperiments/figures/proba_v_g_EV_03_20Nc}
-	\caption{Probability of repair in function of the genomic separation between the breaks. Even for small genomic distances and high connectivity (20 random cross-links) the local volume exclusion seems to interfere with the correct repair, rather than helping it.}
+	\caption{Probability of repair in function of the genomic separation between the breaks.}
 	\label{fig:proba_vs_g_03exclusion}
 \end{figure}
 
@@ -448,16 +461,6 @@ However \textbf{the repair probability function considering excluded volume inte
 	\label{fig:proba_vs_Nc_03exclusion}
 \end{figure}
 
-Now, smaller encounter radius will be considered now to see if excluded volume could help the correct repairs.
-
-Figure \ref{fig:noExclusion_002epsilon} shows the results with and without volume exclusion and with a encounter distance of $\varepsilon = b \cdot 10^{-1} = 0.02 \mu$m. We observe that keeping the same $\varepsilon$ does not provide interesting results. This results motivated the addition of a $\xi$-adaptive $\varepsilon$.
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=\textwidth]{../DNA_Religation/figures/eventsandFET_002epsilon_VE}
-	\caption{Encounter results with and without volume exclusion for a two DSBs at a genomic distance of 4 and considering 20 random cross-links. \textbf{a}. Experiment set. \textbf{a}. Encounter events distribution. The most frequent mismatch corresponds to the looping of the central fragment of the broken polymer. \textbf{c}. First Encounter Time distribution of all the events. \textbf{d}. Same results considering volume exclusion with a cutoff radius of 0.1 $\mu$m.}
-	\label{fig:noExclusion_002epsilon}
-\end{figure}
 
 \clearpage
 
@@ -484,20 +487,46 @@ Now, for an increasing $N_c$ and adapting both $\sigma$ and $\epsilon$ to the co
 \end{figure}
 
 
-\subsubsection{Joint effect of volume exclusion and CL removal}
+We focus now on the impact induced by $\sigma$ on the repair. Figs. \ref{fig:all_v_sigma_3nds} and \ref{fig:all_v_sigma_refinement} show the shapes of repair probability, the MSRG and the mean FET as function of $\sigma$. We observe that selective exclusion lead to better repair probabilities, but an excessive $\sigma$ is also detrimental. For $g = 4$ an optimum exclusion radius is reached few before the value of $b$. 
+Concerning the MSRG at encounter time, it increases with $\sigma$ as expected. On the other hand, the MFET decays rapidly as $\sigma$ increases.
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{../DNA_Religation/figures/__v_sigma_Nd123}
 	\caption{Repair probability (A), MSRG (B) and mean FET (C) as functions of $\sigma$ with selective exclusion, imposing $N_d =1$, $2$ and $3$ CLs in the DF, for then keeping or removing them. $N = 100$, $g = 4$, $\varepsilon = 0.05 \ \mu$m and $N_c = 10$.}
 	\label{fig:all_v_sigma_3nds}
 \end{figure}
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{../DNA_Religation/figures/__v_sigma_Nd1_zoom}
+	\caption{Repair probability (A), MSRG (B) and mean FET (C) as functions of $\sigma$ with selective exclusion and $N_d =1$ as in the left panels of Fig. \ref{fig:all_v_sigma_3nds}, but here refining the evaluated values of $\sigma$ (at right).}
+	\label{fig:all_v_sigma_refinement}
+\end{figure}
+
+ Fig. \ref{fig:all_v_kappa} shows the impact of the exclusion spring constant $\kappa_{ve}$ for $g = 4$ and $\sigma = 0.1 \mu$m. For the experimental set, exclusion with a bigger elastic constant leads to a better repair probability, as well as a more decompacted polymer. The MFET also decays rapidly as $\kappa_{ve}$ increases.
+ 
+ Finally, the joint action of $\sigma$ and $\kappa_{ve}$ is studied in Fig. \ref{fig:proba_v_sigma_kappa}. We observe that high values of $\sigma$ along with weak $\kappa_{ev}$ lead to better repairs. Stronger $\kappa_{ve}$ are also beneficial for smaller exclusion ($\sigma < b$.) Thus, an optimal region combining different values of $\sigma$ and $\kappa_{ve}$ can be observed in the repair probability curve. We also observe that the MFET decays geometrically for $\kappa_{ve}$, and that the decay is faster as $\sigma$ increases.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{../DNA_Religation/figures/__v_kappa_sigma01}
+	\caption{Repair probability (A), MSRG (B) and mean FET (C) as functions of $\kappa_{ve}$ with selective exclusion, $N = 100$, $N_d = 1$, $g = 4$, $\varepsilon = 0.05 \ \mu$m, $N_c = 10$ and $\sigma = 0.1 \mu$m. The global spring constant defined for the backbone and the CLs is indicated in red.}
+	\label{fig:all_v_kappa}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{../DNA_Religation/figures/__v_kappa_sigma_3d}
+	\caption{(Left) Repair probability (A), MSRG (B) and mean FET (C) as functions of $\kappa_{ve}$ for different values of $\sigma$ and with selective exclusion, $N = 100$, $N_d = 1$, $g = 4$, $\varepsilon = 0.05 \ \mu$m and $N_c = 10$. (Right) Repair probability as function of both $\sigma$ and $\kappa_{ve}$ in matrix form (D) and as a surface in space (E).}
+	\label{fig:proba_v_sigma_kappa}
+\end{figure}
+
 \clearpage
 
-\subsection{Repair probability in different domains}
+\subsection{Effect of sub-domain folding on the repair probability}
 
-We'll now consider a polymer folded in two connected sub-domains (simulating topologically associating domains (TADs) in DNA) as represented in Fig. \ref{fig:TADSmodel}). We'll define $M$ sub-domains where each sub-domain $i$ has a connectivity $\xi_i$ defined by their number of inner CLs $N_c^{(i)}$. A number $N_{lr}^{(i,j)}$ of large-range CLs connecting different pairs $i \neq j$  of sub-domains are also added. Thus, we define the connectivity matrix $\mathbb{N}_c$ characterizing the TAD-folded RCL polymer by Eq. \ref{eqn: Nc_TAD}.
+We'll now consider a polymer folded in two connected sub-domains (simulating topologically associating domains (TADs) of chromatin) as represented in Fig. \ref{fig:TADSmodel}. We'll define $M$ sub-domains where each sub-domain $i$ has a connectivity $\xi_i$ defined by their number of inner CLs $N_c^{(i)}$. A number $N_{lr}^{(i,j)}$ of large-range CLs connecting different pairs $i \neq j$  of sub-domains are also added. Thus, we define the connectivity matrix $\mathbb{N}_c$ characterizing the TAD-folded RCL polymer by Eq. \ref{eqn: Nc_TAD}.
 
 \begin{equation}
 \mathbb{N}_c = \begin{pmatrix}
@@ -512,50 +541,19 @@ N_c^{(1)} & N_{lr}^{(1,2)} & \cdots & N_{lr}^{(1,M)} \\
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=\textwidth]{../drawings/twoTADmodel.png}
-	\caption{Model of the RCL polymer folded in two connected subdomains.}
+	\caption{Model of the RCL polymer folded in two connected sub-domains. \textbf{A}. Schematic representation.\textbf{B}. One realization after relaxation time of a polymer with two sub-domains of $N_1 = 100$ and $N_2 = 300$ monomers, $N_c^{(1)} = 5$, $N_c^{(2)} = 12$ and $N_{lr} = 0$ inter-domain CLs. \textbf{C}. Another realization now with $N_{lr} = 2$}
 	\label{fig:TADSmodel}
 \end{figure}
 
 
-Figure \ref{fig:proba_v_interTADdistance} shows the repair probabilities of two DSBs located at independent connected sub-domains. We see that the correct repair rate is visible higher. The probabilities are observed for two sub-domains where the genomic distance that separate them is increased. The distance between the two sub-domains does not seem to affect the (already good) probability of correct repair. 
+To verify the effect of the presence of a juxtaposed sub-domain next to the broken polymer, two DSBs are induced \textbf{in the same sub-domain} with a defined genomic distance $g$ between the breaks as in the previous section. The repair probability is measured again to see if the presence of a juxtaposed sub-domain without breaks affects the repair in the first sub-domain.
 
-The following figures illustrates the following experiment: two DSBs are induced \textbf{in the same sub-domain} with a genomic distance between the breaks as in the previous section. The repair probability is measured again to see if the presence of a juxtaposed sub-domain without breaks affects the repair in the first sub-domain.
-
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.7\textwidth]{../DNA_Religation/projects/RCLPolymer_TwoDomains/figures/RepairProba_v_interTADdistance.png}
-	\caption{One DSB in each subdomain (two subdomains of size 50). Repair probability vs. inter-TAD separation distance.}
-	\label{fig:proba_v_interTADdistance}
-\end{figure}
-
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.7\textwidth]{proba_v_g_2domains.png}
-	\caption{Probability and 95\% confidence interval of repair, in function of the interbreak distance for two DSBs induced in one sub-domain of size 100 on a polymer formed by two sub-domains (100 and 50 monomers). The subdomain had 5 RCLs.}
-	\label{fig:2domain}
-\end{figure}
-
-
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.7\textwidth]{../DNA_Religation/projects/RCLPolymer_TwoDomains/figures/proba_v_g_2domains_10randomconnectors}
-	\caption{Probability and 95\% confidence interval of repair, in function of the interbreak distance for two DSBs induced in one sub-domain of size 100 on a polymer formed by two sub-domains (100 and 50 monomers). The subdomain had 10 RCLs.}
-	\label{fig:2domain_10rcls}
-\end{figure}
-
-
-\clearpage
-
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.7\textwidth]{../DNA_Religation/projects/RCLPolymer_TwoDomains/figures/proba_vs_longrange_first}
-	\caption{Probability of repair in function of the number of long-range connectors. Two DSBs were induced at a genomic distance of 5 in the first sub-domain of a polymer conformed by 2 sub-domains of 100 monomers with 10 inner cross-links.}
-	\label{fig:proba_v_longrange}
-\end{figure}
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[width=0.7\textwidth]{../DNA_Religation/projects/RCLPolymer_TwoDomains/figures/proba_vs_longrange_first}
+%	\caption{Probability of repair in function of the number of long-range connectors. Two DSBs were induced at a genomic distance of 5 in the first sub-domain of a polymer conformed by 2 sub-domains of 100 monomers with 10 inner cross-links.}
+%	\label{fig:proba_v_longrange}
+%\end{figure}
 
 Figures \ref{fig:proba_v_parasytes} and \ref{fig:proba_v_longrange_sizes} suggest that the presence of a juxtaposed cross-linked polymer chain of any size does not affect the repair performance for two DSBs at a given genomic distance when the number of long-range connectors remains little. Figure \ref{fig:proba_v_longrange_3and45} suggest that a higher number of long-range connectors increases the randomness of the system, making the probabilities go to $1/3$. If the correct repair probability was already about $1/3$ without long-range connections (for example, thanks to a high number of intra-domain cross-links), adding the long-range links does not change the repair rates.
 
@@ -583,18 +581,6 @@ Figures \ref{fig:proba_v_parasytes} and \ref{fig:proba_v_longrange_sizes} sugges
 
 
 
-
-
-\clearpage
-
-\subsubsection{TODO}
-\begin{itemize}
-\item For one DSB in each TAD: Simulate the repair probability vs. intra-TAD connectors number
-\item For one DSB in each TAD: Simulate the repair probability vs. long-range connectors number
-\item For two DSB in a TAD: Compare repair probabilities with the results obtained in the previous section. Does a second TAD (with no breaks) affect the repair probability of the first one? How?
-\item THINK ABOUT STOCHASTICALLY GENERATING THE CROSS-LINKS, USING IN THE CONNECTIVITY $\xi$ AS A PROBABILITY SO, INSTEAD OF FIXING THE NUMBER OF CROSS-LINKS WE FIX $\xi$ AND HAVE $\mathbb{E}(Nc) = \xi N_l$ INSTEAD OF A DETERMINISTIC $Nc = \lfloor \xi N_l \rfloor $. THE RCL POLYMER WILL BE THE AN ERDOS-RENYI GRAPH, THE SUB-DOMAINS POLYMER MATRIX WOULD CORRESPOND TO A WELL KNOWN STOCHASTIC BLOCK MODEL, ETC.
-\end{itemize}
-
 \clearpage
 
 \section{Partial conclusions}
@@ -610,11 +596,11 @@ Figures \ref{fig:proba_v_parasytes} and \ref{fig:proba_v_longrange_sizes} sugges
 	\item Local excluded volume in the damage foci seems to do not affect or even obstruct the repair, rather than improving its probability. Probability curves with local local exclusion volume are indeed down shifted in comparison with the non-excluded ones.
 \end{itemize}
 
-\section{Perspectives}
-\begin{itemize}
-	\item Non-homologous end-joining repair : The repair probability curves in function of the inter-break genomic distance and the number of cross-links reveal a characteristic behavior (tendency to $1/3$ when the connectivity is high, a sort of logistic growth when the genomic distance between the breaks is increased) that could be verified analytically using the results available for the unbroken RCL polymer\footnote{O. Shukron and D. Holcman. Statistics of randomly cross-linked polymer models to interpret chromatin conformation capture data. \textbf{Phys. Rev. E} 2017 Jul:96, 012503}
-	\item For the RCL polymer with subdomains : It has been reported that DSBs cluster. In particular, damaged active genes remain largely unrepaired and clustered to be repaired afterwards via homologous recombination in postreplicative cells\footnote{Aymard F. \textit{et al.} Genome-wide mapping of long-range contacts unveils clustering of DNA double-strand breaks at damaged active genes. \textbf{Nat Struct Mol Biol.} 2017 Apr;24(4):353-361}. It could be interesting to study if DSB clustering is a property inherent to the polymer dynamics, and if it is facilitated by exclude volume interactions and the local removal of cross-links in the damage foci.
-\end{itemize}
+%\section{Perspectives}
+%\begin{itemize}
+%	\item Non-homologous end-joining repair : The repair probability curves in function of the inter-break genomic distance and the number of cross-links reveal a characteristic behavior (tendency to $1/3$ when the connectivity is high, a sort of logistic growth when the genomic distance between the breaks is increased) that could be verified analytically using the results available for the unbroken RCL polymer\footnote{O. Shukron and D. Holcman. Statistics of randomly cross-linked polymer models to interpret chromatin conformation capture data. \textbf{Phys. Rev. E} 2017 Jul:96, 012503}
+%	\item For the RCL polymer with subdomains : It has been reported that DSBs cluster. In particular, damaged active genes remain largely unrepaired and clustered to be repaired afterwards via homologous recombination in postreplicative cells\footnote{Aymard F. \textit{et al.} Genome-wide mapping of long-range contacts unveils clustering of DNA double-strand breaks at damaged active genes. \textbf{Nat Struct Mol Biol.} 2017 Apr;24(4):353-361}. It could be interesting to study if DSB clustering is a property inherent to the polymer dynamics, and if it is facilitated by exclude volume interactions and the local removal of cross-links in the damage foci.
+%\end{itemize}
 
 \clearpage
 

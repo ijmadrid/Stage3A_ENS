@@ -1,0 +1,2256 @@
+experimentSetID,numMonomers,dim,b,Nc,keepCL,diffusionConstant,numRealisations,dt,dt_relax,numSteps,waitingSteps,numMaxSteps,encounterDistance,genomicDistance,Nb,selectedSubDomain,Nlr,TADsize,iterationsNumber,events,FETs,meanFET,halfCI_FET,expFit_Amplitude,expFit_Rate,eventsCounter,repair_probability,repair_CIhalflength,mean_removedCLs
+0_0,[100 100],3,0.2,"[[12  0]
+ [ 0 12]]",False,0.008,800,0.0117,0.01,12000,250,12000,0.06872621465253625,10,2,0,0,100,800,"['Misrepair_a1-b2' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Repair' 'NA' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b2' 'Repair' 'Repair' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b2' 'Repair' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair' 'Repair' 'NA'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'NA'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b2' 'Repair' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Repair'
+ 'Repair' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Repair' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'NA' 'Repair'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Repair'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'NA'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2' 'NA' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1' 'NA' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Repair' 'Repair' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b1' 'NA' 'Misrepair_a1-b2' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b2'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b2' 'Repair' 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Repair'
+ 'Repair' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Repair' 'Repair' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Repair' 'NA' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair'
+ 'Repair' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Repair'
+ 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair' 'Repair'
+ 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair' 'NA' 'Repair' 'NA'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b2' 'Repair'
+ 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'NA' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair'
+ 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b2'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'NA' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Repair' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair' 'Repair'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Repair' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b2'
+ 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair' 'NA' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Repair' 'Repair' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b1']","[2.971800e+00 2.386800e+00 2.595060e+01 1.605240e+01 2.948400e+00
+ 7.722000e+00 3.486600e+00 9.781200e+00 2.819700e+00 9.114300e+00
+ 7.780500e+00 6.292260e+01 1.331460e+01 4.443660e+01 5.912010e+01
+ 1.083420e+01 2.925000e+00 7.020000e-02 3.380130e+01 9.313200e+00
+ 4.434300e+00          nan 4.972500e+00 1.027260e+01 3.804840e+01
+ 6.610500e+00 1.539720e+01 4.359420e+01 1.228500e+01 1.230840e+01
+ 1.826370e+01 5.624190e+01 2.141100e+00 1.671930e+01 7.569900e+00
+ 1.161810e+01 4.697550e+01 2.591550e+01 5.367960e+01 8.541000e-01
+ 6.409260e+01 9.603360e+01 5.798520e+01 2.062710e+01 8.775000e-01
+ 4.768920e+01 4.771260e+01 3.264300e+00 6.552000e-01 4.095000e-01
+ 1.076751e+02 1.496430e+01 8.190000e-01 1.698840e+01 4.508010e+01
+ 4.680000e-02 1.867320e+01 8.307000e+00 3.937050e+01 5.303610e+01
+ 7.722000e-01 1.462500e+00 2.059200e+00 1.064700e+00 7.020000e-02
+ 4.422600e+00 1.015560e+01 4.458870e+01 1.738620e+01 3.286530e+01
+ 4.633200e+01 2.480400e+00 6.315660e+01 3.311100e+00 1.146600e+01
+ 1.111500e+00 1.475370e+01 1.640340e+01          nan 2.889900e+00
+ 5.268510e+01 8.353800e+00 1.718730e+01 6.786000e-01 6.435000e+00
+ 3.301740e+01 1.415700e+00 9.771840e+01 5.370300e+00 4.554810e+01
+ 2.808000e+00 1.088100e+00 5.311800e+00 2.492100e+00 2.141100e+00
+ 1.064700e+00 8.260200e+00 2.808000e-01 1.849770e+01 0.000000e+00
+ 9.391590e+01 3.861000e-01 1.461330e+01 4.061070e+01 6.318000e+00
+ 2.400840e+01 2.998710e+01 6.210360e+01 2.316600e+00 2.737800e+01
+ 3.018600e+00 4.736160e+01 1.298700e+00 1.200420e+01 8.778510e+01
+ 4.547790e+01 1.726920e+01 3.907800e+00 1.887210e+01 1.040364e+02
+ 5.838300e+00 5.766930e+01 3.740490e+01 3.285360e+01 3.899610e+01
+ 8.576100e+00 5.001750e+01 2.469870e+01          nan 4.811040e+01
+ 2.035800e+00 2.501460e+01 2.129400e+00 2.497950e+01 9.664200e+00
+ 5.238090e+01 4.204980e+01 1.838070e+01 3.109860e+01 5.428800e+00
+ 1.764360e+01 2.527200e+00 2.503800e+01 1.539720e+01 3.529890e+01
+ 4.165200e+00 2.122380e+01 1.463670e+01 4.914000e-01 2.340000e-02
+ 3.030300e+00 2.516670e+01 2.208960e+01 6.174090e+01 1.550250e+01
+ 1.575990e+01 3.032640e+01 8.039070e+01 1.318590e+01 1.074294e+02
+ 2.646540e+01 1.310400e+00 4.680000e-02 1.614600e+01 3.147300e+00
+ 3.555630e+01 6.528600e+00 1.088100e+00 5.148000e-01 5.453370e+01
+ 1.248390e+01 3.510000e+00 2.654730e+01 1.033461e+02 3.825900e+00
+ 3.627000e-01 8.248500e+00 8.821800e+00 8.260200e+00 5.859360e+01
+ 7.897500e+00 3.753360e+01 4.995900e+00 1.261260e+01 1.170000e-02
+ 4.903470e+01 3.174210e+01 2.981160e+01 5.752890e+01 1.872000e+00
+ 6.099210e+01 1.237860e+01 1.215630e+01 8.739900e+00 1.167660e+01
+ 4.675320e+01 2.542410e+01 1.133730e+01 8.833500e+00 8.309340e+01
+ 2.340000e+00 2.394990e+01 8.833500e+00 3.411720e+01 4.870710e+01
+ 1.860300e+00 1.840410e+01 7.488000e-01 1.497600e+00 7.628400e+00
+ 1.661400e+00 7.722000e-01 2.720250e+01 2.430090e+01 6.926400e+00
+ 5.850000e-02 8.599500e+00 1.404000e-01 1.064700e+00 1.994850e+01
+ 0.000000e+00 3.439800e+00 9.558900e+00 4.438980e+01 1.220310e+01
+ 1.853280e+01 5.967000e-01          nan 5.300100e+00 1.053000e-01
+ 2.652390e+01 0.000000e+00 3.539250e+01 4.565340e+01 1.084356e+02
+ 4.207320e+01 6.201000e-01 1.017900e+00 2.729610e+01 6.201000e-01
+ 3.763890e+01 5.661630e+01 3.542760e+01 2.239380e+01 9.202050e+01
+ 6.556680e+01 1.263600e+01 1.532700e+01 3.890250e+01 2.954250e+01
+ 7.218900e+00 9.079200e+00 5.850000e-01 2.003040e+01 1.158417e+02
+ 2.340000e-02 4.653090e+01 3.954600e+01 2.442960e+01 3.032640e+01
+ 2.187900e+00 1.677780e+01 1.622790e+01 2.943720e+01 7.569900e+00
+ 2.616120e+01 2.971800e+00 1.638000e+00 4.842630e+01 9.126000e-01
+ 7.276230e+01 1.357200e+00 3.384810e+01 8.541000e-01 8.517600e+00
+ 6.013800e+00 7.877610e+01 2.183220e+01          nan 7.622550e+01
+ 6.575400e+01 1.755000e+00 1.568970e+01 9.009000e-01 7.861230e+01
+ 1.333800e+00 7.965360e+01 5.493150e+01 5.586750e+01 5.022810e+01
+ 2.106000e+01 5.206500e+01 7.289100e+00 5.031000e-01 1.518660e+01
+ 7.956000e-01 3.467880e+01 5.323500e+00 5.885100e+00 2.548260e+01
+          nan 3.170700e+01 2.340000e+00 4.037670e+01 3.581370e+01
+ 2.231190e+01 5.348070e+01 1.636830e+01 5.004090e+01 1.170000e-02
+ 3.510000e+00 4.897620e+01 5.803200e+00 5.651100e+00 2.446470e+01
+ 2.100150e+01 7.493850e+01 6.043050e+01 4.539600e+01 8.190000e+00
+ 9.828000e-01 2.960100e+00 4.539600e+00 5.943600e+00 1.532700e+01
+ 6.263010e+01 8.281260e+01          nan 2.772900e+00 3.383640e+01
+ 1.130220e+01 7.830810e+01 0.000000e+00 1.333800e+00 1.041417e+02
+ 1.958580e+01 3.318120e+01 6.830460e+01 2.010060e+01 2.384460e+01
+ 4.032990e+01 2.808000e-01 6.563700e+01 6.282900e+00 2.003040e+01
+ 2.793960e+01 6.060600e+00 3.472560e+01 8.026200e+01 1.250730e+01
+ 1.016028e+02 4.399200e+00 4.832100e+00 9.009000e-01 5.733000e-01
+ 6.296940e+01 3.236220e+01 1.539720e+01 1.064700e+00 9.956700e+00
+ 2.644200e+00 1.461330e+01          nan 3.213990e+01 1.170000e-01
+ 4.469400e+00 2.187900e+00 1.784250e+01 5.133960e+01 2.266290e+01
+ 2.655900e+00 6.084000e-01 2.340000e-02 3.510000e-01 1.428570e+01
+ 1.777230e+01 4.946760e+01 9.857250e+01 1.126710e+01 1.246050e+01
+ 1.994850e+01 2.743650e+01 4.379310e+01 1.537380e+01 1.813500e+01
+ 1.067040e+01 2.457000e-01 8.658000e-01 5.487300e+00 8.927100e+00
+ 5.242770e+01 1.415700e+00 4.504500e+00 2.995200e+00 1.427400e+01
+ 4.633200e+00 3.978000e-01 2.687490e+01 5.562180e+01 1.126710e+01
+ 4.236570e+01 1.404000e+00 1.088100e+00 1.907100e+00 2.069730e+01
+ 1.272258e+02 6.341400e+00 2.797470e+01 1.893060e+01 2.599740e+01
+ 5.972850e+01 7.967700e+00 8.975070e+01 1.267110e+01 1.241370e+01
+          nan 2.700360e+01 5.791500e+00 1.048086e+02 4.909320e+01
+ 2.455830e+01 4.083300e+01 1.626300e+00 7.020000e+00 2.031120e+01
+ 3.510000e+00 6.446700e+00 8.002800e+01 1.345500e+00 4.194450e+01
+ 9.360000e-01 1.202760e+01 1.027260e+01 1.241370e+01 1.489410e+01
+ 3.974490e+01 5.226390e+01 7.511400e+00 5.297760e+01 2.141100e+00
+ 1.818180e+01 3.244410e+01 1.983150e+01 1.989000e-01 1.079910e+01
+ 1.341990e+01 7.137000e-01 2.898090e+01 4.106700e+01 1.591200e+01
+ 3.435120e+01 2.379780e+01 4.750200e+00 8.276580e+01 3.157830e+01
+ 4.581720e+01 8.113950e+01 5.229900e+00 9.512100e+00 2.574000e-01
+ 1.427400e+01 9.158760e+01 9.143550e+01 8.236800e+00 2.035800e+01
+ 4.073940e+01 7.839000e+00 6.092190e+01 6.409260e+01 4.330170e+01
+ 3.189420e+01 3.474900e+00 4.394520e+01 1.537380e+01 1.864980e+01
+ 3.545100e+00 3.878550e+01 6.913530e+01 8.380710e+01 1.614600e+00
+ 1.330290e+01 4.317300e+00 2.445300e+00 3.261960e+01 1.872000e-01
+ 2.135250e+01 1.784250e+01 2.187900e+00 5.709600e+00 5.174910e+01
+ 2.340000e-01 5.999760e+01 6.165900e+01 4.609800e+00 2.106000e-01
+ 1.399320e+01 1.170000e-01 3.065400e+00 4.623840e+01 3.445650e+01
+ 6.672510e+01 3.744000e-01 4.187430e+01 1.119690e+01 2.182050e+01
+ 3.568500e+00 5.662800e+00 7.278570e+01 9.149400e+01 4.137120e+01
+ 4.713930e+01 2.224170e+01 2.260440e+01 3.510000e-02 1.718730e+01
+ 6.590610e+01 4.071600e+00 3.645720e+01 1.719900e+00 2.655900e+00
+ 1.181700e+00 2.585700e+00 1.359540e+01 2.372760e+01 2.675790e+01
+ 2.340000e-01 5.955300e+00 2.913300e+00 2.702700e+00 2.957760e+01
+ 1.181700e+01 1.863810e+01 1.147770e+01 4.656600e+00 6.688890e+01
+ 1.076400e+01 1.516320e+01 8.541000e+00 5.616000e+00 7.651800e+00
+ 6.130800e+00 5.627700e+01 1.306890e+01 1.442610e+01 7.850700e+00
+ 5.524740e+01 4.715100e+00 2.386800e+00 2.371590e+01 1.405170e+01
+ 2.892240e+01 4.189770e+01 3.428100e+00 4.623840e+01 1.306890e+01
+ 7.101900e+00 8.696610e+01 7.979400e+00 7.263360e+01 6.669000e-01
+ 1.781910e+01 1.402830e+01 1.380600e+00 4.680000e-02 1.185210e+01
+ 6.213870e+01 2.067390e+01 3.512340e+01 1.352520e+01 3.017430e+01
+ 1.308060e+01 3.236220e+01 1.700010e+01 1.948050e+01 9.699300e+00
+ 1.064700e+00 9.828000e-01 3.692520e+01 2.277990e+01 1.195740e+01
+ 3.301740e+01 2.223000e-01          nan 3.744000e-01          nan
+ 1.766700e+00 7.191990e+01 2.577510e+01 2.223000e-01 9.301500e+00
+ 2.700360e+01 4.609800e+00 1.755000e-01 2.702700e+01 3.376620e+01
+ 8.716500e+00 1.762020e+01 1.921140e+01 5.193630e+01 6.856200e+00
+ 1.846260e+01 2.831400e+00 5.027490e+01 1.396980e+01 5.625360e+01
+ 9.605700e+00 1.488240e+01 6.750900e+00 1.170000e+00 9.652500e+00
+ 3.125070e+01 7.835490e+01 7.722000e-01 3.987360e+01 2.173860e+01
+          nan 2.000700e+00 1.366092e+02 6.552000e+00 3.469050e+01
+ 5.674500e+00 8.855730e+01 3.072420e+01 4.421430e+01 3.925350e+01
+ 3.273660e+01 1.111500e+00 1.536210e+01 2.644200e+00 2.240550e+01
+ 2.760030e+01 3.577860e+01 2.439450e+01 8.295300e+00 9.009000e+00
+ 1.887210e+01 1.623960e+01 4.840290e+01 2.472210e+01 6.780150e+01
+ 2.506140e+01 1.142505e+02 3.761550e+01 2.208960e+01 5.592600e+01
+ 5.803200e+00 8.026200e+00 5.197140e+01 1.364220e+01 6.333210e+01
+ 4.621500e+00 1.497600e+00 1.532700e+00 9.126000e-01 2.066220e+01
+ 6.096870e+01 2.698020e+01 3.510000e-02 1.360710e+01 1.755000e-01
+ 2.585700e+00 7.856550e+01 6.493500e+00 8.681400e+00 2.654730e+01
+ 1.159470e+01 2.813850e+01 3.568500e+00 1.136070e+01 1.165320e+01
+ 1.213056e+02 4.843800e+00 5.135130e+01 4.010760e+01 1.710540e+01
+ 1.365390e+01 1.525680e+01 3.899610e+01 6.802380e+01 4.644900e+00
+ 2.242890e+01 1.494090e+01 5.826600e+00 6.399900e+00 9.102600e+01
+ 1.567800e+01 1.774890e+01 5.370300e+00 9.836190e+01 1.753830e+01
+ 2.464020e+01 7.956000e-01 2.503800e+00 1.199250e+01 3.276000e-01
+ 3.790800e+00 5.674500e+00 3.168360e+01 1.743300e+00 4.563000e-01
+ 3.109860e+01 4.475250e+01 9.419670e+01 1.989000e+01 8.698950e+01
+ 1.093950e+01          nan 2.207790e+01 1.111851e+02 3.872700e+00
+ 9.828000e+00 7.956000e-01 1.095003e+02 1.813500e+00 1.714050e+01
+ 3.185910e+01 5.370300e+00 7.661160e+01 3.141450e+01 3.397680e+01
+ 1.929330e+01 1.337310e+01 5.943600e+00 1.930500e+00 1.485900e+00
+ 1.778400e+00 1.427400e+00 4.599270e+01 4.651920e+01 2.293200e+00
+ 2.925000e+01 1.474200e+00 4.493970e+01 1.392300e+00 3.745170e+01
+ 1.649700e+00 1.873170e+01 1.212822e+02 8.892000e-01 9.558900e+00
+ 1.029600e+00 3.264300e+01 2.005380e+01 6.446700e+00 0.000000e+00
+ 1.521000e+00 3.217500e+01 3.146130e+01 1.836900e+00 3.018600e+01
+ 4.504500e+00 3.839940e+01 0.000000e+00          nan 5.721300e+00
+ 5.545800e+00 1.404000e-01 1.565460e+01 4.516200e+00 9.921600e+00
+ 1.143090e+01 1.682460e+01 6.084000e-01 1.287000e-01 2.989350e+01
+ 4.153500e+00 4.399200e+00 2.047500e+00 3.744000e+00 2.570490e+01
+ 3.616470e+01 2.116530e+01 1.257750e+01 4.773600e+00 1.347840e+01
+ 6.903000e-01 2.933190e+01 5.733000e+00 1.170000e-02 3.615300e+00
+ 1.053000e+00 8.014500e+00 5.850000e-01 1.860300e+01 1.240200e+00
+ 1.833390e+01 6.318000e-01 3.135600e+01 1.910610e+01 4.560660e+01
+ 1.572480e+01 5.792670e+01 6.318000e-01 2.554110e+01 2.944890e+01
+ 3.068910e+01 4.680000e-02 1.863810e+01 2.129400e+00 5.241600e+00]",23.513129770992364,1.8009868925146018,0.057981866836192976,0.06787408427765125,"Counter({'Repair': 311, 'Misrepair_a2-b1': 183, 'Misrepair_a2-b2': 111, 'Misrepair_a1-b1': 103, 'Misrepair_a1-b2': 78, 'NA': 14})",0.39567430025445294,0.03418607582988356,0.8791348600508906
+1_0,[100 100],3,0.2,"[[12  1]
+ [ 1 12]]",False,0.008,800,0.0112,0.01,12000,250,12000,0.0672858011960512,10,2,0,1,100,800,"['Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b2'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'NA' 'Repair' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'NA' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair'
+ 'Repair' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Repair' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Repair'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair'
+ 'Repair' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'NA' 'Repair' 'Misrepair_a2-b2'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair'
+ 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Repair' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Repair'
+ 'Repair' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b2'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'NA' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b2'
+ 'Repair' 'Misrepair_a2-b1' 'NA' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a2-b2' 'Repair' 'NA'
+ 'Repair' 'Misrepair_a1-b2' 'NA' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Repair' 'Repair'
+ 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair'
+ 'Repair' 'Repair' 'Repair' 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2' 'NA'
+ 'Misrepair_a2-b2' 'NA' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'NA' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b2' 'Repair'
+ 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b2' 'Repair' 'NA' 'Repair'
+ 'Repair' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Repair' 'NA' 'Repair' 'Repair' 'Repair' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair' 'NA'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'NA' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Repair' 'Repair'
+ 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Repair' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Misrepair_a1-b2'
+ 'Repair' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'NA' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair' 'Repair'
+ 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Repair' 'NA' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Misrepair_a1-b1'
+ 'Repair' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'NA' 'Repair' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'NA' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'NA'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'NA' 'Misrepair_a2-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Repair' 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a1-b2' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a2-b1' 'NA' 'Repair' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'NA' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'NA' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b2' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Repair'
+ 'Repair' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b1' 'Repair'
+ 'Repair' 'Misrepair_a2-b2' 'NA' 'Repair' 'Misrepair_a2-b2' 'Repair'
+ 'Repair' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Repair' 'NA' 'NA' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b2'
+ 'NA' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b2' 'NA' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b2' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'NA' 'Misrepair_a1-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b2' 'NA' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Repair' 'Repair' 'NA' 'Repair' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'NA' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Misrepair_a1-b2'
+ 'Repair' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b1']","[9.495360e+01 4.756640e+01 4.306400e+01 1.677760e+01 4.491200e+00
+ 7.534240e+01 9.923200e+01 9.184000e-01 1.257536e+02 2.228800e+00
+ 4.793600e+00 4.121600e+00 2.179520e+01 4.436320e+01 2.374400e+01
+ 5.736640e+01 4.466560e+01 2.086560e+01 3.114720e+01 7.705600e+00
+          nan 6.854400e+00 7.280000e-01 1.145760e+01 1.090880e+01
+ 6.922720e+01 8.233120e+01 3.912160e+01 2.394560e+01 1.198400e+00
+ 2.791040e+01 5.902400e+00 2.152640e+01 3.953600e+01 5.934880e+01
+ 6.817440e+01 4.999680e+01 9.760800e+01 1.136800e+01          nan
+ 1.960000e+00 1.112608e+02 3.908800e+01 3.376800e+01 8.556800e+00
+ 1.534400e+01 5.222560e+01 2.352000e+00 6.574400e+00 2.038400e+01
+ 2.206400e+00 9.934400e+00 3.808000e-01 9.260160e+01 1.594880e+01
+ 1.256640e+01 1.675520e+01 2.374400e+00 3.372320e+01 8.254400e+00
+ 8.848000e-01 8.355200e+00 7.360640e+01 1.704640e+01 6.720000e-02
+ 8.030400e+00 6.832000e-01 3.696000e+00 8.657600e+00 4.550560e+01
+ 1.232000e-01 6.944000e+00 1.041600e+01 8.883840e+01 1.120000e-02
+ 1.070160e+02 1.484000e+01 1.064000e+00 0.000000e+00 2.326240e+01
+ 4.995200e+00 4.480000e+00 5.600000e-02 3.494400e+01 1.024800e+01
+ 5.332320e+01 1.744960e+01 1.499680e+01 2.051840e+01 1.937600e+00
+ 1.168496e+02 5.661600e+01 2.033920e+01 1.490720e+01 2.100000e+01
+ 5.551840e+01 1.377600e+00 1.282624e+02 2.649920e+01 1.514240e+01
+ 2.767520e+01 8.587040e+01 1.568000e-01 1.077552e+02 6.328000e+01
+ 9.027200e+00 1.030400e+00 5.600000e-02 5.219200e+00 8.024800e+01
+ 2.064160e+01 3.047520e+01 5.521600e+01 4.459840e+01 3.784480e+01
+ 5.178880e+01 2.544640e+01 9.372160e+01 1.559040e+01 8.523200e+00
+ 5.532800e+00 3.072160e+01 4.648000e+00 2.240000e-02 8.366400e+00
+ 5.712000e-01 1.981280e+01 6.496000e-01 3.739680e+01 7.502880e+01
+ 2.744000e+01 1.145760e+01 7.315840e+01 1.751680e+01 3.041920e+01
+ 1.540000e+01 7.372960e+01 1.462720e+01 1.842400e+01 7.971040e+01
+ 4.616640e+01 8.512000e-01 3.438400e+00 6.384000e-01 2.858240e+01
+ 6.875680e+01 6.563200e+00 1.120000e-01 1.139040e+01 9.900800e+00
+ 7.310240e+01          nan 5.936000e-01 5.390560e+01 2.707040e+01
+ 5.251680e+01 1.547840e+01 1.059520e+01 5.140800e+00 3.897600e+01
+ 9.038400e+00 9.522240e+01 3.763200e+00 8.601600e+00 1.313760e+01
+ 5.488000e-01 7.136640e+01 0.000000e+00 3.086720e+01 5.040000e-01
+ 1.187200e+00 9.520000e+00 2.240000e-02 0.000000e+00 2.688000e-01
+ 2.352000e-01 2.337440e+01 1.124480e+01 4.364640e+01 7.324800e+01
+ 3.457440e+01 3.516800e+00 1.264480e+01 1.052016e+02 1.534400e+00
+ 1.001280e+02 1.062880e+01 6.720000e-01 1.137920e+01 5.488000e-01
+ 1.844640e+01 3.767680e+01 8.164800e+00 1.261120e+01 1.724800e+00
+ 6.199200e+01 3.628800e+00 4.032000e-01 6.406400e+00 9.166080e+01
+ 4.524800e+00 1.230208e+02 5.398400e+00 4.116000e+01 8.926400e+00
+ 1.736000e+00 5.509280e+01 1.357440e+01 3.055360e+01 6.316800e+01
+ 6.216000e+01 3.941280e+01 4.464320e+01 8.232000e+01 4.313120e+01
+ 2.052960e+01 4.960480e+01 6.048000e-01 4.032000e-01 4.804800e+00
+ 1.604960e+01 1.926400e+01 1.336496e+02          nan 1.841280e+01
+ 2.262400e+01 4.032000e-01 1.589280e+01 1.151584e+02 9.616320e+01
+ 1.308160e+02 7.138880e+01 3.707200e+00 1.524320e+01 3.953600e+01
+ 8.500800e+00 5.773600e+01 5.298720e+01 4.375840e+01 9.430400e+00
+ 3.233440e+01 4.198880e+01 4.412800e+00 2.664480e+01 1.576960e+01
+ 5.918080e+01          nan 2.620800e+00 9.390080e+01 2.970240e+01
+ 5.703040e+01 2.481920e+01 2.240000e-02 5.174400e+01 1.196160e+01
+ 1.402240e+01 7.492800e+00 4.603200e+00          nan 3.342080e+01
+ 4.329920e+01          nan 1.120000e-01 6.496000e-01 1.695680e+01
+ 2.330720e+01 5.708640e+01 5.857600e+00 4.256000e-01 4.603200e+00
+ 3.905440e+01 1.759520e+01 4.457600e+00 6.596800e+00 8.712480e+01
+ 1.192800e+01 3.283840e+01 5.678400e+00 1.214528e+02 1.518720e+01
+ 1.660960e+01 2.979200e+00 2.273600e+00 7.840000e-02 1.030400e+01
+ 5.681760e+01 1.751680e+01 2.665600e+00 2.758560e+01 3.449600e+00
+ 3.889760e+01 1.070720e+01 4.099200e+01 8.422400e+00 1.097600e+01
+ 9.049600e+00 5.801600e+00 1.971200e+00 7.840000e-02 1.219568e+02
+ 6.384000e-01 4.852960e+01 1.217440e+01 3.418240e+01          nan
+ 1.757280e+01          nan 3.908800e+00 1.488480e+01 2.451680e+01
+ 7.504000e+00 2.149280e+01 3.068800e+00 8.040480e+01 4.168640e+01
+ 2.737280e+01 6.260800e+00 2.464000e-01 1.400000e+01 1.400000e+01
+ 3.634400e+01 5.839680e+01 4.626720e+01 3.561600e+00 2.149280e+01
+ 2.132480e+01 2.290400e+01          nan 2.244480e+01 3.785600e+00
+ 2.688000e-01 2.328480e+01 1.741600e+01 1.282176e+02 1.336160e+01
+ 1.478400e+00 6.776000e+00 4.499040e+01 6.414240e+01          nan
+ 7.571200e+00 4.144000e-01 3.472000e-01 3.459680e+01 8.140160e+01
+ 1.580320e+01 7.941920e+01 1.310400e+01 7.649600e+00 2.751840e+01
+ 3.413760e+01 8.374240e+01 2.655520e+01 2.770880e+01 2.363200e+00
+          nan 1.686720e+01 1.550080e+01 3.661280e+01 2.625280e+01
+ 1.120000e-01 2.568160e+01 1.170176e+02 7.431200e+01 1.238720e+01
+ 2.508800e+01 4.513600e+00          nan 1.120000e+00 4.960480e+01
+ 5.211360e+01 5.286400e+00 5.400640e+01 5.600000e-02 8.960000e-01
+ 5.824000e-01 9.956800e+00 3.195360e+01 1.480640e+01 3.635520e+01
+ 5.992000e+00 1.456000e+00 1.000160e+01 1.888320e+01 9.419200e+00
+ 0.000000e+00 6.720000e-01 3.057600e+00 5.622400e+00 1.344000e+01
+ 5.890080e+01 2.868320e+01 8.803200e+00 7.190400e+00 2.844800e+00
+          nan 1.948800e+00 9.979200e+00 2.598400e+01 5.140800e+00
+ 8.199520e+01 5.264000e-01 1.899520e+01 1.302560e+01 3.693760e+01
+ 1.344000e-01 6.160000e-01 6.468000e+01 2.240000e-02 0.000000e+00
+ 6.496000e+00 8.265600e+00 1.189440e+01 1.547840e+01 8.590400e+00
+ 4.782400e+00 3.608640e+01 2.831360e+01 1.926400e+01          nan
+ 6.466880e+01 0.000000e+00 3.682560e+01 1.779680e+01 2.040640e+01
+ 8.747200e+00 6.386240e+01 7.996800e+00 1.311520e+01 1.569120e+01
+ 2.436000e+01 9.060800e+00 7.244160e+01 1.695680e+01 3.515680e+01
+ 1.015840e+01 5.801600e+00 4.299680e+01 7.364000e+01 1.888320e+01
+ 5.712000e-01 5.284160e+01 5.835200e+00 2.555840e+01 2.800000e+00
+ 8.803200e+00 9.543520e+01 2.273600e+00 9.663360e+01 7.548800e+00
+ 6.372800e+00          nan 4.443040e+01 8.022560e+01 4.166400e+00
+ 6.611360e+01 1.071840e+01 4.661440e+01 9.128000e+00 1.417920e+01
+ 1.102080e+01 4.673760e+01 4.587520e+01 9.430400e+00 2.699200e+01
+ 1.556800e+00 5.994240e+01 1.705760e+01 3.783360e+01 4.930240e+01
+ 5.251680e+01 4.462080e+01 1.407840e+01 5.600000e-02 3.169600e+01
+ 1.247680e+01 4.200000e+00 2.428160e+01 9.038400e+00 4.714080e+01
+ 8.190560e+01 3.584000e+01          nan 5.947200e+00 1.859200e+00
+ 6.427680e+01 2.654400e+00 5.005280e+01 3.808000e+00 2.200800e+01
+          nan 6.586720e+01 1.570240e+01          nan 5.096000e+01
+ 1.277920e+01 1.148000e+01 3.848320e+01 1.104656e+02 1.202880e+01
+ 3.297280e+01 1.915200e+00 3.214400e+00 1.627360e+01 9.044000e+01
+ 0.000000e+00 1.456000e+00 8.311520e+01 1.188320e+01 8.631840e+01
+ 2.800000e-01 1.063328e+02 1.279600e+02 1.957760e+01 5.712000e-01
+ 5.583200e+01 1.690080e+01 6.954080e+01 7.336000e+01 8.870400e+00
+ 7.387520e+01 1.867040e+01 4.435200e+00 3.785600e+00          nan
+ 2.997120e+01 2.654400e+01 4.132800e+00 5.040000e-01 4.279520e+01
+ 8.288000e-01 1.704640e+01 2.077600e+01 1.814400e+00 1.223824e+02
+ 9.050720e+01 7.714560e+01 5.607840e+01 7.246400e+00 5.779200e+00
+ 4.891040e+01 1.366400e+00 2.126880e+01 2.492000e+01 1.456000e-01
+ 6.847680e+01 6.902560e+01 1.592640e+01 1.425760e+01 3.908800e+00
+ 1.900640e+01 8.960000e-02 5.521600e+01          nan 2.240000e-01
+ 7.280000e-01 8.331680e+01 6.697600e+00 2.923200e+00 3.964800e+00
+ 5.129600e+00 2.047360e+01 2.204160e+01 1.697920e+01 7.555520e+01
+ 2.371040e+01 1.089760e+01 1.836800e+01 1.095360e+01 8.085280e+01
+ 4.854080e+01 6.049120e+01 1.048432e+02 1.456000e+01 8.377600e+00
+ 4.267200e+00 3.932320e+01 5.633600e+00 2.217600e+00 3.771040e+01
+ 4.256000e-01 1.384320e+01 1.271200e+01 2.627520e+01 8.115520e+01
+ 1.668800e+00 1.138368e+02 5.476800e+00 3.460800e+00 4.633440e+01
+ 7.836640e+01 1.792000e-01 2.166080e+01 4.043200e+00 1.963360e+01
+ 9.878400e+00 4.467680e+01 1.861440e+01 6.009920e+01 6.742400e+01
+ 4.827200e+00          nan 5.936000e+00 8.803200e+00 4.626720e+01
+ 5.913600e+00 6.944000e-01 5.216960e+01 8.551200e+01 1.543360e+01
+ 9.441600e+00          nan 6.959680e+01 2.240000e-01 3.113600e+00
+ 2.072000e+00 1.327312e+02 1.232000e-01 1.039472e+02 1.154720e+01
+ 4.208960e+01 1.224160e+02 6.608000e-01 6.596800e+00 1.178912e+02
+ 8.843520e+01 3.158400e+01 1.253280e+01 1.881600e+00 6.437760e+01
+ 6.360480e+01 4.032000e-01 9.072000e-01 1.656480e+01 8.489600e+00
+ 9.281440e+01 2.312800e+01 4.120480e+01 5.712000e-01 5.152000e-01
+ 1.441440e+01 2.214240e+01 8.675520e+01 7.168000e-01 1.688960e+01
+ 6.454560e+01 2.411360e+01          nan 6.872320e+01 5.824000e-01
+ 3.001600e+00 2.732800e+00 2.567040e+01 1.077440e+01 8.452640e+01
+ 1.463840e+01 1.289120e+01 5.824000e-01 3.907680e+01 3.190880e+01
+ 1.806560e+01 9.048480e+01 1.240960e+01 1.232000e+00 3.713920e+01
+ 2.022720e+01 9.318400e+00 1.644160e+01 8.220800e+00 5.712000e-01
+ 5.476800e+00 3.528000e+00 1.557920e+01 3.069920e+01 2.372160e+01
+ 5.980800e+00 1.444800e+00 1.388800e+00 4.076800e+00 1.811040e+01
+ 8.523200e+01 3.607520e+01 2.710400e+00 1.109360e+02 3.731840e+01
+ 4.067840e+01 1.408960e+01 5.516000e+01 7.212800e+00 7.996800e+00
+ 1.198624e+02 4.065600e+00 2.938880e+01          nan          nan
+ 7.526400e+00 3.591840e+01 5.176640e+01 1.142400e+00 1.734880e+01
+ 3.024000e-01 5.706400e+01          nan 7.486080e+01 9.072000e-01
+ 6.977600e+00 5.315520e+01 2.543520e+01          nan 3.968160e+01
+ 1.277920e+01 3.019520e+01 1.100960e+01 4.256000e-01 8.366400e+00
+ 1.237600e+01 3.628800e+00 2.947840e+01 5.376000e+01          nan
+ 1.199520e+02 2.347520e+01 9.335200e+01 5.636960e+01 1.526560e+01
+ 4.771200e+00 5.276320e+01 2.285920e+01 3.872960e+01 4.401600e+00
+ 6.305600e+00 3.259200e+00 5.398400e+00 1.084160e+01 1.756160e+01
+ 8.186080e+01 2.236640e+01 1.619520e+01 1.683360e+01 7.280000e-01
+ 4.082400e+01 3.136000e-01          nan 1.680000e+00 1.422400e+00
+ 1.288000e+00 3.407040e+01 8.904000e+00 1.160320e+01 7.570080e+01
+ 2.206400e+00 8.086400e+00 2.513280e+01          nan 3.878560e+01
+ 3.942400e+00 1.158080e+01 1.344000e-01 1.344000e+00 3.507840e+01
+ 9.360960e+01 2.800000e+00 2.914240e+01 5.600000e+00 4.935840e+01
+ 7.380800e+00 1.740480e+01 6.391840e+01 1.655360e+01          nan
+ 1.154720e+01 1.116080e+02 2.229920e+01 9.296000e-01 1.203776e+02
+ 1.545600e+00 1.181600e+01 9.284800e+00 5.219200e+01 3.584000e-01
+ 4.734240e+01 2.159360e+01 1.963360e+01 1.243200e+00 2.923200e+00
+ 4.400480e+01 2.128000e-01 8.433600e+01 6.267520e+01 6.158880e+01
+ 1.220800e+00 4.716320e+01 1.046080e+01 6.372800e+01 3.724000e+01
+ 4.872000e+00 2.730560e+01 0.000000e+00 1.478400e+00 5.163200e+00]",28.360179166666665,2.1858400150576296,0.04695697968046628,0.0541853163943147,"Counter({'Repair': 304, 'Misrepair_a2-b1': 164, 'Misrepair_a1-b1': 116, 'Misrepair_a2-b2': 93, 'Misrepair_a1-b2': 91, 'NA': 32})",0.3958333333333333,0.034586771394532985,0.9322916666666666
+2_0,[100 100],3,0.2,"[[12  2]
+ [ 2 12]]",False,0.008,800,0.0108,0.01,12000,250,12000,0.06597374808532423,10,2,0,2,100,800,"['Misrepair_a1-b2' 'Repair' 'Repair' 'NA' 'Repair' 'Misrepair_a2-b1' 'NA'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a1-b2'
+ 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'NA' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'NA' 'NA' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b1' 'NA' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair' 'Repair' 'Repair'
+ 'NA' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Repair' 'Repair'
+ 'Repair' 'Repair' 'Misrepair_a1-b2' 'Repair' 'Repair' 'Repair' 'Repair'
+ 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1' 'Repair' 'NA'
+ 'Misrepair_a1-b2' 'NA' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Misrepair_a1-b1'
+ 'NA' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'NA' 'Repair' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Repair' 'Repair' 'NA'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b1' 'Repair' 'NA'
+ 'Misrepair_a1-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Repair' 'Repair' 'NA' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'NA' 'Repair'
+ 'Misrepair_a2-b2' 'NA' 'Repair' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'NA' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'NA'
+ 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'NA' 'Misrepair_a1-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Repair'
+ 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'NA' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'NA' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'NA' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b2'
+ 'NA' 'Misrepair_a2-b2' 'Repair' 'Repair' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2' 'Repair'
+ 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Repair'
+ 'Repair' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair'
+ 'NA' 'Repair' 'Misrepair_a2-b2' 'NA' 'Repair' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b1' 'Repair' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'NA' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2' 'Repair' 'NA'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b2' 'Repair' 'NA'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Repair' 'Repair' 'Repair' 'NA'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'NA' 'Repair'
+ 'Repair' 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'Repair' 'NA' 'Misrepair_a2-b2' 'Misrepair_a2-b2'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'NA' 'Repair'
+ 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'NA' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Repair' 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b2'
+ 'Repair' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'NA' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair' 'NA' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'NA'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Repair' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'NA' 'NA' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Repair'
+ 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b2' 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair' 'NA' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'NA'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2' 'Repair' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b2' 'NA' 'Repair']","[3.044520e+01 3.167640e+01 7.215480e+01          nan 5.636520e+01
+ 6.152760e+01          nan 2.359800e+01 3.790800e+00 1.917000e+01
+ 2.130840e+01 5.800680e+01 6.098760e+01 4.109400e+01 4.924800e+00
+ 1.085832e+02 4.180680e+01 9.634680e+01 3.654720e+01 1.987200e+00
+ 1.776600e+01 3.337200e+00 1.840320e+01 4.849200e+00 4.161240e+01
+ 7.657200e+01 5.832000e+01 4.136400e+00 3.926880e+01 7.107480e+01
+ 3.672000e+00 5.825520e+01 8.229600e+00 3.078000e+00 1.831680e+01
+ 3.607200e+00 1.099332e+02 3.985200e+00 9.411120e+01          nan
+ 4.671000e+01 6.080400e+00 5.715360e+01 1.231200e+00 2.149200e+00
+ 1.042200e+01 6.589080e+01 8.800920e+01 4.212000e-01 6.760800e+00
+ 4.515480e+01 5.483160e+01 5.920560e+01 9.169200e+00 2.556360e+01
+ 5.227200e+00 1.224504e+02 7.443360e+01 2.540160e+01 4.525200e+00
+ 2.898720e+01 6.893640e+01 3.953880e+01 3.488400e+01 3.391200e+01
+ 8.467200e+00          nan          nan 4.826520e+01 7.722000e+00
+ 3.417120e+01 1.414800e+00 3.351240e+01 2.613600e+00 1.021032e+02
+ 5.875200e+00 6.328800e+00 3.368520e+01 2.444040e+01 4.741200e+00
+ 4.487400e+01 8.640000e-01 1.057428e+02 1.213164e+02 8.551440e+01
+ 4.182840e+01 3.476520e+01          nan 2.841480e+01 3.013200e+00
+ 9.367920e+01 4.806000e+00 3.959280e+01 1.911600e+01 8.002800e+00
+ 3.059640e+01 3.801600e+01          nan 2.775600e+00 8.881920e+01
+ 1.296000e+01 1.402920e+01 3.877200e+00 1.313280e+01 3.024000e-01
+ 6.653880e+01 3.456000e-01 2.160000e+01 1.372680e+01 2.440800e+00
+ 3.059640e+01 7.030800e+00 4.536000e+01 1.680480e+01 1.479600e+00
+ 4.194720e+01 4.749840e+01 3.296160e+01 6.612840e+01 5.124600e+01
+ 4.218480e+01 4.439880e+01 4.665600e+00          nan 4.618080e+01
+          nan 3.493800e+01 2.484000e-01 1.123200e+00 3.348000e+00
+ 7.786800e+01 3.716280e+01 4.644000e+00 1.940760e+01 1.836000e+00
+ 6.113880e+01 1.217160e+01 1.274400e+00 3.724920e+01          nan
+ 4.309200e+00 4.147200e+00 7.495200e+01 4.982040e+01 1.497960e+01
+ 3.348000e-01 4.131000e+01 1.879200e+00 1.104840e+01 9.199440e+01
+          nan 2.126520e+01 5.738040e+01 4.039200e+00 5.821200e+00
+ 1.165428e+02 4.582440e+01 1.088640e+01 7.712280e+01          nan
+ 4.546800e+01 7.106400e+00 4.150440e+01 6.367680e+01 3.423600e+01
+ 7.084800e+00 4.201200e+00 4.189320e+01          nan 2.484000e-01
+ 1.188000e-01 5.616000e+00 1.099548e+02 1.188000e+01 1.952640e+01
+ 9.236160e+01 1.004400e+00 1.179360e+01 9.006120e+01 4.849200e+00
+ 4.287600e+00 1.936440e+01 3.747600e+00 1.220400e+00          nan
+ 4.276800e+01 2.926800e+00 6.866640e+01 8.910000e+00          nan
+ 1.749600e+00 5.400000e-02          nan 9.547200e+00 2.346840e+01
+ 5.714280e+01 2.073600e+01 7.348320e+01 3.326400e+00 0.000000e+00
+ 5.948640e+01 4.104000e+00 4.113720e+01 7.417440e+01 4.320000e-02
+ 6.441120e+01 2.359800e+01 0.000000e+00 4.644000e+00 1.165320e+01
+ 2.646000e+00 5.250960e+01 1.623240e+01 3.034800e+00 1.703160e+01
+ 6.009120e+01 2.177280e+01 9.823680e+01 4.335120e+01          nan
+ 7.484400e+01 3.467880e+01 2.513160e+01 3.034800e+00 2.484000e-01
+ 1.742040e+01 4.644000e+01 4.047840e+01 2.451600e+00 2.018520e+01
+ 1.004400e+00 2.107080e+01          nan 4.509000e+01 5.400000e+00
+ 9.525600e+00 1.623240e+01 2.791800e+01 3.044520e+01 2.084400e+01
+ 1.563840e+01 1.387800e+01 9.259920e+01 4.888080e+01 1.166400e+00
+ 9.838800e+00 6.588000e-01 1.211760e+01 2.153520e+01 1.593000e+01
+ 4.168800e+00 2.819880e+01 2.138400e+00 8.066520e+01 2.269080e+01
+ 9.438120e+01          nan 1.413720e+01 1.944000e-01 1.620000e-01
+ 3.661200e+00 3.132000e-01 3.008880e+01 1.473120e+01 5.497200e+00
+ 3.980880e+01 1.857600e+00 5.380560e+01 3.356640e+01 3.510000e+00
+ 1.472040e+01          nan 2.323080e+01 1.602720e+01 1.404000e-01
+ 3.343680e+01 7.989840e+01          nan 8.415360e+01 7.260840e+01
+ 9.039600e+00 3.475440e+01 4.222800e+00 4.201200e+00 2.061720e+01
+ 3.196800e+00 1.919160e+01 8.424000e-01 4.926960e+01 3.933360e+01
+ 7.743600e+00 7.722000e+00 7.236000e-01 1.509840e+01 1.831680e+01
+ 5.934600e+01 6.577200e+00 1.013040e+01 2.129760e+01 2.156760e+01
+ 1.991520e+01 1.560600e+01 4.212000e-01 4.053240e+01 4.060800e+00
+ 5.151600e+00 8.711280e+01 2.043360e+01 5.261760e+01 3.423600e+00
+ 6.674400e+00 1.321920e+01 1.112508e+02 2.622240e+01 2.991600e+00
+ 3.913920e+01 1.206576e+02 5.861160e+01 2.866320e+01          nan
+ 5.173200e+00 1.612440e+01 4.536000e-01 4.882680e+01 9.342000e+00
+ 2.326320e+01 1.866240e+01 1.805760e+01 9.462960e+01 3.823200e+00
+ 4.420440e+01 2.246400e+00 4.404240e+01 2.916000e-01 5.801760e+01
+ 6.069600e+01 2.907360e+01 5.006880e+01          nan 3.049920e+01
+ 9.288000e-01 6.080400e+00 5.410800e+00 4.052160e+01 4.104000e-01
+ 6.899040e+01 3.845880e+01 1.414800e+01 1.900800e+00 7.689600e+00
+ 2.052000e+00 4.428000e-01 3.917160e+01 1.809000e+01 1.803600e+01
+ 3.499200e+00 2.646000e+00 9.914400e+01 4.623480e+01 9.061200e+00
+ 3.055320e+01 3.733560e+01 8.778240e+01 1.379160e+01 1.242000e+00
+ 3.240000e+00 2.139480e+01 6.388200e+01 2.741040e+01 1.117800e+01
+ 6.899040e+01 1.937520e+01 5.400000e-02 4.395600e+00 1.717200e+00
+ 1.782000e+00 8.067600e+00 7.030800e+00 1.080000e-02 5.972400e+00
+ 3.423600e+00 2.246400e+00 3.900960e+01 1.197720e+01 1.448280e+01
+ 3.338280e+01 2.160000e-02 3.488400e+00 6.948720e+01 2.138400e+01
+ 1.218240e+01 1.950480e+01 3.218400e+00 1.109160e+01 2.738880e+01
+ 6.382800e+00 3.650400e+01 3.012120e+01 6.166800e+01 8.316000e+00
+ 9.828000e-01 2.099520e+01 3.769200e+01 5.443200e+00 2.639520e+01
+ 6.782400e+00 1.249128e+02 1.998000e+00 4.918320e+01 4.537080e+01
+ 1.063152e+02 2.397600e+00 2.376000e+00          nan 9.072000e-01
+ 9.093600e+00          nan 9.687600e+00 4.492800e+00 3.363120e+01
+ 1.911600e+00 8.899200e+00 4.665600e+00 9.309600e+00 1.998000e+00
+ 5.155920e+01 4.409640e+01 2.068200e+01 7.206840e+01 2.786400e+00
+ 3.241080e+01 1.598400e+00 1.987200e+00 2.473200e+01 4.773600e+00
+ 2.265840e+01 6.706800e+00 1.090800e+00 9.259920e+01 1.509840e+01
+ 2.533680e+01 3.578040e+01          nan 5.680800e+00 8.953200e+00
+ 2.249640e+01 1.535760e+01          nan 1.327320e+01 3.488400e+00
+ 3.736800e+01 8.208000e-01 3.932280e+01 3.345840e+01 7.344000e-01
+ 1.782000e+00 2.461320e+01 2.316600e+01 1.209600e+00 9.483480e+01
+ 3.068280e+01 6.685200e+00 1.704240e+01 1.764720e+01 1.794960e+01
+ 2.014200e+01 4.035960e+01 4.042440e+01 5.220720e+01 4.395600e+00
+ 6.814800e+00 1.892160e+01 2.700000e+00 4.255200e+01 4.838400e+00
+ 8.497440e+01 7.287840e+01 1.239948e+02 4.210920e+01 4.155840e+01
+ 2.354400e+00 3.101760e+01 6.782400e+00 7.980120e+01 2.754000e+00
+ 6.480000e-01 1.545480e+01 7.806240e+01 1.578960e+01 4.668840e+01
+ 8.964000e-01 2.399760e+01 3.966840e+01 3.978720e+01 4.599720e+01
+ 1.354320e+01          nan 1.296000e-01 1.991520e+01 5.029560e+01
+ 2.505600e+00 3.963600e+00 2.041200e+00 1.846800e+00 4.156920e+01
+ 1.239840e+01 1.721520e+01 1.583280e+01 1.259280e+01 4.665600e+00
+ 1.296000e+00          nan 5.076000e-01 1.770120e+01 4.644000e-01
+ 5.163480e+01 1.641600e+00 1.177200e+00 2.693520e+01 1.803600e+00
+ 4.665600e+00 6.594480e+01 2.797200e+00 2.906280e+01          nan
+ 4.093200e+00 4.687200e+00 1.188000e+00 4.244400e+00 8.888400e+00
+ 2.451600e+00 6.609600e+00 1.073520e+01 8.425080e+01 4.827600e+00
+ 2.235600e+00 1.055484e+02 9.720000e-01 7.246800e+00 1.252584e+02
+ 6.048000e-01 3.801600e+00 1.479600e+01 1.858680e+01 8.402400e+00
+ 5.546880e+01 4.168800e+00 4.816800e+00 7.452000e-01 3.666600e+01
+ 5.738040e+01 8.100000e-01 1.836000e-01 2.035800e+01 1.191996e+02
+ 3.272400e+00 1.080000e+00          nan 1.555200e+01 6.124680e+01
+ 6.598800e+00 3.397680e+01 5.518800e+00 1.422360e+01 2.689200e+00
+ 3.778920e+01 1.206360e+01          nan 4.352400e+00 3.488400e+00
+ 8.373240e+01 1.428840e+01 7.862400e+00 1.730160e+01 3.596400e+00
+ 4.560840e+01 8.348400e+00 4.365360e+01 5.870880e+01 1.477440e+01
+ 9.504000e-01 6.106320e+01          nan 9.126000e+01 5.875200e+01
+ 2.138400e+00 3.853440e+01 3.446280e+01 3.025080e+01 1.237680e+01
+ 2.160000e-02 3.193560e+01 3.531600e+00 3.153600e+00 6.328800e+00
+ 1.476360e+01 3.056400e+00 2.516400e+00 1.798200e+01 2.275560e+01
+ 3.078000e+00 4.057560e+01 2.462400e+00 7.657200e+01 2.095200e+01
+ 3.471120e+01 1.069524e+02 5.929200e+00 1.188000e+00 1.540080e+01
+ 4.611600e+00 9.374400e+00 1.571400e+01 4.104000e+00 2.447280e+01
+ 3.564000e-01 6.026400e+00 1.166400e+00 2.600640e+01 7.482240e+01
+ 1.251720e+01 1.910520e+01 4.480920e+01 3.780000e-01 4.104000e+01
+ 4.752000e+00 2.819880e+01 7.560000e-02          nan 6.368760e+01
+ 1.100628e+02 1.468800e+01 3.385800e+01 1.620000e-01 8.771760e+01
+ 1.450440e+01 1.386720e+01 1.090800e+00 3.619080e+01          nan
+ 0.000000e+00 3.132000e+00 2.602800e+00 1.468800e+00 1.728000e-01
+ 2.518560e+01 6.605280e+01 0.000000e+00 1.718280e+01 2.964600e+01
+ 2.079000e+01 2.459160e+01 3.379320e+01 1.101600e+00 1.965600e+00
+ 2.667600e+00 1.135080e+01 3.784320e+01 1.870560e+01 5.789880e+01
+ 2.730240e+01 2.426760e+01 2.432160e+01 5.179680e+01 6.264000e-01
+ 1.519560e+01 1.652400e+01          nan 5.389200e+01 2.397600e+00
+ 5.400000e-02 9.504000e-01 6.750000e+00 7.151760e+01 8.087040e+01
+ 4.790880e+01 2.844720e+01 6.588000e+00 2.965680e+01 8.175600e+00
+ 3.841560e+01 1.164780e+02 2.046600e+01 7.074000e+00 2.451600e+00
+ 1.705320e+01 1.521720e+01 8.100000e-01 5.745600e+00 3.240000e-02
+          nan          nan 1.103760e+01 7.549200e+00 7.603200e+00
+ 0.000000e+00 2.592000e-01 4.240080e+01 1.485000e+01 4.320000e-02
+ 3.219480e+01 9.075240e+01 6.458400e+00 1.733400e+01 1.902960e+01
+ 2.749680e+01 1.266408e+02 1.236276e+02 6.066360e+01 9.072000e-01
+ 2.710800e+00 3.387960e+01 4.752000e+00 8.100000e-01 9.655200e+00
+ 7.041600e+00 5.203440e+01 1.188000e+00 1.258200e+01 0.000000e+00
+ 4.459320e+01 1.760400e+00 1.179360e+01 2.002320e+01 1.183248e+02
+ 1.436400e+00 7.484400e+00 5.140800e+00 1.588680e+01 6.156000e+00
+ 6.627960e+01 2.264760e+01 2.646000e+01 1.242000e+00 2.772360e+01
+ 1.981800e+01 1.013796e+02 2.883600e+00          nan 2.378160e+01
+ 1.439640e+01 4.045680e+01 3.478680e+01 2.084400e+00 1.478520e+01
+ 4.536000e-01 6.324480e+01 1.911600e+00          nan 3.021840e+01
+ 6.836400e+00 2.916000e+00 4.226040e+01 5.940000e-01 7.704720e+01
+ 6.512400e+00 6.538320e+01 2.019600e+00 5.108400e+00 7.484400e+00
+ 2.733480e+01 1.046520e+01 6.622560e+01 2.008800e+00 1.347840e+01
+ 1.079568e+02 9.697320e+01 1.137240e+01 5.162400e+00 2.943000e+01
+ 1.487160e+01 4.499280e+01 5.045760e+01 2.386800e+00 1.999080e+01
+ 1.289520e+01 5.717520e+01 3.855600e+00 2.006640e+01 1.706400e+00
+ 3.639600e+00 2.162160e+01 8.158320e+01 1.264140e+02 2.865240e+01
+ 4.471200e+00 1.901880e+01 9.784800e+00 1.144800e+00 9.385200e+00
+ 3.726000e+00 3.765960e+01 7.149600e+00 5.389200e+00 4.524120e+01
+ 3.003480e+01 7.452000e-01 7.354800e+01          nan 8.640000e-02]",26.467214229249013,2.0609185040962736,0.05817442994728274,0.07259027214162157,"Counter({'Repair': 295, 'Misrepair_a2-b1': 168, 'Misrepair_a2-b2': 113, 'Misrepair_a1-b1': 109, 'Misrepair_a1-b2': 74, 'NA': 41})",0.38866930171277997,0.03467874767585471,0.9802371541501976
+3_0,[100 100],3,0.2,"[[12  3]
+ [ 3 12]]",False,0.008,800,0.010400000000000001,0.01,12000,250,12000,0.06477040322254735,10,2,0,3,100,800,"['Misrepair_a2-b1' 'NA' 'Repair' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair'
+ 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b2'
+ 'Repair' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b1'
+ 'Repair' 'NA' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1'
+ 'Repair' 'NA' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a1-b2'
+ 'Repair' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b2' 'Repair' 'NA'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a1-b1' 'Repair' 'NA' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Repair' 'Repair'
+ 'Repair' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'NA' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Repair' 'Repair'
+ 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a1-b1'
+ 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Repair' 'NA' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a1-b2'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Repair' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b2'
+ 'Repair' 'Misrepair_a2-b2' 'NA' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a2-b2' 'NA' 'Misrepair_a2-b2' 'NA' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b2' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Repair' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'NA'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'NA' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'NA' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair'
+ 'Repair' 'Misrepair_a1-b2' 'Repair' 'NA' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair' 'NA'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Repair' 'Repair' 'NA' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'NA' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Repair' 'Misrepair_a1-b1' 'NA' 'Repair' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'NA' 'Repair' 'Misrepair_a1-b1' 'NA' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'NA' 'NA' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair'
+ 'NA' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b2'
+ 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'NA' 'Repair' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'NA' 'Repair' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Misrepair_a2-b1' 'NA' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'NA' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a1-b2'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'NA' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'NA'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair' 'NA' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'NA' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b2'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'NA' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Repair' 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Repair' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Misrepair_a1-b1'
+ 'Repair' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'NA' 'NA' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'NA' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b1' 'Repair' 'Repair' 'Repair' 'NA' 'Misrepair_a1-b1' 'NA'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b2'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair'
+ 'Repair' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair' 'NA' 'Misrepair_a2-b2'
+ 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair' 'NA'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b2'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'NA' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Misrepair_a2-b2'
+ 'Repair' 'NA' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Repair'
+ 'Repair' 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a1-b2'
+ 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Repair' 'NA' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'NA'
+ 'Misrepair_a1-b2' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'NA' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b2' 'NA'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b2' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b2']","[2.616640e+01          nan 3.016000e+00 3.827200e+00 1.276080e+01
+ 9.429680e+01 2.823600e+01 7.376720e+01 3.954080e+01 7.491120e+01
+ 9.224800e+01 2.359760e+01 7.304960e+01 1.053104e+02 1.508000e+01
+ 1.511120e+01 1.152008e+02 9.014720e+01 1.240720e+01 1.019200e+00
+ 3.079440e+01 9.930960e+01 7.549360e+01 8.798400e+00 1.352000e-01
+ 1.306240e+01 1.290640e+01 2.804880e+01 7.280000e-02 2.318160e+01
+ 1.226784e+02 1.265680e+01 3.321760e+01 2.732080e+01 7.748000e+00
+ 1.019200e+00 1.187680e+01 4.201600e+00 5.668000e+01 5.834400e+00
+ 4.295200e+00 3.570320e+01 7.932080e+01 6.812000e+00 2.558400e+00
+ 2.454400e+00 1.061944e+02 9.076080e+01 1.291680e+01 1.804400e+01
+ 2.262000e+01 4.097600e+00 3.229200e+01          nan 1.594320e+01
+ 0.000000e+00 2.683200e+00 2.735200e+00 5.532800e+00 1.739920e+01
+ 4.097600e+00 5.172960e+01 1.710800e+01 5.460000e+00          nan
+ 6.753760e+01 2.100800e+01 8.320000e-02 1.449760e+01 5.314400e+00
+ 3.628560e+01 8.476000e+00 1.976000e+00 1.719120e+01 1.226160e+01
+ 1.163760e+01 3.620240e+01 2.435680e+01 1.617200e+01 1.185600e+01
+ 5.083520e+01 1.095120e+01 1.040000e-01 1.218568e+02 1.698320e+01
+ 3.390400e+00 2.502240e+01 5.189600e+01          nan 5.300880e+01
+ 3.018080e+01 6.609200e+01 1.141920e+01 7.623200e+00 1.051024e+02
+ 1.178320e+01          nan 2.870400e+00 7.488000e+00 3.997760e+01
+ 2.620800e+01 4.940000e+00 5.356000e+00 8.278400e+00 3.556800e+00
+ 2.246400e+01 3.473600e+00 8.314800e+01 3.557840e+01 5.605600e+00
+ 0.000000e+00 1.144000e-01 3.442400e+00 2.321280e+01 2.372240e+01
+ 3.546400e+00          nan 2.912000e+00 9.360000e-02 1.489280e+01
+ 2.487680e+01 1.469520e+01 1.127360e+01 8.130720e+01 6.450080e+01
+ 2.600000e-01 7.748000e+00 4.964960e+01 4.045600e+00 1.524640e+01
+ 4.160000e-02 3.005600e+00 8.467680e+01 5.491200e+00 5.851040e+01
+ 1.546480e+01 3.946800e+01 2.019680e+01 2.579200e+00 1.102400e+00
+ 1.098760e+02 1.383200e+00 1.071200e+00 7.519200e+00 1.662960e+01
+ 5.636800e+00 8.028800e+00 4.059120e+01 4.264000e-01 1.995760e+01
+ 2.789280e+01 6.853600e+01 6.165120e+01 3.180320e+01 6.345040e+01
+ 2.679040e+01 2.652000e+00 3.588000e+00 2.607280e+01 4.804800e+00
+          nan 4.160000e-01 2.347280e+01 2.060240e+01 5.865600e+00
+ 2.624960e+01 6.656000e+00 3.016000e-01 1.840800e+01 8.737040e+01
+ 1.266720e+01 3.889600e+00 8.493680e+01 9.204000e+00 5.322720e+01
+ 8.833760e+01 1.471600e+01 1.387360e+01 9.828000e+00 1.572480e+01
+ 3.116880e+01 3.945760e+01 1.889680e+01 4.362800e+01 8.944000e-01
+ 1.713920e+01 7.943520e+01 9.287200e+00 1.802320e+01 1.541280e+01
+ 8.008000e-01 1.996800e+01 3.494400e+00 1.757600e+00 5.824000e-01
+          nan 7.029360e+01 3.109600e+00 3.328000e-01 2.311920e+01
+ 9.495200e+00 1.125280e+01 2.152800e+00 3.525600e+00 2.409680e+01
+ 1.049776e+02 1.554800e+01          nan 1.166880e+01          nan
+ 2.111200e+00 1.430000e+01 2.317120e+01 2.300480e+01 6.143280e+01
+ 5.957120e+01 5.084560e+01 8.398000e+01 1.418560e+01 8.382400e+00
+ 3.521440e+01 2.140320e+01 3.047200e+01 3.442400e+01 1.157000e+02
+ 8.039200e+00 4.865120e+01 4.056000e-01 6.000800e+00 1.137864e+02
+ 0.000000e+00 4.681040e+01 5.657600e+00 4.784000e+00 2.641600e+00
+ 4.724720e+01 7.696000e-01 2.304640e+01 6.724640e+01 3.848000e-01
+ 1.924000e+01 1.198080e+01 8.119280e+01 3.161600e+00          nan
+ 2.498080e+01 1.665040e+01 1.026480e+01 7.893600e+00 1.586000e+01
+ 5.200000e+00 4.992000e-01          nan 8.736000e-01 1.497600e+00
+ 1.144728e+02 6.295120e+01 1.009632e+02 1.456000e-01 1.227200e+00
+ 8.008000e-01 7.072000e-01 2.142400e+00 3.891680e+01 2.455440e+01
+ 3.244800e+01 3.542240e+01          nan 3.325920e+01 3.135600e+01
+ 4.195360e+01 1.180400e+01 2.964000e+00 5.439200e+00 1.214720e+02
+ 1.022320e+01 2.253680e+01 6.198400e+00 2.943200e+00 1.036672e+02
+ 1.294800e+01 6.094400e+00 5.460000e+00 8.703760e+01 5.560880e+01
+ 1.851200e+00          nan 2.646800e+01 7.176000e-01 7.254000e+01
+ 2.039440e+01 7.011680e+01 8.988720e+01 6.002880e+01 5.324800e+00
+ 1.774240e+01 2.600000e+00 8.032960e+01 1.163760e+01 8.008000e-01
+ 2.163200e+00 1.814800e+01 5.491200e+00          nan 5.304000e+00
+ 1.890720e+01 8.018400e+00 4.160000e-01          nan 3.931200e+00
+ 2.034240e+01 6.217120e+01          nan 6.146400e+00 4.779840e+01
+ 1.358240e+01 1.657760e+01 3.120000e+00 3.770000e+01 2.590640e+01
+ 8.808800e+00 1.133600e+01 1.192880e+01 6.593600e+00 7.076160e+01
+ 3.120000e+00 6.760000e+00 9.318400e+00 5.694000e+01 1.813760e+01
+          nan 5.224960e+01 2.463760e+01 2.445040e+01 9.123920e+01
+ 2.288000e-01          nan 1.705600e+00 7.395440e+01          nan
+ 5.865600e+00 2.156960e+01 9.547200e+00 2.579200e+01 1.658800e+01
+ 3.224000e-01 7.794800e+01 8.881600e+00          nan          nan
+ 1.179360e+01 1.737840e+01 2.678000e+01 1.281280e+01 6.864000e-01
+ 7.290400e+00 2.925520e+01 2.449200e+01 1.014728e+02 3.151200e+00
+          nan 3.833440e+01 6.883760e+01 1.944800e+01 4.424160e+01
+ 5.549440e+01 5.075200e+00 1.069224e+02 3.450720e+01 4.721600e+00
+ 4.690400e+00 3.879200e+00 2.203760e+01 9.059440e+01 1.932320e+01
+ 1.859520e+01 3.008720e+01 2.394080e+01 1.719120e+01 3.345680e+01
+ 2.828800e+01 3.677440e+01 2.121600e+00 4.042480e+01 9.360000e-01
+ 4.397120e+01 3.754400e+00 6.623760e+01 1.105000e+02          nan
+ 4.266080e+01 3.526640e+01 1.005680e+01 0.000000e+00 3.135600e+01
+ 2.652000e+00 6.120400e+01 2.712320e+01 4.700800e+00 1.050296e+02
+ 4.992000e-01 7.733440e+01 5.538000e+01          nan 1.939600e+01
+ 6.819280e+01 8.928400e+01 4.160000e-02 4.388800e+00          nan
+ 8.836880e+01 1.618240e+01 6.021600e+01          nan 1.905280e+01
+ 9.474400e+01 3.008720e+01 1.861600e+00 1.221792e+02 2.327520e+01
+ 4.127760e+01 1.026272e+02 1.473680e+01 2.304640e+01 1.056224e+02
+          nan 4.232800e+00 4.307680e+01          nan 1.646320e+01
+ 2.527200e+01 2.097680e+01 3.537040e+01 6.352320e+01 5.612880e+01
+ 4.696640e+01 8.624720e+01          nan 5.835440e+01 5.647200e+00
+ 3.328000e+00 1.716000e+00          nan 9.464000e-01 1.521520e+01
+ 6.008080e+01 1.040000e-02 4.815200e+01 1.684800e+01 1.268800e+00
+ 5.720000e+00 5.002400e+00 5.555680e+01 1.904240e+01 3.894800e+01
+ 1.232400e+01 1.733680e+01 3.095040e+01 7.789600e+00 3.398720e+01
+ 1.014000e+01 6.872320e+01 5.148000e+00 1.080560e+01 7.382960e+01
+ 1.424800e+01 2.546960e+01 3.501680e+01 5.270720e+01 3.094000e+01
+ 3.629600e+00 6.061120e+01 4.472000e+00 4.976400e+01 8.361600e+00
+ 7.133360e+01 2.028000e+00 4.201600e+00 6.805760e+01 1.132664e+02
+ 3.474640e+01 1.145144e+02 1.795040e+01          nan 1.150240e+01
+ 7.280000e-02 6.884800e+00 6.214000e+01 6.874400e+00 2.360800e+00
+ 3.778320e+01 4.463680e+01 1.806480e+01 1.703520e+01 8.251360e+01
+ 1.697280e+01 9.360000e-02 2.563600e+01 2.119520e+01 8.226400e+00
+ 2.163200e+00 6.671600e+01 4.472000e-01 8.885760e+01 2.737280e+01
+ 1.169272e+02 8.788000e+00 1.760720e+01 1.575600e+01 1.213680e+01
+ 5.801120e+01          nan          nan 1.310400e+00 6.021600e+01
+ 2.506400e+00 2.118480e+01 4.927520e+01 1.315600e+01 1.144000e+00
+ 1.861600e+00 4.128800e+00 5.636800e+00 1.003600e+01 1.456000e+00
+ 7.914400e+00 2.132000e+00          nan 7.217600e+01 1.286480e+01
+ 2.038400e+00 8.122400e+00 3.264560e+01          nan 8.832720e+01
+          nan 3.120000e+00 2.537600e+00 2.397200e+01 1.994720e+01
+ 8.644480e+01 6.032000e-01 2.516800e+00 1.778400e+00 2.218320e+01
+ 3.276000e+00 3.779360e+01 5.998720e+01 6.063200e+00 1.029600e+00
+ 8.320000e-02 2.836080e+01 1.346800e+01 3.827200e+00 9.141600e+00
+ 2.537600e+00 1.230320e+01 6.177600e+00 3.105440e+01 4.472000e-01
+ 4.577040e+01 5.054400e+00 2.995200e+00 2.065440e+01 2.059200e+00
+ 1.071200e+00 2.974400e+00 3.068000e+00 1.082640e+01 1.079312e+02
+ 4.503200e+00 9.672000e-01 2.801760e+01 8.871200e+00 2.589600e+00
+ 1.176760e+02 3.343600e+01 1.143064e+02 1.026480e+01 1.040000e+01
+ 4.784000e-01 2.012400e+01 2.724800e+00 1.387360e+01 5.668000e+00
+ 6.541600e+00 2.319200e+01 2.693600e+00          nan 1.930240e+01
+ 1.674400e+00 5.054400e+00 1.702480e+01 4.472000e-01 4.784000e+01
+ 1.381120e+01 2.934880e+01 3.926000e+01 3.195920e+01 8.600800e+00
+ 2.624960e+01 6.088160e+01 2.225600e+01 3.515200e+00          nan
+ 5.876000e+00 5.127200e+00 8.129680e+01 9.176960e+01 6.926400e+00
+ 3.128320e+01 4.730960e+01 5.730400e+01 4.352400e+01 3.028480e+01
+ 1.321840e+01 6.510400e+00 2.322320e+01 1.257360e+01 1.352000e-01
+ 2.991040e+01 3.336320e+01 1.085760e+02 5.813600e+01 4.916080e+01
+ 1.213680e+01 6.784960e+01 1.866800e+01 6.118320e+01 5.302960e+01
+ 1.227200e+01 1.249040e+01 1.795040e+01 4.167280e+01          nan
+ 2.808000e-01 4.216160e+01 1.410240e+01 8.110960e+01 4.193280e+01
+ 1.393600e+00 1.711840e+01 2.080000e-01 1.154712e+02 2.505360e+01
+ 1.352000e+00 1.069016e+02          nan 1.690000e+01 1.976000e-01
+ 2.592720e+01 4.628000e+00 4.285840e+01 1.782560e+01 1.258400e+00
+ 1.531920e+01 4.151680e+01 1.102400e+00 3.898960e+01 4.154800e+01
+ 1.148160e+01 4.157920e+01 6.523920e+01 6.656000e-01 1.827280e+01
+ 3.588000e+00 4.945200e+01 3.260400e+01 5.948800e+00 8.018400e+00
+ 2.560480e+01 9.001200e+01 3.692000e+01 1.189760e+01 5.241600e+00
+ 1.140880e+01 1.024400e+01 7.257120e+01 2.864160e+01 5.896800e+00
+ 2.379520e+01 2.194400e+00 8.944000e-01 6.440720e+01 1.068080e+02
+ 1.921920e+01 9.568000e+00 1.006824e+02 3.057600e+00 3.324880e+01
+ 5.515120e+01 7.467200e+00 4.700800e+00 5.087680e+01 4.038320e+01
+ 1.072240e+01 3.848000e+01 1.055184e+02 1.976000e-01 1.903200e+00
+ 6.792240e+01 4.014400e+00 0.000000e+00 1.986400e+00 5.443360e+01
+ 3.130400e+01 2.683200e+00 1.019616e+02 7.602400e+00 3.069040e+01
+ 1.933360e+01 1.851200e+00 2.849600e+01 2.704000e-01 3.628560e+01
+ 1.073280e+01          nan 7.763600e+01 6.907680e+01 4.043520e+01
+ 6.779760e+01 5.595200e+00 7.872800e+00 6.576960e+01 1.511120e+01
+ 1.128296e+02 5.332080e+01 2.410720e+01 8.851440e+01 5.928000e-01
+ 6.173440e+01 1.173120e+01 5.990400e+00 4.998240e+01 1.244880e+01
+ 4.940000e+01 2.813200e+01 4.182880e+01          nan 2.860000e+00
+ 1.442480e+01 1.036880e+01 8.840000e+00 5.241600e+00 2.912000e-01
+ 5.939440e+01 7.436000e+00 5.552560e+01 3.242720e+01 3.151200e+01
+ 7.540000e+01          nan 2.679040e+01 1.176240e+01 7.675200e+00
+ 2.475200e+00 1.124240e+02 2.121600e+00 2.535520e+01 2.711280e+01
+ 6.552000e-01 3.608800e+00 1.716000e+01 5.116800e+00          nan
+ 1.219712e+02 3.120000e+01 2.473120e+01 6.271200e+00 2.839200e+00
+ 2.298400e+00 3.494400e+00 6.000800e+01 6.386640e+01 1.258400e+00
+ 7.815600e+01 8.946080e+01 9.375600e+01 4.190160e+01 1.414400e+00
+ 3.941600e+00 3.504800e+00 7.176000e-01 1.609920e+01 6.136000e-01
+ 2.392000e+00 2.901600e+00 3.261440e+01 7.290400e+01 2.579200e+00
+ 1.300000e+01 7.475520e+01 1.692080e+01 2.675920e+01 5.304000e-01
+ 3.611920e+01 1.043120e+02 3.442400e+00 1.196000e+00 2.540720e+01]",28.415045298013247,2.181819825706129,0.04871926399707934,0.057716011114577775,"Counter({'Repair': 292, 'Misrepair_a2-b1': 188, 'Misrepair_a1-b1': 96, 'Misrepair_a2-b2': 95, 'Misrepair_a1-b2': 84, 'NA': 45})",0.38675496688741723,0.03473902019696778,1.0582781456953643
+4_0,[100 100],3,0.2,"[[12  4]
+ [ 4 12]]",False,0.008,800,0.01,0.01,12000,250,12000,0.06366019946479225,10,2,0,4,100,800,"['Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'NA'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b2' 'Repair' 'Repair' 'Misrepair_a2-b2' 'NA' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Repair' 'Repair' 'Repair' 'Repair'
+ 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair' 'NA' 'Repair'
+ 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b2' 'NA' 'Misrepair_a2-b2'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Repair' 'Repair' 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b2'
+ 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'NA'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b2' 'Repair'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a1-b1' 'NA' 'Repair' 'Repair' 'Misrepair_a1-b2' 'Repair'
+ 'Repair' 'Repair' 'Misrepair_a1-b2' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair' 'Repair'
+ 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Repair' 'Repair'
+ 'Misrepair_a1-b2' 'Repair' 'NA' 'Repair' 'NA' 'NA' 'Repair' 'NA' 'Repair'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Repair' 'Misrepair_a2-b2' 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a1-b1' 'NA' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a2-b2' 'Repair'
+ 'Repair' 'Repair' 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'NA' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'NA' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b2'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'NA'
+ 'Repair' 'NA' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'NA'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'NA' 'Repair' 'Misrepair_a2-b2'
+ 'Repair' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'NA'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'NA' 'Misrepair_a2-b2' 'Repair'
+ 'Repair' 'Repair' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a2-b1' 'NA' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b2' 'NA' 'Repair' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Repair' 'NA'
+ 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair' 'NA'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'NA' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a1-b2'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b2'
+ 'NA' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Repair' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair' 'NA' 'Repair' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b2'
+ 'NA' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a1-b2' 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b2' 'Repair' 'NA' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Repair' 'Repair' 'NA' 'NA' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair'
+ 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'NA' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b1' 'NA'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'NA' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair' 'Repair'
+ 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'NA'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'NA' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'NA' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b1' 'NA' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'NA'
+ 'Repair' 'NA' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b2'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Repair'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'NA'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair' 'NA' 'Repair' 'Repair'
+ 'Repair' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Repair' 'NA' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b2' 'NA'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'NA' 'Repair' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'NA' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'NA'
+ 'Misrepair_a1-b1' 'Repair' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'NA' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'NA' 'Misrepair_a2-b1' 'Repair' 'Repair' 'NA'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair' 'Repair' 'NA'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Repair'
+ 'Repair' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'NA' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'NA'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b2' 'Repair' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b2' 'NA' 'Misrepair_a1-b1' 'NA' 'NA' 'NA' 'Repair' 'NA'
+ 'Repair' 'NA' 'Repair' 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b2'
+ 'Repair' 'Misrepair_a1-b2' 'NA' 'Misrepair_a1-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair' 'Repair'
+ 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1']","[8.3300e+00 2.0070e+01 1.8200e+00 6.9900e+00 2.5910e+01 3.6770e+01
+ 2.0000e+01 2.3140e+01 2.1410e+01 4.5600e+01 3.7320e+01 7.8600e+00
+        nan 1.3420e+01 1.5460e+01 7.1100e+00 8.4900e+00 5.4400e+01
+ 1.1620e+01 1.8910e+01 3.0830e+01        nan 9.0000e-02 5.5900e+00
+ 3.1400e+01 6.5200e+00 2.1830e+01 9.9000e+00 2.7200e+01 2.5320e+01
+ 2.0030e+01 5.3080e+01 1.7800e+00        nan 3.4340e+01 2.2630e+01
+ 5.8000e+00 1.0860e+01 4.3500e+01        nan 8.2730e+01 5.1620e+01
+ 6.9320e+01 1.6880e+01 7.5940e+01 6.2420e+01 7.9500e+01 1.5000e-01
+ 3.8990e+01 8.1330e+01 9.4400e+00 7.0610e+01 7.2800e+00 1.0600e+02
+ 4.1430e+01 8.6200e+00 1.0680e+01 1.1615e+02 3.0140e+01 1.5970e+01
+ 5.1780e+01 1.8000e+00 5.6370e+01 3.4700e+00 6.1200e+01 3.0880e+01
+ 2.8100e+00        nan 2.1080e+01 1.0068e+02 4.7380e+01 7.6370e+01
+ 1.5880e+01 1.7950e+01 5.9000e-01 3.4230e+01 1.0664e+02 6.8630e+01
+ 3.2910e+01 1.1430e+01 6.4800e+00 8.7700e+00 4.5120e+01 3.9590e+01
+ 1.4300e+00 1.7400e+01 3.1700e+01 4.2000e+00        nan 3.0000e+00
+ 1.0019e+02 6.2680e+01 1.4400e+00 3.5900e+00 2.5500e+00 1.1950e+01
+ 1.6950e+01 3.6580e+01 4.0000e+00 6.8410e+01 4.3020e+01 4.2000e-01
+ 2.6700e+00 5.1300e+00 2.4610e+01 7.6610e+01 1.0315e+02 5.6000e-01
+ 9.4200e+01 6.4400e+00 3.8410e+01 3.0000e+00 5.5300e+00 1.5900e+00
+ 7.0900e+00 0.0000e+00 5.8890e+01 4.0190e+01 3.9300e+01 1.7020e+01
+ 4.0200e+00 1.2500e+00 2.4530e+01 2.6000e+00 8.8000e-01 2.9700e+00
+ 1.8730e+01 0.0000e+00 1.1730e+01 2.9780e+01 1.2390e+01        nan
+ 4.5900e+00        nan        nan 7.4000e-01        nan 3.1590e+01
+ 7.9060e+01 4.0400e+00 7.0060e+01 3.3700e+00 2.7930e+01 3.0900e+00
+ 2.1370e+01 8.7500e+00 5.4890e+01 2.2980e+01 5.8490e+01 2.0560e+01
+ 1.3800e+00 1.7940e+01 1.3700e+00 7.2320e+01        nan 2.7970e+01
+ 3.3570e+01 9.8390e+01 3.7700e+00 1.4020e+01 1.0452e+02 9.8000e-01
+ 5.6890e+01 4.0500e+00 6.5000e-01 7.6800e+00 4.1900e+00 1.0400e+00
+ 6.4250e+01 2.9820e+01 1.7210e+01 3.1000e+00 8.5060e+01 2.0910e+01
+ 6.5580e+01 4.9300e+00 9.3600e+01 1.1186e+02 1.1600e+00 3.1500e+00
+ 6.7380e+01 3.3700e+00 8.2400e+00 6.6980e+01 9.8700e+00 3.5700e+01
+ 4.9750e+01 2.2830e+01 4.7500e+00 8.1940e+01 4.9000e+00        nan
+ 3.3510e+01 3.4200e+00 9.8030e+01 8.0300e+00 1.3900e+00 5.4010e+01
+ 6.1010e+01 4.7200e+01        nan 3.3890e+01 6.5150e+01 7.5900e+01
+ 4.1100e+01 3.1600e+00 6.2210e+01 8.2220e+01 4.6000e-01 3.9070e+01
+ 2.8000e+00 5.6420e+01 5.1100e+00 1.6500e+00 3.3900e+00 2.2520e+01
+ 7.1070e+01 8.2950e+01        nan 4.0000e-01        nan 5.1130e+01
+ 3.0000e+00 4.1640e+01 1.1930e+01 1.3710e+01 5.5010e+01 1.3720e+01
+ 1.9000e-01 5.6880e+01 1.2700e+00 1.6440e+01        nan 6.3790e+01
+ 1.4180e+01        nan 7.7150e+01 2.2920e+01 6.1100e+00 6.9090e+01
+ 2.5890e+01 7.6850e+01 4.7180e+01 7.5520e+01 4.6000e-01 5.9000e+00
+ 3.6000e-01 1.2330e+01 1.9190e+01 3.7620e+01        nan 4.9800e+00
+ 5.7280e+01        nan 3.3790e+01 5.5000e-01 2.1800e+01 1.9300e+00
+ 6.8260e+01 4.2700e+00 1.3850e+01 2.0480e+01 8.5100e+00        nan
+ 5.7200e+00 1.1070e+01 5.3700e+00 2.7210e+01 6.8530e+01 1.0600e+00
+ 3.1710e+01 3.2620e+01 4.1400e+00 1.2360e+01        nan 1.3000e-01
+ 4.8700e+00 8.3150e+01 5.6430e+01 2.2310e+01 2.0440e+01 1.1144e+02
+ 3.0600e+01 8.8350e+01 4.5340e+01 5.8300e+00        nan 1.3020e+01
+ 2.3090e+01 4.9830e+01 1.1880e+01        nan 1.0674e+02 1.1570e+01
+ 6.4900e+00 4.6530e+01 1.7380e+01 6.1980e+01 7.6020e+01        nan
+ 6.0000e-02 4.2480e+01 5.8910e+01 2.0210e+01 3.6430e+01 1.1200e+01
+ 3.8790e+01 6.7830e+01 9.3540e+01 8.5900e+00 2.1030e+01 5.4000e-01
+ 5.6010e+01 1.1827e+02 1.4540e+01 3.9900e+00 5.7800e+00 2.8760e+01
+ 2.9210e+01 1.7600e+00 2.9010e+01 1.5230e+01 2.2000e+00 6.4330e+01
+ 6.2000e-01 4.1520e+01 2.3100e+00 1.9280e+01        nan 7.8130e+01
+ 5.5880e+01 1.0663e+02 2.5170e+01 6.6000e-01 1.5600e+01 9.1000e+00
+ 3.3000e-01 3.5440e+01 9.2700e+00 2.7300e+00 5.1490e+01 5.5700e+00
+ 1.9740e+01 6.3360e+01 2.7390e+01 3.5700e+00 2.8800e+01 3.7290e+01
+ 1.6590e+01 2.8940e+01 7.8200e+00 1.2700e+00 2.3000e-01 7.7780e+01
+ 9.1000e-01 1.7480e+01 2.6790e+01 1.1321e+02 3.7050e+01 3.6900e+00
+ 9.5900e+01        nan 2.0000e-02 8.3000e-01 1.6900e+00 5.0790e+01
+ 1.2760e+01 1.9200e+00 2.7730e+01 2.6410e+01 1.7120e+01 1.1750e+01
+ 2.0000e-02 2.1510e+01        nan 5.4350e+01 6.4170e+01 2.4140e+01
+ 9.0230e+01 1.0470e+01 6.4280e+01 8.2100e+01 3.8190e+01 2.8600e+00
+ 8.3250e+01 4.0370e+01 4.0870e+01 3.9280e+01 3.1960e+01 7.8500e+00
+ 2.5500e+00 2.3070e+01 3.8600e+00 3.1300e+00 8.5090e+01 9.8080e+01
+ 5.6900e+00 1.0769e+02 3.3510e+01 4.1850e+01 5.5490e+01 3.8890e+01
+ 4.6980e+01 3.3670e+01 6.4000e-01 8.8380e+01 1.5200e+00 1.6100e+00
+ 5.1240e+01 2.8450e+01 4.4400e+00 1.3450e+01 2.1290e+01 9.1830e+01
+ 4.4590e+01        nan 1.0098e+02 8.7000e+00 2.2920e+01 1.0670e+01
+        nan        nan 4.2840e+01 5.6050e+01 4.4300e+00 1.9700e+01
+ 1.1025e+02 1.3800e+01 6.0700e+00 2.1170e+01 5.8930e+01 2.8100e+01
+ 5.9400e+00 4.0200e+00 1.1650e+01 2.2340e+01 1.1104e+02 9.5200e+00
+ 4.6570e+01 4.7980e+01 5.1000e-01 1.5700e+00 1.1600e+00 2.6000e-01
+ 1.1860e+01 8.7400e+00 3.3040e+01 8.7480e+01 7.7800e+00 7.9720e+01
+ 2.0970e+01 1.8200e+00 3.3400e+01 5.7570e+01 9.2300e+00 7.0000e-02
+ 1.7690e+01 8.3830e+01 3.4000e-01 2.0960e+01 4.4730e+01 3.3100e+00
+ 2.0430e+01 2.5220e+01 1.9020e+01 5.3970e+01 2.4500e+00 1.1760e+01
+        nan 2.2050e+01 4.5180e+01 5.7590e+01 2.4400e+00 2.4600e+01
+ 9.0000e-02 1.8960e+01 4.4000e-01 9.5000e-01 1.0739e+02 1.9270e+01
+ 9.5600e+00 4.9810e+01 5.0810e+01 7.5360e+01 1.5310e+01 4.2400e+01
+ 2.4990e+01 3.2270e+01 2.0000e-02 1.5610e+01 1.6930e+01 9.5800e+00
+ 2.0970e+01 1.0000e-02 1.1019e+02        nan 2.6200e+01 3.1970e+01
+ 3.2300e+01 1.4860e+01 1.8260e+01 1.7940e+01 7.7060e+01        nan
+ 1.2860e+01 3.6990e+01 7.1310e+01 2.0240e+01 8.7770e+01 5.1830e+01
+ 2.0370e+01 9.4030e+01 1.1040e+02 1.2860e+01 4.1620e+01 4.0960e+01
+ 7.5240e+01 1.8000e-01 6.3550e+01 7.0170e+01 7.0700e+00 5.1360e+01
+ 1.8610e+01 3.9500e+00 9.1000e-01 7.2000e-01 9.3870e+01 4.0700e+01
+        nan 4.6980e+01 5.3300e+00 2.5270e+01 4.1000e+00        nan
+ 7.0880e+01 2.4590e+01 2.1290e+01 1.1339e+02 6.1420e+01 1.4680e+01
+ 9.1100e+00 1.1710e+01 7.7500e+00 3.4380e+01        nan 3.4260e+01
+ 5.6200e+00 6.7920e+01        nan 1.4700e+01 1.2020e+01 2.7770e+01
+ 2.8670e+01 3.1200e+00 1.1820e+01 6.2110e+01 1.0618e+02 1.5060e+01
+ 5.4500e+00 4.5640e+01 5.6340e+01 9.7810e+01 6.0700e+00 8.6690e+01
+ 3.3580e+01 4.1340e+01 5.6500e+00 2.4940e+01        nan 5.9470e+01
+        nan 2.9000e-01 3.3180e+01 3.5740e+01 2.5480e+01 7.2560e+01
+ 4.2950e+01 3.3260e+01 1.5790e+01 6.8300e+00 5.9870e+01 1.4490e+01
+ 9.3900e+00 5.0770e+01 1.0770e+01 3.2700e+00 2.6240e+01 1.8000e-01
+ 1.8410e+01 1.7500e+01 3.0600e+00 6.7200e+00 6.8100e+00 0.0000e+00
+ 2.3460e+01 4.6770e+01 9.3860e+01 1.6000e-01 3.9750e+01 8.7870e+01
+ 9.0290e+01 1.6000e-01 3.8940e+01 1.9900e+00 1.4190e+01 4.8800e+00
+ 3.2890e+01 6.2900e+00 1.7440e+01 2.0390e+01 1.0410e+01 4.3130e+01
+ 4.5000e-01 1.5490e+01 3.3000e-01 3.5210e+01        nan 4.9030e+01
+ 1.2000e+00 4.4590e+01        nan 7.1600e+00 8.5930e+01 1.9830e+01
+ 3.1200e+00 2.0510e+01 2.0790e+01 2.1700e+01 2.2000e-01 2.7400e+00
+ 3.0000e-02        nan 9.1900e+01 4.2420e+01 5.3000e-01 2.9160e+01
+ 2.4000e-01        nan 2.4490e+01 1.1941e+02        nan 5.3980e+01
+ 1.8500e+00 1.1020e+02 4.2250e+01 4.3630e+01 5.9700e+00 5.5000e-01
+ 4.4990e+01 9.5350e+01 1.5460e+01        nan 8.2200e+00 8.1890e+01
+ 9.1670e+01 1.0660e+01 1.0580e+01        nan 4.2810e+01 8.1700e+00
+ 1.3800e+01 3.6430e+01 8.2180e+01 1.3400e+00 5.3600e+00        nan
+ 1.2600e+00 9.7000e-01 1.8400e+00 7.1900e+00 3.2400e+00 3.7900e+00
+ 1.6060e+01 7.6150e+01        nan 2.3370e+01 1.0300e+00 8.0000e-02
+        nan 4.7140e+01 1.5080e+01 7.0010e+01 1.0966e+02 1.8840e+01
+ 6.5300e+00 1.5990e+01 2.6000e-01 9.9470e+01 1.6580e+01 9.9500e+00
+ 4.4220e+01 2.8800e+00 3.5700e+00 1.2290e+01 7.3840e+01 9.9500e+00
+ 1.9000e-01        nan 2.2110e+01 5.4290e+01 9.9000e-01 1.3530e+01
+ 7.4000e-01 5.5360e+01 3.6600e+00 8.4680e+01 1.1050e+01 3.5200e+00
+ 5.9340e+01 8.3000e-01 2.4970e+01 2.2900e+00 4.7880e+01 1.8000e-01
+ 5.9210e+01 7.3020e+01 1.6700e+00 2.9050e+01 2.8810e+01 1.6410e+01
+ 5.3140e+01 7.1600e+00 1.1162e+02 3.0800e+01 1.7550e+01 4.3050e+01
+ 3.2860e+01 1.9920e+01        nan 2.7180e+01 7.6800e+00 8.0430e+01
+ 6.2000e+00 4.1200e+00 2.9650e+01 2.4830e+01 7.9320e+01 6.9280e+01
+        nan 3.4230e+01 8.2500e+00 4.8860e+01 7.8000e+00 1.8020e+01
+ 3.0800e+01 3.2600e+00 3.2830e+01 1.4450e+01 3.3020e+01 3.2720e+01
+ 2.7680e+01 4.4940e+01 5.1300e+01 9.4300e+00 8.5010e+01 5.0900e+00
+ 1.5690e+01 6.9000e+00        nan 3.3600e+01        nan        nan
+        nan 9.2060e+01        nan 1.0128e+02        nan 5.3200e+00
+ 1.2980e+01 5.2100e+00 2.7300e+00 9.9760e+01 0.0000e+00 5.0600e+00
+        nan 3.4550e+01 1.7410e+01 1.5200e+00 3.9900e+00 6.5400e+00
+ 2.0850e+01 1.4360e+01 4.7900e+00 5.2500e+00 3.3200e+01 2.6540e+01
+ 8.9350e+01 9.7230e+01 6.7100e+00 2.3760e+01 7.5000e-01 5.6000e+00
+ 1.1924e+02 2.6410e+01 6.3300e+00 1.1061e+02 3.4800e+00 5.0220e+01
+ 1.8140e+01 5.6600e+00]",30.788070175438595,2.186004015791115,0.03908257692283742,0.043771248865191605,"Counter({'Repair': 278, 'Misrepair_a2-b1': 166, 'Misrepair_a1-b1': 102, 'Misrepair_a2-b2': 99, 'Misrepair_a1-b2': 96, 'NA': 59})",0.37516869095816463,0.034861145451382546,1.0296896086369771
+5_0,[100 100],3,0.2,"[[12  5]
+ [ 5 12]]",False,0.008,800,0.0097,0.01,12000,250,12000,0.06263060986782026,10,2,0,5,100,800,"['Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a1-b2' 'Repair' 'Repair' 'Misrepair_a2-b1' 'NA'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'NA' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Repair' 'Misrepair_a1-b1' 'Repair' 'NA' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Repair' 'Repair'
+ 'Repair' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2' 'NA'
+ 'Misrepair_a2-b1' 'NA' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'NA' 'Repair' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b2'
+ 'Repair' 'Misrepair_a1-b1' 'NA' 'NA' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair' 'NA' 'NA' 'Repair'
+ 'Misrepair_a1-b1' 'NA' 'Repair' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b2'
+ 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'NA'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'NA' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b1'
+ 'Repair' 'NA' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'NA' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair'
+ 'Repair' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'NA' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Repair' 'Repair'
+ 'NA' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'NA' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b1'
+ 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1' 'NA' 'NA' 'Repair' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Repair' 'Repair' 'Misrepair_a2-b1' 'NA' 'Repair' 'Misrepair_a2-b2'
+ 'Repair' 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Repair'
+ 'Repair' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'NA'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'NA' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Repair' 'Repair'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b1' 'Repair'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'NA' 'Misrepair_a2-b2'
+ 'Repair' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b2'
+ 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'NA' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b1' 'NA' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair' 'Repair' 'Repair' 'Repair'
+ 'Repair' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'NA'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Repair'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'NA'
+ 'Misrepair_a2-b1' 'NA' 'Repair' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'NA'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'NA' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'NA'
+ 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'NA' 'NA' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'NA' 'NA'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'NA' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a2-b2' 'NA' 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Repair' 'Repair'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair'
+ 'Repair' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b2'
+ 'Repair' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'NA' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b2' 'NA' 'Misrepair_a2-b2' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'NA' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Repair' 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a2-b1' 'NA' 'Repair' 'NA'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'NA' 'NA' 'Misrepair_a2-b1' 'NA'
+ 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'NA'
+ 'Misrepair_a1-b2' 'Repair' 'NA' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Repair' 'NA' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair' 'NA' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Repair' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'NA'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Repair' 'NA' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b1' 'NA'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1'
+ 'NA' 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a2-b1' 'NA' 'Repair' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair'
+ 'Repair' 'NA' 'NA' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'NA' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'NA' 'Misrepair_a1-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a1-b1' 'NA' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'NA' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1']","[5.839400e+00 1.281370e+01 7.057720e+01 1.135676e+02 5.687110e+01
+ 1.930300e+00 1.519020e+01 1.338600e+00 1.048570e+01          nan
+ 4.956700e+00 1.290100e+01 1.926420e+01 1.504470e+01 1.716900e+01
+          nan 5.397080e+01 6.983030e+01 4.641450e+01 7.887070e+01
+ 3.337770e+01 3.448350e+01 9.344980e+01 1.367700e+00 2.298900e+00
+ 1.178550e+01          nan 3.996400e+00 1.115500e+01 2.062220e+01
+ 1.142272e+02 4.833510e+01 1.821660e+01 4.180700e+00 3.404700e+00
+ 5.242850e+01 2.472530e+01 9.864900e+00 2.715030e+01 3.477450e+01
+ 1.125200e+00 1.173700e+00 1.755700e+00          nan 9.655380e+01
+          nan 7.924900e+00 2.070950e+01 5.224420e+01 8.277010e+01
+          nan 1.012680e+01 1.803230e+01 6.111000e-01 7.898710e+01
+ 2.991480e+01 3.416340e+01 6.411700e+00 8.933700e+00 3.328070e+01
+ 2.067070e+01 7.352600e+00 4.969310e+01 2.402690e+01 3.027370e+01
+          nan          nan 4.210770e+01 3.913950e+01 7.668820e+01
+ 2.584080e+01 8.264400e+00 4.850000e-02 5.749190e+01 1.369640e+01
+ 1.465670e+01 2.407540e+01          nan          nan 2.345460e+01
+ 2.240700e+00          nan 6.556230e+01 1.862400e+01 7.857000e-01
+ 8.015110e+01 5.267100e+00 4.549300e+00 5.767620e+01 7.663000e-01
+ 1.163612e+02 4.015800e+00 4.536690e+01 8.730000e-01 1.110650e+01
+ 9.428400e+00 7.056750e+01 6.380660e+01 4.219500e+00 4.423200e+00
+ 2.716000e-01 3.325160e+01 8.170310e+01 1.028200e+00 6.947140e+01
+ 4.743300e+00 1.154300e+00 4.588100e+00 3.692790e+01          nan
+ 2.630640e+01 2.936190e+01 6.799700e+00 1.853670e+01 5.614360e+01
+          nan 5.742400e+00 3.089450e+01 4.232110e+01 6.116820e+01
+ 7.934600e+00 1.552000e-01 1.591770e+01 1.519020e+01 8.759100e+01
+ 7.793950e+01          nan 7.381700e+00 7.265300e+00 2.489990e+01
+ 1.875980e+01 1.957460e+01 6.014000e-01 2.509390e+01 8.458400e+00
+ 4.616230e+01 4.306800e+00 6.848200e+01 1.241600e+00 3.909100e+00
+ 6.097420e+01 1.777040e+01 1.195040e+01 3.385300e+00 8.287680e+01
+ 2.388140e+01 5.820000e-02 3.137950e+01 6.819100e+00 2.716000e-01
+          nan 3.576390e+01 3.634590e+01 1.261000e-01 3.424100e+00
+ 2.347400e+00 2.369710e+01 1.726600e+00 4.337840e+01 3.184510e+01
+ 1.071850e+01 9.293570e+01 3.201000e+00 1.003174e+02 5.752100e+00
+ 7.362300e+01 4.254420e+01 4.509530e+01 1.619900e+00 2.619000e+00
+          nan 2.651010e+01 4.919840e+01 0.000000e+00 3.695700e+00
+ 4.859700e+00 2.309570e+01 1.665490e+01 3.598700e+01 6.499000e-01
+          nan 3.625860e+01 1.792560e+01 2.885750e+01          nan
+ 1.474400e+00 5.141000e+00 2.745100e+01 4.520200e+00 3.414400e+00
+ 2.231000e-01 1.319200e+00 8.039360e+01 8.754250e+01          nan
+          nan 6.124580e+01 2.718910e+01 7.281790e+01 4.604590e+01
+ 7.216800e+00 1.070880e+01 1.092220e+01 1.164000e+00 2.615120e+01
+ 1.375460e+01 4.204950e+01 1.083393e+02 3.296060e+01 8.827000e-01
+ 4.424170e+01          nan 1.639300e+00 8.115990e+01 1.093093e+02
+ 9.838710e+01 9.797000e-01 7.183820e+01 3.453200e+00 2.096170e+01
+ 5.189500e+00 6.907370e+01 1.271670e+01 6.887000e-01 3.460960e+01
+ 8.850280e+01 2.157280e+01 1.890530e+01 4.097280e+01 4.418350e+01
+ 1.276520e+01 5.504750e+01 9.352740e+01 2.030210e+01 9.312000e-01
+ 2.717940e+01 2.522000e-01 1.101047e+02 2.522000e-01          nan
+ 7.498100e+00 6.185690e+01          nan 2.628700e+01 1.940000e+01
+ 1.119380e+01 6.129430e+01 4.766580e+01 4.543480e+01 9.317820e+01
+ 1.370610e+01 2.945890e+01 4.006100e+01 3.278600e+01 2.646160e+01
+ 1.924480e+01 6.499000e-01 1.929330e+01 4.025500e+00 7.139200e+00
+ 3.417310e+01 2.159220e+01 7.186730e+01 2.761590e+01 4.559000e+00
+ 3.609370e+01 4.850000e-02 3.792700e+00 3.278600e+00 8.740670e+01
+ 7.401100e+00 1.030140e+01 1.193100e+00 1.504470e+01 2.431790e+01
+ 2.538490e+01 6.130400e+00 2.260100e+00 2.295020e+01 9.716490e+01
+ 1.986560e+01 4.468790e+01 1.668400e+01 8.827000e-01 2.213540e+01
+ 3.649140e+01 1.975890e+01          nan 1.152360e+02 7.372000e-01
+ 4.917900e+00 6.273960e+01 3.395000e-01 1.134900e+00 2.565650e+01
+ 1.137616e+02 1.097555e+02 3.326130e+01 8.933700e+00 6.324400e+00
+ 3.095270e+01 5.439760e+01 5.034300e+00 6.018850e+01 6.599880e+01
+          nan 6.875360e+01 2.004990e+01 7.585400e+00 5.907300e+00
+          nan 7.178000e-01 6.311790e+01 3.998340e+01 1.164000e+00
+ 5.348580e+01 2.647130e+01 4.665700e+00 1.772190e+01 3.581240e+01
+ 3.675330e+01 2.205780e+01 3.880000e-01 5.148760e+01 1.978800e+00
+ 3.878060e+01 1.186310e+01 5.057580e+01 1.061859e+02 8.342000e-01
+ 1.666460e+01 4.236960e+01 5.461100e+00 4.562880e+01 7.352600e+00
+ 4.161300e+01 8.745520e+01 7.915200e+00 7.077120e+01 1.881800e+00
+ 7.791040e+01 2.554010e+01 7.983100e+01 1.391950e+01 2.423060e+01
+ 5.432000e-01 7.393340e+01          nan 5.281650e+01 1.098040e+01
+ 3.051620e+01 5.509600e+00 1.066709e+02 5.480500e+00 3.510430e+01
+ 5.480500e+00 6.237100e+00 6.693000e-01 1.690710e+01 6.052800e+00
+ 2.664590e+01 5.044000e-01 6.691060e+01 4.850000e-01 2.352250e+01
+ 9.021000e+01 2.554010e+01 9.784390e+01 3.298000e-01 2.952680e+01
+ 1.401650e+01 1.577220e+01 2.991480e+01 1.013165e+02 5.829700e+01
+ 2.716000e+01 1.336660e+01 6.694940e+01 1.476340e+01 2.162130e+01
+ 3.225250e+01 1.375460e+01 1.028200e+00 4.438720e+01 2.725700e+00
+ 9.088900e+00 1.463730e+01 4.451330e+01 1.067000e+00 3.174810e+01
+ 1.062053e+02 6.647410e+01 9.236340e+01          nan 2.808150e+01
+          nan 4.500800e+00 4.966400e+00 7.354540e+01 7.183820e+01
+ 3.462900e+01 1.897320e+01          nan 9.709700e+00 3.741290e+01
+ 5.174950e+01 2.851800e+00 1.306590e+01 1.551030e+01 3.220400e+01
+ 7.372000e+00 1.251300e+01 3.644290e+01 3.520130e+01 7.571820e+01
+ 6.392300e+00 1.552000e-01 2.632580e+01          nan 8.240150e+01
+ 8.633000e-01 1.878890e+01          nan 6.780300e+00 7.760000e-02
+ 7.617410e+01 4.874250e+01 3.167050e+01          nan          nan
+ 4.925660e+01 4.675400e+00 6.557200e+00          nan          nan
+ 3.783000e-01 2.037000e-01 1.658700e+00 1.707200e+00 9.894000e+00
+ 1.060792e+02 1.541330e+01 4.585190e+01 1.924480e+01 5.331120e+01
+ 7.112040e+01 8.245000e+00 5.095410e+01 5.047880e+01 7.886100e+00
+ 8.490410e+01 8.730000e+00 4.705470e+01 1.057300e+00 1.028200e+00
+ 1.454030e+01 2.664590e+01 1.566550e+01 3.343590e+01 6.039220e+01
+ 1.034020e+01          nan 7.760000e-02 7.222620e+01 8.730000e+00
+ 1.978800e+00 3.881940e+01          nan 1.597590e+01 1.367700e+00
+ 1.649000e-01 2.175710e+01 5.440730e+01 1.869190e+01 1.048570e+01
+ 5.684200e+01 3.210700e+00 3.074900e+00 1.455000e-01 1.407470e+01
+ 2.851800e+01 1.785770e+01 2.124300e+00 9.336250e+01 6.460200e+00
+ 1.043720e+01 9.409000e+00 1.083490e+01 0.000000e+00 3.201000e-01
+ 4.101160e+01 1.057300e+01 6.499000e+00 2.748010e+01 1.466640e+01
+ 2.370680e+01 1.010740e+01 2.186380e+01 1.678100e+01 4.512440e+01
+ 5.044000e+01 4.675400e+00 1.891500e+01 4.491100e+01 5.616300e+00
+ 1.833300e+01 1.416200e+00 5.958710e+01 3.336800e+01 8.982200e+00
+ 1.154300e+00 6.350590e+01 5.125480e+01 9.810580e+01 4.648240e+01
+ 2.267860e+01 9.615610e+01 1.114918e+02 3.967300e+00 2.027300e+01
+ 2.843070e+01 9.700000e-01 1.766370e+01 1.088340e+01 1.095227e+02
+ 1.161090e+01 1.261000e-01 4.145780e+01 8.964740e+01 3.026400e+01
+ 2.210630e+01 1.134900e+00          nan 1.212500e+00 5.808360e+01
+          nan 2.819790e+01 1.357030e+01 8.068460e+01 3.850900e+00
+ 6.538770e+01          nan 5.311720e+01 1.210560e+01 2.660710e+01
+ 3.160260e+01 1.726600e+00 9.075320e+01 6.595030e+01 4.377610e+01
+ 2.745100e+00 3.595790e+01 5.114810e+01 8.935640e+01 4.639510e+01
+          nan 1.646090e+01          nan 1.823600e+00 8.390500e+00
+ 3.899400e+01 9.814460e+01 1.608260e+01 2.910000e-01 7.410800e+00
+ 1.590800e+00 2.760620e+01 3.395000e-01 8.273130e+01          nan
+          nan 9.259620e+01          nan 1.552970e+01 1.813900e+00
+ 7.866700e+00 3.589000e-01 1.261000e+00          nan 1.874040e+01
+ 0.000000e+00          nan 1.064090e+01 5.065340e+01 2.422090e+01
+          nan 4.803440e+01 9.211120e+01 1.097458e+02 8.099500e+00
+ 5.305900e+00 2.479320e+01 5.820000e-02 5.456250e+01 1.121320e+01
+ 6.890880e+01 2.328000e-01 7.222620e+01 2.409480e+01 1.050510e+01
+ 3.053560e+01 2.420150e+01 4.645330e+01 9.118000e-01 1.089601e+02
+ 4.434840e+01 3.271810e+01          nan 2.910000e-02 1.498650e+01
+ 6.693000e-01 1.241600e+01 7.472880e+01 4.177790e+01 1.688770e+01
+ 2.932310e+01 4.508560e+01 2.220330e+01 9.032640e+01 3.673390e+01
+ 1.338600e+00 3.064230e+01 3.084600e+00 1.445300e+00 3.217490e+01
+ 2.231000e+00 3.809190e+01 1.280400e+00 3.240770e+01 8.215900e+00
+ 1.892470e+01 7.372000e-01 3.710250e+01 2.010810e+01 2.219360e+01
+ 1.398740e+01 5.086680e+01 4.510500e+00 3.981850e+01 5.111900e+00
+ 2.612210e+01 5.993630e+01 1.291070e+01 3.436710e+01 8.574800e+00
+ 1.833300e+00          nan 7.466090e+01 3.237860e+01 8.925940e+01
+ 2.174740e+01 7.430200e+01 7.651360e+01 3.841200e+01 9.765960e+01
+ 9.700000e-01 4.656000e+00 1.590800e+00 1.832330e+01 4.434840e+01
+ 3.483270e+01 5.821940e+01 2.354190e+01          nan 3.831500e+00
+ 1.552970e+01 2.029240e+01 8.292530e+01 3.686000e+00 1.231900e+00
+ 3.227190e+01 7.873490e+01 3.722860e+01          nan 4.908200e+00
+ 4.394100e+00 8.759100e+01 1.216380e+01 1.024902e+02 2.085500e+00
+ 5.820000e-01 2.077740e+01 4.579370e+01 1.610200e+00 1.372550e+01
+ 5.713300e+00 3.977000e+00          nan 6.081900e+00 2.426940e+01
+ 6.600850e+01 5.917000e-01 3.970210e+01 2.210630e+01 3.612280e+01
+ 7.967580e+01 2.209660e+01 5.470800e+01 9.253800e+00 4.335900e+00
+ 1.990440e+01 1.479250e+01 3.540500e+00 1.552970e+01 1.110650e+01
+ 8.196500e+01 1.358000e+00 1.364790e+01 5.820000e-02 3.259200e+01
+ 3.783000e+00 1.387100e+00 1.067776e+02 7.969520e+01 7.405950e+01
+ 1.075148e+02 7.507800e+00 1.053420e+01 1.085042e+02 6.237100e+00
+ 1.090280e+02 1.377400e+00 7.385580e+01          nan 7.673670e+01
+ 2.054460e+01 9.379900e+00 6.887970e+01 1.897320e+01 2.871200e+00
+ 3.007000e+00 4.874250e+01 2.673320e+01 1.595650e+01 1.290100e+01
+ 4.182640e+01 0.000000e+00 9.135460e+01 2.919700e+01 5.490200e+01
+ 5.789930e+01 8.380800e+00 1.346360e+01 2.813000e-01 6.689120e+01
+ 3.268900e+01 1.863370e+01 2.670410e+01 3.414400e+00 1.198920e+01
+ 3.492000e-01 2.869260e+01 1.336660e+01 1.261000e+00 8.623300e+00
+ 5.606600e+00 2.196080e+01          nan          nan 2.682050e+01
+ 4.122500e+00 2.545280e+01 3.317400e+01 1.365760e+01 4.109890e+01
+ 1.069716e+02 6.133310e+01          nan 3.381420e+01 5.694870e+01
+ 1.407470e+01          nan 8.556370e+01 6.279780e+01 6.136220e+01
+ 2.527820e+01 3.938200e+00 1.291070e+01 2.540430e+01 1.113269e+02
+          nan 1.251300e+00 2.515210e+01 1.730480e+01 2.164070e+01
+ 1.069425e+02          nan 1.590800e+00 3.916860e+01 1.272640e+01
+ 7.071300e+00 4.285460e+01 9.525400e+00 2.108780e+01 9.457500e+00
+ 5.212780e+01 1.641240e+01 6.670690e+01 8.730000e-01 1.189220e+01]",30.163941677943168,2.153869317047754,0.03868575727743928,0.04265293960643069,"Counter({'Repair': 270, 'Misrepair_a2-b1': 187, 'Misrepair_a1-b1': 106, 'Misrepair_a2-b2': 97, 'Misrepair_a1-b2': 79, 'NA': 61})",0.36535859269282817,0.03471824129365449,1.1569688768606226
+6_0,[100 100],3,0.2,"[[12  6]
+ [ 6 12]]",False,0.008,800,0.0094,0.01,12000,250,12000,0.061671414428675415,10,2,0,6,100,800,"['Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'NA'
+ 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair'
+ 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Repair' 'NA' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Repair' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b1' 'Repair' 'NA' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b2' 'Repair'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'NA' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair' 'NA'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b1' 'Repair' 'NA' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'NA' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair' 'NA'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b2'
+ 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'NA' 'Misrepair_a2-b2' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair' 'Repair'
+ 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'NA' 'Misrepair_a1-b1'
+ 'Repair' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b1' 'NA'
+ 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a1-b2'
+ 'Repair' 'NA' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'NA'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Repair' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b1' 'NA'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Repair' 'Repair'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'NA' 'Misrepair_a2-b1' 'NA'
+ 'Misrepair_a1-b1' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b2'
+ 'NA' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b2'
+ 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'NA' 'Misrepair_a2-b2' 'NA'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'NA' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair' 'Repair'
+ 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Repair' 'NA' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'NA' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Repair'
+ 'Repair' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'NA'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'NA' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair' 'Repair'
+ 'Repair' 'Misrepair_a1-b2' 'NA' 'Repair' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Misrepair_a1-b1'
+ 'Repair' 'Repair' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'NA' 'NA' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair' 'NA'
+ 'Repair' 'Misrepair_a1-b2' 'Repair' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Repair' 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'NA'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a1-b2' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'NA' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b2' 'Repair'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'NA' 'Misrepair_a1-b2' 'Repair' 'NA' 'Repair'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'NA' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'NA'
+ 'Misrepair_a1-b1' 'Repair' 'Repair' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'NA' 'Repair' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b2'
+ 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'NA' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b2'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'NA'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair' 'NA' 'Repair' 'NA'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Repair' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a1-b2'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'NA'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b2' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b2' 'Repair' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Repair' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b1' 'Repair' 'NA' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'NA' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Repair' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b1'
+ 'Repair' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Repair' 'Repair' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b1' 'Repair' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b2' 'Repair'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'NA' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b2' 'Repair'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a1-b2' 'Misrepair_a1-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a2-b1' 'NA' 'NA' 'Misrepair_a1-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1']","[2.387600e+01 3.102000e-01 1.896920e+01 1.897860e+01 1.193800e+00
+ 1.124146e+02 5.148380e+01 2.682760e+01 6.496340e+01 5.616500e+01
+ 8.210900e+01 5.170000e-01 2.791800e+00 3.678220e+01 3.994060e+01
+ 3.203520e+01 1.222000e+00          nan 6.646740e+01 2.100900e+01
+ 5.749980e+01 1.029676e+02 2.462800e+00 1.726780e+01 3.045600e+00
+ 1.553820e+01 3.261800e+00 7.144000e-01 2.634820e+01 2.569020e+01
+ 3.760000e-02 3.292820e+01 7.687320e+01 1.091904e+02 2.068000e-01
+ 3.233600e+00 1.297200e+01 3.008000e-01 4.324000e-01 3.377420e+01
+ 6.402340e+01 5.346720e+01 1.218240e+01 1.011722e+02 9.197900e+01
+ 1.727720e+01 5.564800e+00 2.858540e+01 4.756400e+00          nan
+ 5.662560e+01 9.722420e+01 3.644380e+01 3.336060e+01 2.019120e+01
+ 5.234860e+01 8.234400e+00 2.632000e-01 2.970400e+01 5.207600e+01
+ 9.682000e+00 2.387600e+00 3.851180e+01          nan 7.144000e-01
+ 7.249280e+01 4.497900e+01 1.435380e+01 2.726000e-01 1.588600e+00
+ 2.871700e+01 7.848060e+01 2.522960e+01 6.826280e+01 5.062840e+01
+ 3.043720e+01 6.025400e+00 8.328400e+01 7.125200e+01 6.687160e+01
+ 3.759060e+01 1.664740e+01 3.801360e+01          nan 2.502280e+01
+ 1.202260e+01 5.564800e+00 8.460000e-01 2.139440e+01 4.888000e+00
+ 7.009580e+01 7.739960e+01 6.194600e+00 1.613980e+01 6.551800e+00
+ 5.928580e+01 4.408600e+00 7.376180e+01          nan 3.981840e+01
+ 3.760000e+00 5.271520e+01 1.306600e+00 5.750920e+01 7.435400e+00
+ 7.783200e+00 2.611320e+01 4.512000e+00 1.940160e+01          nan
+ 5.533780e+01 2.698740e+01 7.369600e+00 6.150420e+01          nan
+ 8.817200e+00 3.167800e+00 1.908200e+00 1.216360e+01 5.583600e+00
+ 2.875460e+01 4.740420e+01 1.997500e+01 7.238000e-01 2.196780e+01
+ 1.128000e-01 5.771600e+00 7.393100e+01 3.137720e+01 1.440080e+01
+ 6.231260e+01 5.959600e+00 2.210880e+01 1.927000e+00 2.218400e+00
+ 7.672280e+01 5.769720e+01 8.845400e+00 7.943000e+00 2.310520e+01
+ 1.957080e+01 3.439460e+01 1.123112e+02 7.614000e-01          nan
+ 1.073480e+01 8.681840e+01 2.274800e+00 1.770960e+01 1.607400e+00
+ 8.166720e+01 1.154320e+01 1.344200e+01 6.873280e+01 4.425520e+01
+          nan 7.614000e+00 1.689180e+01 6.655200e+01 3.572000e-01
+ 6.072400e+00 9.541000e+00 4.164200e+00 7.932660e+01 8.403600e+00
+ 3.052180e+01 1.388380e+01 8.419580e+01 2.979800e+00 5.130520e+01
+ 1.009560e+01          nan 3.600200e+01 9.033400e+01 6.699380e+01
+ 3.720520e+01 3.666000e+00 4.053280e+01 2.123460e+01 9.804200e+00
+ 1.092938e+02 8.937520e+01 2.749500e+01 1.064080e+01 1.126120e+01
+ 1.052988e+02 3.260860e+01 7.144000e-01 1.079402e+02 1.031180e+01
+ 2.848200e+00 5.094800e+00 9.644400e+00 4.136000e-01 1.611160e+01
+ 3.854000e-01 6.348760e+01 9.362400e+00 4.825960e+01 1.034000e-01
+          nan 2.162000e-01 1.525620e+01 1.598000e-01 1.279340e+01
+ 3.752480e+01 3.260860e+01 2.457160e+01 4.981060e+01 4.336220e+01
+ 2.374440e+01 3.791960e+01 2.002200e+00 1.071506e+02 4.212140e+01
+          nan 5.433200e+00 4.685900e+01 3.824860e+01          nan
+ 5.499000e+00 3.287180e+01 1.231400e+00 5.795100e+01 1.258660e+01
+ 6.983260e+01 6.669300e+01 5.320400e+00 8.854800e+00 6.204000e-01
+ 3.703600e+00 3.487400e+00 7.511540e+01 3.203520e+01 9.794800e+00
+ 0.000000e+00 1.430680e+01 1.082880e+01 3.705480e+01 3.720520e+01
+          nan 4.506360e+01 5.058140e+01 6.638280e+01 4.704700e+01
+ 3.290000e-01 2.378200e+00 6.800900e+01 4.871080e+01 1.783180e+01
+ 3.315380e+01 4.991400e+00 1.034000e+00 2.888620e+01 5.133340e+01
+ 3.224200e+00 6.310220e+01 1.163720e+01 1.363000e+01 1.532200e+01
+ 1.697640e+01 2.829400e+01 5.443540e+01 6.204000e-01 2.791800e+00
+ 2.316160e+01 4.982000e-01 1.670380e+01 4.880480e+01 4.252560e+01
+ 5.423800e+00 4.856980e+01 2.007840e+01 4.092760e+01 4.185820e+01
+ 3.118920e+01 2.632940e+01 4.032600e+00 6.055480e+01 4.521400e+00
+ 2.155420e+01          nan 2.271980e+01          nan 1.049980e+01
+ 1.535960e+01 5.270580e+01 2.375380e+01 2.301120e+01 1.463580e+01
+ 2.199600e+00 6.796200e+00 5.094800e+00 2.762660e+01 3.167800e+00
+ 9.888800e+00 7.040600e+00          nan 2.193960e+01 1.635600e+00
+ 2.039800e+01 9.371800e+00 2.437420e+01 1.904440e+01 2.209000e+00
+ 4.792120e+01 5.458580e+01 9.400000e-02 8.359420e+01          nan
+ 2.914000e+00          nan 5.659740e+01 4.865440e+01 2.319920e+01
+ 9.230800e+00 2.813420e+01 3.172500e+01 1.848040e+01 5.725540e+01
+ 1.934520e+01          nan 9.400000e+00 1.950500e+01 2.003140e+01
+ 1.922300e+01 6.175800e+00 4.934060e+01 8.753280e+01 7.520000e-02
+ 2.472200e+00 4.180180e+01 6.539580e+01 1.954260e+01 8.779600e+01
+ 6.712540e+01 5.499940e+01 1.222000e-01 9.484600e+00 3.214800e+00
+ 1.457000e+01 1.011628e+02 5.499000e+00 2.544580e+01 1.037008e+02
+ 2.280440e+01 1.442900e+01 2.923400e+00          nan 9.926400e+00
+ 1.053740e+01 2.035100e+01 8.666800e+00 3.610540e+01 1.635600e+00
+ 1.014542e+02 4.672740e+01 2.333080e+01 1.469220e+01 2.302060e+01
+          nan 2.416740e+01 1.047160e+01 7.435400e+00 6.423020e+01
+ 1.316000e+00 5.889100e+01 1.663800e+00 4.822200e+00 7.583920e+01
+ 3.992180e+01 1.371460e+01 3.023040e+01 2.367860e+01 1.977760e+01
+ 2.816240e+01 3.308800e+01 2.225920e+01 1.752160e+01 1.421280e+01
+ 3.472360e+01 1.690120e+01 3.298460e+01 9.099200e+00 6.041380e+01
+ 1.088520e+02 6.431480e+01 4.659580e+01 8.178000e-01 6.640160e+01
+ 7.892240e+01          nan 2.397940e+01 5.790400e+00          nan
+ 1.769080e+01 2.162000e-01 4.700000e-02 3.078500e+01 4.962260e+01
+ 1.504000e-01 3.885020e+01 1.193800e+01          nan 1.015200e+00
+ 1.947680e+01 1.391200e+01 3.919800e+00 3.034320e+01 4.662400e+00
+ 5.452000e-01 4.946280e+01 1.417520e+01 1.108260e+01 2.058600e+00
+ 6.392940e+01 1.124522e+02 2.820000e+00 5.352360e+01 7.877200e+00
+ 1.410000e-01 5.293140e+01 7.557600e+00 6.033860e+01 4.223420e+01
+ 1.045280e+01 1.254900e+01          nan          nan 2.757960e+01
+ 4.610700e+01 1.537840e+01 1.367700e+01 5.474560e+01 1.880000e-02
+ 3.385880e+01          nan 1.493660e+01 3.487400e+00 5.433200e+00
+ 1.158080e+01 5.217000e+01 3.064400e+00 9.476140e+01 4.201800e+00
+ 3.101060e+01 1.710800e+00 2.039800e+01 1.922300e+01 9.238320e+01
+ 9.682000e-01 4.386040e+01 1.017644e+02 1.839580e+01 1.457000e+00
+ 1.349840e+01 1.123582e+02          nan 7.896000e-01 2.528600e+00
+ 1.125180e+01 2.650800e+00 3.900060e+01 1.198500e+01 3.135840e+01
+ 3.421600e+00 8.460000e+00 4.536440e+01 4.502600e+00 5.124880e+01
+ 2.937500e+01 7.121440e+01 7.187240e+01 1.886580e+01 2.754200e+01
+ 2.211820e+01 4.251620e+01 5.937040e+01 4.445260e+01 5.160600e+00
+          nan 8.836000e+00 2.902720e+01 1.640300e+01 2.773000e+01
+ 9.652860e+01 1.674140e+01 2.955360e+01 2.437420e+01 7.062220e+01
+ 3.845540e+01 5.809200e+00 8.384800e+00 1.124240e+01 4.641720e+01
+ 3.787260e+01 1.667560e+01 3.448860e+01 2.216520e+01 3.944240e+01
+ 1.619620e+01 1.253960e+01 5.452000e-01 3.788200e+00 4.888000e+00
+ 4.042000e+00 3.316320e+01 6.702200e+00 2.685580e+01 7.647840e+01
+ 4.784600e+00 6.016000e+00 7.357380e+01 9.747800e+00 3.301280e+01
+ 6.879860e+01          nan 1.015200e+00 1.767200e+00          nan
+ 5.076000e+00 1.889400e+00 1.787880e+01 1.915720e+01 4.937820e+01
+ 1.770960e+01 2.204300e+01 1.461700e+01 9.270280e+01 2.312400e+00
+ 6.763300e+01 4.147280e+01 2.285140e+01 1.646880e+01 1.102620e+01
+ 5.715200e+01 2.321800e+01 1.409060e+01 9.058780e+01 5.912600e+00
+ 9.472380e+01 1.045374e+02 1.540660e+01          nan 3.305040e+01
+ 1.062200e+02 1.959900e+01 0.000000e+00 1.410000e-01 6.815940e+01
+ 1.423160e+01 1.508700e+01 1.754980e+01 4.089000e+00 9.541000e+00
+ 8.930000e-01 4.479100e+01          nan 6.470960e+01 1.395900e+01
+ 2.265400e+00 4.324000e+01 4.788360e+01 3.327600e+00 8.864200e+00
+ 4.277000e+01          nan 4.625740e+01 1.539720e+01 4.705640e+01
+ 9.860600e+00 8.309600e+00 1.629960e+01 1.085512e+02 7.200400e+00
+ 1.302840e+01 5.253660e+01 9.522200e+00 1.758740e+01 1.099800e+01
+ 6.550860e+01 3.049360e+01 7.238000e+00 1.649700e+01 2.707200e+00
+ 7.910100e+01 6.417380e+01 6.016000e+00 8.831300e+01          nan
+ 6.580000e-02 1.206020e+01 6.624180e+01 2.632000e+00 7.275600e+00
+ 2.540820e+01 3.057820e+01 1.175000e+00 2.005960e+01 1.071600e+00
+ 4.262900e+01 1.128000e-01 5.034640e+01 5.092920e+01 1.052800e+01
+          nan 1.075360e+01 5.782880e+01 1.471100e+01          nan
+ 9.870000e-01          nan 7.080080e+01 3.542860e+01 1.051672e+02
+ 6.204000e+00 1.813260e+01 7.162800e+00 6.016000e-01 3.553200e+00
+ 3.180960e+01 7.971200e+00 7.990000e-01 9.165000e+00 2.516380e+01
+          nan 9.897260e+01 2.370680e+01 7.238000e+00 2.491000e+01
+ 9.344540e+01 2.810600e+00 7.144000e+00 6.404220e+01 3.242060e+01
+ 6.092140e+01 1.668500e+01 2.376320e+01 9.475200e+00 6.392000e-01
+ 0.000000e+00 2.242840e+01 0.000000e+00 0.000000e+00 9.118000e-01
+ 8.764560e+01 1.983400e+01 4.878600e+00 5.589240e+01 7.078200e+00
+ 7.538800e+00 1.358300e+01 7.949580e+01 5.781000e+00 2.782400e+00
+ 8.582200e+00 2.188320e+01 5.646580e+01 4.784600e+00 3.459200e+00
+ 1.744640e+01 1.184400e+00 2.566200e+00 1.748400e+00 2.593460e+01
+ 1.510580e+01 5.972760e+01 5.191620e+01 4.590960e+01 2.990140e+01
+ 3.142420e+01          nan 3.515600e+00 5.910720e+01 6.046080e+01
+ 7.124260e+01 1.607400e+00 7.092300e+01 1.270880e+01 5.399360e+01
+ 0.000000e+00 6.342180e+01 2.190200e+01 1.348900e+01          nan
+ 4.489440e+01 3.666000e-01 1.029864e+02 1.105158e+02 7.191000e+00
+ 5.718960e+01 3.440400e+00 2.100900e+01 1.254900e+01 7.177840e+01
+ 7.717400e+00 6.832860e+01 4.653000e+00 8.037940e+01 4.042000e-01
+ 6.628880e+01 3.765640e+01 8.178000e-01 7.190060e+01 5.821420e+01
+ 1.045280e+01 6.074280e+01 1.513400e+01 1.353600e+00 4.089000e+01
+ 2.321800e+00 5.152140e+01 4.534560e+01 4.117200e+00 8.930000e-01
+ 4.897400e+00 5.047800e+00 8.963840e+01 8.596300e+01 1.438200e+00
+ 4.544900e+01 1.813260e+01 5.564800e+01 9.540060e+01 1.151500e+01
+ 4.466880e+01 1.207900e+01 4.050460e+01 4.422700e+01 3.553200e+00
+ 1.203200e+00 3.700780e+01 4.364420e+01 1.837700e+01 1.053740e+01
+ 8.681840e+01 1.084760e+01 1.158080e+01 5.318520e+01 3.891600e+00
+ 8.075540e+01 1.616800e+00 8.068020e+01 2.039800e+01 3.618060e+01
+ 3.083200e+01 2.883920e+01 2.755140e+01 3.515600e+00 4.606000e+00
+ 2.352820e+01 1.880000e+00 3.374600e+00 8.723200e+00 4.427400e+00
+ 4.812800e+01 2.707200e+00 1.717380e+01 6.840380e+01 5.181280e+01
+ 1.059380e+02          nan 1.126120e+02 7.520000e-02 9.530660e+01
+ 2.152600e+00 2.846320e+01 1.786000e+00 2.434600e+00 1.133640e+01
+ 2.641400e+00 8.980760e+01 8.366000e-01 5.301600e+00 2.677120e+01
+ 5.429440e+01 6.264160e+01 4.382280e+01 4.617280e+01 4.787420e+01
+ 6.561200e+00 4.854160e+01 5.066600e+00 6.933440e+01 1.739000e+00
+ 1.965540e+01 3.921680e+01 4.205560e+01 3.290000e-01 9.400000e-02
+ 1.492720e+01 4.718800e+00 4.896460e+01 2.024760e+01 4.931240e+01
+          nan          nan 7.679800e+00 6.016940e+01 3.303160e+01]",29.408379337748343,2.0303602863151244,0.03808862931050665,0.041118102531787985,"Counter({'Repair': 264, 'Misrepair_a2-b1': 189, 'Misrepair_a1-b1': 121, 'Misrepair_a2-b2': 103, 'Misrepair_a1-b2': 78, 'NA': 45})",0.34966887417218545,0.03401561703852718,1.1364238410596026

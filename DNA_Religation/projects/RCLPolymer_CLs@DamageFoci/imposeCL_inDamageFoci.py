@@ -31,7 +31,7 @@ import csv
 ############################################################################
 
                      
-polymerParams = dict(numMonomers = 200, # np.array([100,100]), # TODO (.., ..., ...)
+polymerParams = dict(numMonomers = 100, # np.array([100,100]), # TODO (.., ..., ...)
                      dim         = 3,
                      b           = 0.2,
                      Nc          = 10, #NcMatrix,
@@ -45,14 +45,14 @@ simulationParams = dict(# Physicial parameters
                         dt                = 0.005,
                         dt_relax          = 0.01,
                         numSteps          = 12000,
-                        excludedVolumeCutOff = 0.15,
-                        excludedVolumeSpringConstant = 0.60,
+                        excludedVolumeCutOff = 0.20,
+                        excludedVolumeSpringConstant = 0.30,
                         waitingSteps = 0,
                         numMaxSteps = 12000,
                         encounterDistance = 0.05,
-                        genomicDistance = 20,
+                        genomicDistance = 4,
                         Nb = 2,
-                        Nc_inDamageFoci = 5
+                        Nc_inDamageFoci = 1
 #                        selectedSubDomain = 0
                         )
 
@@ -66,8 +66,8 @@ x_sigma = np.linspace(0.03,0.25,num=5)
 
 x_kappa = (3*0.008/(0.2**2))*np.linspace(0, 4, num = 30)
 
-x_g = np.append(np.arange(2,5),np.arange(9,50,4))
-x_Nc = np.arange(2,20,4)
+x_g = np.arange(2,20)
+x_Nc = np.arange(2,20,2)
 errorbars = True
 
 ############################################################################
@@ -636,7 +636,7 @@ def proba_v_VEkappa(polymerParams,simulationParams,x_sigma,x_kappa,errorbars=Fal
 
 def proba_v_gNc(polymerParams,simulationParams,x_g,x_Nc,errorbars=False):
     date = strftime("%Y_%m_%d_%H_%M")
-    filename = date + '_proba-v_gNc' + '.csv'
+    filename = date + '_proba-v_gNc_withVE' + '.csv'
 
     first_time = True
     N = polymerParams['numMonomers']
@@ -649,7 +649,7 @@ def proba_v_gNc(polymerParams,simulationParams,x_g,x_Nc,errorbars=False):
             simulationParams['genomicDistance'] = g
 
             for j, nc in enumerate(x_Nc):    
-                print("Simulation for κ = %s " % nc)
+                print("Simulation for Nc = %s " % nc)
                 polymerParams['Nc'] = nc
                 
                 ### ADAPTIVE ENCOUNTER DISTANCE
@@ -657,6 +657,7 @@ def proba_v_gNc(polymerParams,simulationParams,x_g,x_Nc,errorbars=False):
 #                scaleFactor = np.sqrt( (1-xi0)*np.sqrt(xi0) / ((1-xi)*np.s1qrt(xi)) )
                 simulationParams['encounterDistance'] = adaptiveEpsilon(xi, N, polymerParams['b'])
                 
+                simulationParams['excludedVolumeCutOff'] = 3*simulationParams['encounterDistance']
                 ### ADAPTIVE dt
                 simulationParams['dt'] = np.round((0.2*simulationParams['encounterDistance'])**2/(2*simulationParams['diffusionConstant']),decimals=4)-0.0001                
                 
@@ -664,7 +665,7 @@ def proba_v_gNc(polymerParams,simulationParams,x_g,x_Nc,errorbars=False):
                 
                 p0 = RCLPolymer(**polymerParams)
                 results = {**polymerParams, **simulationParams}
-                mc = Experiment(p0, results, simulationParams,"EncounterSimulation")
+                mc = Experiment(p0, results, simulationParams,"Encounter_withRepairSphere")
 
                 if first_time:
                     fieldnames = ['experimentSetID']+list(mc.results)
@@ -705,8 +706,8 @@ if __name__ == "__main__":
 #    proba_vs_Nc_andKeepCL(polymerParams,simulationParams,x_Nc,errorbars)
 #    proba_v_sigma(polymerParams,simulationParams,x_sigma,errorbars)
 #    proba_v_VEkappa(polymerParams,simulationParams,x_sigma,x_kappa,errorbars)
-#    proba_v_gNc(polymerParams,simulationParams,x_g,x_Nc,errorbars)
+    proba_v_gNc(polymerParams,simulationParams,x_g,x_Nc,errorbars)
 #    FET_Simulation(polymerParams,simulationParams)
 #    mFET_vs_NcinDF(polymerParams,simulationParams,x_Nc,errorbars)
-    mc = watchOneSimulation(polymerParams, simulationParams)
-    ani = mc.plot_trajectoire(show=True)
+#    mc = watchOneSimulation(polymerParams, simulationParams)
+#    ani = mc.plot_trajectoire(show=True)

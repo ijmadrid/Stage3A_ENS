@@ -1,21 +1,9 @@
-res <- read.csv("./Stage 3A ENS/DNA_Religation/projects/RCLPolymer_CLs@DamageFoci/results/2018_05_23_12_26_proba-v_gNc.csv")
+res <- read.csv("./Stage 3A ENS/DNA_Religation/projects/RCLPolymer_CLs@DamageFoci/results/2018_05_24_17_05_proba-v_gNc_withVE.csv")
 
 library(ggplot2)
 library(RColorBrewer)
 
 res$excludedVolumeCutOff <- as.factor(res$excludedVolumeCutOff)
-
-{
-  p <- ggplot(data = res, aes(x = excludedVolumeSpringConstant, y = repair_probability, color = excludedVolumeCutOff)) + geom_line(size = 1.5) + geom_ribbon(data = res, aes(x = excludedVolumeSpringConstant, 
-                                                                                                                                                                             ymin = repair_probability - repair_CIhalflength,
-                                                                                                                                                                             ymax = repair_probability + repair_CIhalflength), alpha = 0.2) + theme_bw()
-  
-  colourCount = 15
-  getPalette = colorRampPalette(brewer.pal(9, "Blues"))
-  
-  p + geom_vline(xintercept = 0.6) + scale_color_manual(values = getPalette(colourCount)) + coord_cartesian()
-}
-
 
 
 ####
@@ -28,6 +16,24 @@ res$excludedVolumeCutOff <- as.factor(res$excludedVolumeCutOff)
 }
 ####
 
+
+##### VERIFICATION   ADAPTIVE-EPSILON VS MRG
+res$genomicDistance <- as.factor(res$genomicDistance)
+{
+  p <- ggplot(data = res, aes(x = Nc, y = encounterDistance)) + geom_point(size = 2) + geom_line(size = 1)
+  p + theme_bw() #+ geom_line(aes(x = Nc, y = Ensemble_MSRG, color = genomicDistance), size = 1) 
+}
+
+{
+  p <- ggplot(data = res, aes(x = encounterDistance, y = sqrt(Ensemble_MSRG), color = genomicDistance)) + geom_point()
+  p
+}
+
+relation <- lm(data = res, formula = excludedVolumeCutOff ~ sqrt(Ensemble_MSRG))
+summary(relation)
+
+##########################################
+
 library(plotly)
 
 #######
@@ -36,13 +42,28 @@ ggplotly(p) %>% add_surface(z = pp$z)
 ######
 
 ########
-proba <- matrix(res$repair_probability, ncol = 14)
+{proba <- matrix(res$repair_probability, ncol = 14)
 mfet <- matrix(res$meanFET, ncol = 14)
 gs <- c(seq(2,4),seq(9,49,4))
 nc <- seq(2,19,4)
 py <- plot_ly(x = gs, y = nc, z = proba) %>% add_surface()
-py
+py}
 #########
+
+
+########
+{
+  proba <- matrix(res$repair_probability, ncol = 18)
+  gs <- seq(2,19)
+  nc <- seq(2,18,2)
+  py <- plot_ly(data = res, x = gs, y = nc, z = proba) %>% add_surface()
+  py
+}
+
+
+
+########
+
 
 ########
 proba.REMOVING <- matrix(res$repair_probability, ncol = 14)

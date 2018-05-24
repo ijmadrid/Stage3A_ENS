@@ -34,8 +34,9 @@ import csv
 NcMatrix = np.ones((2,2),dtype=int)*0
 NcMatrix[0,0] = 12
 NcMatrix[1,1] = 12
+NcMatrix[0,1] = NcMatrix[1,0] = 0
 
-polymerParams = dict(numMonomers = np.array([100,100]),
+polymerParams = dict(numMonomers = np.array([100,300]),
                      dim         = 3,
                      b           = 0.2,
                      Nc          = NcMatrix,
@@ -45,7 +46,7 @@ polymerParams = dict(numMonomers = np.array([100,100]),
 simulationParams = dict(# Physicial parameters
                         diffusionConstant = 0.008,
                         # Numerical parameters
-                        numRealisations   = 3, 
+                        numRealisations   = 800, 
                         dt                = 0.005,
                         dt_relax          = 0.01,
                         numSteps          = 12000,
@@ -61,8 +62,8 @@ simulationParams = dict(# Physicial parameters
                         )
 
 
-x_Nlr = np.arange(0,10)
-x_TADsizes = np.array([50,100,200,300])
+x_Nlr = np.arange(7)
+x_TADsizes = np.array([100])
 
 
 ############################################################################
@@ -101,7 +102,9 @@ def proba_v_NlrandSizes(polymerParams,simulationParams,x_Nlr,x_TADsizes):
                 print("ε = %s" % (simulationParams['encounterDistance']))
                 
                 p0 = RCLPolymer(**polymerParams)
-                results = {**polymerParams, **simulationParams}
+                results = {**polymerParams, **simulationParams, **{'Nlr' : polymerParams['Nc'][0,1],
+                                                                   'TADsize' : polymerParams['numMonomers'][1]}}
+                
                 mc = Experiment(p0, results, simulationParams,"oneTAD_Repair")
 
                 if first_time:
@@ -114,4 +117,8 @@ def proba_v_NlrandSizes(polymerParams,simulationParams,x_Nlr,x_TADsizes):
 
 if __name__ == "__main__":
     
-     proba_v_NlrandSizes(polymerParams,simulationParams,x_Nlr,x_TADsizes)
+    proba_v_NlrandSizes(polymerParams,simulationParams,x_Nlr,x_TADsizes)
+#    p0 = RCLPolymer(**polymerParams)
+#    p0.step(500,0.05,0.008)
+#    p0.colors[:100] = ['y']*100
+#    p0.plot()

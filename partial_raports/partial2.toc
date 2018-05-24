@@ -13,12 +13,11 @@
 \contentsline {subsection}{\numberline {3.1}First Encounter Time (FET) distribution when CLs are kept and removed in the damage foci}{9}
 \contentsline {subsection}{\numberline {3.2}Changes on the repair probability conditionally to $g$, $N_c$ and decondensation}{12}
 \contentsline {subsubsection}{\numberline {3.2.1}Effect of $g$ on the repair probability}{12}
-\contentsline {subsubsection}{\numberline {3.2.2}Effect of $N_c$ on the repair probability}{13}
-\contentsline {subsubsection}{\numberline {3.2.3}Effect of volume exclusion on the repair probability}{20}
-\contentsline {paragraph}{\numberline {3.2.3.1}Effect of undiscriminating exclusion}{20}
+\contentsline {subsubsection}{\numberline {3.2.2}Effect of $N_c$ on the repair probability}{15}
+\contentsline {paragraph}{\numberline {3.2.2.1}Effect of $N_c$ under fixed $\varepsilon $}{15}
+\contentsline {paragraph}{\numberline {3.2.2.2}Effect of $N_c$ under a $\xi $-adaptive $\varepsilon $}{18}
+\contentsline {subsubsection}{\numberline {3.2.3}Effect of volume exclusion on the repair probability}{22}
+\contentsline {paragraph}{\numberline {3.2.3.1}Effect of undiscriminating exclusion}{22}
 \contentsline {paragraph}{\numberline {3.2.3.2}Effect of a selective repair sphere}{26}
-\contentsline {subsubsection}{\numberline {3.2.4}Joint effect of volume exclusion and CL removal}{27}
-\contentsline {subsection}{\numberline {3.3}Repair probability in different domains}{29}
-\contentsline {subsubsection}{\numberline {3.3.1}TODO}{36}
-\contentsline {section}{\numberline {4}Partial conclusions}{37}
-\contentsline {section}{\numberline {5}Perspectives}{37}
+\contentsline {subsection}{\numberline {3.3}Effect of sub-domain folding on the repair probability}{32}
+\contentsline {section}{\numberline {4}Partial conclusions}{35}
