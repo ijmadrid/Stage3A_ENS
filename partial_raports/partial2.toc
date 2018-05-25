@@ -20,4 +20,4 @@
 \contentsline {paragraph}{\numberline {3.2.3.1}Effect of undiscriminating exclusion}{22}
 \contentsline {paragraph}{\numberline {3.2.3.2}Effect of a selective repair sphere}{26}
 \contentsline {subsection}{\numberline {3.3}Effect of sub-domain folding on the repair probability}{32}
-\contentsline {section}{\numberline {4}Partial conclusions}{35}
+\contentsline {section}{\numberline {4}Partial conclusions}{36}

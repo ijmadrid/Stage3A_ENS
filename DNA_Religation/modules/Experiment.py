@@ -496,6 +496,8 @@ class Experiment():
             # Remove the CL concerning the cleavages if it is the case
             if self.polymer.keepCL == False:
                 removedNum = self.polymer.removeCL()
+            else:
+                removedNum = 0
         
             # Wait some more time
             self.polymer.step(self.waitingSteps,self.dt_relax,self.diffusionConstant)
@@ -597,6 +599,80 @@ class Experiment():
         self.addResults('Ensemble_MSRG_dx', 1.96*np.std(msrg)/np.sqrt(len(msrg)))
         self.addResults('MeanInterBreakDistance',np.mean(interbreakDistance,axis=0))
 
+
+    def computeSD(self,t):
+        """
+        Square Deviation of each monomer at time t
+        """
+        r0 = self.trajectoire[0]
+        rt = self.trajectoire[t]
+        return np.linalg.norm( rt - r0 , axis = 1)**2
+        
+    def get_avg_msd(self):
+        return np.mean(np.mean(self.sds,axis=0),axis=1)
+ 
+    def get_msd_per_monomer(self):
+        return np.mean(self.sds,axis=0)
+    
+    def MSD_track(self):
+        """
+        Track of statistical properties of the breaks troughout time
+        Goal: Extract the anomalous exponent of each monomer after the break
+        """
+        
+        self.addResults("iterationsNumber",self.numRealisations)
+        alphas = np.zeros(self.numRealisations)
+        #events = np.repeat('NA',self.numRealisations).astype('<U15')
+        #removedNums = np.ones(self.numRealisations)*np.nan
+        #post_msrgs = np.ones(self.numRealisations)*np.nan
+
+        if self.numRealisations >= 10: k = self.numRealisations//10        
+        else: k = 1
+        
+        for i in range(self.numRealisations):
+            if not(i%k):
+                print("|",'='*(i//k),'-'*(10-i//k),"| Simulation", i+1, "of", self.numRealisations)
+
+            # Simulates the break and some waiting time:
+            removedNum = self.randomBreaks_SingleStep()
+
+            if self.excludedVolumeCutOff > 0:
+                # ADD EXCLUDED VOLUME
+                try:
+                    kappa = self.excludedVolumeSpringConstant
+                except:
+                    kappa = 3*self.diffusionConstant/(self.polymer.b**2)
+                
+                repulsionForce = lambda polymer : - kappa * RepairSphere(polymer, self.polymer.freeMonomers, self.excludedVolumeCutOff)   
+                self.polymer.addnewForce(repulsionForce)
+    
+                # Wait some more time
+                self.polymer.step(self.waitingSteps,self.dt_relax,self.diffusionConstant)
+
+            ##################################################                 
+            # Simulation until NumSteps
+            
+            # Will contain the Square Displacement of each monomer
+            sd = np.zeros((self.numSteps, self.polymer.numMonomers))
+            
+            r0 = self.polymer.get_r()
+            for t in range(self.numSteps):
+                self.polymer.step(1,self.dt,self.diffusionConstant)
+                # Square displacement of each monomer at time t
+                sd[t] = np.linalg.norm( self.polymer.get_r() - r0 , axis = 1)**2
+
+
+            # Polymer MSD
+            polymerMSD = np.mean(sd,axis=1)
+
+            # Extraction of anomalous exponents
+                            
+
+            self.polymer = self.polymer.new()
+            ##################################################  
+
+        self.saveEncounterResults(FETs, events, removedNums, post_msrgs)
+        
 
     def exponentialFit(self,x):
         from scipy.optimize import curve_fit

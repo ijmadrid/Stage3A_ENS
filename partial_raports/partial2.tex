@@ -360,6 +360,7 @@ We use now an adaptive $\varepsilon$ that evolutes according the polymer compact
 	\label{fig:adaptiveEps_vs_nc}
 \end{figure}
 
+Considering an adaptive $\varepsilon$ we compare the repair probability when CLs are kept or not in the DF as a function of $N_c$.  It can be observed that the removal allows to increase the repair rates, swifting up the probability functions as in Fig. \ref{fig:proba_v_Nc_Nd2_g20} (for $g = 20$) and \ref{fig:proba_v_Nc_Nd2_g4} (for $g = 4$). The other statistical properties measured in both cases can be observed in Fig. \ref{fig:all_v_Nc_Nd2}.
 
 \begin{figure}[h]
 	\centering
@@ -578,7 +579,12 @@ Figures \ref{fig:proba_v_parasytes} and \ref{fig:proba_v_longrange_sizes} sugges
 	\label{fig:proba_v_longrange_sizes}
 \end{figure}
 
-
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{../DNA_Religation/projects/RCLPolymer_TwoDomains/figures/proba_v_Nlr_100TAD.png}
+	\caption{Probability of repair for $N_{lr} = $ 0,2,4 and 6 long-range connectors, with a 100-monomers juxtaposed unbroken sub-domain, both with $N_c = 12$. Two DSBs were induced at $g = 10$ in the first sub-domain (100 monomers).}
+	\label{fig:proba_v_longrange100}
+\end{figure}
 
 
 \clearpage
@@ -591,9 +597,9 @@ Figures \ref{fig:proba_v_parasytes} and \ref{fig:proba_v_longrange_sizes} sugges
 
 \begin{itemize}
 	\item When the mismatch rate is high (near DSBs and/or high connectivity) the most common misrepair seems to be the $"a_2-b_1$" one, which corresponds to the looping of the central segment of the cut RCL polymer.
-	\item Keeping or removing the cross-links in the separated neighbors does not seem to particularly help the repair, at least without considering volume exclusion. The joint action of CLs removal and volume exclusion in the damage foci should be analyzed more carefully to conclude if this "relaxation" helps or not the repair.
 	\item If there are enough cross-links, even for DSBs separated by a large genomic distance the repair probability goes down to $1/3$, i.e. the expected value by pure chance. The best correct repair probabilities occur, as one could expect, at large interbreak genomic distances with few random cross-links. However, if the breaks are close and the repair probability is less than $1/3$, the increment of cross-links improves the correct match rate.
-	\item Local excluded volume in the damage foci seems to do not affect or even obstruct the repair, rather than improving its probability. Probability curves with local local exclusion volume are indeed down shifted in comparison with the non-excluded ones.
+	\item Concerning the volume exclusion, best repair rates are reached for $\kappa_{ve}$ near to, but smaller than, the backbone $\kappa$ and $\sigma$ a bit lesser than $b$. Increasing values of $\sigma$ also lead to shorter MFET.
+	
 \end{itemize}
 
 %\section{Perspectives}
