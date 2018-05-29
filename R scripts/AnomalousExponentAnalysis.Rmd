@@ -1,0 +1,63 @@
+---
+title: "AnomalousExponentAnalysis"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+res <- read.csv("../DNA_Religation/projects/RCLPolymer_CLs@DamageFoci/results/2018_05_29_15_10_trackMSD.csv")
+```
+
+```{r echo=FALSE}
+library(ggplot2)
+```
+
+## Anomalous exponent ($\alpha$) after DSB induction
+
+```{r}
+ggplot(data = res, aes(x = genomicDistance, y = Nc, fill = polymerAlpha)) + geom_raster()
+```
+
+```{r}
+msdfit <- function(t, A, alpha){
+  return(A*t^alpha)
+}
+
+df <- data.frame(time = seq(0,12000)*0.005)
+for (i in 1:15) {
+  df[,paste("polymerMSD",i,sep="")] <- msdfit(df$time, res$polymer_MSDamplitude[i], res$polymerAlpha[i])
+}
+```
+
+```{r}
+library(reshape)
+df.melt <- melt(df, id = "time")
+```
+
+```{r}
+p <- ggplot(data = df.melt, aes(x = time, y = value, color = variable)) + geom_line()
+p + scale_color_discrete(name = "Experimental Set", labels = c("g = 2, Nc = 20",
+                                                               "g = 2, Nc = 25",
+                                                               "g = 2, Nc = 30",
+                                                               "g = 2, Nc = 35",
+                                                               "g = 2, Nc = 40",
+                                                               "g = 4, Nc = 20",
+                                                               "g = 4, Nc = 25",
+                                                               "g = 4, Nc = 30",
+                                                               "g = 4, Nc = 35",
+                                                               "g = 4, Nc = 40",
+                                                               "g = 20, Nc = 20",
+                                                               "g = 20, Nc = 25",
+                                                               "g = 20, Nc = 30",
+                                                               "g = 20, Nc = 35",
+                                                               "g = 20, Nc = 40"
+                                                               )) + ylab("Polymer MSD")
+```
+
+for (i in 1:15){
+  q <- ggplot(data = df, aes(x = time)) + geom_line(aes( y = df[,paste("polymerMSD",i,sep = "")], color = paste("polymerMSD",i,sep="")))
+  q$data
+  #p <- p + q

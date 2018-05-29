@@ -70,6 +70,10 @@ class Experiment():
             self.persistentDSB()
         elif customExperiment == 'watchEncounter':
             self.watchEncounter()
+            
+        elif customExperiment == 'trackMSD':
+            self.MSD_track()
+            
         elif callable(customExperiment):
             # customExperiment should be a function that has a 
             # Experiment object as unique argument
@@ -621,7 +625,8 @@ class Experiment():
         """
         
         self.addResults("iterationsNumber",self.numRealisations)
-        alphas = np.zeros(self.numRealisations)
+        polymerSDs = np.zeros((self.numRealisations,self.numSteps))
+        breaksSDs = np.zeros((self.numRealisations,4,self.numSteps))
         #events = np.repeat('NA',self.numRealisations).astype('<U15')
         #removedNums = np.ones(self.numRealisations)*np.nan
         #post_msrgs = np.ones(self.numRealisations)*np.nan
@@ -655,23 +660,60 @@ class Experiment():
             # Will contain the Square Displacement of each monomer
             sd = np.zeros((self.numSteps, self.polymer.numMonomers))
             
-            r0 = self.polymer.get_r()
+            r0 = self.polymer.get_r().copy()
             for t in range(self.numSteps):
                 self.polymer.step(1,self.dt,self.diffusionConstant)
                 # Square displacement of each monomer at time t
                 sd[t] = np.linalg.norm( self.polymer.get_r() - r0 , axis = 1)**2
 
 
-            # Polymer MSD
-            polymerMSD = np.mean(sd,axis=1)
+            # Polymer SD
+            polymerSDs[i] = np.mean(sd,axis=1)
 
-            # Extraction of anomalous exponents
-                            
+            # Breaks SD
+            #breaksSDs[i] = np.zeros((4,self.numSteps))
+            for j, brokenMonomer in enumerate(self.polymer.freeMonomers):
+                breaksSDs[i][j] = sd[:,brokenMonomer]
+            
+                       
 
             self.polymer = self.polymer.new()
             ##################################################  
 
-        self.saveEncounterResults(FETs, events, removedNums, post_msrgs)
+#        self.saveEncounterResults(FETs, events, removedNums, post_msrgs)
+        
+        ### Computation of MSD averaging over all realisations
+        polymerMSD = np.mean(polymerSDs, axis = 0) # size: numSteps
+        breaksMSD = np.mean(breaksSDs, axis = 0) # size: 4 x numSteps
+        
+        ### Extraction of anomalous exponent
+        
+        realtime = np.arange(self.numSteps) * self.dt
+        
+        polymerMSDfit_amplitude, polymerMSDfit_alpha = self.getMSDfit(realtime, polymerMSD)
+        breakMSDfit_amplitude = np.zeros(4)
+        breakMSDfit_alpha = np.zeros(4)
+        for b in range(4):
+            breakMSDfit_amplitude[b], breakMSDfit_alpha[b] = self.getMSDfit(realtime, breaksMSD[b])
+        
+        self.addResults("polymerMSD",polymerMSD)
+        self.addResults("A1_MSD",breaksMSD[0])
+        self.addResults("A2_MSD",breaksMSD[1])
+        self.addResults("B1_MSD",breaksMSD[2])
+        self.addResults("B2_MSD",breaksMSD[3])
+        
+        self.addResults("polymerAlpha",polymerMSDfit_alpha)
+        self.addResults("A1_Alpha",breakMSDfit_alpha[0])
+        self.addResults("A2_Alpha",breakMSDfit_alpha[1])
+        self.addResults("B1_Alpha",breakMSDfit_alpha[2])
+        self.addResults("B2_Alpha",breakMSDfit_alpha[3])
+        
+        self.addResults("polymer_MSDamplitude",polymerMSDfit_amplitude)
+        self.addResults("A1_MSDamplitude",breakMSDfit_amplitude[0])
+        self.addResults("A2_MSDamplitude",breakMSDfit_amplitude[1])
+        self.addResults("B1_MSDamplitude",breakMSDfit_amplitude[2])
+        self.addResults("B2_MSDamplitude",breakMSDfit_amplitude[3])
+        
         
 
     def exponentialFit(self,x):
@@ -689,12 +731,18 @@ class Experiment():
         return popt
     
     
-    def getMSDfit(self,x):
+    def getMSDfit(self,time,MSDarray):
         from scipy.optimize import curve_fit
         
         def power(t, A, alpha):
             return A*t**alpha
         
+        try:
+            popt, _ = curve_fit(power, time, MSDarray)
+        except:
+            popt = (-1, -1)
+        
+        return popt
         #TODO
         
 #        x_interval_for_fit = np.linspace(bin_borders[0], bin_borders[-1], 10000)
@@ -739,6 +787,26 @@ class Experiment():
         
         self.trajectoire = trajectory
         
+        msd = np.zeros(t)
+        a1_msd = np.zeros(t)
+        a2_msd = np.zeros(t)
+        b1_msd = np.zeros(t)
+        b2_msd = np.zeros(t)
+        for it in range(t):
+            msd[it] = np.mean(np.linalg.norm( trajectory[it] - trajectory[0] , axis = 1)**2)
+            a1,a2,b1,b2 = self.polymer.freeMonomers
+            a1_msd[it] = (np.linalg.norm( trajectory[it][a1] - trajectory[0][a1])**2)
+            a2_msd[it] = (np.linalg.norm( trajectory[it][a2] - trajectory[0][a2])**2)
+            b1_msd[it] = (np.linalg.norm( trajectory[it][b1] - trajectory[0][b1])**2)
+            b2_msd[it] = (np.linalg.norm( trajectory[it][b2] - trajectory[0][b2])**2)
+        
+        
+        self.addResults("realtime",np.arange(t)*self.dt)
+        self.addResults("polymerMSD",msd)
+        self.addResults("a1MSD",a1_msd)
+        self.addResults("a2MSD",a2_msd)
+        self.addResults("b1MSD",b1_msd)
+        self.addResults("b2MSD",b2_msd)
         self.addResults("trajectory",self.trajectoire)
         self.addResults("removedCLs",removedNum)
         self.addResults("FET",t)

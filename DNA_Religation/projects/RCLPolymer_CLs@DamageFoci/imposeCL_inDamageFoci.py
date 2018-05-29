@@ -34,40 +34,40 @@ import csv
 polymerParams = dict(numMonomers = 100, # np.array([100,100]), # TODO (.., ..., ...)
                      dim         = 3,
                      b           = 0.2,
-                     Nc          = 10, #NcMatrix,
-                     keepCL      = True
+                     Nc          = 20, #NcMatrix,
+                     keepCL      = False
                      )
 
 simulationParams = dict(# Physicial parameters
                         diffusionConstant = 0.008,
                         # Numerical parameters
-                        numRealisations   = 300, 
+                        numRealisations   = 100, 
                         dt                = 0.005,
                         dt_relax          = 0.01,
                         numSteps          = 12000,
-                        excludedVolumeCutOff = 0.20,
-                        excludedVolumeSpringConstant = 0.30,
+                        excludedVolumeCutOff = 0.005,
+#                        excludedVolumeSpringConstant = 0.30,
                         waitingSteps = 0,
-                        numMaxSteps = 12000,
-                        encounterDistance = 0.05,
-                        genomicDistance = 4,
+#                        numMaxSteps = 500,
+                        encounterDistance = 0.045,
+                        genomicDistance = 20,
                         Nb = 2,
-                        Nc_inDamageFoci = 1
+                        Nc_inDamageFoci = 2
 #                        selectedSubDomain = 0
                         )
 
 
 #x_Nc = np.arange(3,11)
-x_sigma = np.linspace(0.03,0.25,num=5)
+#x_sigma = np.linspace(0.03,0.25,num=5)
 #x_Nc = np.array([3,5,7,9,11,13,15]) #np.arange(3,20,3)
 #x_Nd = np.array([0,1,2,3])
 #gmax = 12
 #gStep = 1
 
-x_kappa = (3*0.008/(0.2**2))*np.linspace(0, 4, num = 30)
+#x_kappa = (3*0.008/(0.2**2))*np.linspace(0, 4, num = 30)
 
-x_g = np.arange(2,20)
-x_Nc = np.arange(2,20,2)
+x_g = [2,4,20]
+x_Nc = np.arange(20,41,5)
 errorbars = True
 
 ############################################################################
@@ -513,6 +513,9 @@ def mFET_vs_NcinDF(polymerParams,simulationParams,x_Nc,errorbars=False):
                 print("ε = %s and σ = %s" % (simulationParams['encounterDistance'],simulationParams['excludedVolumeCutOff']))
                 
                 p0 = RCLPolymer(**polymerParams)
+                
+                
+                
                 results = {**polymerParams, **simulationParams}
                 mc = Experiment(p0, results, simulationParams,"EncounterSimulation")
     #            oneTAD_Repair
@@ -657,15 +660,20 @@ def proba_v_gNc(polymerParams,simulationParams,x_g,x_Nc,errorbars=False):
 #                scaleFactor = np.sqrt( (1-xi0)*np.sqrt(xi0) / ((1-xi)*np.s1qrt(xi)) )
                 simulationParams['encounterDistance'] = adaptiveEpsilon(xi, N, polymerParams['b'])
                 
-                simulationParams['excludedVolumeCutOff'] = 3*simulationParams['encounterDistance']
+#                simulationParams['excludedVolumeCutOff'] = 3*simulationParams['encounterDistance']
                 ### ADAPTIVE dt
                 simulationParams['dt'] = np.round((0.2*simulationParams['encounterDistance'])**2/(2*simulationParams['diffusionConstant']),decimals=4)-0.0001                
+                
+                simulationParams['numMaxSteps'] = int(60//simulationParams['dt'])
                 
                 print("ε = %s" % (simulationParams['encounterDistance']))
                 
                 p0 = RCLPolymer(**polymerParams)
+                
+                simulationParams['waitingSteps'] = np.ceil(p0.relaxTime(simulationParams['diffusionConstant'])/simulationParams['dt_relax']).astype(int)
+                
                 results = {**polymerParams, **simulationParams}
-                mc = Experiment(p0, results, simulationParams,"Encounter_withRepairSphere")
+                mc = Experiment(p0, results, simulationParams,"EncounterSimulation")
 
                 if first_time:
                     fieldnames = ['experimentSetID']+list(mc.results)
@@ -683,7 +691,37 @@ def watchOneSimulation(polymerParams, simulationParams):
     print(mc.results['FET'])
     return mc
 
+def trackAlpha_v_gNc(polymerParams,simulationParams,x_g,x_Nc):
+    date = strftime("%Y_%m_%d_%H_%M")
+    filename = date + '_trackMSD' + '.csv'
 
+    first_time = True
+    N = polymerParams['numMonomers']
+    
+    with open('results/'+filename, 'w') as csvfile:
+
+        for i, g in enumerate(x_g):
+  
+            print("Simulation for g = %s " % g)
+            simulationParams['genomicDistance'] = g
+
+            for j, nc in enumerate(x_Nc):    
+                print("Simulation for Nc = %s " % nc)
+                polymerParams['Nc'] = nc
+                                
+                p0 = RCLPolymer(**polymerParams)
+                
+                simulationParams['waitingSteps'] = np.ceil(p0.relaxTime(simulationParams['diffusionConstant'])/simulationParams['dt_relax']).astype(int)
+                
+                results = {**polymerParams, **simulationParams}
+                mc = Experiment(p0, results, simulationParams,"trackMSD")
+
+                if first_time:
+                    fieldnames = ['experimentSetID']+list(mc.results)
+                    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                    writer.writeheader()
+                    first_time = False
+                writer.writerow({**{'experimentSetID' : str(i)+'_'+str(j)}, **mc.results})
 
 
 ###############################################################################
@@ -706,8 +744,19 @@ if __name__ == "__main__":
 #    proba_vs_Nc_andKeepCL(polymerParams,simulationParams,x_Nc,errorbars)
 #    proba_v_sigma(polymerParams,simulationParams,x_sigma,errorbars)
 #    proba_v_VEkappa(polymerParams,simulationParams,x_sigma,x_kappa,errorbars)
-    proba_v_gNc(polymerParams,simulationParams,x_g,x_Nc,errorbars)
+#    proba_v_gNc(polymerParams,simulationParams,x_g,x_Nc,errorbars)
 #    FET_Simulation(polymerParams,simulationParams)
 #    mFET_vs_NcinDF(polymerParams,simulationParams,x_Nc,errorbars)
-#    mc = watchOneSimulation(polymerParams, simulationParams)
-#    ani = mc.plot_trajectoire(show=True)
+    mc = watchOneSimulation(polymerParams, simulationParams)
+    ani = mc.plot_trajectoire(show=True)
+    
+    plt.figure()
+    plt.plot(mc.results['realtime'],mc.results['a1MSD'])
+    plt.plot(mc.results['realtime'],mc.results['a2MSD'])
+    plt.plot(mc.results['realtime'],mc.results['b1MSD'])
+    plt.plot(mc.results['realtime'],mc.results['b2MSD'])
+    plt.plot(mc.results['realtime'],mc.results['polymerMSD'])
+    plt.show()
+    
+#    print("hey")
+#    trackAlpha_v_gNc(polymerParams,simulationParams,x_g,x_Nc)

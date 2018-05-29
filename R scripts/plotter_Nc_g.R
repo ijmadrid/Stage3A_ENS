@@ -1,9 +1,15 @@
-res <- read.csv("./Stage 3A ENS/DNA_Religation/projects/RCLPolymer_CLs@DamageFoci/results/2018_05_24_17_05_proba-v_gNc_withVE.csv")
+res <- read.csv("./Stage 3A ENS/DNA_Religation/projects/RCLPolymer_CLs@DamageFoci/results/2018_05_28_15_14_proba-v_gNc_withVE.csv")
 
 library(ggplot2)
 library(RColorBrewer)
 
 res$excludedVolumeCutOff <- as.factor(res$excludedVolumeCutOff)
+
+res$genomicDistance <- as.factor(res$genomicDistance)
+{
+  p <- ggplot(data = res, aes(x = Nc, y = repair_probability, color = genomicDistance)) + geom_line()
+  p
+}
 
 
 ####
@@ -66,10 +72,12 @@ py}
 
 
 ########
-proba.REMOVING <- matrix(res$repair_probability, ncol = 14)
-proba.KEEPING <- matrix(res$repair_probability, ncol = 14)
-py <- plot_ly(x = gs, y = nc, z = proba.REMOVING) %>% add_surface()
-
+proba.REMOVING <- matrix(res$repair_probability, ncol = 2)
+proba.KEEPING <- matrix(res$repair_probability, ncol = 2)
+gs = c(4,20)
+nc = seq(20,59,4)
+py <- plot_ly(x = gs, y = nc, z = proba.REMOVING)
+py
 py <- plot_ly(x = gs, y = nc) %>% add_surface(z = proba.KEEPING, cmin = min(proba.KEEPING), cmax = max(proba.KEEPING), colorscale = list(c(0,1),c("rgb(255,112,184)","rgb(128,0,64)"))) %>% 
   add_surface(z = proba.REMOVING,cmin = min(proba.REMOVING), cmax = max(proba.REMOVING), colorscale = list(c(0,1),c("rgb(107,184,214)","rgb(0,90,124)")))
 py
