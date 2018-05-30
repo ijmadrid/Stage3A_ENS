@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from mpl_toolkits.mplot3d import Axes3D
 from collections import Counter
-from .Forces import LocalExcludedVolume, RepairSphere
+from .Forces import ExcludedVolume, LocalExcludedVolume, RepairSphere
 from time import time
 
 class Experiment():
@@ -370,16 +370,17 @@ class Experiment():
             removedNum = self.randomBreaks_SingleStep()
 
             # ADD EXCLUDED VOLUME
-            try:
-                kappa = self.excludedVolumeSpringConstant
-            except:
-                kappa = 3*self.diffusionConstant/(self.polymer.b**2)
-            
-            repulsionForce = lambda polymer : - kappa * RepairSphere(polymer, self.polymer.freeMonomers, self.excludedVolumeCutOff)   
-            self.polymer.addnewForce(repulsionForce)
-
-            # Wait some more time
-            self.polymer.step(self.waitingSteps,self.dt_relax,self.diffusionConstant)
+            if(self.excludedVolumeCutOff > 0):
+                try:
+                    kappa = self.excludedVolumeSpringConstant
+                except:
+                    kappa = 3*self.diffusionConstant/(self.polymer.b**2)
+                
+                repulsionForce = lambda polymer : - kappa * RepairSphere(polymer, self.polymer.freeMonomers, self.excludedVolumeCutOff)   
+                self.polymer.addnewForce(repulsionForce)
+    
+                # Wait some more time
+                self.polymer.step(self.waitingSteps,self.dt_relax,self.diffusionConstant)
 
             ##################################################                 
             # Simulation until encounter              
@@ -755,10 +756,14 @@ class Experiment():
         # Simulates the break and some waiting time:
         removedNum = self.randomBreaks_SingleStep()
 
-        # ADD EXCLUDED VOLUME       
-        kappa = 3*self.diffusionConstant/(self.polymer.b**2)
-        repulsionForce = lambda polymer : - kappa * RepairSphere(polymer, self.polymer.freeMonomers, self.excludedVolumeCutOff)   
-        self.polymer.addnewForce(repulsionForce)
+        # ADD EXCLUDED VOLUME
+        if self.excludedVolumeCutOff > 0:
+            try:
+                kappa = self.excludedVolumeSpringConstant
+            except:
+                kappa = 3*self.diffusionConstant/(self.polymer.b**2)    
+            repulsionForce = lambda polymer : - kappa * RepairSphere(polymer, self.polymer.freeMonomers, self.excludedVolumeCutOff)   
+            self.polymer.addnewForce(repulsionForce)
 
         self.polymer.colors = ['y']*self.polymer.numMonomers
         for m in self.polymer.freeMonomers:
@@ -775,10 +780,10 @@ class Experiment():
         trajectory = np.zeros((self.numSteps+1,self.polymer.numMonomers,3))
         trajectory[0] = self.polymer.get_r()
         
-        didEncounter = self.polymer.anyEncountered(self.encounterDistance)
-        while(not(didEncounter[0]) and t < self.numSteps):
+#        didEncounter = self.polymer.anyEncountered(self.encounterDistance)
+        while(t < self.numSteps):
             self.polymer.step(1,self.dt,self.diffusionConstant)
-            didEncounter = self.polymer.anyEncountered(self.encounterDistance)
+#            didEncounter = self.polymer.anyEncountered(self.encounterDistance)
             trajectory[t+1] = self.polymer.get_r()
             t += 1
         
@@ -817,22 +822,26 @@ class Experiment():
         # Prepare results 
         FETs = FETs*self.dt
         self.addResults("events",events)
-        events = Counter(events)
-        total_valid_experiments = sum(events.values())-events['NA']
+        eventsC = Counter(events)
+        total_valid_experiments = sum(eventsC.values())-eventsC['NA']
         
         if total_valid_experiments == 0:
             repairProbas = 0.
             repairHalfCI = 0.
             mFET = np.nan
+            repairMFET = np.nan
+            misrepairMFET = np.nan
             halfCI_mFET = 0.
             meanremovedCLs = 0.
             fitAmplitude = fitRate = 0.
             print('No valid experiments!')
         else:
-            proba = events['Repair']/total_valid_experiments
+            proba = eventsC['Repair']/total_valid_experiments
             repairProbas = proba
             repairHalfCI = 1.96*np.sqrt((proba - proba**2)/total_valid_experiments)
             mFET = np.nanmean(FETs)
+            repairMFET = np.nanmean(FETs[events == 'Repair'])
+            misrepairMFET = np.nanmean(FETs[(events != 'Repair') * (events != 'NA')])
             halfCI_mFET = 1.96*np.nanstd(FETs)/np.sqrt(total_valid_experiments)
             meanremovedCLs = np.nanmean(removedNums)
             fitAmplitude, fitRate = self.exponentialFit(FETs[~np.isnan(FETs)])
@@ -841,10 +850,12 @@ class Experiment():
         # Save results
         self.addResults("FETs",FETs)
         self.addResults("meanFET",mFET)
+        self.addResults("repairMFET",repairMFET)
+        self.addResults("misrepairMFET",misrepairMFET)
         self.addResults("halfCI_FET",halfCI_mFET)
         self.addResults("expFit_Amplitude",fitAmplitude)
         self.addResults("expFit_Rate",fitRate)
-        self.addResults("eventsCounter",events)
+        self.addResults("eventsCounter",eventsC)
         self.addResults("repair_probability",repairProbas)
         self.addResults("repair_CIhalflength",repairHalfCI)
         self.addResults("mean_removedCLs",meanremovedCLs)

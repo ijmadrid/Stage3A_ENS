@@ -79,7 +79,7 @@ def RepairSphere(polymer, exclusionLoci, cutoff):
 #        localInteractionMatrix[i,monomer_i] = - np.sum(localInteractionMatrix[i]) - 1
         interactionMatrix[monomer_i] = localInteractionMatrix[i]
         interactionMatrix[:,monomer_i] = localInteractionMatrix[i]
-        interactionMatrix += np.diag(interactionMatrix.sum(axis=0))
+        interactionMatrix += -np.diag(interactionMatrix.sum(axis=0))
     
     return np.dot(interactionMatrix,polymer.get_r())    
 

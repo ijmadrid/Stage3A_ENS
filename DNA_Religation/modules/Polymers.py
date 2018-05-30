@@ -129,7 +129,7 @@ class Polymer(Graph):
                 self.positions += - (np.sum([f(self) for f in self.forces],axis=0) + (self.dim*D/(self.b**2))*(np.dot(self.LaplacianMatrix,self.get_r())))*dt + np.random.randn(self.numMonomers,self.dim)*np.sqrt(2.0*D*dt)
         
         else:
-            # Harmonic potential only
+            # Rouse Harmonic potential only
             for j in range(numsteps):
                 self.positions += -(self.dim*D/(self.b**2))*np.dot(self.LaplacianMatrix,self.get_r())*dt + np.random.randn(self.numMonomers,self.dim)*np.sqrt(2.0*D*dt)
         

@@ -44,7 +44,7 @@ polymerParams = dict(numMonomers = 100, # np.array([100,100]), # TODO (.., ..., 
 simulationParams = dict(# Physicial parameters
                         diffusionConstant = 0.008,
                         # Numerical parameters
-                        numRealisations   = 600, 
+                        numRealisations   = 200, 
                         dt                = 0.005,
                         dt_relax          = 0.01,
 #                        numSteps          = 500,
@@ -60,8 +60,8 @@ simulationParams = dict(# Physicial parameters
 
 #test_distances = np.arange(1,30,3,dtype = int)
 #
-gmax = 16
-gStep = 1
+gmax = 20
+gStep = 5
 #test_epsilons = [0.1]
 #
 #x_Nc = np.arange(25,45,5)
@@ -69,7 +69,7 @@ gStep = 1
 #TADsizes = [20,50,100,200,300]
 #connectivityFraction = 0.002
 errorbars = True
-x_sigma = np.array([0, 0.1, 0.2])
+x_sigma = np.array([0.1, 0.2])
 ############################################################################
 ############################################################################
 
@@ -165,10 +165,10 @@ def proba_vs_genomicDistance_andVE(polymerParams,simulationParams,x_sigma,gmax,g
         gmin = 2
         
         
-        plt.figure()
-        rcParams.update({'axes.labelsize': 'xx-large'})
-        plt.xlabel('genomic distance (in number of monomers)')
-        plt.ylabel(r'$\mathbb{P}$(Repair)')
+#        plt.figure()
+#        rcParams.update({'axes.labelsize': 'xx-large'})
+#        plt.xlabel('genomic distance (in number of monomers)')
+#        plt.ylabel(r'$\mathbb{P}$(Repair)')
         
         xg = np.arange(gmin,gmax,gStep,dtype=int)
         
@@ -200,14 +200,14 @@ def proba_vs_genomicDistance_andVE(polymerParams,simulationParams,x_sigma,gmax,g
                     writer.writeheader()
                 writer.writerow({**{'experimentSetID' : str(i)+'_'+str(j)}, **mc.results})
             
-            if errorbars:
-                plt.errorbar(x=xg, y=probas, yerr=demiCI,
-                             fmt='-o', label=labelkeep, capsize = 4)
-            else:
-                plt.plot(xg,probas,'-o',label=labelkeep)
-        
-        plt.legend()        
-        plt.show()
+#            if errorbars:
+#                plt.errorbar(x=xg, y=probas, yerr=demiCI,
+#                             fmt='-o', label=labelkeep, capsize = 4)
+#            else:
+#                plt.plot(xg,probas,'-o',label=labelkeep)
+#        
+#        plt.legend()        
+#        plt.show()
 
 
 if __name__ == "__main__":
