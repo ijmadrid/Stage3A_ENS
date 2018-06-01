@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     23202,        808]
-NotebookOptionsPosition[     22381,        777]
-NotebookOutlinePosition[     22720,        792]
-CellTagsIndexPosition[     22677,        789]
+NotebookDataLength[     23125,        803]
+NotebookOptionsPosition[     22347,        774]
+NotebookOutlinePosition[     22686,        789]
+CellTagsIndexPosition[     22643,        786]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -756,8 +756,6 @@ Cell[BoxData[
   RowBox[{"NormalDistribution", ",", "2"}], "]"}]], "Input",
  CellChangeTimes->{{3.7362535771180873`*^9, 3.7362535772460947`*^9}}],
 
-Cell[CellGroupData[{
-
 Cell[BoxData[
  RowBox[{"Evaluate", "[", 
   RowBox[{"CDF", "[", 
@@ -773,7 +771,6 @@ Cell[BoxData[
    RowBox[{"-", 
     SqrtBox["2"]}], "]"}]}]], "Output",
  CellChangeTimes->{{3.736253591370902*^9, 3.7362536184724526`*^9}}]
-}, Open  ]]
 },
 WindowSize->{824, 952},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
@@ -795,7 +792,7 @@ Cell[558, 20, 931, 24, 46, "Input"],
 Cell[1492, 46, 777, 17, 31, "Input"],
 Cell[CellGroupData[{
 Cell[2294, 67, 212, 4, 31, "Input"],
-Cell[2509, 73, 12997, 488, 433, "Output"]
+Cell[2509, 73, 12997, 488, 419, "Output"]
 }, Open  ]],
 Cell[15521, 564, 96, 1, 31, "Input"],
 Cell[15620, 567, 124, 5, 68, "Text"],
@@ -803,16 +800,13 @@ Cell[15747, 574, 393, 9, 31, "Input"],
 Cell[CellGroupData[{
 Cell[16165, 587, 769, 22, 49, "Input"],
 Cell[16937, 611, 568, 12, 21, "Message"],
-Cell[17508, 625, 4191, 125, 230, "Output"]
+Cell[17508, 625, 4191, 125, 159, "Output"]
 }, Open  ]],
 Cell[21714, 753, 166, 3, 31, "Input"],
-Cell[CellGroupData[{
-Cell[21905, 760, 254, 6, 31, InheritFromParent],
-Cell[22162, 768, 203, 6, 46, "Output"]
-}, Open  ]]
+Cell[21883, 758, 254, 6, 31, "Input"],
+Cell[22140, 766, 203, 6, 46, "Output"]
 }
 ]
 *)
 
 (* End of internal cache information *)
-

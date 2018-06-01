@@ -35,7 +35,7 @@ polymerParams = dict(numMonomers = 100, # np.array([100,100]), # TODO (.., ..., 
                      dim         = 3,
                      b           = 0.2,
                      Nc          = 10, #NcMatrix,
-                     keepCL      = False
+                     keepCL      = True
                      )
 
 simulationParams = dict(# Physicial parameters
@@ -45,12 +45,12 @@ simulationParams = dict(# Physicial parameters
                         dt                = 0.005,
                         dt_relax          = 0.01,
                         numSteps          = 6000,
-                        excludedVolumeCutOff = 0,
+                        excludedVolumeCutOff = 0.05,
                         excludedVolumeSpringConstant = 0.6,
                         waitingSteps = 0,
 #                        numMaxSteps = 12000,
                         encounterDistance = 0.05,
-                        genomicDistance = 20,
+                        genomicDistance = 4,
                         Nb = 2,
                         Nc_inDamageFoci = 1
 #                        selectedSubDomain = 0
@@ -58,7 +58,7 @@ simulationParams = dict(# Physicial parameters
 
 
 #x_Nc = np.arange(3,11)
-x_sigma = np.linspace(0,0.25,num=15)
+x_sigma = np.linspace(0,0.25,num=10)
 #x_Nc = np.array([3,5,7,9,11,13,15]) #np.arange(3,20,3)
 #x_Nd = np.array([0,1,2,3])
 #gmax = 12
@@ -743,6 +743,10 @@ if __name__ == "__main__":
 #    proba_vs_genomicDistance(polymerParams,simulationParams,gmax,gStep,errorbars)
 #    proba_vs_Nc_andKeepCL(polymerParams,simulationParams,x_Nc,errorbars)
 #    proba_v_sigma(polymerParams,simulationParams,x_sigma,errorbars)
+#    proba_v_VEkappa(polymerParams,simulationParams,x_sigma,x_kappa)
+    simulationParams['genomicDistance'] = 20
+    proba_v_VEkappa(polymerParams,simulationParams,x_sigma,x_kappa)
+    simulationParams['genomicDistance'] = 50
     proba_v_VEkappa(polymerParams,simulationParams,x_sigma,x_kappa)
 #    proba_v_gNc(polymerParams,simulationParams,x_g,x_Nc,errorbars)
 #    FET_Simulation(polymerParams,simulationParams)

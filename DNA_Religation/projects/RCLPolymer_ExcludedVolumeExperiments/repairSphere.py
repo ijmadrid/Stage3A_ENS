@@ -34,7 +34,7 @@ NcMatrix = np.ones((2,2),dtype=int)*0
 NcMatrix[0,0] = 10
 NcMatrix[1,1] = 10
                      
-polymerParams = dict(numMonomers = 100, # np.array([100,100]), # TODO (.., ..., ...)
+polymerParams = dict(numMonomers = 50, # np.array([100,100]), # TODO (.., ..., ...)
                      dim         = 3,
                      b           = 0.2,
                      Nc          = 10, #NcMatrix,
@@ -52,9 +52,9 @@ simulationParams = dict(# Physicial parameters
                         waitingSteps = 200,
                         numMaxSteps = 9000,
                         encounterDistance = 0.05,
-                        genomicDistance = 25,
+                        genomicDistance = 20,
                         Nb = 2,
-                        Nc_inDamageFoci = 1
+                        Nc_inDamageFoci = 0
 #                        selectedSubDomain = 0
                         )
 
@@ -64,12 +64,13 @@ gmax = 20
 gStep = 5
 #test_epsilons = [0.1]
 #
-#x_Nc = np.arange(25,45,5)
+x_Nc = np.arange(4,20,1) #np.array([5,10,15,20,25]) #np.arange(5,50,5)
+x_v = np.array([0.5,1.,2.])
 #x_Nc = np.arange(5,40,5)
 #TADsizes = [20,50,100,200,300]
 #connectivityFraction = 0.002
 errorbars = True
-x_sigma = np.array([0.1, 0.2])
+#x_sigma = np.array([0.1, 0.2])
 ############################################################################
 ############################################################################
 
@@ -78,19 +79,19 @@ def adaptiveEpsilon(xi, N, b):
     y = 1 + (N*xi)/(2*(1 -xi))
     return 2*np.sqrt(6 * b**2 / (N * 2*(1-xi) * np.sqrt(y**2-1)))
 
-def proba_vs_Nc_andVE(polymerParams,simulationParams,x_Nc,errorbars=False):
+def proba_vs_Nc_andVE(polymerParams,simulationParams,x_Nc,x_v,errorbars=False):
 
     date = strftime("%Y_%m_%d_%H_%M")
     filename = date + 'proba_VE_vs_Nc_NcinDF_adptEPSILONandSIGMA' + '.csv'
     
     with open('results/'+filename, 'w') as csvfile:
                 
-        plt.figure()
-        rcParams.update({'axes.labelsize' : 'xx-large'})
-        rcParams.update({'legend.fontsize': 'xx-large'})
-        rcParams.update({'xtick.labelsize': 'large'}) 
-        plt.xlabel('Number of connectors')
-        plt.ylabel(r'$\mathbb{P}$(Repair)') #('Mean first encounter time (sec)') #
+#        plt.figure()
+#        rcParams.update({'axes.labelsize' : 'xx-large'})
+#        rcParams.update({'legend.fontsize': 'xx-large'})
+#        rcParams.update({'xtick.labelsize': 'large'}) 
+#        plt.xlabel('Number of connectors')
+#        plt.ylabel(r'$\mathbb{P}$(Repair)') #('Mean first encounter time (sec)') #
         
         first_time = True
         
@@ -100,15 +101,18 @@ def proba_vs_Nc_andVE(polymerParams,simulationParams,x_Nc,errorbars=False):
 #        eps0 = simulationParams['encounterDistance']
 #        sigma0 = simulationParams['excludedVolumeCutOff']
                 
-        for i, VolumeExclusion in enumerate([True, False]):
+        for i, v in enumerate(x_v):
             
-            if VolumeExclusion:
-                labelkeep = r"Excluding volume ($\xi$-adaptive $\epsilon$ and $\sigma$)"
-                experimentName = "Encounter_withRepairSphere"
-            else:
-                labelkeep = 'Without excluded volume'
-                experimentName = "EncounterSimulation"        
-                simulationParams['excludedVolumeCutOff'] = 0
+            simulationParams['v'] = v
+            
+            experimentName = "Encounter_withRepairSphere"
+#            if VolumeExclusion:
+##                labelkeep = r"Excluding volume ($\xi$-adaptive $\epsilon$ and $\sigma$)"
+#                experimentName = "Encounter_withRepairSphere"
+#            else:
+##                labelkeep = 'Without excluded volume'
+#                experimentName = "EncounterSimulation"        
+#                simulationParams['excludedVolumeCutOff'] = 0
 #            mfet = np.zeros(len(x_Nc))
 #            efet = np.zeros(len(x_Nc))
             probas = np.zeros(len(x_Nc))
@@ -123,12 +127,12 @@ def proba_vs_Nc_andVE(polymerParams,simulationParams,x_Nc,errorbars=False):
                 simulationParams['encounterDistance'] = adaptiveEpsilon(xi, N, polymerParams['b'])
                 
                 ### ADAPTIVE CUTOFF RADIUS
-                simulationParams['excludedVolume'] = 2 * adaptiveEpsilon(xi, N, polymerParams['b'])
+                simulationParams['excludedVolumeCutOff'] = v * adaptiveEpsilon(xi, N, polymerParams['b'])
                 
                 ### ADAPTIVE dt
                 simulationParams['dt'] = np.round((0.2*simulationParams['encounterDistance'])**2/(2*simulationParams['diffusionConstant']),decimals=4)-0.0001                
                 
-                print("ε = %s and σ = %s" % (simulationParams['encounterDistance'],simulationParams['excludedVolume']))
+                print("ε = %s and σ = %s" % (simulationParams['encounterDistance'],simulationParams['excludedVolumeCutOff']))
                 
                 p0 = RCLPolymer(**polymerParams)
                 results = {**polymerParams, **simulationParams}
@@ -146,14 +150,14 @@ def proba_vs_Nc_andVE(polymerParams,simulationParams,x_Nc,errorbars=False):
                     first_time = False
                 writer.writerow({**{'experimentSetID' : str(i)+'_'+str(j)}, **mc.results})
             
-            if errorbars:
-                plt.errorbar(x=x_Nc, y=probas, yerr=demiCI,
-                             fmt='-o', label=labelkeep, capsize = 4)
-            else:
-                plt.plot(x_Nc,probas,'-o',label=labelkeep)
-        
-        plt.legend()        
-        plt.show()
+#            if errorbars:
+#                plt.errorbar(x=x_Nc, y=probas, yerr=demiCI,
+#                             fmt='-o', label=labelkeep, capsize = 4)
+#            else:
+#                plt.plot(x_Nc,probas,'-o',label=labelkeep)
+#        
+#        plt.legend()        
+#        plt.show()
 
 def proba_vs_genomicDistance_andVE(polymerParams,simulationParams,x_sigma,gmax,gStep,errorbars=False):
 
@@ -230,8 +234,8 @@ if __name__ == "__main__":
 #    mc = FET_Simulation(polymerParams,simulationParams)
 
 #    proba_vs_genomicDistance(polymerParams,simulationParams,gmax,gStep,errorbars)
-    proba_vs_genomicDistance_andVE(polymerParams,simulationParams,x_sigma,gmax,gStep,errorbars)
-#    proba_vs_Nc_andVE(polymerParams,simulationParams,x_Nc,errorbars)   ###########
+#    proba_vs_genomicDistance_andVE(polymerParams,simulationParams,x_sigma,gmax,gStep,errorbars)
+    proba_vs_Nc_andVE(polymerParams,simulationParams,x_Nc,x_v,errorbars)   ###########
 #    print(__name__)
 #    DSBclustering(polymerParams,simulationParams)
     

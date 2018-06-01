@@ -1,0 +1,55 @@
+experimentSetID,numMonomers,dim,b,Nc,keepCL,diffusionConstant,numRealisations,dt,dt_relax,excludedVolumeCutOff,waitingSteps,numMaxSteps,encounterDistance,genomicDistance,Nb,Nc_inDamageFoci,iterationsNumber,events,FETs,meanFET,repairMFET,misrepairMFET,halfCI_FET,expFit_Amplitude,expFit_Rate,eventsCounter,repair_probability,repair_CIhalflength,mean_removedCLs,MSRG_atEncounter,Ensemble_MSRG,Ensemble_MSRG_dx
+0_0,50,3,0.2,5,True,0.008,100,0.050699999999999995,0.01,0.07129178539556087,200,9000,0.14258357079112174,5,2,1,100,"['Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a2-b2' 'Repair'
+ 'Repair' 'Misrepair_a1-b2' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b2'
+ 'Repair' 'Misrepair_a1-b1' 'Repair' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b2' 'Repair' 'Misrepair_a2-b2' 'Repair' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b1' 'Repair' 'Misrepair_a1-b2' 'Repair' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Misrepair_a2-b1' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b1'
+ 'Misrepair_a2-b1' 'Repair' 'Repair' 'Repair' 'Misrepair_a2-b1'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Repair'
+ 'Misrepair_a1-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b1' 'Misrepair_a2-b2'
+ 'Misrepair_a2-b1' 'Repair' 'Misrepair_a1-b2' 'Misrepair_a1-b2' 'Repair'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Misrepair_a1-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a1-b1' 'Misrepair_a2-b1' 'Misrepair_a1-b1' 'Misrepair_a1-b2'
+ 'Misrepair_a2-b2' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a2-b1'
+ 'Repair' 'Repair' 'Misrepair_a2-b1' 'Misrepair_a2-b2' 'Misrepair_a1-b1'
+ 'Misrepair_a2-b2' 'Repair' 'Repair' 'Repair']","[3.54900e-01 6.13470e+00 7.09800e-01 4.20810e+00 5.07000e-02 0.00000e+00
+ 2.53500e+00 5.57700e-01 6.23610e+00 1.21680e+00 1.52100e-01 0.00000e+00
+ 0.00000e+00 2.02800e-01 6.59100e-01 0.00000e+00 6.74310e+00 9.12600e-01
+ 3.04200e-01 1.57170e+00 3.04200e-01 2.33727e+01 2.02800e+00 0.00000e+00
+ 3.90390e+00 9.12600e-01 1.75422e+01 4.91790e+00 2.83920e+00 0.00000e+00
+ 0.00000e+00 1.97730e+00 1.01400e-01 2.02800e-01 1.52100e+00 0.00000e+00
+ 0.00000e+00 6.38820e+00 9.12600e-01 3.54900e-01 1.32834e+01 6.59100e-01
+ 0.00000e+00 6.59100e-01 3.90390e+00 7.85850e+00 1.10019e+01 1.92660e+00
+ 4.66440e+00 5.17140e+00 3.09270e+00 2.28150e+00 2.58570e+00 2.53500e-01
+ 5.22210e+01 7.55430e+00 1.45002e+01 1.97730e+00 6.38820e+00 5.07000e-02
+ 0.00000e+00 0.00000e+00 2.48430e+00 5.57700e-01 0.00000e+00 2.02800e-01
+ 1.31820e+00 1.36890e+00 0.00000e+00 0.00000e+00 7.95990e+00 1.92660e+00
+ 1.52100e-01 1.47030e+00 0.00000e+00 4.20810e+00 1.97730e+00 9.12600e-01
+ 6.08400e-01 1.52100e+00 0.00000e+00 3.59970e+00 1.41960e+00 1.21680e+00
+ 1.36890e+00 4.56300e-01 7.60500e-01 1.06470e+00 8.87250e+00 3.80250e+00
+ 5.72403e+01 5.83050e+00 2.68710e+01 1.47030e+00 9.12600e-01 2.02800e-01
+ 1.87590e+00 1.57170e+00 4.56300e-01 1.41960e+01]",3.997188,3.781903125,4.098498529411765,1.6927241977141816,0.7102203701857306,0.8259394025739446,"Counter({'Repair': 32, 'Misrepair_a2-b1': 24, 'Misrepair_a2-b2': 17, 'Misrepair_a1-b2': 16, 'Misrepair_a1-b1': 11})",0.32,0.0914293257111743,0.0,"[0.20512184 0.10717854 0.24066378 0.32095967 1.18169199 0.46148147
+ 0.20285649 0.93055083 0.1926723  0.47141079 0.3964023  0.48503982
+ 0.13812455 0.53058307 0.09006507 0.39484396 0.23704345 0.45689478
+ 0.33723935 0.18994212 0.20293939 0.53607467 0.46013056 0.08400536
+ 0.14784308 0.30830987 0.42506531 0.11106726 0.36279366 0.32094864
+ 0.27309905 0.46471742 0.30342209 0.26532159 0.22998533 0.19397813
+ 0.17541984 0.30205529 0.67372828 0.35192502 0.32145349 0.17045683
+ 0.09069234 0.21310308 0.32859719 0.55009395 0.15716094 0.17010158
+ 0.30347489 0.1638866  0.20672533 0.91443396 0.53208971 0.2329454
+ 0.13777042 1.68712534 0.14600641 0.79307747 0.31547974 0.29621659
+ 0.36383256 0.32394853 0.27439448 0.27309756 0.42954862 0.21090696
+ 0.2602417  0.19518055 0.29999512 0.21617476 0.23950182 0.18957564
+ 0.18101768 0.48816937 0.39727913 0.22398642 0.45128488 0.44869218
+ 0.26071195 1.65782308 0.18801416 0.76529665 0.48474198 0.58305808
+ 0.29564197 0.19326884 0.50042102 0.26025816 0.11980462 0.37160514
+ 0.64274507 0.33726572 0.14479441 0.30345243 0.29286487 1.0746994
+ 0.49901347 0.14469042 1.26199021 0.11665866]",0.3746013553931883,0.05698734312171312

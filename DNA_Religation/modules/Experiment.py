@@ -214,12 +214,17 @@ class Experiment():
             self.polymer.imposeDSBconnections(self.Nc_inDamageFoci,breakLoci)
         
         # Verify is polymer is splittable for the prepeared DSBs
+        trialNb = 0
+        
         while(not(self.polymer.isSplittable(breakLoci))):
             # if not, make new connections (#TODO: try an heuristic maybe?)
+            trialNb +=  1
+#            print("Try",trialNb,"for making a valid polymer.")
             self.polymer.reset()
             if(self.Nc_inDamageFoci > 0):
                 self.polymer.imposeDSBconnections(self.Nc_inDamageFoci,breakLoci)
         
+        self.results["TotalRejectedPolymers"] += trialNb
         # Once the polymer is splittable:
         # Burn in until relaxation time
         relaxSteps = np.ceil(self.polymer.relaxTime(self.diffusionConstant)/self.dt_relax).astype(int)
@@ -257,7 +262,7 @@ class Experiment():
     
     
     def runEncounterSimulation(self):
-            
+        self.addResults("TotalRejectedPolymers", 0)
         self.addResults("iterationsNumber",self.numRealisations)
         FETs = np.ones(self.numRealisations)*np.nan
         events = np.repeat('NA',self.numRealisations).astype('<U15')
@@ -299,6 +304,7 @@ class Experiment():
         After inducing the DSBs add exclusion forces (excluded volume forces)
         from the cleaved monomers.
         """
+        self.addResults("TotalRejectedPolymers", 0)
         self.addResults("iterationsNumber",self.numRealisations)
         FETs = np.ones(self.numRealisations)*np.nan
         events = np.repeat('NA',self.numRealisations).astype('<U15')
@@ -351,7 +357,8 @@ class Experiment():
         """
         Add a repair spehere, repulsive for the non-cleaved monomers
         """
-        
+        self.addResults("TotalRejectedPolymers", 0)
+                
         self.addResults("iterationsNumber",self.numRealisations)
         FETs = np.ones(self.numRealisations)*np.nan
         events = np.repeat('NA',self.numRealisations).astype('<U15')
@@ -751,6 +758,111 @@ class Experiment():
 #        plt.legend()
 
 
+
+    
+    
+    def trackDSB_distanceDistribution(self):
+        """
+        Get histogram of times where broken monomers and near and/or far from each other
+        """
+
+        self.addResults("iterationsNumber",self.numRealisations)
+        polymerSDs = np.zeros((self.numRealisations,self.numSteps))
+        breaksSDs = np.zeros((self.numRealisations,2*self.Nb,self.numSteps))
+
+        from scipy.special import comb
+        encounternumber = comb(2*self.Nb,2).astype(int)
+        interbreakDistance = np.zeros((self.numRealisations,self.numSteps,encounternumber))
+        
+        if self.numRealisations >= 10: k = self.numRealisations//10        
+        else: k = 1
+        
+        for i in range(self.numRealisations):
+            if not(i%k):
+                print("|",'='*(i//k),'-'*(10-i//k),"| Simulation", i+1, "of", self.numRealisations)
+
+            # Simulates the break and some waiting time:
+            self.randomBreaks_SingleStep()
+
+            if self.excludedVolumeCutOff > 0:
+                # ADD EXCLUDED VOLUME
+                try:
+                    kappa = self.excludedVolumeSpringConstant
+                except:
+                    kappa = 3*self.diffusionConstant/(self.polymer.b**2)
+                
+                repulsionForce = lambda polymer : - kappa * RepairSphere(polymer, self.polymer.freeMonomers, self.excludedVolumeCutOff)   
+                self.polymer.addnewForce(repulsionForce)
+    
+                # Wait some more time
+                self.polymer.step(self.waitingSteps,self.dt_relax,self.diffusionConstant)
+
+            ##################################################                 
+            # Simulation until NumSteps
+            
+            # Will contain the Square Displacement of each monomer
+            sd = np.zeros((self.numSteps, self.polymer.numMonomers))
+            
+            # Will contain the distance between breaks
+            
+            
+            r0 = self.polymer.get_r().copy()
+            for t in range(self.numSteps):
+                self.polymer.step(1,self.dt,self.diffusionConstant)
+                # Square displacement of each monomer at time t
+                sd[t] = np.linalg.norm( self.polymer.get_r() - r0 , axis = 1)**2
+                # Inter break distance
+                interbreakDistance[i][t] = self.polymer.interBreakDistance()
+
+            # Polymer SD
+            polymerSDs[i] = np.mean(sd,axis=1)
+
+            # Breaks SD
+            #breaksSDs[i] = np.zeros((4,self.numSteps))
+            for j, brokenMonomer in enumerate(self.polymer.freeMonomers):
+                breaksSDs[i][j] = sd[:,brokenMonomer]
+            
+                       
+
+            self.polymer = self.polymer.new()
+            ##################################################  
+
+        
+        ### Save d(m,n)'s
+        self.addResults('MeanInterBreakDistance',np.mean(interbreakDistance,axis=0))
+        # TODO EXTRAIRE Dt
+        
+        
+        ### Computation of MSD averaging over all realisations
+        polymerMSD = np.mean(polymerSDs, axis = 0) # size: numSteps
+        breaksMSD = np.mean(breaksSDs, axis = 0) # size: 2*Nb x numSteps
+        
+        ### Extraction of anomalous exponent
+        
+        realtime = np.arange(self.numSteps) * self.dt
+        
+        polymerMSDfit_amplitude, polymerMSDfit_alpha = self.getMSDfit(realtime, polymerMSD)
+        breakMSDfit_amplitude = np.zeros(2*self.Nb)
+        breakMSDfit_alpha = np.zeros(2*self.Nb)
+        for b in range(2*self.Nb):
+            breakMSDfit_amplitude[b], breakMSDfit_alpha[b] = self.getMSDfit(realtime, breaksMSD[b])
+        
+        self.addResults("polymerMSD",polymerMSD)
+        for im, m in enumerate(self.polymer.freeMonomers):
+            self.addResults(self.polymer.freeMonomersNames[m]+"_MSD", breaksMSD[im])
+        
+        self.addResults("polymerAlpha",polymerMSDfit_alpha)
+        for im, m in enumerate(self.polymer.freeMonomers):
+            self.addResults(self.polymer.freeMonomersNames[m]+"_Alpha", breakMSDfit_alpha[im])
+        
+        self.addResults("polymer_MSDamplitude",polymerMSDfit_amplitude)
+        for im, m in enumerate(self.polymer.freeMonomers):
+            self.addResults(self.polymer.freeMonomersNames[m]+"_Amplitude", breakMSDfit_amplitude[im])
+
+
+
+
+
     def watchEncounter(self):
 
         # Simulates the break and some waiting time:
@@ -793,25 +905,18 @@ class Experiment():
         self.trajectoire = trajectory
         
         msd = np.zeros(t)
-        a1_msd = np.zeros(t)
-        a2_msd = np.zeros(t)
-        b1_msd = np.zeros(t)
-        b2_msd = np.zeros(t)
+        freeEnds_msd = np.zeros((len(self.polymer.freeMonomers), t))
         for it in range(t):
             msd[it] = np.mean(np.linalg.norm( trajectory[it] - trajectory[0] , axis = 1)**2)
-            a1,a2,b1,b2 = self.polymer.freeMonomers
-            a1_msd[it] = (np.linalg.norm( trajectory[it][a1] - trajectory[0][a1])**2)
-            a2_msd[it] = (np.linalg.norm( trajectory[it][a2] - trajectory[0][a2])**2)
-            b1_msd[it] = (np.linalg.norm( trajectory[it][b1] - trajectory[0][b1])**2)
-            b2_msd[it] = (np.linalg.norm( trajectory[it][b2] - trajectory[0][b2])**2)
+            for im, m in enumerate(self.polymer.freeMonomers):
+                freeEnds_msd[im][it] = (np.linalg.norm( trajectory[it][m] - trajectory[0][m])**2)
+
         
         
         self.addResults("realtime",np.arange(t)*self.dt)
         self.addResults("polymerMSD",msd)
-        self.addResults("a1MSD",a1_msd)
-        self.addResults("a2MSD",a2_msd)
-        self.addResults("b1MSD",b1_msd)
-        self.addResults("b2MSD",b2_msd)
+        for im, m in enumerate(self.polymer.freeMonomers):
+            self.addResults(self.polymer.freeMonomersNames[m]+"MSD", freeEnds_msd[im])
         self.addResults("trajectory",self.trajectoire)
         self.addResults("removedCLs",removedNum)
         self.addResults("FET",t)
@@ -863,6 +968,3 @@ class Experiment():
             self.addResults('MSRG_atEncounter', post_msrgs)
             self.addResults('Ensemble_MSRG', np.nanmean(post_msrgs))
             self.addResults('Ensemble_MSRG_dx', 1.96*np.nanstd(post_msrgs)/np.sqrt(total_valid_experiments))
-
-
-        

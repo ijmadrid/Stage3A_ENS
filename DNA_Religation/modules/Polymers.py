@@ -323,6 +323,8 @@ class RCLPolymer(Polymer):
         Imposes connecitivy in the Damage Foci (monomers in the DSBs)
         NB : breakLoci = [A1, B1]
         """
+        #TODO
+        #Adapt to any Nb
         if Nc == 0:
             return
         else:

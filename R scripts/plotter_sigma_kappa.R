@@ -1,4 +1,4 @@
-res <- read.csv("./Stage 3A ENS/DNA_Religation/projects/RCLPolymer_CLs@DamageFoci/results/2018_05_22_12_28_proba-v_kappa.csv")
+res <- read.csv("./Stage 3A ENS/DNA_Religation/projects/RCLPolymer_CLs@DamageFoci/results/2018_05_30_18_01_proba-v_kappa.csv")
   
 library(ggplot2)
 library(RColorBrewer)
@@ -20,7 +20,7 @@ res$excludedVolumeCutOff <- as.factor(res$excludedVolumeCutOff)
 
 ####
 {
-  p <- ggplot(data = res, aes(x = excludedVolumeCutOff, y = excludedVolumeSpringConstant)) + geom_raster(aes(fill = repair_probability), interpolate = T)
+  p <- ggplot(data = res, aes(x = excludedVolumeCutOff, y = excludedVolumeSpringConstant)) + geom_raster(aes(fill = repair_probability), interpolate = F)
   
   p <- p + scale_fill_gradientn(colours= heat.colors(100)) +
     geom_hline(yintercept = 0.6,linetype = 2,size=1) +
