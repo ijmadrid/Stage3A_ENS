@@ -34,23 +34,23 @@ import csv
 polymerParams = dict(numMonomers = 100, # np.array([100,100]), # TODO (.., ..., ...)
                      dim         = 3,
                      b           = 0.2,
-                     Nc          = 10, #NcMatrix,
-                     keepCL      = True
+                     Nc          = 20, #NcMatrix,
+                     keepCL      = False
                      )
 
 simulationParams = dict(# Physicial parameters
                         diffusionConstant = 0.008,
                         # Numerical parameters
-                        numRealisations   = 500, 
+                        numRealisations   = 250, 
                         dt                = 0.005,
                         dt_relax          = 0.01,
-                        numSteps          = 6000,
+#                        numSteps          = 12000,
                         excludedVolumeCutOff = 0.05,
                         excludedVolumeSpringConstant = 0.6,
-                        waitingSteps = 0,
-#                        numMaxSteps = 12000,
+                        waitingSteps = 250,
+                        numMaxSteps = 12000,
                         encounterDistance = 0.05,
-                        genomicDistance = 4,
+                        genomicDistance = 20,
                         Nb = 2,
                         Nc_inDamageFoci = 1
 #                        selectedSubDomain = 0
@@ -58,13 +58,13 @@ simulationParams = dict(# Physicial parameters
 
 
 #x_Nc = np.arange(3,11)
-x_sigma = np.linspace(0,0.25,num=10)
+x_sigma = np.linspace(0,0.25,num=2)
 #x_Nc = np.array([3,5,7,9,11,13,15]) #np.arange(3,20,3)
 #x_Nd = np.array([0,1,2,3])
 #gmax = 12
 #gStep = 1
 
-x_kappa = (3*0.008/(0.2**2))*np.linspace(0.1, 4.25, num = 10)
+x_kappa = (3*0.008/(0.2**2))*np.linspace(0.1, 4.25, num = 2)
 
 #x_g = [2,4,20]
 #x_Nc = np.arange(20,41,5)

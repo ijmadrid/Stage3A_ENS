@@ -35,29 +35,33 @@ polymerParams = dict(numMonomers = 100, # np.array([100,100]), # TODO (.., ..., 
                      dim         = 3,
                      b           = 0.2,
                      Nc          = 25, #NcMatrix,
-                     keepCL      = True
+                     keepCL      = False
                      )
 
 simulationParams = dict(# Physicial parameters
                         diffusionConstant = 0.008,
                         # Numerical parameters
-                        numRealisations   = 250, 
+                        numRealisations   = 200, 
                         dt                = 0.005,
                         dt_relax          = 0.01,
-#                        numSteps          = 12000,
+                        numSteps          = 24000,
                         excludedVolumeCutOff = 0,
 #                        excludedVolumeSpringConstant = 0.6,
                         waitingSteps = 250,
-                        numMaxSteps = 12000,
+#                        numMaxSteps = 12000,
                         encounterDistance = 0.05,
-                        genomicDistance = 5,
-                        Nb = 5,
-                        Nc_inDamageFoci = 0
+                        genomicDistance = 59 - 30 - 1,
+                        Nb = 2,
+                        Nc_inDamageFoci = 0,
+                        distanceThreshold = 0.05,
+                        A1 = 30,
+                        B1 = 59
 #                        selectedSubDomain = 0
                         )
 
-x_Nb = np.arange(2,10)
-x_g = [3,5,7,9]
+#x_Nb = np.arange(2,10)
+x_Nc = np.arange(2,20,4)
+#x_g = [21] #[3,12,21,30]
 
 ############################################################################
 # SCRIPT FUNCTIONS  ########################################################
@@ -70,18 +74,58 @@ def watchOneSimulation(polymerParams, simulationParams):
     print(mc.results['FET'])
     return mc
 
-def trackDistanceDistribution(polymerParams, simulationParams, x_Nb, x_g):
+def adaptiveEpsilon(xi, N, b):
+    y = 1 + (N*xi)/(2*(1 -xi))
+    return 2*np.sqrt(6 * b**2 / (N * 2*(1-xi) * np.sqrt(y**2-1)))
+
+
+def trackDefinedDSBtrajectory(polymerParams, simulationParams, x_Nc):
     date = strftime("%Y_%m_%d_%H_%M")
-    filename = date + '_StatsVsNb' + '.csv'
+    filename = date + '_trackDSB' + '.csv'
+
+    first_time = True
+    N = polymerParams['numMonomers']
+    with open('results/'+filename, 'w') as csvfile:
+
+        for i, Nc in enumerate(x_Nc):
+  
+            print("\n Simulation for Nc = %s CLs " % Nc)
+            polymerParams['Nc'] = Nc
+            
+            ### ADAPTIVE ENCOUNTER DISTANCE
+            xi = 2*(Nc)/((N-1)*(N-2))
+#                scaleFactor = np.sqrt( (1-xi0)*np.sqrt(xi0) / ((1-xi)*np.s1qrt(xi)) )
+            simulationParams['encounterDistance'] = adaptiveEpsilon(xi, N, polymerParams['b'])
+                
+            simulationParams['distanceThreshold'] = simulationParams['encounterDistance']
+                        
+            p0 = RCLPolymer(**polymerParams)
+                    
+            results = {**polymerParams, **simulationParams}
+        
+            mc = Experiment(p0, results, simulationParams,"trackDSB")
+
+            if first_time:
+                fieldnames = ['experimentSetID']+list(mc.results)
+                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                writer.writeheader()
+                first_time = False
+            writer.writerow({**{'experimentSetID' : str(i)}, **mc.results})
+
+
+
+def trackDistanceDistribution(polymerParams, simulationParams, x_Nc, x_g):
+    date = strftime("%Y_%m_%d_%H_%M")
+    filename = date + '_trackDSB' + '.csv'
 
     first_time = True
   
     with open('results/'+filename, 'w') as csvfile:
 
-        for i, Nb in enumerate(x_Nb):
+        for i, Nc in enumerate(x_Nc):
   
-            print("Simulation for Nb = %s breaks " % Nb)
-            simulationParams['Nb'] = Nb
+            print("Simulation for Nc = %s CLs " % Nc)
+            polymerParams['Nc'] = Nc
             
             for j, g in enumerate(x_g):
                 
@@ -90,11 +134,11 @@ def trackDistanceDistribution(polymerParams, simulationParams, x_Nb, x_g):
                 
                 p0 = RCLPolymer(**polymerParams)
                 
-                simulationParams['waitingSteps'] = np.ceil(p0.relaxTime(simulationParams['diffusionConstant'])/simulationParams['dt_relax']).astype(int)
+#                simulationParams['waitingSteps'] = np.ceil(p0.relaxTime(simulationParams['diffusionConstant'])/simulationParams['dt_relax']).astype(int)
             
                 results = {**polymerParams, **simulationParams}
             
-                mc = Experiment(p0, results, simulationParams,"EncounterSimulation")
+                mc = Experiment(p0, results, simulationParams,"trackDSB")
 
                 if first_time:
                     fieldnames = ['experimentSetID']+list(mc.results)
@@ -109,14 +153,20 @@ def trackDistanceDistribution(polymerParams, simulationParams, x_Nb, x_g):
 
 if __name__ == "__main__":
     
-    stats_vs_Nb(polymerParams, simulationParams, x_Nb, x_g)
-#    mc = watchOneSimulation(polymerParams, simulationParams)
-#    ani = mc.plot_trajectoire(show=True)
+#    trackDistanceDistribution(polymerParams, simulationParams, x_Nc, x_g)
+    
+    trackDefinedDSBtrajectory(polymerParams, simulationParams, x_Nc)
+    
+#    p0 = RCLPolymer(**polymerParams)
+#    
+#    simulationParams['waitingSteps'] = np.ceil(p0.relaxTime(simulationParams['diffusionConstant'])/simulationParams['dt_relax']).astype(int)
+#
+#    results = {**polymerParams, **simulationParams}
+#
+#    mc = Experiment(p0, results, simulationParams,"trackDSB")
+#                    
+#    above = mc.results['aboveTimes']
+#    below = mc.results['belowTimes']
 #    
 #    plt.figure()
-#    plt.plot(mc.results['realtime'],mc.results['a1MSD'])
-#    plt.plot(mc.results['realtime'],mc.results['a2MSD'])
-#    plt.plot(mc.results['realtime'],mc.results['b1MSD'])
-#    plt.plot(mc.results['realtime'],mc.results['b2MSD'])
-#    plt.plot(mc.results['realtime'],mc.results['polymerMSD'])
-#    plt.show()
+#    plt.hist(above['a1-a2'])

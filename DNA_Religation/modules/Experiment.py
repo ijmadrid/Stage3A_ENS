@@ -74,6 +74,9 @@ class Experiment():
         elif customExperiment == 'trackMSD':
             self.MSD_track()
             
+        elif customExperiment == 'trackDSB':
+            self.trackDSB_distanceDistribution()
+            
         elif callable(customExperiment):
             # customExperiment should be a function that has a 
             # Experiment object as unique argument
@@ -203,7 +206,46 @@ class Experiment():
         self.addResults("MSRG", np.mean(msrg))
    
 
-    
+    def makeDefinedBreak(self, A1, B1):
+        breakLoci = (A1,B1)
+
+        # Add CLs to the Damage-to-be foci
+        if(self.Nc_inDamageFoci > 0):
+            self.polymer.imposeDSBconnections(self.Nc_inDamageFoci,breakLoci)
+        
+        # Verify is polymer is splittable for the prepeared DSBs
+        trialNb = 0
+        
+        while(not(self.polymer.isSplittable(breakLoci))):
+            # if not, make new connections (#TODO: try an heuristic maybe?)
+            trialNb +=  1
+#            print("Try",trialNb,"for making a valid polymer.")
+            self.polymer.reset()
+            if(self.Nc_inDamageFoci > 0):
+                self.polymer.imposeDSBconnections(self.Nc_inDamageFoci,breakLoci)
+        
+#        self.results["TotalRejectedPolymers"] += trialNb
+        # Once the polymer is splittable:
+        # Burn in until relaxation time
+        relaxSteps = np.ceil(self.polymer.relaxTime(self.diffusionConstant)/self.dt_relax).astype(int)
+#        self.addResults("relaxSteps", relaxSteps)
+        self.polymer.step(relaxSteps,self.dt_relax,self.diffusionConstant)
+        
+        # Induce DSBs
+        self.polymer.cutNow(breakLoci,definitive=True)
+        # Remove the CL concerning the cleavages if it is the case
+        if self.polymer.keepCL == False:
+            removedNum = self.polymer.removeCL()
+        else:
+            removedNum = 0
+            
+        # Wait some more time
+        self.polymer.step(self.waitingSteps,self.dt_relax,self.diffusionConstant)
+        
+        return removedNum
+        
+        
+        
     def randomBreaks_SingleStep(self):
         
         # Prepare the random DSBs
@@ -224,10 +266,11 @@ class Experiment():
             if(self.Nc_inDamageFoci > 0):
                 self.polymer.imposeDSBconnections(self.Nc_inDamageFoci,breakLoci)
         
-        self.results["TotalRejectedPolymers"] += trialNb
+#        self.results["TotalRejectedPolymers"] += trialNb
         # Once the polymer is splittable:
         # Burn in until relaxation time
         relaxSteps = np.ceil(self.polymer.relaxTime(self.diffusionConstant)/self.dt_relax).astype(int)
+#        self.addResults("relaxSteps", relaxSteps)
         self.polymer.step(relaxSteps,self.dt_relax,self.diffusionConstant)
         
         # Induce DSBs
@@ -730,7 +773,7 @@ class Experiment():
         def exponential(x, amplitude, lambd):
             return amplitude * np.exp(-lambd*x)
         
-        bin_heights, bin_borders = np.histogram(x, bins='auto', normed='True')
+        bin_heights, bin_borders = np.histogram(x, bins=50, normed='True')
         bin_centers = bin_borders[:-1] + np.diff(bin_borders) / 2
         try:
             popt, _ = curve_fit(exponential, bin_centers, bin_heights, p0=[1/np.mean(x),1/np.mean(x)])
@@ -767,22 +810,28 @@ class Experiment():
         """
 
         self.addResults("iterationsNumber",self.numRealisations)
-        polymerSDs = np.zeros((self.numRealisations,self.numSteps))
-        breaksSDs = np.zeros((self.numRealisations,2*self.Nb,self.numSteps))
-
-        from scipy.special import comb
-        encounternumber = comb(2*self.Nb,2).astype(int)
-        interbreakDistance = np.zeros((self.numRealisations,self.numSteps,encounternumber))
+#        polymerSDs = np.zeros((self.numRealisations,self.numSteps))
+#        breaksSDs = np.zeros((self.numRealisations,2*self.Nb,self.numSteps))
+#
+#        from scipy.special import comb
+#        encounternumber = comb(2*self.Nb,2).astype(int)
+        interbreakDistance = np.zeros((self.numRealisations,self.numSteps,6))
         
-        if self.numRealisations >= 10: k = self.numRealisations//10        
-        else: k = 1
+#        if self.numRealisations >= 10: k = self.numRealisations//10        
+#        else: k = 1
         
+        start = time()
         for i in range(self.numRealisations):
-            if not(i%k):
-                print("|",'='*(i//k),'-'*(10-i//k),"| Simulation", i+1, "of", self.numRealisations)
+#            if not(i%k):
+#                print("|",'='*(i//k),'-'*(10-i//k),"| Simulation", i+1, "of", self.numRealisations)
+
 
             # Simulates the break and some waiting time:
-            self.randomBreaks_SingleStep()
+            
+#            try:
+            self.makeDefinedBreak(self.A1, self.B1)
+#            except:
+#                self.randomBreaks_SingleStep()
 
             if self.excludedVolumeCutOff > 0:
                 # ADD EXCLUDED VOLUME
@@ -801,66 +850,124 @@ class Experiment():
             # Simulation until NumSteps
             
             # Will contain the Square Displacement of each monomer
-            sd = np.zeros((self.numSteps, self.polymer.numMonomers))
+#            sd = np.zeros((self.numSteps, self.polymer.numMonomers))
             
             # Will contain the distance between breaks
             
             
-            r0 = self.polymer.get_r().copy()
+#            r0 = self.polymer.get_r().copy()
             for t in range(self.numSteps):
                 self.polymer.step(1,self.dt,self.diffusionConstant)
                 # Square displacement of each monomer at time t
-                sd[t] = np.linalg.norm( self.polymer.get_r() - r0 , axis = 1)**2
+#                sd[t] = np.linalg.norm( self.polymer.get_r() - r0 , axis = 1)**2
                 # Inter break distance
                 interbreakDistance[i][t] = self.polymer.interBreakDistance()
 
             # Polymer SD
-            polymerSDs[i] = np.mean(sd,axis=1)
+#            polymerSDs[i] = np.mean(sd,axis=1)
 
             # Breaks SD
             #breaksSDs[i] = np.zeros((4,self.numSteps))
-            for j, brokenMonomer in enumerate(self.polymer.freeMonomers):
-                breaksSDs[i][j] = sd[:,brokenMonomer]
+#            for j, brokenMonomer in enumerate(self.polymer.freeMonomers):
+#                breaksSDs[i][j] = sd[:,brokenMonomer]
             
                        
 
             self.polymer = self.polymer.new()
+            
+            transcurredTime = time() - start
+            totalTime = transcurredTime * self.numRealisations/(i+1)
+            print('\r' + 'Simulation ' + str(i) + ' of ' + str(self.numRealisations) + ' | ' +
+                  str(round(totalTime - transcurredTime, 2)) + ' sec still.', end='\r')
+            
             ##################################################  
 
         
         ### Save d(m,n)'s
-        self.addResults('MeanInterBreakDistance',np.mean(interbreakDistance,axis=0))
-        # TODO EXTRAIRE Dt
+#        self.addResults('MeanInterBreakDistance',np.mean(interbreakDistance,axis=0))
+        
+        ### Get interval lengths
+        from itertools import combinations
+        z = combinations([chr(97 + i//2) + str(1 + i%2) for i in range(2*self.Nb)], r = 2)
+        breakNames = [i for i in z]
+        combinationNames = ['%s-%s' % breakNames[i] for i in range(len(breakNames))]
+
+        aboveLengths = {mn:[] for mn in combinationNames}
+        belowLengths = {mn:[] for mn in combinationNames}
+        for k, key in enumerate(combinationNames):
+            for i in range(self.numRealisations):
+                up, lo = self.getThresholdedIntervalLengths(interbreakDistance[i,:,k])
+                aboveLengths[key].extend(up)
+                belowLengths[key].extend(lo)
         
         
-        ### Computation of MSD averaging over all realisations
-        polymerMSD = np.mean(polymerSDs, axis = 0) # size: numSteps
-        breaksMSD = np.mean(breaksSDs, axis = 0) # size: 2*Nb x numSteps
+
+        ### Fit Exponential Distribution to the Time Intervals Distribution
+        above_fit = {}
+        below_fit = {}
+        for mn in aboveLengths.keys():
+            aboveLengths[mn] = np.array(aboveLengths[mn])*self.dt
+            belowLengths[mn] = np.array(belowLengths[mn])*self.dt
+            above_fit[mn] = a = self.exponentialFit(aboveLengths[mn])
+            below_fit[mn] = b = self.exponentialFit(belowLengths[mn])
+            self.addResults(mn+"_ComebackRate", a[1])
+            self.addResults(mn+"_ComebackAmplitude", a[0])
+            self.addResults(mn+"_meanComebackTime", aboveLengths[mn].mean())
+            self.addResults(mn+"_stdComebackTime", aboveLengths[mn].std())
+            self.addResults(mn+"_meanComebackTime_dx", 1.96*aboveLengths[mn].std()/np.sqrt(len(aboveLengths[mn])))
+            self.addResults(mn+"_TakeoffRate", b[1])
+            self.addResults(mn+"_TakeoffAmplitude", b[0])
+            self.addResults(mn+"_meanTakeoffTime", belowLengths[mn].mean())
+            self.addResults(mn+"_stdTakeoffTime", belowLengths[mn].std())
+            self.addResults(mn+"_meanTakeoffTime_dx", 1.96*belowLengths[mn].std()/np.sqrt(len(belowLengths[mn])))
+            
+
+#        self.addResults("aboveTimes", aboveLengths)
+#        self.addResults("belowTimes", belowLengths)
+#
+#        self.addResults("aboveFit", above_fit)
+#        self.addResults("belowFit", below_fit)        
         
-        ### Extraction of anomalous exponent
-        
-        realtime = np.arange(self.numSteps) * self.dt
-        
-        polymerMSDfit_amplitude, polymerMSDfit_alpha = self.getMSDfit(realtime, polymerMSD)
-        breakMSDfit_amplitude = np.zeros(2*self.Nb)
-        breakMSDfit_alpha = np.zeros(2*self.Nb)
-        for b in range(2*self.Nb):
-            breakMSDfit_amplitude[b], breakMSDfit_alpha[b] = self.getMSDfit(realtime, breaksMSD[b])
-        
-        self.addResults("polymerMSD",polymerMSD)
-        for im, m in enumerate(self.polymer.freeMonomers):
-            self.addResults(self.polymer.freeMonomersNames[m]+"_MSD", breaksMSD[im])
-        
-        self.addResults("polymerAlpha",polymerMSDfit_alpha)
-        for im, m in enumerate(self.polymer.freeMonomers):
-            self.addResults(self.polymer.freeMonomersNames[m]+"_Alpha", breakMSDfit_alpha[im])
-        
-        self.addResults("polymer_MSDamplitude",polymerMSDfit_amplitude)
-        for im, m in enumerate(self.polymer.freeMonomers):
-            self.addResults(self.polymer.freeMonomersNames[m]+"_Amplitude", breakMSDfit_amplitude[im])
+#        ### Computation of MSD averaging over all realisations
+#        polymerMSD = np.mean(polymerSDs, axis = 0) # size: numSteps
+#        breaksMSD = np.mean(breaksSDs, axis = 0) # size: 2*Nb x numSteps
+#        
+#        ### Extraction of anomalous exponent
+#        
+#        realtime = np.arange(self.numSteps) * self.dt
+#        
+#        polymerMSDfit_amplitude, polymerMSDfit_alpha = self.getMSDfit(realtime, polymerMSD)
+#        breakMSDfit_amplitude = np.zeros(2*self.Nb)
+#        breakMSDfit_alpha = np.zeros(2*self.Nb)
+#        for b in range(2*self.Nb):
+#            breakMSDfit_amplitude[b], breakMSDfit_alpha[b] = self.getMSDfit(realtime, breaksMSD[b])
+#        
+#        self.addResults("polymerMSD",polymerMSD)
+#        for im, m in enumerate(self.polymer.freeMonomers):
+#            self.addResults(self.polymer.freeMonomersNames[m]+"_MSD", breaksMSD[im])
+#        
+#        self.addResults("polymerAlpha",polymerMSDfit_alpha)
+#        for im, m in enumerate(self.polymer.freeMonomers):
+#            self.addResults(self.polymer.freeMonomersNames[m]+"_Alpha", breakMSDfit_alpha[im])
+#        
+#        self.addResults("polymer_MSDamplitude",polymerMSDfit_amplitude)
+#        for im, m in enumerate(self.polymer.freeMonomers):
+#            self.addResults(self.polymer.freeMonomersNames[m]+"_Amplitude", breakMSDfit_amplitude[im])
 
 
 
+    def getThresholdedIntervalLengths(self, distance):
+        """
+        Return the lengths of time intervals in which 
+        |Rm - Rn| > threshold
+        distance is 1D
+        """
+        thresholded = (distance >= self.distanceThreshold)
+        edges = np.where(np.diff(thresholded))[0]
+        intervalLengths = np.diff(np.append(0,edges+1))
+        aboveIntervalLengths = intervalLengths[1+thresholded[0]::2]
+        belowIntervalLengths = intervalLengths[2-thresholded[0]::2]
+        return (aboveIntervalLengths, belowIntervalLengths)
 
 
     def watchEncounter(self):
