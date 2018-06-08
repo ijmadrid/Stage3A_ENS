@@ -42,7 +42,7 @@ class Experiment():
         for paramKeys, paramValues in params.items(): 
             exec('self.'+paramKeys+'=paramValues')
 
-        assert np.sqrt(2*self.diffusionConstant*self.dt) <= 0.2*self.encounterDistance, "dt should verify: sqrt(2*D*dt) < 0.2*epsilon"
+#        assert np.sqrt(2*self.diffusionConstant*self.dt) <= 0.2*self.encounterDistance, "dt should verify: sqrt(2*D*dt) < 0.2*epsilon"
         
         if customExperiment == "SimpleDynamicSimulation":
             print("Simulation of a Simple Dynamic (no breaks)")
@@ -768,17 +768,47 @@ class Experiment():
         
 
     def exponentialFit(self,x):
+        from scipy.stats import expon
+        
+        try:
+            loc, scale = expon.fit(x)
+        
+            amplitude = np.exp(loc/scale)/scale
+            rate      = 1/scale
+        
+        except:
+            amplitude = np.nan
+            rate      = np.nan
+            
+        popt = (amplitude, rate)
+        
+#        from scipy.optimize import curve_fit
+#        
+#        def exponential(x, amplitude, lambd):
+#            return amplitude * np.exp(-lambd*x)
+#        
+#        bin_heights, bin_borders = np.histogram(x, normed='True')
+#        bin_centers = bin_borders[:-1] + np.diff(bin_borders) / 2
+#        try:
+#            popt, _ = curve_fit(exponential, bin_centers, bin_heights, p0=[x[0],1/np.mean(x)])
+#        except:
+#            popt = (np.nan, np.nan)
+            
+        return popt
+    
+    
+    def powerFit(self, x):
         from scipy.optimize import curve_fit
         
-        def exponential(x, amplitude, lambd):
-            return amplitude * np.exp(-lambd*x)
+        def power(x, A, mu):
+            return A * x ** ( -1 - mu)
         
-        bin_heights, bin_borders = np.histogram(x, bins=50, normed='True')
+        bin_heights, bin_borders = np.histogram(x, normed='True')
         bin_centers = bin_borders[:-1] + np.diff(bin_borders) / 2
         try:
-            popt, _ = curve_fit(exponential, bin_centers, bin_heights, p0=[1/np.mean(x),1/np.mean(x)])
+            popt, _ = curve_fit(power, bin_centers, bin_heights, p0=[x[0],1/np.mean(x)])
         except:
-            popt = (-1, -1)
+            popt = (np.nan, np.nan)
         return popt
     
     
@@ -791,7 +821,7 @@ class Experiment():
         try:
             popt, _ = curve_fit(power, time, MSDarray)
         except:
-            popt = (-1, -1)
+            popt = (np.nan, np.nan)
         
         return popt
         #TODO
@@ -810,8 +840,9 @@ class Experiment():
         """
 
         self.addResults("iterationsNumber",self.numRealisations)
-#        polymerSDs = np.zeros((self.numRealisations,self.numSteps))
-#        breaksSDs = np.zeros((self.numRealisations,2*self.Nb,self.numSteps))
+        polymerSDs = np.zeros((self.numRealisations,self.numSteps))
+        centerSDs = np.zeros((self.numRealisations,self.numSteps))
+        breaksSDs = np.zeros((self.numRealisations,2*self.Nb,self.numSteps))
 #
 #        from scipy.special import comb
 #        encounternumber = comb(2*self.Nb,2).astype(int)
@@ -828,10 +859,11 @@ class Experiment():
 
             # Simulates the break and some waiting time:
             
-#            try:
-            self.makeDefinedBreak(self.A1, self.B1)
-#            except:
-#                self.randomBreaks_SingleStep()
+            try:
+                self.makeDefinedBreak(self.A1, self.B1)
+                self.genomicDistance = self.B1 - self.A1 - 1
+            except:
+                self.randomBreaks_SingleStep()
 
             if self.excludedVolumeCutOff > 0:
                 # ADD EXCLUDED VOLUME
@@ -850,26 +882,34 @@ class Experiment():
             # Simulation until NumSteps
             
             # Will contain the Square Displacement of each monomer
-#            sd = np.zeros((self.numSteps, self.polymer.numMonomers))
+            sd = np.zeros((self.numSteps, self.polymer.numMonomers))
+            # Will contain the SD of the center of mass
+            sdCenter = np.zeros(self.numSteps)
             
             # Will contain the distance between breaks
             
             
-#            r0 = self.polymer.get_r().copy()
+            r0 = self.polymer.get_r().copy()
+            rc0 = self.polymer.getCenterOfMass()
             for t in range(self.numSteps):
                 self.polymer.step(1,self.dt,self.diffusionConstant)
+                # Center of mass
+                sdCenter[t] = np.linalg.norm( self.polymer.getCenterOfMass() - rc0 )**2
                 # Square displacement of each monomer at time t
-#                sd[t] = np.linalg.norm( self.polymer.get_r() - r0 , axis = 1)**2
+                sd[t] = np.linalg.norm( self.polymer.get_r() - r0 , axis = 1)**2
                 # Inter break distance
                 interbreakDistance[i][t] = self.polymer.interBreakDistance()
 
             # Polymer SD
-#            polymerSDs[i] = np.mean(sd,axis=1)
+            polymerSDs[i] = np.mean(sd,axis=1)
+
+            # Center of Mass SD
+            centerSDs[i] = sdCenter
 
             # Breaks SD
-            #breaksSDs[i] = np.zeros((4,self.numSteps))
-#            for j, brokenMonomer in enumerate(self.polymer.freeMonomers):
-#                breaksSDs[i][j] = sd[:,brokenMonomer]
+            breaksSDs[i] = np.zeros((4,self.numSteps))
+            for j, brokenMonomer in enumerate(self.polymer.freeMonomers):
+                breaksSDs[i][j] = sd[:,brokenMonomer]
             
                        
 
@@ -884,14 +924,33 @@ class Experiment():
 
         
         ### Save d(m,n)'s
+        ### VARIANCE ALONG TIME SERIES
+        ### AVERAGE VARIANCE ALONG REALIZATIONS
+
+        ### Get break names
+        from itertools import combinations
+        monomerNames = [chr(97 + i//2) + str(1 + i%2) for i in range(2*self.Nb)]
+        breakNames = [i for i in combinations(monomerNames, r = 2)]
+        combinationNames = ['%s-%s' % breakNames[i] for i in range(len(breakNames))]
+        
+        # Variance and mean over time
+        var_t  = np.var(interbreakDistance, axis = 1)   # numRealisations x (2Nb 2)
+        mean_t = np.mean(interbreakDistance, axis = 1)   # numRealisations x (2Nb 2)
+        
+        # Mean variance and variance of means (calculated above) over realisations
+        meanvarDistance = np.mean(var_t, axis = 0)  # (2Nb 2) x 1
+        varmeanDistance = np.var(mean_t, axis = 0)  # (2Nb 2) x 1
+        
+        # Total Variance
+        totalvarDistance = meanvarDistance + varmeanDistance
+        
+        for i in range(6):
+            self.addResults(combinationNames[i]+"_interbreakDistance_totalVariance", totalvarDistance[i])
+            self.addResults(combinationNames[i]+"_interbreakDistance_meanOfVariances", meanvarDistance[i])
 #        self.addResults('MeanInterBreakDistance',np.mean(interbreakDistance,axis=0))
         
-        ### Get interval lengths
-        from itertools import combinations
-        z = combinations([chr(97 + i//2) + str(1 + i%2) for i in range(2*self.Nb)], r = 2)
-        breakNames = [i for i in z]
-        combinationNames = ['%s-%s' % breakNames[i] for i in range(len(breakNames))]
 
+        ### Get interval lengths
         aboveLengths = {mn:[] for mn in combinationNames}
         belowLengths = {mn:[] for mn in combinationNames}
         for k, key in enumerate(combinationNames):
@@ -909,12 +968,21 @@ class Experiment():
             aboveLengths[mn] = np.array(aboveLengths[mn])*self.dt
             belowLengths[mn] = np.array(belowLengths[mn])*self.dt
             above_fit[mn] = a = self.exponentialFit(aboveLengths[mn])
-            below_fit[mn] = b = self.exponentialFit(belowLengths[mn])
+            below_fit[mn] = b = self.powerFit(belowLengths[mn])
+            
+            # Histogram
+            bin_heights, bin_borders = np.histogram(aboveLengths[mn], normed='True')
+            bin_centers = bin_borders[:-1] + np.diff(bin_borders) / 2
+            self.addResults(mn+"_HistogramCenters", bin_centers)
+            self.addResults(mn+"_HistogramHeights", bin_heights)
+            
+        
             self.addResults(mn+"_ComebackRate", a[1])
             self.addResults(mn+"_ComebackAmplitude", a[0])
             self.addResults(mn+"_meanComebackTime", aboveLengths[mn].mean())
             self.addResults(mn+"_stdComebackTime", aboveLengths[mn].std())
             self.addResults(mn+"_meanComebackTime_dx", 1.96*aboveLengths[mn].std()/np.sqrt(len(aboveLengths[mn])))
+            
             self.addResults(mn+"_TakeoffRate", b[1])
             self.addResults(mn+"_TakeoffAmplitude", b[0])
             self.addResults(mn+"_meanTakeoffTime", belowLengths[mn].mean())
@@ -922,37 +990,50 @@ class Experiment():
             self.addResults(mn+"_meanTakeoffTime_dx", 1.96*belowLengths[mn].std()/np.sqrt(len(belowLengths[mn])))
             
 
-#        self.addResults("aboveTimes", aboveLengths)
-#        self.addResults("belowTimes", belowLengths)
+        self.addResults("aboveTimes", aboveLengths)
+        self.addResults("belowTimes", belowLengths)
+        
+        meanTimes = np.array([np.mean(aboveLengths[i]) for i in aboveLengths.keys()])
+        self.addResults("estimatedProba_byMeanTimes", (1/meanTimes[0] + 1/meanTimes[-1])/np.sum(1/meanTimes))
+        
+        rates = np.array([above_fit[i][1] for i in aboveLengths.keys()])
+        self.addResults("estimatedProba_byRates", (rates[0] + rates[-1])/np.nansum(rates))
+
+        
 #
 #        self.addResults("aboveFit", above_fit)
 #        self.addResults("belowFit", below_fit)        
         
 #        ### Computation of MSD averaging over all realisations
-#        polymerMSD = np.mean(polymerSDs, axis = 0) # size: numSteps
-#        breaksMSD = np.mean(breaksSDs, axis = 0) # size: 2*Nb x numSteps
+        polymerMSD = np.mean(polymerSDs, axis = 0) # size: numSteps
+        breaksMSD = np.mean(breaksSDs, axis = 0) # size: 2*Nb x numSteps
+        centerMSD = np.mean(centerSDs, axis = 0)
 #        
-#        ### Extraction of anomalous exponent
-#        
-#        realtime = np.arange(self.numSteps) * self.dt
-#        
-#        polymerMSDfit_amplitude, polymerMSDfit_alpha = self.getMSDfit(realtime, polymerMSD)
-#        breakMSDfit_amplitude = np.zeros(2*self.Nb)
-#        breakMSDfit_alpha = np.zeros(2*self.Nb)
-#        for b in range(2*self.Nb):
-#            breakMSDfit_amplitude[b], breakMSDfit_alpha[b] = self.getMSDfit(realtime, breaksMSD[b])
-#        
-#        self.addResults("polymerMSD",polymerMSD)
-#        for im, m in enumerate(self.polymer.freeMonomers):
-#            self.addResults(self.polymer.freeMonomersNames[m]+"_MSD", breaksMSD[im])
-#        
-#        self.addResults("polymerAlpha",polymerMSDfit_alpha)
-#        for im, m in enumerate(self.polymer.freeMonomers):
-#            self.addResults(self.polymer.freeMonomersNames[m]+"_Alpha", breakMSDfit_alpha[im])
-#        
-#        self.addResults("polymer_MSDamplitude",polymerMSDfit_amplitude)
-#        for im, m in enumerate(self.polymer.freeMonomers):
-#            self.addResults(self.polymer.freeMonomersNames[m]+"_Amplitude", breakMSDfit_amplitude[im])
+        ### Extraction of anomalous exponent
+        
+        realtime = np.arange(self.numSteps) * self.dt
+        
+        polymerMSDfit_amplitude, polymerMSDfit_alpha = self.getMSDfit(realtime, polymerMSD)
+        centerMSDfit_amplitude, centerMSDfit_alpha = self.getMSDfit(realtime, centerMSD)
+        breakMSDfit_amplitude = np.zeros(2*self.Nb)
+        breakMSDfit_alpha = np.zeros(2*self.Nb)
+        for b in range(2*self.Nb):
+            breakMSDfit_amplitude[b], breakMSDfit_alpha[b] = self.getMSDfit(realtime, breaksMSD[b])
+        
+        self.addResults("polymerMSD",polymerMSD)
+        self.addResults("centerMSD",centerMSD)
+        for im, m in enumerate(monomerNames):
+            self.addResults(m+"_MSD", breaksMSD[im])
+        
+        self.addResults("polymerAlpha",polymerMSDfit_alpha)
+        self.addResults("centerAlpha",centerMSDfit_alpha)
+        for im, m in enumerate(monomerNames):
+            self.addResults(m+"_Alpha", breakMSDfit_alpha[im])
+        
+        self.addResults("polymer_MSDamplitude",polymerMSDfit_amplitude)
+        self.addResults("center_MSDamplitude",centerMSDfit_amplitude)
+        for im, m in enumerate(monomerNames):
+            self.addResults(m+"_Amplitude", breakMSDfit_amplitude[im])
 
 
 

@@ -135,7 +135,10 @@ class Polymer(Graph):
         
     def addnewForce(self, potentialGradient):
         self.forces.append(potentialGradient)
-        
+    
+    def getCenterOfMass(self):
+        return np.mean(self.positions, axis = 0)
+    
     def haveEncountered(self,mono1,mono2,eps):
         """
         Return True if mono1 and mono2 have encountered, i.e., |R_mono1 - R_mono2| < eps

@@ -34,7 +34,7 @@ import csv
 polymerParams = dict(numMonomers = 100, # np.array([100,100]), # TODO (.., ..., ...)
                      dim         = 3,
                      b           = 0.2,
-                     Nc          = 25, #NcMatrix,
+                     Nc          = 50, #NcMatrix,
                      keepCL      = True
                      )
 
@@ -42,16 +42,16 @@ simulationParams = dict(# Physicial parameters
                         diffusionConstant = 0.008,
                         # Numerical parameters
                         numRealisations   = 250, 
-                        dt                = 0.005,
+                        dt                = 0.01,
                         dt_relax          = 0.01,
-#                        numSteps          = 12000,
+                        numSteps          = 3000,
                         excludedVolumeCutOff = 0,
 #                        excludedVolumeSpringConstant = 0.6,
                         waitingSteps = 250,
                         numMaxSteps = 12000,
                         encounterDistance = 0.05,
                         genomicDistance = 5,
-                        Nb = 5,
+                        Nb = 2,
                         Nc_inDamageFoci = 0
 #                        selectedSubDomain = 0
                         )
@@ -109,9 +109,9 @@ def stats_vs_Nb(polymerParams, simulationParams, x_Nb, x_g):
 
 if __name__ == "__main__":
     
-    stats_vs_Nb(polymerParams, simulationParams, x_Nb, x_g)
-#    mc = watchOneSimulation(polymerParams, simulationParams)
-#    ani = mc.plot_trajectoire(show=True)
+#    stats_vs_Nb(polymerParams, simulationParams, x_Nb, x_g)
+    mc = watchOneSimulation(polymerParams, simulationParams)
+    ani = mc.plot_trajectoire(show=True)
 #    
 #    plt.figure()
 #    plt.plot(mc.results['realtime'],mc.results['a1MSD'])
