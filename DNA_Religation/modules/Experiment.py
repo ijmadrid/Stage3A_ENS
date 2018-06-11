@@ -890,7 +890,7 @@ class Experiment():
             
             
             r0 = self.polymer.get_r().copy()
-            rc0 = self.polymer.getCenterOfMass()
+            rc0 = self.polymer.getCenterOfMass().copy()
             for t in range(self.numSteps):
                 self.polymer.step(1,self.dt,self.diffusionConstant)
                 # Center of mass
@@ -905,7 +905,7 @@ class Experiment():
 
             # Center of Mass SD
             centerSDs[i] = sdCenter
-
+            
             # Breaks SD
             breaksSDs[i] = np.zeros((4,self.numSteps))
             for j, brokenMonomer in enumerate(self.polymer.freeMonomers):

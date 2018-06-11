@@ -1,11 +1,15 @@
-res <- read.csv("./Stage 3A ENS/DNA_Religation/projects/RCLPolymer_TimesBelowThreshold/results/2018_06_07_02_16_trackDSB_fixedDSBs.csv")
+res <- read.csv("./Stage 3A ENS/DNA_Religation/projects/RCLPolymer_TimesBelowThreshold/results/2018_06_10_04_08_trackDSB_fixedDSBs.csv")
 
+res[is.na(res)] <- Inf
 
 library(ggplot2)
+
+res$genomicDistance <- res$B1 - res$A1 - 1
 
 {p <- ggplot(data = res, aes(x = genomicDistance, y = Nc, fill = a1.b2_ComebackRate)) + geom_tile()
 p}
 
+res$genomicDistance <- res$B1 - res$A1 - 1
 res$genomicDistance <- as.factor(res$genomicDistance)
 ggplot(data = res, aes(x = Nc, y = a1.a2_ComebackRate, color = genomicDistance)) + geom_line(size=2)
 
@@ -42,10 +46,45 @@ res$EstimatedProba <- (1/res$a1.a2_meanComebackTime + 1/res$b1.b2_meanComebackTi
                        1/res$a2.b1_meanComebackTime + 1/res$a2.b2_meanComebackTime + 
                        1/res$a1.a2_meanComebackTime + 1/res$b1.b2_meanComebackTime)
 
-ggplot(data = res, aes(x = Nc, y = EstimatedProba, color = genomicDistance)) + geom_line()
+res$EstimatedProba <- ()
 
 
+alphas <- res[c("Nc","polymerAlpha","centerAlpha","a1_Alpha","a2_Alpha","b1_Alpha","b2_Alpha")]
+alphas.melted <- melt(alphas, id = "Nc")
 
+ggplot(data = alphas.melted, aes(x = Nc, y = value, color = variable)) + geom_point() + geom_line()
+
+
+variances <- res[c("Nc",
+                  "a1.a2_interbreakDistance_meanOfVariances",
+                  "a1.b1_interbreakDistance_meanOfVariances",
+                  "a1.b2_interbreakDistance_meanOfVariances",
+                  "a2.b1_interbreakDistance_meanOfVariances",
+                  "a2.b2_interbreakDistance_meanOfVariances",
+                  "b1.b2_interbreakDistance_meanOfVariances")]
+
+variances.melted <- melt(variances, id = "Nc")
+
+ggplot(data = variances.melted, aes(x = Nc, y = value, color = variable)) + geom_line(size = 1) + geom_point(size = 3)
+
+ggplot(data = res, aes(x = Nc, y = a1.a2_interbreakDistance_totalVariance, color = genomicDistance)) + geom_point() + geom_line()
+
+
+# Numeric vector from string lists
+library(gsubfn)
+
+msds <- res$a1_MSD
+str2numvector <- function(strlist){
+  z <- strapply(as.character(strlist), "(\\d*\\.*\\d+|\\d+\\.|\\d*\\.*\\d+e\\+\\d+|\\d*\\.*\\d+e\\-\\d+|nan)", as.numeric)
+  z <- cbind(sapply(z, 2, FUN = unlist))
+  return(z)
+}
+
+msds.num <- str2numvector(msds)
+timeline <- c(1,2,3,29997,29998,29999)
+
+msd.data <- data.frame(msd = msds.num[,1], time = timeline)
+ggplot(data = msd.data, aes(x= time, y = msd)) + geom_line()
 # Histograms
 
 exponential <- function(t,A,l){

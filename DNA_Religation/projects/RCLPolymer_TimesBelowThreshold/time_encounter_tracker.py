@@ -39,19 +39,19 @@ polymerParams = dict(numMonomers = 100, # np.array([100,100]),
 simulationParams = dict(# Physicial parameters
                         diffusionConstant = 0.008,
                         # Numerical parameters
-                        numRealisations   = 100, 
-                        dt                = 0.01,
+                        numRealisations   = 800, 
+                        dt                = 0.005,
                         dt_relax          = 0.01,
-                        numSteps          = 6000, #15000,
+                        numSteps          = 20000, #15000,
                         excludedVolumeCutOff = 0,
 #                        excludedVolumeSpringConstant = 0.6,
                         waitingSteps = 500,
 #                        numMaxSteps = 12000,
-                        encounterDistance = 0.05,
+                        encounterDistance = 0.10,
 #                        genomicDistance = 59 - 30 - 1,
                         Nb = 2,
                         Nc_inDamageFoci = 0,
-                        distanceThreshold = 0.01
+                        distanceThreshold = 0.10
 #                        A1 = 10,
 #                        B1 = 80
 #                        selectedSubDomain = 0
@@ -156,22 +156,30 @@ if __name__ == "__main__":
 #    x_g = [5,40]
 #    trackDistanceDistribution(polymerParams, simulationParams, x_Nc, x_g)
     
-#    x_Nc = np.arange(20,60,5)
-    simulationParams['A1'] = 30
-    simulationParams['B1'] = 59
-#    trackDefinedDSBtrajectory(polymerParams, simulationParams, x_Nc)
+    # Same setting, more time
+    x_Nc = np.arange(3,40,1)
+    simulationParams['A1'] = 46
+    simulationParams['B1'] = 53
+    trackDefinedDSBtrajectory(polymerParams, simulationParams, x_Nc)
+
+    # Nearer breaks
+#    x_Nc = np.arange(6,84,4)
+#    simulationParams['A1'] = 45
+#    simulationParams['B1'] = 55
+#    trackDefinedDSBtrajectory(polymerParams, simulationParams, x_Nc)    
+    
+##    
 #    
-    
-    p0 = RCLPolymer(**polymerParams)
-    
-#    simulationParams['waitingSteps'] = np.ceil(p0.relaxTime(simulationParams['diffusionConstant'])/simulationParams['dt_relax']).astype(int)
-
-    results = {**polymerParams, **simulationParams}
-
-    mc = Experiment(p0, results, simulationParams,"trackDSB")
-                    
-    above = mc.results['aboveTimes']
-    below = mc.results['belowTimes']
-    
-    plt.figure()
-    plt.hist(below['a1-a2'])
+#    p0 = RCLPolymer(**polymerParams)
+#    
+##    simulationParams['waitingSteps'] = np.ceil(p0.relaxTime(simulationParams['diffusionConstant'])/simulationParams['dt_relax']).astype(int)
+#
+#    results = {**polymerParams, **simulationParams}
+#
+#    mc = Experiment(p0, results, simulationParams,"trackDSB")
+#                    
+#    above = mc.results['aboveTimes']
+#    below = mc.results['belowTimes']
+#    
+#    plt.figure()
+#    plt.hist(below['a1-a2'])
