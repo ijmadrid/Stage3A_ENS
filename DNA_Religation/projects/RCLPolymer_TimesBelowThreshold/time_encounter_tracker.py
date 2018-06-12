@@ -39,10 +39,10 @@ polymerParams = dict(numMonomers = 100, # np.array([100,100]),
 simulationParams = dict(# Physicial parameters
                         diffusionConstant = 0.008,
                         # Numerical parameters
-                        numRealisations   = 800, 
+                        numRealisations   = 200, 
                         dt                = 0.005,
                         dt_relax          = 0.01,
-                        numSteps          = 20000, #15000,
+                        numSteps          = 15000, #15000,
                         excludedVolumeCutOff = 0,
 #                        excludedVolumeSpringConstant = 0.6,
                         waitingSteps = 500,
@@ -157,15 +157,15 @@ if __name__ == "__main__":
 #    trackDistanceDistribution(polymerParams, simulationParams, x_Nc, x_g)
     
     # Same setting, more time
-    x_Nc = np.arange(3,40,1)
-    simulationParams['A1'] = 46
-    simulationParams['B1'] = 53
-    trackDefinedDSBtrajectory(polymerParams, simulationParams, x_Nc)
+#    x_Nc = np.arange(3,40,1)
+#    simulationParams['A1'] = 46
+#    simulationParams['B1'] = 53
+#    trackDefinedDSBtrajectory(polymerParams, simulationParams, x_Nc)
 
     # Nearer breaks
 #    x_Nc = np.arange(6,84,4)
-#    simulationParams['A1'] = 45
-#    simulationParams['B1'] = 55
+    simulationParams['A1'] = 45
+    simulationParams['B1'] = 55
 #    trackDefinedDSBtrajectory(polymerParams, simulationParams, x_Nc)    
     
 ##    
@@ -183,3 +183,46 @@ if __name__ == "__main__":
 #    
 #    plt.figure()
 #    plt.hist(below['a1-a2'])
+
+########################################
+    ### TRACE ONE MSD REALIZATION  #####
+    ####################################
+    p0 = RCLPolymer(**polymerParams)
+                    
+    results = {**polymerParams, **simulationParams}
+        
+    mc = Experiment(p0, results, simulationParams,"trackDSB")
+    
+    
+    msd_a1 = mc.results['a1_MSD']
+    msd_a2 = mc.results['a2_MSD']
+    msd_b1 = mc.results['b1_MSD']
+    msd_b2 = mc.results['b2_MSD']
+    
+    A_a1 = mc.results['a1_Amplitude']
+    A_a2 = mc.results['a2_Amplitude']
+    A_b1 = mc.results['b1_Amplitude']
+    A_b2 = mc.results['b2_Amplitude']
+    
+    alpha_a1 = mc.results['a1_Alpha']
+    alpha_a2 = mc.results['a2_Alpha']
+    alpha_b1 = mc.results['b1_Alpha']
+    alpha_b2 = mc.results['b2_Alpha']
+    
+    realtime = np.arange(15000)*0.005
+    
+    import matplotlib.pyplot as plt
+    
+    plt.figure()
+    
+    plt.plot(realtime,msd_a1)
+    plt.plot(realtime,A_a1*realtime**alpha_a1)
+    
+    plt.plot(realtime,msd_a2)
+    plt.plot(realtime,A_a2*realtime**alpha_a2)
+    
+    plt.plot(realtime,msd_b1)
+    plt.plot(realtime,A_b1*realtime**alpha_b1)
+    
+    plt.plot(realtime,msd_b2)
+    plt.plot(realtime,A_b2*realtime**alpha_b2)

@@ -1,4 +1,4 @@
-res <- read.csv("./Stage 3A ENS/DNA_Religation/projects/RCLPolymer_TimesBelowThreshold/results/2018_06_10_04_08_trackDSB_fixedDSBs.csv")
+res <- read.csv("./Stage 3A ENS/DNA_Religation/projects/RCLPolymer_TimesBelowThreshold/results/2018_06_11_18_40_trackDSB_fixedDSBs.csv")
 
 res[is.na(res)] <- Inf
 
@@ -48,12 +48,23 @@ res$EstimatedProba <- (1/res$a1.a2_meanComebackTime + 1/res$b1.b2_meanComebackTi
 
 res$EstimatedProba <- ()
 
+amps <- res[c("Nc","a1_Amplitude","a2_Amplitude","b1_Amplitude","b2_Amplitude")]
+amps.melted <- melt(amps, id = "Nc")
 
-alphas <- res[c("Nc","polymerAlpha","centerAlpha","a1_Alpha","a2_Alpha","b1_Alpha","b2_Alpha")]
+alphas <- res[c("Nc","a1_Alpha","a2_Alpha","b1_Alpha","b2_Alpha")]
 alphas.melted <- melt(alphas, id = "Nc")
 
-ggplot(data = alphas.melted, aes(x = Nc, y = value, color = variable)) + geom_point() + geom_line()
+ggplot(data = alphas.melted, aes(x = Nc, y = value, color = variable, shape = variable)) + geom_point(size = 3) + geom_line(size = 1)
 
+
+#############################
+#############################
+
+ggplot(data = res, aes(x = Nc, y = estimatedProba_byMeanTimes)) + geom_line()
+
+
+
+#############################
 
 variances <- res[c("Nc",
                   "a1.a2_interbreakDistance_meanOfVariances",
@@ -91,24 +102,54 @@ exponential <- function(t,A,l){
   return(A*exp(-l*t))
 }
 
-{df <- data.frame(realtime = seq(1, 2, 0.1))
-df$y1 <- exponential(df$realtime, res$a1.a2_ComebackAmplitude[3] + res$b1.b2_ComebackAmplitude[3], 
-                     res$a1.a2_ComebackRate[3] + res$b1.b2_ComebackRate[3] )
-df$y2 <- exponential(df$realtime, res$a1.a2_ComebackAmplitude[6] + res$b1.b2_ComebackAmplitude[6], 
-                     res$a1.a2_ComebackRate[6] + res$b1.b2_ComebackRate[6] )
-df$y3 <- exponential(df$realtime, res$a1.a2_ComebackAmplitude[9] + res$b1.b2_ComebackAmplitude[9], 
-                     res$a1.a2_ComebackRate[9] + res$b1.b2_ComebackRate[9] )
-df$y4 <- exponential(df$realtime, res$a1.a2_ComebackAmplitude[12] + res$b1.b2_ComebackAmplitude[12], 
-                     res$a1.a2_ComebackRate[12] + res$b1.b2_ComebackRate[12] )
-df$y5 <- exponential(df$realtime, res$a1.a2_ComebackAmplitude[15] + res$b1.b2_ComebackAmplitude[15], 
-                     res$a1.a2_ComebackRate[15] + res$b1.b2_ComebackRate[15] )
-df$y6 <- exponential(df$realtime, res$a1.a2_ComebackAmplitude[18] + res$b1.b2_ComebackAmplitude[18], 
-                     res$a1.a2_ComebackRate[18] + res$b1.b2_ComebackRate[18] )
-df$y7 <- exponential(df$realtime, res$a1.a2_ComebackAmplitude[21] + res$b1.b2_ComebackAmplitude[21], 
-                     res$a1.a2_ComebackRate[21] + res$b1.b2_ComebackRate[21] )
-df$y8 <- exponential(df$realtime, res$a1.a2_ComebackAmplitude[24] + res$b1.b2_ComebackAmplitude[24], 
-                     res$a1.a2_ComebackRate[24] + res$b1.b2_ComebackRate[24] )
+exp.fit <- function(df, k){
+  return(exponential(df$realtime, res$a1.a2_ComebackAmplitude[k] + res$b1.b2_ComebackAmplitude[k], 
+              res$a1.a2_ComebackRate[k] + res$b1.b2_ComebackRate[k] ))
 }
+
+exp.fit <- function(df, k){
+  min.rate = res$a1.a2_ComebackRate[k] + res$a1.b1_ComebackRate[k] +
+    res$a1.b2_ComebackRate[k] + res$a2.b1_ComebackRate[k] +
+    res$a2.b2_ComebackRate[k] + res$b1.b2_ComebackRate[k]
+  
+  min.ampl = min.rate * 
+    res$a1.a2_ComebackAmplitude[k]/res$a1.a2_ComebackRate[k] *
+    res$a1.b1_ComebackAmplitude[k]/res$a1.b1_ComebackRate[k] *
+    res$a1.b2_ComebackAmplitude[k]/res$a1.b2_ComebackRate[k] *
+    res$a2.b1_ComebackAmplitude[k]/res$a2.b1_ComebackRate[k] *
+    res$a2.b2_ComebackAmplitude[k]/res$a2.b2_ComebackRate[k] *
+    res$b1.b2_ComebackAmplitude[k]/res$b1.b2_ComebackRate[k]
+  
+  min.ampl = min.rate
+  
+  return(exponential(df$realtime, min.ampl, min.rate))
+}
+
+{df <- data.frame(realtime = seq(1, 2, 0.05))
+df$"3"  <- exp.fit(df,1)
+df$"4"  <- exp.fit(df,2)
+df$"5"  <- exp.fit(df,3)
+df$"6"  <- exp.fit(df,4)
+df$"7"  <- exp.fit(df,5)
+df$"8"  <- exp.fit(df,6)
+df$"9"  <- exp.fit(df,7)
+df$"10" <- exp.fit(df,8)
+df$"11" <- exp.fit(df,9)
+df$"12" <- exp.fit(df,10)
+df$"13" <- exp.fit(df,11)
+df$"14" <- exp.fit(df,12)
+df$"15" <- exp.fit(df,13)
+df$"16" <- exp.fit(df,14)
+df$"17" <- exp.fit(df,15)
+df$"18" <- exp.fit(df,16)
+df$"19" <- exp.fit(df,17)
+df$"20" <- exp.fit(df,18)
+df$"21" <- exp.fit(df,19)
+df$"22" <- exp.fit(df,20)
+df$"23" <- exp.fit(df,21)
+}
+
 library(reshape)
-df.melted <- melt(df, id = c("realtime"))
-ggplot(data = df.melted, aes(x = realtime, y = value, color = variable)) + geom_line(size = 1)
+df.melted <- melt(df, id = c("realtime"), variable_name = "nc")
+df.melted$nc <- as.numeric(df.melted$nc)
+ggplot(data = df.melted, aes(x = realtime, y = value, color = nc)) + geom_point() + scale_color_gradientn(colours = heat.colors(20))
