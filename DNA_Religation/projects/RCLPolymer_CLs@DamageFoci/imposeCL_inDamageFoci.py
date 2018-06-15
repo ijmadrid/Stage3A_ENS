@@ -41,25 +41,25 @@ polymerParams = dict(numMonomers = 100, # np.array([100,100]), # TODO (.., ..., 
 simulationParams = dict(# Physicial parameters
                         diffusionConstant = 0.008,
                         # Numerical parameters
-                        numRealisations   = 500, 
+                        numRealisations   = 250, 
                         dt                = 0.005,
                         dt_relax          = 0.01,
-#                        numSteps          = 12000,
-                        excludedVolumeCutOff = 0.05,
+                        numSteps          = 24000,
+                        excludedVolumeCutOff = 0.25,
 #                        excludedVolumeSpringConstant = 0.6,
-                        waitingSteps = 500,
+                        waitingSteps = 2000,
                         numMaxSteps = 24000,
                         encounterDistance = 0.05,
                         genomicDistance = 9,
                         Nb = 2,
-                        Nc_inDamageFoci = 0
+                        Nc_inDamageFoci = 2
 #                        selectedSubDomain = 0
                         )
 
 errorbars = False
 
 #x_Nc = np.arange(3,11)
-x_sigma = np.linspace(0,0.25,num=10)
+x_sigma = np.linspace(0,0.30,num=5)
 #x_Nc = np.array([3,5,7,9,11,13,15]) #np.arange(3,20,3)
 #x_Nd = np.array([0,1,2,3])
 #gmax = 12
@@ -757,6 +757,10 @@ if __name__ == "__main__":
     
 #    mc = watchOneSimulation(polymerParams, simulationParams)
 #    ani = mc.plot_trajectoire(show=True)
+#    
+##    plt.figure()
+#    plt.figure()
+#    plt.plot(mc.results['realtime'], mc.results['MSRG'])
 #    
 #    plt.figure()
 #    plt.plot(mc.results['realtime'],mc.results['a1MSD'])

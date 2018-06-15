@@ -53,6 +53,9 @@ class Experiment():
         elif customExperiment == "twoDSB":
             print("Simultation of two DSBs until relaxation time")
             self.runTwoRandomBreakSimulation()
+        elif customExperiment == "break":
+            print('Break and wait')
+            self.randomBreaks_SingleStep()
         elif customExperiment == "Encounter_withExcludedVolume":
             print("Simulation of Encounter after two DSBs adding exclusion forces")
             self.BreakAndExclude()
@@ -76,12 +79,16 @@ class Experiment():
             
         elif customExperiment == 'trackDSB':
             self.trackDSB_distanceDistribution()
-            
+        
+        elif customExperiment == 'measureMSRG':
+            self.measureStatisticalProperties()
+        
         elif callable(customExperiment):
             # customExperiment should be a function that has a 
             # Experiment object as unique argument
             print("Custom experiment")
             customExperiment(self)
+        
         else:
             print("Custom Experiment should be a function or the name of an implemented experiment!!!")
     
@@ -1036,7 +1043,6 @@ class Experiment():
             self.addResults(m+"_Amplitude", breakMSDfit_amplitude[im])
 
 
-
     def getThresholdedIntervalLengths(self, distance):
         """
         Return the lengths of time intervals in which 
@@ -1050,6 +1056,83 @@ class Experiment():
         belowIntervalLengths = intervalLengths[2-thresholded[0]::2]
         return (aboveIntervalLengths, belowIntervalLengths)
 
+
+    def measureStatisticalProperties(self):
+        """
+        Measure statistical properties at given times
+        """
+        self.addResults("iterationsNumber",self.numRealisations)
+        msrg = np.zeros((self.numRealisations,len(self.times2sample)))
+        breaks2center = np.zeros((self.numRealisations,len(self.times2sample),2*self.Nb))
+                
+        start = time()
+        for i in range(self.numRealisations):
+#            if not(i%k):
+#                print("|",'='*(i//k),'-'*(10-i//k),"| Simulation", i+1, "of", self.numRealisations)
+
+
+            # Simulates the break and some waiting time:
+            
+            try:
+                self.makeDefinedBreak(self.A1, self.B1)
+                self.genomicDistance = self.B1 - self.A1 - 1
+            except:
+                self.randomBreaks_SingleStep()
+
+            if self.excludedVolumeCutOff > 0:
+                # ADD EXCLUDED VOLUME
+                try:
+                    kappa = self.excludedVolumeSpringConstant
+                except:
+                    kappa = 3*self.diffusionConstant/(self.polymer.b**2)
+                
+                repulsionForce = lambda polymer : - kappa * RepairSphere(polymer, self.polymer.freeMonomers, self.excludedVolumeCutOff)   
+                self.polymer.addnewForce(repulsionForce)
+    
+                # Wait some more time
+                self.polymer.step(self.waitingSteps,self.dt_relax,self.diffusionConstant)
+
+            ##################################################                 
+            # Simulation until NumSteps
+
+
+            T0 = 0
+            for it, T in enumerate(self.times2sample):
+
+                self.polymer.step(T-T0,self.dt,self.diffusionConstant)
+
+                # Distance breaks to center
+                breaksPosition = self.polymer.get_r()[self.polymer.freeMonomers]
+                breaks2center[i][it] = np.linalg.norm(breaksPosition - self.polymer.getCenterOfMass(), axis = 1)
+                    
+                msrg[i][it] = self.polymer.get_msrg()
+
+                T0 = T
+                       
+
+            self.polymer = self.polymer.new()
+            
+            transcurredTime = time() - start
+            totalTime = transcurredTime * self.numRealisations/(i+1)
+            print('\r' + 'Simulation ' + str(i) + ' of ' + str(self.numRealisations) + ' | ' +
+                  str(round(totalTime - transcurredTime, 2)) + ' sec still.', end='\r')
+        
+        mean_msrg = np.mean(msrg, axis = 0)
+        mean_breaks2center = np.mean(breaks2center, axis = 0)
+        
+        msrg_dx = 1.96*np.std(msrg, axis = 0)/np.sqrt(self.numRealisations)
+        mean_breaks2center_dx = 1.96*np.std(breaks2center, axis = 0)/np.sqrt(self.numRealisations)
+        
+        self.addResults("realtime",np.arange(self.times2sample[-1])*self.dt)
+        for it, T in enumerate(self.times2sample):
+            real = str(round(T*self.dt,1))
+            self.addResults("MSRG_at_"+real,mean_msrg[it])
+            self.addResults("MSRGdx_at_"+real,msrg_dx[it])
+            for b in range(4):
+                self.addResults("Distance_"+str(b)+"_2center_at_"+real,mean_breaks2center[it][b])
+                self.addResults("Distance_"+str(b)+"_2center_at_"+real+"_dx",mean_breaks2center_dx[it][b])
+                    
+        
 
     def watchEncounter(self):
 
@@ -1093,9 +1176,11 @@ class Experiment():
         self.trajectoire = trajectory
         
         msd = np.zeros(t)
+        msrg = np.zeros(t)
         freeEnds_msd = np.zeros((len(self.polymer.freeMonomers), t))
         for it in range(t):
             msd[it] = np.mean(np.linalg.norm( trajectory[it] - trajectory[0] , axis = 1)**2)
+            msrg[it] = np.mean( np.linalg.norm(trajectory[it] - np.mean(trajectory[it], axis = 0), axis = 1)**2)
             for im, m in enumerate(self.polymer.freeMonomers):
                 freeEnds_msd[im][it] = (np.linalg.norm( trajectory[it][m] - trajectory[0][m])**2)
 
@@ -1103,6 +1188,7 @@ class Experiment():
         
         self.addResults("realtime",np.arange(t)*self.dt)
         self.addResults("polymerMSD",msd)
+        self.addResults("MSRG",msrg)
         for im, m in enumerate(self.polymer.freeMonomers):
             self.addResults(self.polymer.freeMonomersNames[m]+"MSD", freeEnds_msd[im])
         self.addResults("trajectory",self.trajectoire)
