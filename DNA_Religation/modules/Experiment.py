@@ -975,7 +975,7 @@ class Experiment():
             aboveLengths[mn] = np.array(aboveLengths[mn])*self.dt
             belowLengths[mn] = np.array(belowLengths[mn])*self.dt
             above_fit[mn] = a = self.exponentialFit(aboveLengths[mn])
-            below_fit[mn] = b = self.powerFit(belowLengths[mn])
+            below_fit[mn] = b = self.exponentialFit(belowLengths[mn])
             
             # Histogram
             bin_heights, bin_borders = np.histogram(aboveLengths[mn], normed='True')
@@ -997,8 +997,8 @@ class Experiment():
             self.addResults(mn+"_meanTakeoffTime_dx", 1.96*belowLengths[mn].std()/np.sqrt(len(belowLengths[mn])))
             
 
-        self.addResults("aboveTimes", aboveLengths)
-        self.addResults("belowTimes", belowLengths)
+#        self.addResults("aboveTimes", aboveLengths)
+#        self.addResults("belowTimes", belowLengths)
         
         meanTimes = np.array([np.mean(aboveLengths[i]) for i in aboveLengths.keys()])
         self.addResults("estimatedProba_byMeanTimes", (1/meanTimes[0] + 1/meanTimes[-1])/np.sum(1/meanTimes))

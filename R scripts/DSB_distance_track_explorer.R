@@ -1,4 +1,4 @@
-res <- read.csv("./Stage 3A ENS/DNA_Religation/projects/RCLPolymer_TimesBelowThreshold/results/2018_06_11_18_40_trackDSB_fixedDSBs.csv")
+res <- read.csv("./Stage 3A ENS/DNA_Religation/projects/RCLPolymer_TimesBelowThreshold/results/2018_06_15_17_48_trackDSB_fixedDSBs.csv")
 
 res[is.na(res)] <- Inf
 
@@ -48,13 +48,52 @@ res$EstimatedProba <- (1/res$a1.a2_meanComebackTime + 1/res$b1.b2_meanComebackTi
 
 res$EstimatedProba <- ()
 
+library(reshape)
 amps <- res[c("Nc","a1_Amplitude","a2_Amplitude","b1_Amplitude","b2_Amplitude")]
 amps.melted <- melt(amps, id = "Nc")
 
 alphas <- res[c("Nc","a1_Alpha","a2_Alpha","b1_Alpha","b2_Alpha")]
 alphas.melted <- melt(alphas, id = "Nc")
 
-ggplot(data = alphas.melted, aes(x = Nc, y = value, color = variable, shape = variable)) + geom_point(size = 3) + geom_line(size = 1)
+ggplot(data = alphas.melted, aes(x = Nc, y = value, color = variable, shape = variable)) + geom_point(size = 3) + geom_line(size = 1) + xlim(0,28) + ylim(0.5,1)
+
+
+
+############################ encounter rates #################
+##############################################################
+
+repairComebacks <- res[c("Nc","a1.a2_meanComebackTime","a1.b1_meanComebackTime",
+                         "a1.b2_meanComebackTime","a2.b1_meanComebackTime",
+                         "a2.b2_meanComebackTime","b1.b2_meanComebackTime")]
+repairComebacks.melted <- melt(repairComebacks, id = "Nc")
+
+
+repairLengths <- res[c("Nc","a1.a2_meanTakeoffTime","a1.b1_meanTakeoffTime",
+                         "a1.b2_meanTakeoffTime","a2.b1_meanTakeoffTime",
+                         "a2.b2_meanTakeoffTime","b1.b2_meanTakeoffTime")]
+repairLengths.melted <- melt(repairLengths, id = "Nc")
+
+
+ggplot(data = repairLengths.melted, aes(x = Nc, y = value, color = variable, shape = variable)) + geom_point(size = 3) + geom_line(size = 1)
+
+
+
+#############################
+# MSD(t) vs Nc
+#############################
+msdPower <- function(df, A,alph){ return(A*df$realtime^alph)}
+df <- data.frame( realtime = seq(0, 100, 0.1))
+
+df$"5" <- msdPower(df, 1, alphas$b1_Alpha[3])
+df$"10" <- msdPower(df, 1, alphas$b1_Alpha[8])
+df$"15" <- msdPower(df, 1, alphas$b1_Alpha[13])
+df$"20" <- msdPower(df, 1, alphas$b1_Alpha[18])
+
+library(reshape)
+df.melted <- melt(df, id = c("realtime"), variable_name = "nc")
+df.melted$nc <- as.numeric(df.melted$nc)
+ggplot(data = df.melted, aes(x = realtime, y = value, color = nc)) + geom_line()
+
 
 
 #############################

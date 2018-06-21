@@ -1,8 +1,30 @@
-res <- read.csv("./Stage 3A ENS/DNA_Religation/projects/RCLPolymer_CLs@DamageFoci/results/2018_06_13_15_23_proba-v_sigma.csv")
+res <- read.csv("./Stage 3A ENS/DNA_Religation/projects/measureMSRG_withoutencounter/results/2018_06_15_11_30_msrg-v_sigma.csv")
   
 library(ggplot2)
 
 res$excludedVolumeCutOff <- as.factor(res$excludedVolumeCutOff)
+
+ggplot(data = res, aes(x=excludedVolumeCutOff, y = Distance_1_2center_at_2.5)) + geom_line()
+ggplot(data = res, aes(x=excludedVolumeCutOff, y = Distance_1_2center_at_2.5)) + geom_line()
+
+
+df <- data.frame(sigma = res$excludedVolumeCutOff)
+df$a1 <- res$Distance_0_2center_at_50.0
+df$a2 <- res$Distance_1_2center_at_50.0
+df$b1 <- res$Distance_2_2center_at_50.0
+df$b2 <- res$Distance_3_2center_at_50.0
+
+df$a1dx <- res$Distance_0_2center_at_25.0_dx
+df$a2dx <- res$Distance_0_2center_at_25.0_dx
+df$b1dx <- res$Distance_0_2center_at_25.0_dx
+df$b2dx <- res$Distance_0_2center_at_25.0_dx
+
+library(reshape)
+df.melted <- melt(df, id.vars = "sigma")
+
+ggplot(data = df.melted, aes(x=sigma, y = value, color = variable)) + geom_line()
+
+
 
 {
 p <- ggplot(data = res, aes(x = excludedVolumeCutOff, y = repair_probability)) + geom_line(size = 1.5) + geom_ribbon(data = res, aes(x = excludedVolumeCutOff, 
