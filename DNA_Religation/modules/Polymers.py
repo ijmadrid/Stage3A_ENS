@@ -116,8 +116,9 @@ class Polymer(Graph):
     
     def relaxTime(self, D):
         z = 2*self.Nc/((self.numMonomers-1)*(self.numMonomers-2))
-        return self.b**2/(self.dim*D*(self.numMonomers*z + 4.0*(1-z)*np.sin(np.pi/(2.0*self.numMonomers))**2))
-    
+        return self.b**2/(2*D*(self.numMonomers*z)) # + 4.0*(1-z)*np.sin(np.pi/(2.0*self.numMonomers))**2))
+        #changed to fit PRE paper
+        
     def step(self,numsteps,dt,D):
         
 #        springConstant = (self.dim*D/(self.b**2))

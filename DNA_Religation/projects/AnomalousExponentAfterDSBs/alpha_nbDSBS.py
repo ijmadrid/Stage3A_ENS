@@ -12,6 +12,7 @@ import os, sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__)))))
 from modules.Polymers import RCLPolymer
 from modules.Experiment import Experiment
+from modules.Forces import RepairSphere
 
 import numpy as np
 from time import strftime
@@ -43,14 +44,27 @@ def trackAlpha(xp):
     monomerSDs = np.zeros((xp.numRealisations, xp.polymer.numMonomers, xp.numSteps))
 #    monomerACs = monomerSDs.copy()
     
+    removedCLs = 0
+    
     for i in range(xp.numRealisations):
         
         #Relax and cut
-        xp.makeDefinedBreak(xp.A1, xp.B1)
-
+        removedCLs += xp.makeDefinedBreak(xp.A1, xp.B1)
+        
         #Prepare array to save sds of each monomer
         sd = np.zeros((xp.numSteps, xp.polymer.numMonomers))    
 
+        if xp.excludedVolumeCutOff > 0:
+            # ADD EXCLUDED VOLUME
+            kappa = 3*xp.diffusionConstant/(xp.polymer.b**2)
+            
+            repulsionForce = lambda polymer : - kappa * RepairSphere(polymer, xp.polymer.freeMonomers, xp.excludedVolumeCutOff)   
+            xp.polymer.addnewForce(repulsionForce)
+
+            # Wait some more time (relaxation)
+            xp.polymer.step(xp.VE_waitingSteps,xp.dt,xp.diffusionConstant)
+                
+            
         #Save initial position
         r0 = xp.polymer.get_r().copy()
         
@@ -81,6 +95,8 @@ def trackAlpha(xp):
         # Use new polymer for the next one
         xp.polymer = xp.polymer.new()
             
+    xp.addResults('removedCLs',removedCLs/xp.numRealisations)
+    
     # Average over realisations
     monomersMSD = np.mean(monomerSDs, axis = 0)    # size: N x numSteps
 #    monomersAC = np.mean(monomerACs, axis = 0)
@@ -123,9 +139,14 @@ def trackAlpha_vsNc(x_Nc):
         for i, Nc in enumerate(x_Nc):
             
             polymerParams['Nc'] = Nc
-            results = {**polymerParams, **simulationParams}
-            
             p0 = RCLPolymer(**polymerParams)
+            
+            # Waiting time will be relaxation time (Nc dependant)
+            simulationParams['waitingSteps'] = np.ceil(p0.relaxTime(simulationParams['diffusionConstant'])/simulationParams['dt_relax']).astype(int)
+            simulationParams['VE_waitingSteps'] = np.ceil(p0.relaxTime(simulationParams['diffusionConstant'])/simulationParams['dt']).astype(int)
+
+
+            results = {**polymerParams, **simulationParams}
             mc = Experiment(p0, results, simulationParams, trackAlpha)
         
             if first_time:
@@ -170,12 +191,12 @@ polymerParams = dict(numMonomers = 100,
 simulationParams = dict(# Physicial parameters
                         diffusionConstant = 0.008,
                         # Numerical parameters
-                        numRealisations   = 10, 
+                        numRealisations   = 600, 
                         dt                = 0.005,
                         dt_relax          = 0.01,
                         excludedVolumeCutOff = 0,
                         numSteps = 10000,
-                        waitingSteps = 10000,
+#                        waitingSteps = "relax",
 #                        encounterDistance = 0.10,
 #                        genomicDistance = 10,
                         Nb = 2,
@@ -205,9 +226,31 @@ if __name__ == "__main__":
     import warnings
     warnings.filterwarnings("ignore")
     
-    x_Nc = np.arange(2,50,2)
+    x_Nc = np.arange(2,60,2)
     trackAlpha_vsNc(x_Nc)
 
+    # DEFINE THE BREAKS
     simulationParams['A1'] = 30
     simulationParams['B1'] = 68
+    
+    ### Impose CLs in the DF ...
+    simulationParams['Nc_inDamageFoci'] = 3
+    
+    # ... and keep them
+    polymerParams['keepCL'] = True
     trackAlpha_vsNc(x_Nc)
+    
+    # ... and remove them
+    polymerParams['keepCL'] = False
+    trackAlpha_vsNc(x_Nc)
+    
+    
+    ### With selective VE and keeping CLs
+    simulationParams['excludedVolumeCutOff'] = 0.1
+    polymerParams['keepCL'] = True
+    trackAlpha_vsNc(x_Nc)
+    
+    # selective VE and remove CLs
+    polymerParams['keepCL'] = False
+    trackAlpha_vsNc(x_Nc)    
+    
