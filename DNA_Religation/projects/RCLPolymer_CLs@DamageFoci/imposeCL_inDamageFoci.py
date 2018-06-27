@@ -31,28 +31,30 @@ import csv
 ############################################################################
 
                      
-polymerParams = dict(numMonomers = 100, # np.array([100,100]), # TODO (.., ..., ...)
+polymerParams = dict(numMonomers = 300, # np.array([100,100]), # TODO (.., ..., ...)
                      dim         = 3,
                      b           = 0.2,
-                     Nc          = 20, #NcMatrix,
-                     keepCL      = True
+                     Nc          = 50, #NcMatrix,
+                     keepCL      = False
                      )
 
 simulationParams = dict(# Physicial parameters
                         diffusionConstant = 0.008,
                         # Numerical parameters
-                        numRealisations   = 250, 
-                        dt                = 0.005,
+#                        numRealisations   = 250, 
+                        dt                = 0.001,
                         dt_relax          = 0.01,
-                        numSteps          = 24000,
+                        numSteps          = 12000,
                         excludedVolumeCutOff = 0.25,
 #                        excludedVolumeSpringConstant = 0.6,
-                        waitingSteps = 2000,
-                        numMaxSteps = 24000,
-                        encounterDistance = 0.05,
-                        genomicDistance = 9,
+                        waitingSteps = 12000,
+                        numMaxSteps = 12000,
+#                        encounterDistance = 0.05,
+#                        genomicDistance = 9,
+                        A1 = 30,
+                        B1 = 68,
                         Nb = 2,
-                        Nc_inDamageFoci = 2
+                        Nc_inDamageFoci = 3
 #                        selectedSubDomain = 0
                         )
 
@@ -743,7 +745,7 @@ if __name__ == "__main__":
 #    proba_vs_keepDFCL(polymerParams,simulationParams,x_Nc,errorbars)   ###########
 #    proba_vs_genomicDistance(polymerParams,simulationParams,gmax,gStep,errorbars)
 #    proba_vs_Nc_andKeepCL(polymerParams,simulationParams,x_Nc,errorbars)
-    proba_v_sigma(polymerParams,simulationParams,x_sigma,errorbars)
+#    proba_v_sigma(polymerParams,simulationParams,x_sigma,errorbars)
 #    proba_v_VEkappa(polymerParams,simulationParams,x_sigma,x_kappa)
     ###################################
 #    simulationParams['genomicDistance'] = 20
@@ -755,8 +757,8 @@ if __name__ == "__main__":
 #    FET_Simulation(polymerParams,simulationParams)
 #    mFET_vs_NcinDF(polymerParams,simulationParams,x_Nc,errorbars)\
     
-#    mc = watchOneSimulation(polymerParams, simulationParams)
-#    ani = mc.plot_trajectoire(show=True)
+    mc = watchOneSimulation(polymerParams, simulationParams)
+    ani = mc.plot_trajectoire(show=True)
 #    
 ##    plt.figure()
 #    plt.figure()

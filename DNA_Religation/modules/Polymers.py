@@ -332,6 +332,7 @@ class RCLPolymer(Polymer):
         if Nc == 0:
             return
         else:
+            breakLoci = np.array(breakLoci)
             breakLoci = np.vstack((breakLoci,breakLoci+1)).T.flatten() # [A1, B1] -> [A1, A2, B1, B2]
             possible_pairs = [[a,b] for a,b in product(breakLoci, np.arange(0,self.numMonomers))]
 
@@ -373,7 +374,7 @@ class RCLPolymer(Polymer):
         of each DSB
         """
         # A1 ~ Unif[0,N-1-(Nc-1)(g-1)[
-        A1 = np.random.randint(1-self.keepCL, self.numMonomers-1-(Nb-1)*(g+1)-(1-self.keepCL))
+        A1 = np.random.randint(1, self.numMonomers-1-(Nb-1)*(g+1)-1)
         return A1 + np.arange(Nb)*(1+g)
     
     
@@ -439,6 +440,10 @@ class RCLPolymer(Polymer):
             self.LaplacianMatrix[:,m][m+2:] = 0
             self.LaplacianMatrix[m,m] = 1 
             removedNum += self.cutAllEdgesWith(m)
+        # Update the diagonal of the Laplacian
+        np.fill_diagonal(self.LaplacianMatrix, 0) # dummy, not sure if it is worth to think a better way
+        np.fill_diagonal(self.LaplacianMatrix, -1*self.LaplacianMatrix.sum(axis = 1))
+        
         return removedNum
 
                 

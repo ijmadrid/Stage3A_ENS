@@ -1,27 +1,15 @@
-\select@language {english}
-\select@language {french}
-\select@language {english}
-\select@language {english}
-\select@language {english}
-\contentsline {chapter}{\numberline {1}Introduction}{2}
-\contentsline {chapter}{\numberline {2}Background}{3}
-\contentsline {chapter}{\numberline {3}Methods}{4}
-\contentsline {section}{\numberline {3.1}An introduction to chromatin polymer models}{4}
-\contentsline {subsection}{\numberline {3.1.1}The Rouse polymer}{4}
-\contentsline {subsection}{\numberline {3.1.2}The RCL polymer}{4}
-\contentsline {subsection}{\numberline {3.1.3}The $\beta $-polymer}{4}
-\contentsline {subsection}{\numberline {3.1.4}Some statistical properties of polymers}{4}
-\contentsline {section}{\numberline {3.2}Modeling double strand breaks in the RCL polymer}{4}
-\contentsline {subsection}{\numberline {3.2.1}Simple random cleavages}{4}
-\contentsline {subsection}{\numberline {3.2.2}Removing cross-links in cleaved pairs}{4}
-\contentsline {subsection}{\numberline {3.2.3}Adding volume exclusion}{4}
-\contentsline {chapter}{\numberline {4}Results}{5}
-\contentsline {section}{\numberline {4.1}Simulation results for the RCL polymer}{5}
-\contentsline {subsection}{\numberline {4.1.1}Statistical properties}{5}
-\contentsline {subsection}{\numberline {4.1.2}First Encounter Time}{5}
-\contentsline {subsection}{\numberline {4.1.3}Repair probability}{5}
-\contentsline {subsubsection}{Effect of the genomic distance between two DSBs}{5}
-\contentsline {subsubsection}{Effect of the number of cross-links}{5}
-\contentsline {subsubsection}{Effect of the number of the encounter distance}{5}
-\contentsline {subsubsection}{Effect of the number of the polymer size}{5}
-\contentsline {section}{\numberline {4.2}Simulation results for the $\beta $-polymer}{5}
+\babel@toc {english}{}
+\babel@toc {french}{}
+\babel@toc {english}{}
+\babel@toc {english}{}
+\babel@toc {english}{}
+\contentsline {chapter}{\numberline {1}Motivation}{2}
+\contentsline {chapter}{\numberline {2}Methods}{3}
+\contentsline {section}{\numberline {2.1}The RCL polymer}{3}
+\contentsline {section}{\numberline {2.2}Langevin dynamics of the RCL polymer}{4}
+\contentsline {section}{\numberline {2.3}Useful statistical properties of the RCL polymer}{4}
+\contentsline {section}{\numberline {2.4}Induction of Double Strand Breaks (DSBs)}{5}
+\contentsline {section}{\numberline {2.5}Definition of encounter times and probabilities}{5}
+\contentsline {section}{\numberline {2.6}Simulation of chromatin decondensation around DSBs: Removal of CLs and Excluded Volume Interactions}{6}
+\contentsline {section}{\numberline {2.7}Scaling distances under condensation: $\xi $-adaptive encounter distances and exclusion radii}{8}
+\contentsline {section}{\numberline {2.8}Pipeline of the simulations}{8}

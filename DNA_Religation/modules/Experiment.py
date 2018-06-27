@@ -255,6 +255,7 @@ class Experiment():
         
     def randomBreaks_SingleStep(self):
         
+
         # Prepare the random DSBs
         breakLoci = self.polymer.randomCuts(self.genomicDistance,self.Nb)
         
@@ -1136,8 +1137,15 @@ class Experiment():
 
     def watchEncounter(self):
 
-        # Simulates the break and some waiting time:
-        removedNum = self.randomBreaks_SingleStep()
+        try:
+            self.makeDefinedBreak(self.A1, self.B1)
+            self.genomicDistance = self.B1 - self.A1 - 1
+            removedNum = 0
+        except:
+            removedNum = self.randomBreaks_SingleStep()
+                
+#        # Simulates the break and some waiting time:
+#        removedNum = self.randomBreaks_SingleStep()
 
         # ADD EXCLUDED VOLUME
         if self.excludedVolumeCutOff > 0:

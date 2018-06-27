@@ -191,7 +191,7 @@ polymerParams = dict(numMonomers = 100,
 simulationParams = dict(# Physicial parameters
                         diffusionConstant = 0.008,
                         # Numerical parameters
-                        numRealisations   = 600, 
+                        numRealisations   = 500, 
                         dt                = 0.005,
                         dt_relax          = 0.01,
                         excludedVolumeCutOff = 0,
@@ -226,16 +226,28 @@ if __name__ == "__main__":
     import warnings
     warnings.filterwarnings("ignore")
     
-    x_Nc = np.arange(2,60,2)
-    trackAlpha_vsNc(x_Nc)
+    x_Nc = np.arange(2,60,4)
+#    trackAlpha_vsNc(x_Nc)
 
     # DEFINE THE BREAKS
-    simulationParams['A1'] = 30
-    simulationParams['B1'] = 68
+    polymerParams['numMonomers'] = 100
+    simulationParams['A1'] = 45
+    simulationParams['B1'] = 53
     
     ### Impose CLs in the DF ...
-    simulationParams['Nc_inDamageFoci'] = 3
+    simulationParams['Nc_inDamageFoci'] = 2
     
+    # ... and keep them
+#    polymerParams['keepCL'] = True
+#    trackAlpha_vsNc(x_Nc)
+    
+    # ... and remove them
+    polymerParams['keepCL'] = False
+    trackAlpha_vsNc(x_Nc)
+
+    simulationParams['A1'] = 10
+    simulationParams['B1'] = 25
+
     # ... and keep them
     polymerParams['keepCL'] = True
     trackAlpha_vsNc(x_Nc)
@@ -245,12 +257,20 @@ if __name__ == "__main__":
     trackAlpha_vsNc(x_Nc)
     
     
-    ### With selective VE and keeping CLs
-    simulationParams['excludedVolumeCutOff'] = 0.1
-    polymerParams['keepCL'] = True
-    trackAlpha_vsNc(x_Nc)
-    
-    # selective VE and remove CLs
-    polymerParams['keepCL'] = False
-    trackAlpha_vsNc(x_Nc)    
-    
+#    ### With selective VE and keeping CLs
+#    simulationParams['excludedVolumeCutOff'] = 0.1
+#    polymerParams['keepCL'] = True
+#    trackAlpha_vsNc(x_Nc)
+#    
+#    # selective VE and remove CLs
+#    polymerParams['keepCL'] = False
+#    trackAlpha_vsNc(x_Nc)    
+#    
+#    ### With selective VE and keeping CLs
+#    simulationParams['excludedVolumeCutOff'] = 0.2
+#    polymerParams['keepCL'] = True
+#    trackAlpha_vsNc(x_Nc)
+#    
+#    # selective VE and remove CLs
+#    polymerParams['keepCL'] = False
+#    trackAlpha_vsNc(x_Nc)
