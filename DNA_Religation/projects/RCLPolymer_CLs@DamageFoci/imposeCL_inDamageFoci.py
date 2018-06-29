@@ -31,7 +31,7 @@ import csv
 ############################################################################
 
                      
-polymerParams = dict(numMonomers = 300, # np.array([100,100]), # TODO (.., ..., ...)
+polymerParams = dict(numMonomers = 100, # np.array([100,100]), # TODO (.., ..., ...)
                      dim         = 3,
                      b           = 0.2,
                      Nc          = 50, #NcMatrix,
@@ -41,18 +41,18 @@ polymerParams = dict(numMonomers = 300, # np.array([100,100]), # TODO (.., ..., 
 simulationParams = dict(# Physicial parameters
                         diffusionConstant = 0.008,
                         # Numerical parameters
-#                        numRealisations   = 250, 
+                        numRealisations   = 600, 
                         dt                = 0.001,
                         dt_relax          = 0.01,
-                        numSteps          = 12000,
-                        excludedVolumeCutOff = 0.25,
+#                        numSteps          = 12000,
+                        excludedVolumeCutOff = 0,
 #                        excludedVolumeSpringConstant = 0.6,
                         waitingSteps = 12000,
-                        numMaxSteps = 12000,
+                        numMaxSteps = 10000,
 #                        encounterDistance = 0.05,
 #                        genomicDistance = 9,
-                        A1 = 30,
-                        B1 = 68,
+#                        A1 = 30,
+#                        B1 = 68,
                         Nb = 2,
                         Nc_inDamageFoci = 3
 #                        selectedSubDomain = 0
@@ -272,7 +272,7 @@ def proba_vs_Nc_andKeepCL(polymerParams,simulationParams,x_Nc,errorbars=False):
 #                simulationParams['excludedVolume'] = 2 * adaptiveEpsilon(xi, N, polymerParams['b'])
 #                
                 ### ADAPTIVE dt
-                simulationParams['dt'] = np.round((0.2*simulationParams['encounterDistance'])**2/(2*simulationParams['diffusionConstant']),decimals=4)-0.0001                
+#                simulationParams['dt'] = np.round((0.2*simulationParams['encounterDistance'])**2/(2*simulationParams['diffusionConstant']),decimals=4)-0.0001                
                 
                 print("ε = %s" % (simulationParams['encounterDistance']))
                 
@@ -669,6 +669,8 @@ def proba_v_gNc(polymerParams,simulationParams,x_g,x_Nc,errorbars=False):
                 
                 simulationParams['numMaxSteps'] = int(60//simulationParams['dt'])
                 
+
+                
                 print("ε = %s" % (simulationParams['encounterDistance']))
                 
                 p0 = RCLPolymer(**polymerParams)
@@ -752,13 +754,27 @@ if __name__ == "__main__":
 #    proba_v_VEkappa(polymerParams,simulationParams,x_sigma,x_kappa)
 #    simulationParams['genomicDistance'] = 50
 #    proba_v_VEkappa(polymerParams,simulationParams,x_sigma,x_kappa)
+    x_g = np.arange(2,30,2) 
+    x_Nc = np.arange(5,55,5)
+    polymerParams['keepCL'] = True
+    proba_v_gNc(polymerParams,simulationParams,x_g,x_Nc,errorbars)
+    
+    polymerParams['keepCL'] = False
+    proba_v_gNc(polymerParams,simulationParams,x_g,x_Nc,errorbars)
+    
+#    x_g = [20]
+#    polymerParams['keepCL'] = True
 #    proba_v_gNc(polymerParams,simulationParams,x_g,x_Nc,errorbars)
+#    
+#    polymerParams['keepCL'] = False
+#    proba_v_gNc(polymerParams,simulationParams,x_g,x_Nc,errorbars)    
+    
     #########
 #    FET_Simulation(polymerParams,simulationParams)
 #    mFET_vs_NcinDF(polymerParams,simulationParams,x_Nc,errorbars)\
     
-    mc = watchOneSimulation(polymerParams, simulationParams)
-    ani = mc.plot_trajectoire(show=True)
+#    mc = watchOneSimulation(polymerParams, simulationParams)
+#    ani = mc.plot_trajectoire(show=True)
 #    
 ##    plt.figure()
 #    plt.figure()

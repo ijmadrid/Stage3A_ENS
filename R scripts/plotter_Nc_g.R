@@ -1,16 +1,52 @@
-res <- read.csv("./Stage 3A ENS/DNA_Religation/projects/RCLPolymer_CLs@DamageFoci/results/2018_05_28_15_14_proba-v_gNc_withVE.csv")
+res.k <- read.csv("../DNA_Religation/projects/RCLPolymer_CLs@DamageFoci/results/2018_06_27_17_38_proba-v_gNc_withVE.csv")
+res.r <- read.csv("../DNA_Religation/projects/RCLPolymer_CLs@DamageFoci/results/2018_06_27_19_15_proba-v_gNc_withVE.csv")
+
 
 library(ggplot2)
 library(RColorBrewer)
 
-res$excludedVolumeCutOff <- as.factor(res$excludedVolumeCutOff)
+res.k$excludedVolumeCutOff <- as.factor(res.k$excludedVolumeCutOff)
 
-res$genomicDistance <- as.factor(res$genomicDistance)
+res.k$genomicDistance <- as.factor(res.k$genomicDistance)
 {
-  p <- ggplot(data = res, aes(x = Nc, y = repair_probability, color = genomicDistance)) + geom_line()
+  p <- ggplot(data = res.k, aes(x = Nc, y = repair_probability, color = genomicDistance)) + geom_line()
   p
 }
 
+
+res.r$excludedVolumeCutOff <- as.factor(res.r$excludedVolumeCutOff)
+
+res.r$genomicDistance <- as.factor(res.r$genomicDistance)
+{
+  p <- ggplot(data = res.r, aes(x = Nc, y = repair_probability, color = genomicDistance)) + geom_line()
+  p
+}
+
+
+#### Simulataneous plot
+
+res.k$Scenario <- "Keeping CLs"
+res.r$Scenario <- "Removing CLs"
+
+res <- rbind(res.k, res.r)
+
+{
+p <- ggplot(data = res, mapping = aes(x = Nc, y = repair_probability, color = genomicDistance)) + 
+  facet_grid(.~panel, scale="free") + 
+  geom_line(data = res.k, stat = "identity") + 
+  geom_line(data = res.r, stat = "identity")
+p
+}
+
+
+
+{
+  q <- ggplot(data = res, mapping = aes(x = Nc, y = Ensemble_MSRG, color = Scenario, shape = Scenario)) + 
+    facet_grid(.~genomicDistance, scale="free") + 
+    geom_line(data = res.k, stat = "identity", size = 2) + geom_point(data = res.k, stat = "identity", size = 4) +
+    geom_line(data = res.r, stat = "identity", size = 2) + geom_point(data = res.r, stat = "identity", size = 4)
+  q 
+}
 
 ####
 {

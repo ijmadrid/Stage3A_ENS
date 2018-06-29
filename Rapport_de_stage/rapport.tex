@@ -129,7 +129,7 @@ Je soussigné \textsc{Madrid Canales} Ignacio certifie sur l’honneur :
 	
 \begin{abstract}{french}
 	\emph{
-	Les cassures double-brin (DSBs de par ses sigles en anglais) sont un type d'endommagement de l'ADN particulierement cytotoxique, pour lequel la jonction d'extrémités non homologues (Non Homologous End Joining ou NHEJ) est le mecanisme de reparation prefere en grande partie du cycle cellulaire. Neanmois, ce dernier peut induire d'importantes reorganisations chromosomiques quand les DSBs sont regroupes en clusters. Des polymeres grossieres a reticulations aleatoires (Random Cross-Linked, RCL) ont ete utilises comme modeles de la chromatine, et simulations stochastiques de dynamique moleculaire ont ete performees avec l'objet de characteriser les facteurs qui affectent la probabilite de reparation d'un cluster de deux DSBs, a savoir: la distance genomique entre les DSBs, le degre de repliement du polymere (nombre de reticulations) et la dispersion induite par la machinerie de reparation (simulee par forces d'exclusion et par la suppression des reticulations autour des focus de dommage). Les resultats montrent que... TODO: Add results
+	Les cassures double-brin (DSBs de par ses sigles en anglais) sont un type d'endommagement de l'ADN particulierement cytotoxique, pour lequel la jonction d'extrémités non homologues (Non Homologous End Joining ou NHEJ) est le mecanisme de reparation prefere en grande partie du cycle cellulaire. Neanmois, ce dernier peut induire d'importantes reorganisations chromosomiques lorsque les DSBs sont regroupes en clusters. Des polymeres grossieres a reticulations aleatoires (Random Cross-Linked, RCL) ont ete utilises comme modeles pour la chromatine, et simulations stochastiques de dynamique moleculaire ont ete performees avec l'objet de characteriser les facteurs qui affectent la probabilite de reparation d'un cluster de deux DSBs. Les resultats montrent que... TODO: Add results
 	\\[1.5cm]
 	}
 \end{abstract}
@@ -137,7 +137,7 @@ Je soussigné \textsc{Madrid Canales} Ignacio certifie sur l’honneur :
 
 \begin{abstract}{english}
 	\emph{
-	Les cassures double-brin (DSBs de par ses sigles en anglais) sont un type de dommage d'ADN particulierement cytotoxique, pour lequel la jonction d'extrémités non homologues (Non Homologous End Joining ou NHEJ) est le mecanisme de reparation prefere en grande partie du cycle cellulaire. Neanmois, il peut induire d'importantes reorganisations chromosomiques quand les DSBs sont regroupes en clusters. Des polymeres grossieres a reticulations aleatoires (Random Cross-Linked, RCL) ont ete utilises comme modeles de la chromatine, et simulations stochastiques de dynamique moleculaire ont ete performees avec l'objet de characteriser les facteurs qui affectent la probabilite de reparation d'un cluster de deux DSBs, a savoir: la distance genomique entre les DSBs, le degre de repliement du polymere (nombre de reticulations) et la dispersion induite par la machinerie de reparation (simulee par forces d'exclusion et par la suppression des reticulations autour des focus de dommage). Les resultats montrent que... TODO: Add results
+	Les cassures double-brin (DSBs de par ses sigles en anglais) sont un type de dommage d'ADN particulierement cytotoxique, pour lequel la jonction d'extrémités non homologues (Non Homologous End Joining ou NHEJ) est le mecanisme de reparation prefere en grande partie du cycle cellulaire. Neanmois, il peut induire d'importantes reorganisations chromosomiques lorsque les DSBs sont regroupes en clusters. Des polymeres grossieres a reticulations aleatoires (Random Cross-Linked, RCL) ont ete utilises comme modeles de la chromatine, et simulations stochastiques de dynamique moleculaire ont ete performees avec l'objet de characteriser les facteurs qui affectent la probabilite de reparation d'un cluster de deux DSBs, a savoir: la distance genomique entre les DSBs, le degre de repliement du polymere (nombre de reticulations) et la dispersion induite par la machinerie de reparation (simulee par forces d'exclusion et par la suppression des reticulations autour des focus de dommage). Les resultats montrent que... TODO: Add results
 	\\[1.5cm]
 	}
 \end{abstract}
@@ -160,14 +160,29 @@ Je soussigné \textsc{Madrid Canales} Ignacio certifie sur l’honneur :
 %----------------------------------------------------------------------------------------
 
 
-\chapter{Motivation}
+\chapter{Introduction}
 
-Double Strand Breaks (DSB) are a highly cytotoxic type of DNA damage that occur when both strands of duplex DNA break, for instance, after ionizing radiation (IR) and cancer chemotherapy. Two principal pathways of DSB repair have evolved: non-homologous end joining (NHEJ) and homologous recombination (HR). NHEJ is the major pathway of DSB repair and consists on the synapsis and ligation of the broken ends. Here, we aim to simulate and study the repair and misrepair rates after two DSBs, via the NHEJ pathway. Polymer models (and in particular, a generalization of the Gaussian chain, the Randomly Cross-Linked (RCL) Polymer) will be used as a model of the chromatin. Stochastic simulations of molecular dynamics will be performed with the goal of characterize the factors that contribute to interfere or improve the repair probability, namely: the distance between the DSBs, the degree of folding of the polymer (simulated by the number of cross-links connecting non-neighbor monomers) and the dispersion effect induced by the DNA repair machinery (simulated by exclusion forces and the local removal of cross-links in the damage foci).
 
+
+\chapter{Biological background}
+
+\section{Chromatin: the complex, compact and mobile wrapping of DNA}
+In cells DNA is never alone. Since Walther Flemming's observations in 1878 it is known that DNA organizes in a more complex, heterogeneous structure: the chromatin. This macromolecular complex formed by DNA, RNA and proteins [] folds in a reticular multiscale organization (Fig. ) along which DNA is wrapped ranging from the 2 nm dyameter duplex DNA strands to the micrometric chromosome.  
+
+However, it was not until 1997 when it was finally proved that chromatin is indeed not static and that undergoes constrained diffusion (subdiffusion) []. The biological function of chromatin mobility, and particularly its implications and changes during DNA damage response (DDR) are still poorly understood and have been discussed ever since []. 
+
+%2015 chem nobel 
+
+\section{Double-strand breaks (DSB): induction and repair pathways}
+During cell cycle the genetic material is susceptible to suffer from various types of damage. Double Strand Breaks (DSB) are one of the most cytotoxic ones [], occurring when both strands of duplex DNA break. For instance, DSB happen after ionizing radiation (IR) exposure and cancer chemotherapy []. Spontaneously, mammalian cells can experiment around 50 DSBs per cell cycle [].
+
+DSB repair is a crucial task for cells, and two main pathways of DSB repair have evolved: non-homologous end joining (NHEJ) and homologous recombination (HR) (Fig. ). NHEJ is the major pathway of DSB repair and consists simply on the religation of the broken ends. NHEJ is fast but error-prone, inducing random insertions or deletions (indels) in the repaired region. On the other hand, HR is usually error-free, but needs an homologous donor sequence to use as template (so it requires to wait until DNA replication) [shielding]. Moreover, the risks of failed repair via NHEJ increase as DSB cluster in a genomic neighborhood. Misrepaired two-DSB clusters may result in a variety of serious chromosomic aberrations (Fig. ). 
+
+Furthermore, both HR and NHEJ pathways requires a complex and yet not fully understood assembly of proteins and biochemical changes around the damage foci (DF). In particular, during NHEJ the repair machinery has been proven to favor decondensation of the chromatin around DF [] (Fig. ). At the same time, the combined action of 53BP1 protein, the LINC nuclear envelope complex and microtubules in the periphery of the nucleus enhance the chromatin mobility around DSB DF [Lottersberg15]. However, the relationship between enhanced diffusion and repair is not evident, and even counterintuitive: why and how repair could be favored by the broken DNA ends mobility? Contrasting results arguing for the detrimental or enhancing effect of DSB mobility on faithful repair have been showed, as some mechanisms have been proposed to fit them [ibid]. Here we rejoin the debate, aiming to characterize the factors that contribute to alter the chromatin diffusion, interfering or improving the repair probability of a two-DSB cluster, namely: the distance between the DSBs, the degree of folding and the dispersion effect induced by the DNA repair machinery. 
 
 \chapter{Methods}
 \section{The RCL polymer}
-To simulate the chromatin we consider the model of a randomly cross-linked (RCL) polymer. An RCL polymer is formed by a chain of $N$ monomers connected by harmonic springs of constant $\kappa$ as backbone, and $N_c$ extra cross-links (CLs) which connect non-neighbor monomers with springs of constant $\kappa'$. CLs are added uniformly over all $\frac{(N-1)(N-2)}{2}$ combinations of non-neighbor monomer pairs. We also define the RCL polymer connectivity $\xi$ as the fraction of added cross-links with respect to the total number of possible pairings, i.e. $\xi = \frac{2N_c}{(N-1)(N-2)}$. 
+To simulate the chromatin we consider the model of a randomly cross-linked (RCL) polymer [ofir]. An RCL polymer is formed by a chain of $N$ monomers connected by harmonic springs of constant $\kappa$ as backbone (also known as Rouse polymer, or Gaussian chain [doi]), and $N_c$ extra cross-links (CLs) which connect non-neighbor monomers with springs of constant $\kappa'$. CLs are added uniformly over all $\frac{(N-1)(N-2)}{2}$ combinations of non-neighbor monomer pairs. We also define the RCL polymer connectivity $\xi$ as the fraction of added cross-links with respect to the total number of possible pairings, i.e. $\xi = \frac{2N_c}{(N-1)(N-2)}$. 
 
 We characterize the RCL polymer by two $N \times N$ admittance (Laplacian) matrices: the Rouse matrix $M$ which describes the backbone, and $B$ which describes the added connectors. A Laplacian matrix results from the difference between the diagonal degree matrix $D$ that accounts for the total number of connections each monomer has, and the adjacency matrix $A$ that accounts for the connectivity ($A_{m,n} = 1$ if monomers $m$ and $n$ are connected, $0$ otherwise). So
 \begin{equation}
@@ -361,5 +376,7 @@ $$
 where $\Theta$ summarizes the experiment parameters, $$\Theta = (N,b,N_c,g,\varepsilon,\sigma,T_{wait},T_{max}).$$
 
 \clearpage
+
+\chapter{Results}
 
 \end{document}

@@ -3,13 +3,17 @@
 \babel@toc {english}{}
 \babel@toc {english}{}
 \babel@toc {english}{}
-\contentsline {chapter}{\numberline {1}Motivation}{2}
-\contentsline {chapter}{\numberline {2}Methods}{3}
-\contentsline {section}{\numberline {2.1}The RCL polymer}{3}
-\contentsline {section}{\numberline {2.2}Langevin dynamics of the RCL polymer}{4}
-\contentsline {section}{\numberline {2.3}Useful statistical properties of the RCL polymer}{4}
-\contentsline {section}{\numberline {2.4}Induction of Double Strand Breaks (DSBs)}{5}
-\contentsline {section}{\numberline {2.5}Definition of encounter times and probabilities}{5}
-\contentsline {section}{\numberline {2.6}Simulation of chromatin decondensation around DSBs: Removal of CLs and Excluded Volume Interactions}{6}
-\contentsline {section}{\numberline {2.7}Scaling distances under condensation: $\xi $-adaptive encounter distances and exclusion radii}{8}
-\contentsline {section}{\numberline {2.8}Pipeline of the simulations}{8}
+\contentsline {chapter}{\numberline {1}Introduction}{2}
+\contentsline {chapter}{\numberline {2}Biological background}{3}
+\contentsline {section}{\numberline {2.1}Chromatin: the complex, compact and mobile wrapping of DNA}{3}
+\contentsline {section}{\numberline {2.2}Double-strand breaks (DSB): induction and repair pathways}{3}
+\contentsline {chapter}{\numberline {3}Methods}{5}
+\contentsline {section}{\numberline {3.1}The RCL polymer}{5}
+\contentsline {section}{\numberline {3.2}Langevin dynamics of the RCL polymer}{6}
+\contentsline {section}{\numberline {3.3}Useful statistical properties of the RCL polymer}{6}
+\contentsline {section}{\numberline {3.4}Induction of Double Strand Breaks (DSBs)}{7}
+\contentsline {section}{\numberline {3.5}Definition of encounter times and probabilities}{7}
+\contentsline {section}{\numberline {3.6}Simulation of chromatin decondensation around DSBs: Removal of CLs and Excluded Volume Interactions}{8}
+\contentsline {section}{\numberline {3.7}Scaling distances under condensation: $\xi $-adaptive encounter distances and exclusion radii}{10}
+\contentsline {section}{\numberline {3.8}Pipeline of the simulations}{10}
+\contentsline {chapter}{\numberline {4}Results}{12}

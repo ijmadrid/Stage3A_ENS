@@ -194,7 +194,7 @@ simulationParams = dict(# Physicial parameters
                         numRealisations   = 500, 
                         dt                = 0.005,
                         dt_relax          = 0.01,
-                        excludedVolumeCutOff = 0,
+                        excludedVolumeCutOff = 0.1,
                         numSteps = 10000,
 #                        waitingSteps = "relax",
 #                        encounterDistance = 0.10,
@@ -226,35 +226,35 @@ if __name__ == "__main__":
     import warnings
     warnings.filterwarnings("ignore")
     
-    x_Nc = np.arange(2,60,4)
+    x_Nc = np.arange(2,60,2)
 #    trackAlpha_vsNc(x_Nc)
 
     # DEFINE THE BREAKS
     polymerParams['numMonomers'] = 100
-    simulationParams['A1'] = 45
-    simulationParams['B1'] = 53
+    simulationParams['A1'] = 30
+    simulationParams['B1'] = 68
     
     ### Impose CLs in the DF ...
-    simulationParams['Nc_inDamageFoci'] = 2
+    simulationParams['Nc_inDamageFoci'] = 3
     
-    # ... and keep them
+#     ... and keep them
+    polymerParams['keepCL'] = False
+    trackAlpha_vsNc(x_Nc)
+    
+    # ... and remove them
+#    polymerParams['keepCL'] = False
+#    trackAlpha_vsNc(x_Nc)
+
+#    simulationParams['A1'] = 10
+#    simulationParams['B1'] = 25
+#
+#    # ... and keep them
 #    polymerParams['keepCL'] = True
 #    trackAlpha_vsNc(x_Nc)
-    
-    # ... and remove them
-    polymerParams['keepCL'] = False
-    trackAlpha_vsNc(x_Nc)
-
-    simulationParams['A1'] = 10
-    simulationParams['B1'] = 25
-
-    # ... and keep them
-    polymerParams['keepCL'] = True
-    trackAlpha_vsNc(x_Nc)
-    
-    # ... and remove them
-    polymerParams['keepCL'] = False
-    trackAlpha_vsNc(x_Nc)
+#    
+#    # ... and remove them
+#    polymerParams['keepCL'] = False
+#    trackAlpha_vsNc(x_Nc)
     
     
 #    ### With selective VE and keeping CLs

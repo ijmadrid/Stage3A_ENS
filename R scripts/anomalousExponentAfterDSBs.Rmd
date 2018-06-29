@@ -2,7 +2,6 @@
 title: "Anomalous diffusion of monomers after two DSBs"
 author: "Ignacio Madrid"
 date: "June 26, 2018"
-runtime: shiny
 output: html_document
 ---
 
@@ -19,7 +18,7 @@ library(reshape2)
 
 ```{r data, include = FALSE}
 res_keep <- read.csv("../DNA_Religation/projects/AnomalousExponentAfterDSBs/results/2018_06_22_17_39_trackAlphaAfterDSB_vsNc.csv")
-res_remo <- read.csv("../DNA_Religation/projects/AnomalousExponentAfterDSBs/results/2018_06_22_22_46_trackAlphaAfterDSB_vsNc.csv")
+res_remo <- read.csv("../DNA_Religation/projects/AnomalousExponentAfterDSBs/results/2018_06_28_12_42_trackAlphaAfterDSB_vsNc.csv")
 ```
 
 ```{r extract_alphas, include = FALSE}
@@ -27,6 +26,12 @@ get_alpha <- function(res){
 alphas <- res[, grepl("alpha.", names(res))]
 alphas$nc <- res$Nc
 alphas$alpha_monomers <- NULL
+return(alphas)
+}
+
+get_ends.alpha <- function(res){
+alphas <- res[, c("alpha.30","alpha.31","alpha.68","alpha.69")]
+alphas$nc <- res$Nc
 return(alphas)
 }
 
@@ -46,17 +51,22 @@ alphas.avg <- data.frame(monomer = seq(100),
                          remo = sapply(alphas.r[,!names(alphas.r) %in% ("nc")], mean))
 
 alphas.avg.melted <- melt(alphas.avg, id.vars = c("monomer"), value.name = "alpha")
+
+a1 = 31
+a2 = 32
+b1 = 69 
+b2 = 70
 ```
 
 
-The anomalous diffusion exponent $\alpha$ was extraited from the trajectories of each one of the 100 monomers of the polymer after the induction of two fixed DSBs at $A_1 = 31$ and $B_1 = 69$ (the first monomers is numerated $1$). The break is followed by the removal or not of the CLs in the DF, and finally a waiting relaxation time of 10000 steps (50 seconds) before start tracking the monomers' position. The same is performed for different values of $N_c$ between 2 and 48. $N_d = 3$ CLs were imposed in the DF to compare both scenarios.
+The anomalous diffusion exponent $\alpha$ was extraited from the trajectories of each one of the 100 monomers of the polymer after the induction of two fixed DSBs at $A_1 = 46$ and $B_1 = 54$ (the first monomers is numerated $1$). The break is followed by the removal or not of the CLs in the DF, and finally a waiting relaxation time of 10000 steps (50 seconds) before start tracking the monomers' position. The same is performed for different values of $N_c$ between 2 and 58. $N_d = 3$ CLs were imposed in the DF to compare both scenarios.
 
 Below we see $\alpha$ for each monomer when CLs are kept after the DSB.
 
 ```{r, echo = F}
 ggplot(data = alphas.k.melted, aes(x = monomer, y = alpha, color = nc)) + 
-  geom_point() + 
-  geom_vline(xintercept = c(31,32,69,70)) +
+  geom_point() + geom_line(aes(group = nc)) +
+  geom_vline(xintercept = c(a1,a2,b1,b2)) +
   scale_color_gradient(low = "yellow", high = "red")
 ```
 
@@ -64,24 +74,59 @@ And when CLs are removed:
 
 ```{r, echo = F}
 ggplot(data = alphas.r.melted, aes(x = monomer, y = alpha, color = nc)) + 
-  geom_point() + 
-  geom_vline(xintercept = c(31,32,69,70)) +
+  geom_point() + geom_line(aes(group = nc)) +
+  geom_vline(xintercept = c(a1,a2,b1,b2)) +
   scale_color_gradient(low = "yellow", high = "red")
 ```
 
-And finally, averageing over all realisations of $N_c$ (25 CLs in average):
+And finally, averageing over all realisations of $N_c$ (30 CLs in average):
 
 ```{r, echo = F}
-ggplot(data = alphas.avg.melted, aes(x= monomer, y = alpha, color = variable)) + 
-  geom_line() +
-  geom_vline(xintercept = c(31,32,69,70))
+ggplot(data = alphas.avg.melted, aes(x= monomer, y = alpha, color = variable, shape = variable)) + 
+  geom_point(size = 2) + geom_line(aes(group = variable), size = 1) +
+  geom_vline(xintercept = c(a1,a2,b1,b2), linetype = 1, size = 1)
 ```
 
-The behaviour when CLs are removed is strange. Even the symmetry is lost (both DSBs are induced at the same distance to the polymer ends)
 
-## Including the effect of selective volume exclusion ($\sigma = 0.1 \mu$m)
+## $\alpha$ of DF ends as function of $N_c$
 
-We'll consider now the same experiment but adding a selective exclusion sphere of radius $\sigma = 0.1 \mu$m around each one of the 4 DF ends.
+### Keeping CLs
+
+Anomalous exponents of the ends:
+
+```{r, echo = F}
+alphas.k.melted$monomer <- as.factor(alphas.k.melted$monomer)
+ggplot(data = alphas.k.melted[alphas.k.melted$monomer %in% c(a1,a2,b1,b2),], aes(x = nc, y = alpha, color = monomer)) + geom_point() + geom_line(aes(group = monomer))
+```
+
+Anomalous exponents of all the monomers
+
+```{r, echo = F}
+ggplot(data = alphas.k.melted, aes(x = nc, y = alpha, color = monomer)) + 
+  geom_point() + geom_line(aes(group = monomer))
+```
+
+
+### Removing CLs
+
+Anomalous exponents of the ends:
+
+```{r, echo = F}
+alphas.r.melted$monomer <- as.factor(alphas.r.melted$monomer)
+ggplot(data = alphas.r.melted[alphas.r.melted$monomer %in% c(a1,a2,b1,b2),], aes(x = nc, y = alpha, color = monomer)) + geom_point() + geom_line(aes(group = monomer))
+```
+
+Anomalous exponents of all the monomers
+
+```{r, echo = F}
+ggplot(data = alphas.r.melted, aes(x = nc, y = alpha, color = monomer)) + 
+  geom_point() + geom_line(aes(group = monomer))
+```
+
+
+<!-- ## Including the effect of selective volume exclusion ($\sigma = 0.1 \mu$m) -->
+
+<!-- We'll consider now the same experiment but adding a selective exclusion sphere of radius $\sigma = 0.1 \mu$m around each one of the 4 DF ends. -->
 
 ```{r data ve, include = FALSE}
 res_keep01 <- read.csv("../DNA_Religation/projects/AnomalousExponentAfterDSBs/results/2018_06_23_03_49_trackAlphaAfterDSB_vsNc.csv")
@@ -103,87 +148,107 @@ alphas.avg.ve01 <- data.frame(monomer = seq(100),
 alphas.avg.melted.ve01 <- melt(alphas.avg.ve01, id.vars = c("monomer"), value.name = "alpha")
 ```
 
-Below we see $\alpha$ for each monomer when CLs are kept after the DSB.
+<!-- Below we see $\alpha$ for each monomer when CLs are kept after the DSB. -->
 
-```{r, echo = F}
-ggplot(data = alphas.k.melted.ve01, aes(x = monomer, y = alpha, color = nc)) + 
-  geom_point() + 
-  geom_vline(xintercept = c(31,32,69,70)) +
-  scale_color_gradient(low = "yellow", high = "red")
-```
+<!-- ```{r, echo = F} -->
+<!-- ggplot(data = alphas.k.melted.ve01, aes(x = monomer, y = alpha, color = nc)) +  -->
+<!--   geom_point() +  -->
+<!--   geom_vline(xintercept = c(31,32,69,70)) + -->
+<!--   scale_color_gradient(low = "yellow", high = "red") -->
+<!-- ``` -->
 
-And when CLs are removed:
+<!-- And when CLs are removed: -->
 
-```{r, echo = F}
-ggplot(data = alphas.r.melted.ve01, aes(x = monomer, y = alpha, color = nc)) + 
-  geom_point() + 
-  geom_vline(xintercept = c(31,32,69,70)) +
-  scale_color_gradient(low = "yellow", high = "red")
-```
+<!-- ```{r, echo = F} -->
+<!-- ggplot(data = alphas.r.melted.ve01, aes(x = monomer, y = alpha, color = nc)) +  -->
+<!--   geom_point() +  -->
+<!--   geom_vline(xintercept = c(31,32,69,70)) + -->
+<!--   scale_color_gradient(low = "yellow", high = "red") -->
+<!-- ``` -->
 
-And finally, averageing over all realisations of $N_c$ (25 CLs in average):
+<!-- And finally, averageing over all realisations of $N_c$ (25 CLs in average): -->
 
-```{r, echo = F}
-ggplot(data = alphas.avg.melted.ve01, aes(x= monomer, y = alpha, color = variable)) + 
-  geom_line() +
-  geom_vline(xintercept = c(31,32,69,70))
-```
+<!-- ```{r, echo = F} -->
+<!-- ggplot(data = alphas.avg.melted.ve01, aes(x= monomer, y = alpha, color = variable)) +  -->
+<!--   geom_line() + -->
+<!--   geom_vline(xintercept = c(31,32,69,70)) -->
+<!-- ``` -->
 
 ## Comparaison keeping/removing CLs $\times$ with/without VE (average over all $N_c$'s)
 
 We compare the average curves for the four experimental scenarios:
 ```{r, echo = F}
 alphas.avg.all <- data.frame(monomer = seq(100),
-                             keep_ve00 = alphas.avg$keep,
-                             remo_ve00 = alphas.avg$remo,
-                             keep_ve01 = alphas.avg.ve01$keep,
-                             remo_ve01 = alphas.avg.ve01$remo)
+                             keep = alphas.avg$keep,
+                             remo = alphas.avg$remo,
+                             sigma0.1 = alphas.avg.ve01$keep)
 
 alphas.avg.all.melted <- melt(alphas.avg.all, id.vars = c("monomer"), value.name = "alpha")
 
 ggplot(data = alphas.avg.all.melted, aes(x= monomer, y = alpha, color = variable)) + 
-  geom_line() +
-  geom_vline(xintercept = c(31,32,69,70))
+  geom_line(size = 1) +
+  geom_vline(xintercept = c(a1,a2,b1,b2))
 ```
 
-## Interactive comparaison (for each Nc)
 
 ```{r, echo = F}
-library(shiny)
+ends.k <- melt(get_ends.alpha(res_keep), id.vars = "nc", value.name = "alpha", variable.name = "monomer")
+ends.r <- melt(get_ends.alpha(res_remo), id.vars = "nc", value.name = "alpha", variable.name = "monomer")
+ends.ve <- melt(get_ends.alpha(res_keep01), id.vars = "nc", value.name = "alpha", variable.name = "monomer")
+ends.k$scenario <- "Keeping CLs"
+ends.r$scenario <- "Removing CLs"
+ends.ve$scenario <- "VE 0.1 (keeping CLs)"
+ends.k$monomer <- ends.r$monomer <- ends.ve$monomer <- as.factor(c(sapply(c(a1,a2,b1,b2),FUN = function(x){rep(x,29)})))
+ends <- rbind(ends.k, ends.r, ends.ve)
 
-ui <- fluidPage(
- selectInput(inputId = "experiment", 
-             label = "Select experimental scenario", 
-             choices = c("Keep CLs in DF", "Remove CLs in DF")),
- sliderInput(inputId = "nc", 
-             label = "Select Nc", 
-             min = 2, max = 48, value = 20, 
-             step = 2),
- plotOutput(outputId = "plot") 
-)
+p <- ggplot(data = ends, mapping = aes(x = nc, y = alpha, color = monomer)) + 
+  facet_grid(.~scenario, scale="free") + 
+  geom_line(data = ends.k, stat = "identity", size = 1) + 
+  geom_line(data = ends.r, stat = "identity", size = 1) + 
+  geom_line(data = ends.ve, stat = "identity", size = 1)
+p
 
-server <- function(input, output) {
- output$plot <- renderPlot({
- ##################
-   if (input$experiment == "Keep CLs in DF") {
-     df <- data.frame(monomer = seq(100),
-                      withoutVE = alphas.k.melted[alphas.k.melted$nc==input$nc,]$alpha,
-                      withVE.01 = alphas.k.melted.ve01[alphas.k.melted$nc==input$nc,]$alpha)
-   }
-   else{
-     df <- data.frame(monomer = seq(100),
-                      withoutVE = alphas.r.melted[alphas.k.melted$nc==input$nc,]$alpha,
-                      withVE.01 = alphas.r.melted.ve01[alphas.k.melted$nc==input$nc,]$alpha)
-   }
 
-  df.melted <- melt(df, id.vars = "monomer", value.name = "alpha", variable.name = "VE")
-  
-  ggplot(data = df.melted, aes(x = monomer, y = alpha, color = VE)) + 
-  geom_line() + 
-  geom_vline(xintercept = c(31,32,69,70)) 
- ##################
- })
-}
-
-shinyApp(ui = ui, server = server)
 ```
+
+<!-- ## Interactive comparaison (for each Nc) -->
+
+<!-- ```{r, echo = F} -->
+<!-- library(shiny) -->
+
+<!-- ui <- fluidPage( -->
+<!--  selectInput(inputId = "experiment",  -->
+<!--              label = "Select experimental scenario",  -->
+<!--              choices = c("Keep CLs in DF", "Remove CLs in DF")), -->
+<!--  sliderInput(inputId = "nc",  -->
+<!--              label = "Select Nc",  -->
+<!--              min = 2, max = 48, value = 20,  -->
+<!--              step = 2), -->
+<!--  plotOutput(outputId = "plot")  -->
+<!-- ) -->
+
+<!-- server <- function(input, output) { -->
+<!--  output$plot <- renderPlot({ -->
+<!--  ################## -->
+<!--    if (input$experiment == "Keep CLs in DF") { -->
+<!--      df <- data.frame(monomer = seq(100), -->
+<!--                       withoutVE = alphas.k.melted[alphas.k.melted$nc==input$nc,]$alpha, -->
+<!--                       withVE.01 = alphas.k.melted.ve01[alphas.k.melted$nc==input$nc,]$alpha) -->
+<!--    } -->
+<!--    else{ -->
+<!--      df <- data.frame(monomer = seq(100), -->
+<!--                       withoutVE = alphas.r.melted[alphas.k.melted$nc==input$nc,]$alpha, -->
+<!--                       withVE.01 = alphas.r.melted.ve01[alphas.k.melted$nc==input$nc,]$alpha) -->
+<!--    } -->
+
+<!--   df.melted <- melt(df, id.vars = "monomer", value.name = "alpha", variable.name = "VE") -->
+
+<!--   ggplot(data = df.melted, aes(x = monomer, y = alpha, color = VE)) +  -->
+<!--   geom_line() +  -->
+<!--   geom_vline(xintercept = c(31,32,69,70))  -->
+<!--  ################## -->
+<!--  }) -->
+<!-- } -->
+
+<!-- shinyApp(ui = ui, server = server) -->
+<!-- ``` -->

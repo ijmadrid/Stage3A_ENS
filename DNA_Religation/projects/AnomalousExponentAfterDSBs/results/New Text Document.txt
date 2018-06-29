@@ -1,0 +1,33 @@
+A1 30, B1 68	Nc 2,60,2	Nd=3
+2018_06_28_12_42	removingCLs	sigma 0		
+2018_06_26_03_15	keepingCLs	sigma 0.2 	*aborted, results until Nc=16 only
+2018_06_24_15_18	removingCLs	sigma 0.1	*wrong removal laplacian
+2018_06_23_03_49	keepingCLs	sigma 0.1
+2018_06_22_22_46	removingCLs	sigma 0		*wrong removal laplacian
+2018_06_22_17_39	keepingCLs	sigma 0
+
+
+A1 30, B1 68	Nc 2,50,2	Nd = 0
+2018_06_22_00_01	removingCLs	sigma 0		*wrong removal laplacian
+
+
+A1 46, B1 53	Nc 2,50,2	Nd = 0
+2018_06_21_18_55	removingCLs	sigma 0		*wrong removal laplacian
+
+
+A1 45, B1 53	Nc 2,60,4
+2018_06_27_17_37	keepingCLs	sigma 0
+2018_06_27_13_08	removingCLs	sigma 0
+
+
+A1 10, B1 25	Nc 2,44,4
+2018_06_27_15_29	keepingCLs	sigma 0
+
+
+
+TO DO :
+ALPHA VS VE : use A1 30, B1 68	Nc 2,60,2	Nd=3 until Nc = 16 with sigma = 0, 0.1 and 0.2
+
+
+TO INCLUDE IN THE ALPHA_VS_MONOMERS FIGURE :
+ENDS ALPHA VS NC (TRANSVERSAL REGIONS OF THE CURVE A)
