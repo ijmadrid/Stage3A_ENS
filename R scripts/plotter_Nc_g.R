@@ -1,5 +1,5 @@
-res.k <- read.csv("../DNA_Religation/projects/RCLPolymer_CLs@DamageFoci/results/2018_06_27_17_38_proba-v_gNc_withVE.csv")
-res.r <- read.csv("../DNA_Religation/projects/RCLPolymer_CLs@DamageFoci/results/2018_06_27_19_15_proba-v_gNc_withVE.csv")
+res.k <- read.csv("../DNA_Religation/projects/RCLPolymer_CLs@DamageFoci/results/2018_06_28_13_05_proba-v_gNc_withVE.csv")
+res.r <- read.csv("../DNA_Religation/projects/RCLPolymer_CLs@DamageFoci/results/2018_06_28_17_54_proba-v_gNc_withVE.csv")
 
 
 library(ggplot2)
@@ -48,6 +48,21 @@ p
   q 
 }
 
+
+
+######## TILES ###########
+##########################
+{
+  t <- ggplot(data = res, mapping = aes(x = genomicDistance, y = Nc, fill = Ensemble_MSRG)) + 
+    facet_grid(.~Scenario, scale="free") + 
+    geom_tile(data = res.k, stat = "identity") +
+    geom_tile(data = res.r, stat = "identity") 
+  t +  scale_fill_gradientn(colours= heat.colors(100))
+}
+
+
+
+###OLD
 ####
 {
   w = c(rep(rep(1,5),3),rep(9,5),rep(rep(4,5),10))

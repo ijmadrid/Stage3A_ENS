@@ -13,7 +13,9 @@
 \contentsline {section}{\numberline {3.3}Useful statistical properties of the RCL polymer}{6}
 \contentsline {section}{\numberline {3.4}Induction of Double Strand Breaks (DSBs)}{7}
 \contentsline {section}{\numberline {3.5}Definition of encounter times and probabilities}{7}
-\contentsline {section}{\numberline {3.6}Simulation of chromatin decondensation around DSBs: Removal of CLs and Excluded Volume Interactions}{8}
-\contentsline {section}{\numberline {3.7}Scaling distances under condensation: $\xi $-adaptive encounter distances and exclusion radii}{10}
+\contentsline {section}{\numberline {3.6}Simulation of chromatin decondensation around DSBs: Removal of CLs and Excluded Volume Interactions}{7}
+\contentsline {section}{\numberline {3.7}Scaling distances under condensation: $\xi $-adaptive encounter distances and exclusion radii}{8}
 \contentsline {section}{\numberline {3.8}Pipeline of the simulations}{10}
 \contentsline {chapter}{\numberline {4}Results}{12}
+\contentsline {section}{\numberline {4.1}DSBs alter single-monomers anomalous diffusion around damage foci}{12}
+\contentsline {section}{\numberline {4.2}DF anomalous diffusion is altered in a $N_c$-dependent way}{12}

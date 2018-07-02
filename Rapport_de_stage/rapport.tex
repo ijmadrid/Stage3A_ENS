@@ -12,6 +12,7 @@
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage{cite}
 \usepackage{titlesec}
+\usepackage{geometry}
 
 %----------------------------------------------------------------------------------------
 %	CUSTOM ENVIRONMENTS
@@ -361,9 +362,10 @@ A number $I$ of independent polymer realizations will be simulated to extract me
 	\item \textbf{Predefinition of DSBs $A$ and $B$}. We take $A_1 \sim \mathcal{U}[1,N-g-2]$ and then $A_2 = A_1 + 1$, $B_1 = A_2 + g$, $B_2 = B_2 + 1$.
 	\item \textbf{Induction of random cross-links}. $N_c$ cross-links are induced between non-neighbor monomers such that after breaks $A$ and $B$ the polymer rests fully connected. In practice, we make random connections until obtaining one which verifies the full connectivity condition.
 	\item \textbf{Relaxation}. Once the polymer is validly cross-linked, the polymer is subdued to Langevin dynamics (discretized as an Euler's scheme for Eq. \ref{eqn:langevin}) until relaxation time $\tau$, which is computed analytically [Ref] as:
-	$$
+	\begin{equation}
 	\tau = \frac{...}{...}
-	$$
+	\label{eqn:relaxtime}
+	\end{equation}
 	\item \textbf{DSBs Induction and actualization of the total Laplacian matrix}. When the polymer reaches relaxation time, the two cuts are induced between the predefined monomers $A_1$, $A_2$ and $B_1$, $B_2$. Removed bonds are thus cleaned out from the Laplacian matrix. Besides, if CLs are removed from the separated monomers and if Volume Exclusion is included, those effects are also added to the Laplacian as in Eq. \ref{eqn:langevin_VE}.
 	\item \textbf{Waiting}. As a way to exclude the repair events which happen immediately after the break, and since the DNA repair is not instantaneous (it requires the arrival of specific proteins to the cut ends), the polymer is let to evolve under Eq. \ref{eqn:langevin} for some waiting time $T_{wait}$
 	\item \textbf{Simulation until encounter}. Once $T_{wait}$ is reached, simulation continues until an encounter, as defined in Eq. \ref{eqn:encountertime}, happens between any of the cut ends. If two or more pairs of monomers encounter at the same simulated instant, we randomly choose over those pairs to be the first encounter. If no encounters occur before a threshold time $T_{max}$ the simulation is discarded.
@@ -378,5 +380,40 @@ where $\Theta$ summarizes the experiment parameters, $$\Theta = (N,b,N_c,g,\vare
 \clearpage
 
 \chapter{Results}
+
+The repair dynamics of the simulated chromatin fiber are studied from two distinctive points of view. First, we ask how a DSB moves, and particularly how the presence of a DSB cluster changes the normal subdiffusive regime that characterizes unbroken Gaussian chains. To that extent, time-dependent statistical properties accounting for the polymer anomalous diffusion are measured after DSBs induction and after a fixed relaxation time (12000 steps), along a given fixed simulation time. We focus mainly in the Mean Square Displacement (MSD), defined in Eq. \ref{eqn:mrg}. Finally, we ask how DSBs are repaired. Which factors affect the misrepair rate? How are those changes explained by the mechanical alterations introduced before?
+
+\section{DSBs alter single-monomers anomalous diffusion around damage foci}
+
+MSD curves are obtained from monomer trajectories saved over different realizations. For intermediate time scales it is known that MSD fits a power function (Eq. \ref{eqn:msdfit}) where $A$ is constant and $\alpha$ is known as the anomalous diffusion exponent.
+
+\begin{equation}
+\text{MSD}_m(t) := \left\langle ||R_m(t) - R_m(0)||^2 \right\rangle \sim A t^\alpha
+\label{eqn:msdfit}
+\end{equation}
+
+$\alpha$ characterizes the motion: $\alpha = 1$ indicates normal diffusion (Brownian motion); $\alpha > 1$, superdiffusion (directed motion): and, $\alpha < 1$ characterizes subdiffusion (confined motion). Chromatin motion is usually described as subdifussive [refs]. On its behalf, classical Rouse polymers exhibit $\alpha = 0.5$.
+
+Here, MSD curves are obtained for each monomer of the chain and therefore an anomalous exponent $\alpha$ is fitted to each one of them. Fig. \ref{fig:alpha_vs_monomers}.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{../DNA_Religation/figures/dsbhypothesis.png}
+	\caption{Hypothesis of possible DDR effects on the damage foci after DSB induction. \textbf{A.} Not only the backbone adjacency is lost after DSB; the CLs in the DF are also removed. \textbf{B.} Only the backbone adjacency is lost, the CLs in the DF are kept. \textbf{C.} Exclusion repulsive forces are induced around the DF. This scenario might occur keeping or removing CLs in DF.}
+	\label{fig:dshypothesis}
+\end{figure}
+
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=\textwidth]{../DNA_Religation/figures/alpha_vs_monomers.png}
+	\caption{Anomalous diffusion exponent $\alpha$ measured under the four considered scenarios after the induction of two DSBs at fixed loci $A_1 = 31$ and $B_1 = 69$. \textbf{A.} $\alpha$ of each monomer from a 100-monomers RCL polymer obtained by fitting $A t ^ \alpha$ to the MSD curves measured along 60 seconds ($\Delta t = 0.005$ sec) after have waited a relaxation time calculated by Eq. \ref{eqn:relaxtime}. The MSD is computed averaging over 600 simulations for different values of $N_c$ ranging from 2 to 58, and for each of the four possible repair scenarios. \textbf{B.} Schematic representation of the simulated system illustrating the considered repair mechanisms. \textbf{C.} Averaged $\alpha$ of each monomer, where the average is taken over all the simulated connectivities ($N_c$) (i.e. averages of curves represented in the left panel). The colors are consistent with the labels titling the graphs at the left (\textbf{A}). Two windows zooming around the DF monomers appear at the bottom.}
+	\label{fig:alpha_vs_monomers}
+\end{figure}
+
+
+\section{DF anomalous diffusion is altered in a $N_c$-dependent way}
+
+Results above also shows a clear trend in terms of $N_c$ (see color distribution in Fig. - A). 
 
 \end{document}
