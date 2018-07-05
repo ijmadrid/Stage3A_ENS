@@ -28,7 +28,24 @@ def tMSDestimator(trajectory,lag):
     Np = len(trajectory)
     dr = trajectory[0:Np-lag] - trajectory[lag:Np]
     return np.mean(np.linalg.norm(dr, axis = 1)**2)
+
+def FitMSD(msdMatrix,dt):
+    # initialize fit result structure
+    numMonomers  = np.shape(msdMatrix)[0] # number of particles
+    N            = np.shape(msdMatrix)[1] # number of steps
+    alpha        = np.zeros(numMonomers)
+    A            = np.zeros(numMonomers)                
+    times        = np.linspace(dt,N*dt,N-1)
     
+    for mIdx in range(numMonomers):
+        msdMonomer = msdMatrix[mIdx,1:] # exclude the zero point
+        T          = (N*np.sum(np.log(times)**2)-np.sum(np.log(times))**2)      
+        alpha[mIdx]    = (N*np.sum(np.log(times)*np.log(msdMonomer))-np.sum(np.log(times))*np.sum(np.log(msdMonomer)))/T
+        A[mIdx]    = np.exp((1/N)*(np.sum(np.log(msdMonomer))-alpha[mIdx]*np.sum(np.log(times))))
+
+
+    return (A,alpha)
+
 
 def trackAlpha(xp):
     """
@@ -109,15 +126,16 @@ def trackAlpha(xp):
     print("\rFitting....................................................\r")
     realtime = np.arange(xp.numSteps) * xp.dt
 
-    # A and alpha of each monomer
-    for m in range(xp.polymer.numMonomers):
-        MSDfit_A[m], MSDfit_alpha[m] = A, alpha = xp.getMSDfit(realtime,monomersMSD[m])
-#        ACMSDfit_A[m], ACMSDfit_alpha[m] = A_ac, alpha_ac = xp.getMSDfit(realtime,monomersAC[m])
-        xp.addResults('A.'+str(m), A)
-        xp.addResults('alpha.'+str(m), alpha)
-#        xp.addResults('ac_A.'+str(m), A_ac)
-#        xp.addResults('ac_alpha.'+str(m), alpha_ac)
+#    # A and alpha of each monomer
+#    for m in range(xp.polymer.numMonomers):
+#        MSDfit_A[m], MSDfit_alpha[m] = A, alpha = xp.getMSDfit(realtime,monomersMSD[m])
+##        ACMSDfit_A[m], ACMSDfit_alpha[m] = A_ac, alpha_ac = xp.getMSDfit(realtime,monomersAC[m])
+#        xp.addResults('A.'+str(m), A)
+#        xp.addResults('alpha.'+str(m), alpha)
+##        xp.addResults('ac_A.'+str(m), A_ac)
+##        xp.addResults('ac_alpha.'+str(m), alpha_ac)
     
+    MSDfit_A, MSDfit_alpha = FitMSD(monomersMSD,xp.dt)
     print("\rFitting ready!.............................................\r")
     
     xp.addResults('A_monomers', MSDfit_A)
@@ -158,14 +176,19 @@ def trackAlpha_vsNc(x_Nc):
             
             writer.writerow({**{'experimentSetID' : str(i)}, **mc.results})
 
-                # Save MSD curve
+            # Save MSD raw data
+            with open('results/'+filename+'_figures/nc'+str(Nc)+'msd_data.csv','w') as rawdata:
+                    rowwriter = csv.writer(rawdata)
+                    for msd_data in mc.results['monomersMSD'].transpose():
+                        rowwriter.writerow(msd_data)
+            # Save MSD curve
             plt.figure()
             plt.plot(mc.results['monomersMSD'].transpose())
             legend = ['_o']*polymerParams['numMonomers']
             legend[simulationParams['A1']] = 'a1'
             legend[simulationParams['A1']+1] = 'a2'
             legend[simulationParams['B1']] = 'b1'
-            legend[simulationParams['B1']+1] = 'b1'
+            legend[simulationParams['B1']+1] = 'b2'
             legend = tuple(legend)
             plt.legend(legend)
             plt.savefig('results/'+filename+'_figures/nc'+str(Nc)+'.png')
@@ -184,7 +207,7 @@ def trackAlpha_vsNc(x_Nc):
 polymerParams = dict(numMonomers = 100,
                      dim         = 3,
                      b           = 0.2,
-                     Nc          = 5,
+                     Nc          = 500,
                      keepCL      = False
                      )
 
@@ -194,7 +217,7 @@ simulationParams = dict(# Physicial parameters
                         numRealisations   = 500, 
                         dt                = 0.005,
                         dt_relax          = 0.01,
-                        excludedVolumeCutOff = 0.1,
+                        excludedVolumeCutOff = 0,
                         numSteps = 10000,
 #                        waitingSteps = "relax",
 #                        encounterDistance = 0.10,
@@ -238,12 +261,12 @@ if __name__ == "__main__":
     simulationParams['Nc_inDamageFoci'] = 3
     
 #     ... and keep them
-    polymerParams['keepCL'] = False
+    polymerParams['keepCL'] = True
     trackAlpha_vsNc(x_Nc)
     
     # ... and remove them
-#    polymerParams['keepCL'] = False
-#    trackAlpha_vsNc(x_Nc)
+    polymerParams['keepCL'] = False
+    trackAlpha_vsNc(x_Nc)
 
 #    simulationParams['A1'] = 10
 #    simulationParams['B1'] = 25
